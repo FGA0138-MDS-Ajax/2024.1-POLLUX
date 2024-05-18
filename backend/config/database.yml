@@ -21,25 +21,24 @@ default: &default
 
 development:
   <<: *default
-  database: backend_development
-
+  database: <%= ENV['POSTGRES_DB'] %>
   # The specified database role being used to connect to PostgreSQL.
   # To create additional roles in PostgreSQL see `$ createuser --help`.
   # When left blank, PostgreSQL will use the default role. This is
   # the same name as the operating system user running Rails.
-  #username: backend
+  username: <%= ENV['POSTGRES_USER'] %>
 
   # The password associated with the PostgreSQL role (username).
-  #password:
+  password: <%= ENV['POSTGRES_PASSWORD'] %>
 
   # Connect on a TCP socket. Omitted by default since the client uses a
   # domain socket that doesn't need configuration. Windows does not have
   # domain sockets, so uncomment these lines.
-  #host: localhost
+  host: localhost
 
   # The TCP port the server listens on. Defaults to 5432.
   # If your server runs on a different port number, change accordingly.
-  #port: 5432
+  port: 5432
 
   # Schema search path. The server defaults to $user,public
   #schema_search_path: myapp,sharedapp,public

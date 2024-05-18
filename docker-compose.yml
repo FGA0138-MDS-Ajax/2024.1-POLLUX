@@ -1,16 +1,13 @@
-version: "2.1"
-
 services:
   postgres: # nome do serviço a ser criado
     image: postgres # nome da imagem existente no docker hub
     ports: ["5432:5432"] # porta a ser exposta para fora do container
     networks: [backing-services] # definição de rede virtual para outros possíveis serviços a serem disponibilizados na mesma rede possam acessar
-    volumes: ["./data"] # definição de local onde estará exposto o volume persistente
+    volumes: ["/apt/data/EdraPGDB"] # definição de local onde estará exposto o volume persistente
     environment: # Variáveis de ambiente , no caso o nome do banco o usuário e senha de acesso que é criada dinamicamente quando o container é criado
-      POSTGRES_DB: postgres
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
 networks: # configuação de rede virtual
   backing-services:
     driver: bridge
