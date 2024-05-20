@@ -1,11 +1,13 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  matricula: MyString
   nome: MyString
+  matricula: MyString
   email: MyString
+  cargo: one
 
 two:
-  matricula: MyString
   nome: MyString
+  matricula: MyString
   email: MyString
+  cargo: two
