@@ -1,0 +1,6 @@
+.bar {
+    background-color: #007600;
+    width: 90px;
+    height: 100vh;
+    flex-direction: column;
+}

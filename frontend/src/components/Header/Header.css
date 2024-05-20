@@ -1,0 +1,34 @@
+.header{
+    width:100%;
+    height: 120px;
+    background-color: #007600;
+    color: #fdfdfd;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+}
+
+.nav{
+    display: flex;
+    align-items: center;
+}
+
+.header a {
+    font-size: 34px;
+    color: #fdfdfd;
+    text-decoration: none;
+    padding-right: 250px;
+}
+
+.header a:hover{
+    text-decoration: underline;
+}
+
+.header img{
+    height: 120px;
+    justify-content: flex-start;
+    cursor: pointer;
+
+}

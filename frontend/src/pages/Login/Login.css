@@ -1,0 +1,108 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body{
+  font-family: 'Poppins', monospace;
+}
+
+.divC{
+  display: flex;
+  flex-direction: column;
+  background-color: #fafafa;
+  padding: 32px;
+  border-radius: 32px;
+  height: auto;
+  text-align: end;
+  width: 500px;
+  
+  form{
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+
+      input{
+          border: none;
+          outline: none;
+          padding: 13px;
+          border-bottom: 1px solid black;
+          background-color: #fdfdfd;
+
+          &::placeholder{
+              color: gray;
+          }
+      }
+
+      button{
+          padding: 16px;
+          border: none;
+          background-color: #2683b5;
+          font-weight: 400;
+          color: #fdfdfd;
+          font-size: 16px;
+          border-radius: 13px;
+          cursor: pointer;  
+
+          &:hover{
+
+              /* para o botão mudar de cor 
+              
+              animation: 5s ease-in linear infinite;
+              color: #fafafa;
+              background-color: aqua;
+              */
+              text-decoration: underline;
+          }
+      }
+  }
+
+  p{
+      margin-top: 16px;
+      font-size: 13px;
+      color: black;
+  }
+}
+
+.title{
+  font-size: 32px;
+  color: black;
+  font-weight: bold;
+
+}
+
+.sub-title{
+  font-size: 13px;
+  padding: 0 0 24px 0;
+  color: black;
+}
+
+.a{
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.a:hover{
+  text-decoration: underline;
+}
+
+
+#paginaLogin{
+  background-color: #007600;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+  .img-setaLogin{
+    width: 40px;
+    display: flex;
+    margin-top: -40px;
+    align-items: start;
+    position: relative;
+    top: 50px; 
+  }
+
+ 
