@@ -65,6 +65,6 @@ class CargosController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def cargo_params
-      params.require(:cargo).permit(:cargos)
+      params.require(:cargo).permit(:nome)
     end
 end
