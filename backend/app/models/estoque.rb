@@ -1,0 +1,2 @@
+class Estoque < ApplicationRecord
+end
