@@ -56,7 +56,10 @@ class UsersController < ApplicationController
       format.json { head :no_content }
     end
   end
-
+  def CriaUser(nome,matricula,email,senha,cargo)
+  hash = BCrypt::Password.create(senha)
+  User.create(nome: nome,matricula: matricula,email: email,senha: hash,cargo_id: cargo.id)
+  end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
