@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @acao %>
+
+<div>
+  <%= link_to "Edit this acao", edit_acao_path(@acao) %> |
+  <%= link_to "Back to acaos", acaos_path %>
+
+  <%= button_to "Destroy this acao", @acao, method: :delete %>
+</div>

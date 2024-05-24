@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :reuniaos
+  resources :documentos
+  resources :tarefas
+  resources :acaos
   resources :estoques
   resources :cargos
   resources :users

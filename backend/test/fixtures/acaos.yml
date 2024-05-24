@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  titulo: MyString
+  valor: 1.5
+  type: false
+  data: MyString
+  user: one
+
+two:
+  titulo: MyString
+  valor: 1.5
+  type: false
+  data: MyString
+  user: two
