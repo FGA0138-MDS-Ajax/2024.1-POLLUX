@@ -1,0 +1,29 @@
+.sidebar{
+    width: 10%;
+    height: 100%;
+    position: fixed;
+
+    background-color: green;
+    color: #fdfdfd;
+    font-size: 16px;
+
+    display: flex;
+    align-items:center;
+    justify-content: space-around;
+}
+
+.nav{
+    display:flex;
+    align-items: center;
+}
+
+.sidebar img{
+    height: 60px ;
+    justify-content:flex;
+    cursor: pointer;
+}
+
+.edraLogo{
+    margin-left: 100%;
+    padding: 0px 1000px;
+}

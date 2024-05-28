@@ -6,9 +6,17 @@ function Header() {
         <header className='header'>
             <nav>
                 <Link to="/login">
-                    <img src="edraV.svg" alt="edraV" />
+                <img src="edraV.svg" alt="edraV" />
                 </Link>
-                <Link to="/login">Login</Link>
+                
+                <Link to="/login">
+                Login
+                </Link>
+
+                <Link to='/memberArea'>
+                    Area de Membros
+                </Link>
+
             </nav>
             <span>EDRA.com</span>
         </header>

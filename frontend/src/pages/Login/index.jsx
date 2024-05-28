@@ -30,7 +30,7 @@ function Login() {
         setSenha('');
 
         //alerta pra ver se esta recebendo os valores
-        alert("Matricula : " + matricula +" Senha: " + senha);
+        //alert("Matricula : " + matricula +" Senha: " + senha);
     };
 
     return (
@@ -57,7 +57,7 @@ function Login() {
                             value={senha}
                             onChange={handleSenhaChange}
                         />
-                        <button type="submit">ENTRAR</button>
+                        <button type="submit"> ENTRAR</button>
                     </form>
 
                     <p>Não possui conta? <Link to="/createAccount">Registrar-se</Link></p>
