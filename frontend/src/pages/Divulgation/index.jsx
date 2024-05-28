@@ -1,6 +1,8 @@
 import Footer from "../../components/Footer"
 import Header from "../../components/Header"
 import './Divulgation.css'
+import { Link } from 'react-router-dom';
+
 
 function Divulgation() {
     return (
@@ -13,6 +15,7 @@ function Divulgation() {
                             <span> colorindo </span>
                         </p>
                         <button className='btn'> Edital </button>
+
                     </div>
                     <figure>
                         <img className='img-edraV' src='/edraV.svg' alt='logo edraV' />

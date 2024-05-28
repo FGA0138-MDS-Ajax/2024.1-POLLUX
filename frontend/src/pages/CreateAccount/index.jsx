@@ -4,11 +4,13 @@ import { Link } from 'react-router-dom';
 
 function CreateAccount() {
   const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
   const [registration, setRegistration] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [errors, setErrors] = useState({
     name: '',
+    email: '',
     registration: '',
     password: '',
   });
@@ -21,6 +23,9 @@ function CreateAccount() {
       setErrors({ ...errors, name: '' });
       setName(value);
     }
+  };
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
   };
 
   const handleRegistrationChange = (e) => {
@@ -56,12 +61,13 @@ function CreateAccount() {
     }
     // os dados que o usuario mandou chegam aqui
     console.log('Nome:', name);
+    console.log('Email: ');
     console.log('Matrícula:', registration);
     console.log('Senha:', password);
     console.log('Confirmar Senha:', confirmPassword);
 
     //alerta pra ver se esta recebendo os valores
-    alert("Matricula : " + registration +" Senha: " + password + "Nome: "+ name + "Senha confirmada: "+ confirmPassword);
+    alert("Matricula : " + registration + "Email: "+ email+" Senha: " + password + " Nome: "+ name + " Senha confirmada: "+ confirmPassword);
 
   };
 
@@ -82,6 +88,12 @@ function CreateAccount() {
               onChange={handleNameChange}
             />
             {errors.name && <span className='error'>{errors.name}</span>}
+            <input
+              type="text"
+              placeholder='E-Mail'
+              value={email}
+              onChange={handleEmailChange}
+            />
             <input
               type="text"
               placeholder='Matrícula'
