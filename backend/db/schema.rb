@@ -10,9 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_20_053455) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_24_214222) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "acaos", force: :cascade do |t|
+    t.string "titulo"
+    t.float "valor"
+    t.boolean "type"
+    t.string "data"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_acaos_on_user_id"
+  end
 
   create_table "cargos", force: :cascade do |t|
     t.string "nome"
@@ -20,15 +31,56 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_20_053455) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "documentos", force: :cascade do |t|
+    t.string "titulo"
+    t.integer "nivelAcesso"
+    t.string "data"
+    t.string "tipoDocumento"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_documentos_on_user_id"
+  end
+
+  create_table "estoques", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "reuniaos", force: :cascade do |t|
+    t.string "titulo"
+    t.string "ata"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_reuniaos_on_user_id"
+  end
+
+  create_table "tarefas", force: :cascade do |t|
+    t.string "titulo"
+    t.string "descricao"
+    t.string "data"
+    t.integer "prioridade"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_tarefas_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "nome"
     t.string "matricula"
     t.string "email"
+    t.string "senha"
     t.bigint "cargo_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["cargo_id"], name: "index_users_on_cargo_id"
   end
 
+  add_foreign_key "acaos", "users"
+  add_foreign_key "documentos", "users"
+  add_foreign_key "reuniaos", "users"
+  add_foreign_key "tarefas", "users"
   add_foreign_key "users", "cargos"
 end

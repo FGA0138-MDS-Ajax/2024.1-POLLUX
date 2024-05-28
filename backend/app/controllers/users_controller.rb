@@ -1,3 +1,4 @@
+require "bcrypt"
 class UsersController < ApplicationController
   before_action :set_user, only: %i[ show edit update destroy ]
 
@@ -5,7 +6,6 @@ class UsersController < ApplicationController
   def index
     @users = User.all
   end
-
   # GET /users/1 or /users/1.json
   def show
   end
@@ -56,7 +56,10 @@ class UsersController < ApplicationController
       format.json { head :no_content }
     end
   end
-
+  def CriaUser(nome,matricula,email,senha,cargo)
+  hash = BCrypt::Password.create(senha)
+  User.create(nome: nome,matricula: matricula,email: email,senha: hash,cargo_id: cargo.id)
+  end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
@@ -65,6 +68,6 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.require(:user).permit(:matricula, :nome, :email)
+      params.require(:user).permit(:nome, :matricula, :email, :senha, :cargo_id)
     end
 end

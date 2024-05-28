@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @estoque %>
+
+<div>
+  <%= link_to "Edit this estoque", edit_estoque_path(@estoque) %> |
+  <%= link_to "Back to estoques", estoques_path %>
+
+  <%= button_to "Destroy this estoque", @estoque, method: :delete %>
+</div>

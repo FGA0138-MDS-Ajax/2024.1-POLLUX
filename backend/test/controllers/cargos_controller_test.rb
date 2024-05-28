@@ -17,7 +17,7 @@ class CargosControllerTest < ActionDispatch::IntegrationTest
 
   test "should create cargo" do
     assert_difference("Cargo.count") do
-      post cargos_url, params: { cargo: { cargos: @cargo.cargos } }
+      post cargos_url, params: { cargo: { nome: @cargo.nome } }
     end
 
     assert_redirected_to cargo_url(Cargo.last)
@@ -34,7 +34,7 @@ class CargosControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update cargo" do
-    patch cargo_url(@cargo), params: { cargo: { cargos: @cargo.cargos } }
+    patch cargo_url(@cargo), params: { cargo: { nome: @cargo.nome } }
     assert_redirected_to cargo_url(@cargo)
   end
 

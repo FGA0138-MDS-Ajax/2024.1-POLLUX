@@ -4,10 +4,12 @@ one:
   nome: MyString
   matricula: MyString
   email: MyString
+  senha: MyString
   cargo: one
 
 two:
   nome: MyString
   matricula: MyString
   email: MyString
+  senha: MyString
   cargo: two

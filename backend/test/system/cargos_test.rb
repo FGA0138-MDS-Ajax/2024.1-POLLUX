@@ -14,7 +14,7 @@ class CargosTest < ApplicationSystemTestCase
     visit cargos_url
     click_on "New cargo"
 
-    fill_in "Cargos", with: @cargo.cargos
+    fill_in "Nome", with: @cargo.nome
     click_on "Create Cargo"
 
     assert_text "Cargo was successfully created"
@@ -25,7 +25,7 @@ class CargosTest < ApplicationSystemTestCase
     visit cargo_url(@cargo)
     click_on "Edit this cargo", match: :first
 
-    fill_in "Cargos", with: @cargo.cargos
+    fill_in "Nome", with: @cargo.nome
     click_on "Update Cargo"
 
     assert_text "Cargo was successfully updated"
