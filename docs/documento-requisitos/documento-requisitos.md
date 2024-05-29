@@ -1,3 +1,17 @@
-| Versão | Data | Descrição da Alteração | Nome(s) Integrante(s) |
-| :----: | :--: | :--------------------: | :-------------------: |
-| 1.0 | 25/02/2024 | Mudei isso e aquilo | Fulano de Tal |
+# Documento de Requisitos - Grupo Pollux 
+## Projeto EDRA
+
+<style>
+    p{
+        text-indent: 40px;
+    }
+</style>
+
+<div style="text-align: justify;">
+<p>
+O Documento de Requisitos, captura e detalha todas as necessidades e expectativas em relação ao sistema a ser desenvolvido. Ele serve como um contrato entre os clientes e a equipe de desenvolvimento, garantindo que todas as partes tenham uma compreensão clara e comum.
+</p>
+</div>
+
+
+O documento de requisitos do projeto pode ser acessado e será sempre atualizado no link do documento a seguir: [Documento de Requisitos]()

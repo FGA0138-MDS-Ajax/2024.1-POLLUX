@@ -1,5 +1,5 @@
-# Documento de visão - Grupo Pollux 
-## Projeto: EDRA.com
+# Documento de Visão - Grupo Pollux 
+## Projeto EDRA
 <style>
     p{
         text-indent: 40px;
@@ -12,18 +12,8 @@ O Documento de Visão, fornece um plano abrangente e estruturado para o desenvol
 </p>
 </div>
 
+Caso sejam feitas alterações e correções, será colocado um novo arquivo indicando a nova versão.
 
+O documento de visão - versão 01 do projeto pode ser acessado no link a seguir: [Documento de Visão](documento-visao(v01).pdf)
 
-
-
-
-
-
-
-
-
-
-
-
-
-O documento de visão do projeto pode ser acessado e será sempre atualizado no link do documento a seguir: [Documento de Visão](https://docs.google.com/document/d/1624VB7EG8TJFBOMWGKePcoW3NtDwCpo2WgKGI8F7nNk/edit?usp=sharing)
+O documento de visão- versão 01 do projeto pode ser acessado no link a seguir: [Documento de Visão](documento-visao(v01).pdf)
