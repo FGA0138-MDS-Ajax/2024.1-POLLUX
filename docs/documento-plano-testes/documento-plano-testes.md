@@ -1,12 +1,6 @@
 # Documento de Plano de Testes - Grupo Pollux 
 ## Projeto EDRA
 
-<style>
-    p{
-        text-indent: 40px;
-    }
-</style>
-
 <div style="text-align: justify;">
 <p>
 O Documento de Plano de Teste, define a abordagem, recursos e cronograma das atividades de teste necessárias para garantir que o projeto atenda aos requisitos especificados e funcione conforme o esperado. Ele serve como um guia para a equipe de teste. 
