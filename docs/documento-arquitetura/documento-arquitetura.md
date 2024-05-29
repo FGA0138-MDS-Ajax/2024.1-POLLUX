@@ -14,4 +14,4 @@ Um documento de arquitetura de software, apresenta uma visão detalhada e estrut
 </p>
 
 
-O documento de arquitetura do projeto pode ser acessado e será sempre atualizado no link do documento a seguir: [Documento de Arquitetura]()
+O documento de arquitetura do projeto pode ser acessado e será sempre atualizado no link do documento a seguir: [Documento de Arquitetura](documento-arquitetura(v01).pdf)
