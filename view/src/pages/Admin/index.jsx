@@ -31,7 +31,7 @@ function Admin() {
         if (newMemberD.trim()) {
             setMembersD([...membersD,newMemberD]);
             console.log("Novo membro com acesso total à tela de documentos:", newMemberD);
-            setMembersD('');
+            setNewMemberD('');
         } else {
             alert('O espaço não pode ficar em branco.')
         }
