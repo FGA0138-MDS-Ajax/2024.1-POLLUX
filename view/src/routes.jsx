@@ -8,6 +8,7 @@ import Meeting from './pages/Meeting'
 import Finance from './pages/Finance'
 import Storage from './pages/Storage'
 import Documents from './pages/Documents'
+import Admin from './pages/Admin'
 import './App.css'
 
 function AppRoutes() {
@@ -23,6 +24,7 @@ function AppRoutes() {
                 <Route path='/finance' element={<Finance/>}></Route>
                 <Route path='/storage' element={<Storage/>}></Route>
                 <Route path='/documents' element={<Documents/>}></Route>
+                <Route path='/admin' element={<Admin/>}></Route>
             </Routes>
         </BrowserRouter>
     )
