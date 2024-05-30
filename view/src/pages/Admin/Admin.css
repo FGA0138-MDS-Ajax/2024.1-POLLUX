@@ -1,0 +1,159 @@
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #d2d3e4fa;    
+  padding: 20px;
+  width: 550px;
+  border-radius: 8%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.336);
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+}
+
+body {
+  font-family: 'Poppins', monospace;
+}
+
+.adminTitulo {
+  margin-top: 3rem;
+  text-align: center;
+  font-size: 200%;
+}
+
+.adminCorpo {
+  text-align: left;
+  margin-left: 180px;
+  left: 9rem;
+  width: 80%;
+  font-family: 'Poppins', monospace;
+  padding: 20px;  
+}
+
+.img-text-container {
+  display: flex;
+  align-items: center;
+}
+
+.fonte {
+  font-size: 40px; 
+  display: flex;
+  margin-left: 20px;
+  margin-top: -2px;
+}
+
+.fonte2 {
+  font-size: 25px;
+}
+
+.trash {
+  height: 20px;
+  width: 20px;
+  margin-right: 25px;
+  margin-top: 15px;
+  margin-left: 150px;
+}
+
+.close {
+  font-size: 36px;
+  cursor: pointer;
+  margin-left: 480px;
+}
+
+.caixa {
+  display: flex;
+  margin-top: -10px;
+  margin-bottom: 10px;
+  font-size: 20px;
+}
+
+.caixa label {
+  width: 100px; 
+  margin-right: 10px; 
+  font-size: 20px;
+}
+
+.caixa input {
+  flex: 1; 
+  font-size: 20px;
+  background-color: #d2d3e4fa;
+  border: none; 
+  outline: none; 
+}
+
+.botao {
+  font-size: 20px;
+  width: 200px;
+  margin-left: 155px;
+  margin-top: -20px;
+}
+
+.memberListContainer {
+  display: flex;
+  flex-direction: column;
+  background-color: #fafafa;
+  padding: 32px;
+  border-radius: 32px;
+  height: auto;
+  text-align: center;
+  width: 500px;
+  margin: 20px auto;
+}
+
+.memberListContainer h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.memberListContainer ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.memberListContainer li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.memberListContainer li button {
+  background-color: #ff4c4c;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.memberListContainer li button:hover {
+  background-color: #ff1c1c;
+}
+
+.memberListContainer input {
+  border: none;
+  outline: none;
+  padding: 13px;
+  margin: 20px 0;
+  border-bottom: 1px solid black;
+  background-color: #fdfdfd;
+  width: calc(100% - 26px);
+}
+
+.memberListContainer button {
+  padding: 16px;
+  border: none;
+  background-color: #2683b5;
+  font-weight: 400;
+  color: #fdfdfd;
+  font-size: 16px;
+  border-radius: 13px;
+  cursor: pointer;
+}
+
+.memberListContainer button:hover {
+  text-decoration: underline;
+}
