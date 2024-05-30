@@ -16,23 +16,24 @@
 body{
   font-family: 'Poppins', monospace;
 }
-.documentosTitulo{
+.estoqueTitulo{
   margin-top: 3rem;
   text-align: center;
   font-size: 200%;
 }
 
-.documentosCorpo{
+.estoqueCorpo{
   text-align: left;
   margin-left: 180px;
   left: 9rem;
   width: 80%;
   font-family: 'Poppins', monospace;
   padding: 20px;  
+  background-color: #d2d3e4fa;
   
 }
 
-.img-text-container {
+.img-text-container2 {
   display: flex;
   align-items: center;
 }
@@ -46,14 +47,6 @@ body{
 
 .fonte2{
   font-size: 25px;
-}
-
-.trash{
-  height: 20px;
-  width: 20px;
-  margin-right: 25px;
-  margin-top: 15px;
-  margin-left: 150px;
 }
 
 .close {
@@ -78,8 +71,9 @@ font-size: 20px;
   font-size: 20px;
   background-color: #d2d3e4fa;
   border: none; 
-outline: none; 
+  outline: none; 
 }
+
 
 .botao{
   font-size: 20px;
@@ -88,3 +82,20 @@ outline: none;
   margin-top: -20px;
 
 }
+
+.bntMaiseMenos{
+  border-radius: 50%;
+  width: 40px; 
+  height: 40px; 
+  background-color: #3A8EBB; 
+  color: black; 
+  font-size: 16px; 
+  border: none; 
+  cursor: pointer; 
+  font-size: 30px;
+  text-align: center;
+  margin-inline: 10px;
+  cursor: pointer;
+  
+}
+
