@@ -5,22 +5,37 @@ function SideBar(){
     return(
         <sidebar className='sidebar'>
             <nav>
-                <Link to='/meeting'>
-                    <img src="meeting.png" alt="meeting"/>
+            <Link to='/meeting'>
+                <img src="calendario.svg" alt="img-calendario"/>
                 </Link>
-                <Link to='/finance'>
-                    <img src="finance.png" alt ="finance"/>
-                </Link>
+
                 <Link to='/storage'>
-                    <img src="drone.png" alt="drone"/>
+                    <img src="estoque.svg" alt="img-estoque"/>
                 </Link>
+                
+                <Link to='/meeting'>
+                    <img src="reuniao.svg" alt="img-reuniao"/>
+                </Link>
+
+                <Link to='/documents'>
+                    <img src="documentos.svg" alt="img-documentos"/>
+                </Link>
+
+                <Link to='/finance'>
+                    <img src="financeiro.svg" alt ="img-finance"/>
+                </Link>
+                </nav>
+
+                <nav className="embaixo">
+                <Link to='/login'>
+                    <img src="logout.svg" alt="logout" class="sidebar-image img-logout"/>
+                </Link>
+
                 <Link to='/memberarea'>
                     <img src="edraV.svg" alt="edraV"/>
                 </Link>
-                <Link to='/login'>
-                    <img src="seta.svg" alt="voltar"/>
-                </Link>
-            </nav>
+                </nav>
+
         </sidebar>
     )
 }

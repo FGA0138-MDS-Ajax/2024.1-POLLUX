@@ -1,26 +1,26 @@
-.sidebar{
-    width: 10%;
-    height: 100%;
+.sidebar {
     position: fixed;
-
-    background-color: green;
-    color: #fdfdfd;
-    font-size: 16px;
-
-    display: flex;
-    align-items:center;
-    justify-content: space-around;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 120px; /* Largura da sidebar */
+    background: linear-gradient(#3A8EBB 50%, #007600 50%);
 }
 
-.nav{
-    display:flex;
-    align-items: center;
-}
-
-.sidebar img{
-    height: 60px ;
-    justify-content:flex;
+.sidebar img {
+    display: block;
+    height: 55px ;
     cursor: pointer;
+    width: 100%;
+    margin-bottom: 30px; 
+    margin-top: 20px;
+  }
+
+.embaixo{
+    margin-top: 310px;
+    display: flex;
+    flex-direction: column;
+
 }
 
 .edraLogo{

@@ -7,6 +7,7 @@ import MemberArea from './pages/MemberArea'
 import Meeting from './pages/Meeting'
 import Finance from './pages/Finance'
 import Storage from './pages/Storage'
+import Documents from './pages/Documents'
 import './App.css'
 
 function AppRoutes() {
@@ -21,6 +22,7 @@ function AppRoutes() {
                 <Route path='/meeting' element={<Meeting/>}></Route>
                 <Route path='/finance' element={<Finance/>}></Route>
                 <Route path='/storage' element={<Storage/>}></Route>
+                <Route path='/documents' element={<Documents/>}></Route>
             </Routes>
         </BrowserRouter>
     )

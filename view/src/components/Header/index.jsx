@@ -17,6 +17,10 @@ function Header() {
                     Area de Membros
                 </Link>
 
+                <Link to='/documents'>
+                    docs
+                </Link>
+
             </nav>
             <span>EDRA.com</span>
         </header>

@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import SideBar from "../../components/SideBar"
-import './Storage.css';
+import './Documents.css';
 
-function Storage() {
+function Documents() {
   const [showPopup, setShowPopup] = useState(false);
-  const [nome, setLink] = useState('');
+  const [link, setLink] = useState('');
   const [descricao, setDescricao] = useState('');
   const [links, setLinks] = useState([]);
 
@@ -26,8 +26,8 @@ function Storage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (nome.trim() !== '' && descricao.trim() !== '') {
-      setLinks([...links, { descricao, nome }]);
+    if (link.trim() !== '' && descricao.trim() !== '') {
+      setLinks([...links, { descricao, link }]);
     }
     setShowPopup(false);
     setLink('');
@@ -45,14 +45,14 @@ function Storage() {
     <SideBar/>
     
     <div className='documentosTitulo'>
-        <h1>Estoque</h1> 
+        <h1>Documentos</h1> 
     </div>
     
     <div className='documentosCorpo'>
     <div className='img-text-container'>
       <img src="plus.svg" alt="img-plus"
         onClick={handleImageClick} />
-      <p className='fonte'>Adicionar nova peça</p>
+      <p className='fonte'>Adicionar link</p>
       </div>
       {showPopup && (
         <div className="popup" >
@@ -61,10 +61,10 @@ function Storage() {
               &times; </span>
             <form onSubmit={handleSubmit}>
               <label className='caixa'>
-                Nome:
+                Insira o link:
                 <input className='caixa'
                   type="text"
-                  value={nome}
+                  value={link}
                   onChange={handleLinkChange}
                   required
                 />
@@ -90,7 +90,7 @@ function Storage() {
             <div className='img-text-container'>
             <img src="trash.svg" alt='img-trash' class='trash' onClick={() => handleRemoveLink(index)}></img>
             <p className='fonte2'>
-              <a href={item.nome} target="_blank" rel="noopener noreferrer">{item.descricao}</a>
+              <a href={item.link} target="_blank" rel="noopener noreferrer">{item.descricao}</a>
             </p>
             
           </div>
@@ -103,4 +103,4 @@ function Storage() {
   
 }
 
-export default Storage;
+export default Documents;

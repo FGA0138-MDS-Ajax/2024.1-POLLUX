@@ -1,0 +1,90 @@
+.popup{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #d2d3e4fa;    
+    padding: 20px;
+    width: 550px;
+    border-radius: 8%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.336);
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+}
+
+body{
+    font-family: 'Poppins', monospace;
+}
+.documentosTitulo{
+    margin-top: 3rem;
+    text-align: center;
+    font-size: 200%;
+}
+
+.documentosCorpo{
+    text-align: left;
+    margin-left: 180px;
+    left: 9rem;
+    width: 80%;
+    font-family: 'Poppins', monospace;
+    padding: 20px;  
+    
+}
+
+.img-text-container {
+    display: flex;
+    align-items: center;
+}
+
+.fonte{
+    font-size: 40px; 
+    display: flex;
+    margin-left: 20px;
+    margin-top: -2px;
+}
+
+.fonte2{
+    font-size: 25px;
+}
+
+.trash{
+    height: 20px;
+    width: 20px;
+    margin-right: 25px;
+    margin-top: 15px;
+    margin-left: 150px;
+}
+
+.close {
+    font-size: 36px;
+    cursor: pointer;
+    margin-left: 480px;
+  }
+
+.caixa{
+  display: flex;
+  margin-top: -10px;
+  margin-bottom: 10px;
+  font-size: 20px;
+}
+.caixa label {
+    width: 100px; 
+    margin-right: 10px; 
+    font-size: 20px;
+  }
+  .caixa input {
+    flex: 1; 
+    font-size: 20px;
+    background-color: #d2d3e4fa;
+    border: none; 
+  outline: none; 
+  }
+
+  .botao{
+    font-size: 20px;
+    width: 200px;
+    margin-left: 155px;
+    margin-top: -20px;
+
+  }
