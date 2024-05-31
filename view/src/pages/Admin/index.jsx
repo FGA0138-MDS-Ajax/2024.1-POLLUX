@@ -33,20 +33,20 @@ function Admin() {
             console.log("Novo membro com acesso total à tela de documentos:", newMemberD);
             setNewMemberD('');
         } else {
-            alert('O espaço não pode ficar em branco.')
+            alert('O espaço não pode ficar em branco.');
         }
     }
     
     const handleRemoveMemberF = (index) => {
-        const updatedMembers = membersF.filter((_, i) => i !== index);
-        setMembersF(updatedMembers);
+        const updatedMembersF = membersF.filter((_, i) => i !== index);
+        setMembersF(updatedMembersF);
         console.log("Membro removido:", membersF[index]);  // Log do membro removido no console
         alert("Membro removido: "+  membersF[index])
     };
 
     const handleRemoveMemberD = (index) => {
-        const updatedMembers = membersD.filter((_,i) => i !== index);
-        setMembersD(updatedMembers);
+        const updatedMembersD = membersD.filter((_,i) => i !== index);
+        setMembersD(updatedMembersD);
         console.log("Membro removido da Tela Documentos: ", membersD[index]);
         alert("Membro removido da Tela Documentos: "+ membersD[index])
     }
