@@ -17,7 +17,7 @@
   }
 
 .embaixo{
-    margin-top: 310px;
+    margin-top: 10px;
     display: flex;
     flex-direction: column;
 
@@ -25,5 +25,5 @@
 
 .edraLogo{
     margin-left: 100%;
-    padding: 0px 1000px;
+    /*padding: 0px 1000px;*/
 }

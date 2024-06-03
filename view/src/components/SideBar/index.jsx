@@ -27,7 +27,7 @@ function SideBar(){
                 </nav>
 
                 <nav className="embaixo">
-                <Link to='/login'>
+                <Link to='/'>
                     <img src="logout.svg" alt="logout" class="sidebar-image img-logout"/>
                 </Link>
 
