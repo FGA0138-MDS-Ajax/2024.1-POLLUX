@@ -7,3 +7,10 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+["Admin", "Membro"].each do |cargo|
+  Cargo.find_or_create_by!(nome: cargo)
+end
+
+cargoAdmin = Cargo.find_by!(nome: "Admin")
+User.find_or_create_by!(nome: :admin, matricula: "000000000", email: "teste@aluno.unb.br", senha: :Teste123, cargo: cargoAdmin)
