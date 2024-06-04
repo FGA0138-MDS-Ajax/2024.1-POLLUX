@@ -7,20 +7,17 @@ body {
 
 #paginaFinance {
   background-color: #fdfdfd;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   color: #070606;
-  padding: 20px;
 }
 
 .financeTitulo {
-  margin-bottom: 2rem;
+  margin-top: 3rem;
   text-align: center;
-  font-size: 2.5rem;
-  color: #070606;
+  font-size: 200%;
 }
 
 .img-text-container2 {
