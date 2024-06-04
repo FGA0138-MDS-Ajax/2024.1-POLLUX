@@ -77,13 +77,14 @@ body{
     font-size: 20px;
     background-color: #d2d3e4fa;
     border: none; 
-  outline: none; 
+    outline: none; 
+    margin-top: 10px;
   }
 
   .botao{
     font-size: 20px;
     width: 200px;
-    margin-left: 155px;
+    margin-right: 150px;
     margin-top: -20px;
 
   }

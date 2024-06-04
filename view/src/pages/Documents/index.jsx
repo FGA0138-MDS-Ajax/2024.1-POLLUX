@@ -47,7 +47,6 @@ function Documents() {
     <div className='documentosTitulo'>
         <h1>Documentos</h1> 
     </div>
-    
     <div className='documentosCorpo'>
     <div className='img-text-container'>
       <img src="plus.svg" alt="img-plus"
