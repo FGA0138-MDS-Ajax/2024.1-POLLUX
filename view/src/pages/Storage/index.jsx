@@ -27,26 +27,40 @@ function Storage() {
 
   const handleQuantidadeChange = (event) => {
     const { value } = event.target;
-    // Checa se o valor esta vazio ou se sao apenas numeros
     if (value === '' || /^\d+$/.test(value)) {
-        setQuantidade(value);
+      setQuantidade(value);
     }
-};
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (nome.trim() !== '' && quantidade.trim() !== '') {
       setLinks([...links, { quantidade, nome, imagem: imagemSelecionada }]);
+      setShowPopup(false);
+      setNome('');
+      setQuantidade('');
+      setImagemSelecionada(null);
     }
-    setShowPopup(false);
-    setNome('');
-    setQuantidade('');
-    setImagemSelecionada(null);
   };
 
   const handleRemoveLink = (index) => {
     const updatedLinks = [...links];
     updatedLinks.splice(index, 1);
+    setLinks(updatedLinks);
+  };
+
+  const handleAddQuantity = (index) => {
+    const updatedLinks = [...links];
+    updatedLinks[index].quantidade = String(parseInt(updatedLinks[index].quantidade) + 1);
+    setLinks(updatedLinks);
+  };
+
+  const handleRemoveQuantity = (index) => {
+    const updatedLinks = [...links];
+    updatedLinks[index].quantidade = String(parseInt(updatedLinks[index].quantidade) - 1);
+    if (updatedLinks[index].quantidade < 0) {
+      updatedLinks[index].quantidade = '0';
+    }
     setLinks(updatedLinks);
   };
 
@@ -91,23 +105,23 @@ function Storage() {
                     required
                   />
                 </label>
-                <label className='caixa'>
+                <label className='caixaImg'>
                   <img  
                     src="/disponivel.svg"
                     alt="Disponível"
-                    className="opcao-imagem"
+                    className={`opcao-imagem ${imagemSelecionada === "/disponivel.svg" ? 'selecionada' : ''}`}
                     onClick={() => handleImageSelection("/disponivel.svg")}
                   />
                   <img
                     src="/indisponivel.svg"
                     alt="Indisponível"
-                    className="opcao-imagem"
+                    className={`opcao-imagem ${imagemSelecionada === "/indisponivel.svg" ? 'selecionada' : ''}`}
                     onClick={() => handleImageSelection("/indisponivel.svg")}
                   />
                   <img
                     src="/alerta.svg"
                     alt="Alerta"
-                    className="opcao-imagem"
+                    className={`opcao-imagem ${imagemSelecionada === "/alerta.svg" ? 'selecionada' : ''}`}
                     onClick={() => handleImageSelection("/alerta.svg")}
                   />
                 </label>
@@ -121,12 +135,12 @@ function Storage() {
           {links.map((item, index) => (
             <div key={index} className='item-container'>
               <div className='img-text-container2'>
-              <div className="bntMaiseMenosContainer">
-                  <button className='bntMaiseMenos'>+</button>
+                <div className="bntMaiseMenosContainer">
+                  <button className='bntMaiseMenos' onClick={() => handleAddQuantity(index)}>+</button>
                   <p className='fonteDetalheEstoque'>
                     {item.quantidade}
                   </p>
-                  <button className='bntMaiseMenos'>-</button>
+                  <button className='bntMaiseMenos' onClick={() => handleRemoveQuantity(index)}>-</button>
                 </div>
                 <p className='fonteDetalheEstoque'>
                   {item.nome}
@@ -134,7 +148,7 @@ function Storage() {
                 {item.imagem && (
                   <img src={item.imagem} alt="Status" className="imagem-selecionada" />
                 )}
-                <img src="trash.svg" alt='img-trash' class='trashEstoque' onClick={() => handleRemoveLink(index)}></img>
+                <img src="trash.svg" alt='img-trash' className='trashEstoque' onClick={() => handleRemoveLink(index)} />
               </div>
             </div>
           ))}

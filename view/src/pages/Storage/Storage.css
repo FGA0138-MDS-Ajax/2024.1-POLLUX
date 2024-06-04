@@ -1,28 +1,14 @@
-.popup{
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #d2d3e4fa;    
-  padding: 20px;
-  width: 550px;
-  border-radius: 8%;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.336);
-  z-index: 999;
-  display: flex;
-  flex-direction: column;
-}
-
-body{
+body {
   font-family: 'Poppins', monospace;
 }
-.estoqueTitulo{
+
+.estoqueTitulo {
   margin-top: 3rem;
   text-align: center;
   font-size: 200%;
 }
 
-.estoqueCorpo{
+.estoqueCorpo {
   text-align: left;
   margin-left: 180px;
   left: 9rem;
@@ -34,72 +20,73 @@ body{
 .img-text-container2 {
   display: flex;
   align-items: center;
-  margin-top:10px;
+  margin-top: 10px;
   margin-left: 150px;
 }
 
-.fonte{
-  font-size: 40px; 
+.fonte {
+  font-size: 40px;
   display: flex;
   margin-left: 20px;
   margin-top: -2px;
 }
 
-.fonteDetalheEstoque{
+.fonteDetalheEstoque {
   font-size: 25px;
 }
 
 .close {
   font-size: 36px;
   cursor: pointer;
-  margin-left: 480px;
+  margin-left: auto;
 }
 
-.caixa{
-display: flex;
-margin-top: -10px;
-margin-bottom: 10px;
-font-size: 20px;
+.caixa {
+  display: flex;
+  flex-direction: column;
+  margin-top: -10px;
+  margin-bottom: 10px;
+  font-size: 20px;
 }
 
 .caixa label {
-  width: 100px; 
-  margin-right: 10px; 
+  margin-bottom: 5px;
   font-size: 20px;
 }
 
 .caixa input {
-  flex: 1; 
   font-size: 20px;
   background-color: #d2d3e4fa;
-  border: none; 
-  outline: none; 
+  border: none;
+  outline: none;
+  padding: 5px;
 }
 
-
-.botao{
+.botao {
   font-size: 20px;
   width: 200px;
-  margin-left: 155px;
-  margin-top: -20px;
-
+  margin: 10px auto;
+  display: block;
 }
 
-.bntMaiseMenos{
+.bntMaiseMenos {
   border-radius: 50%;
-  width: 25px; 
-  height: 25px; 
-  background-color: #3A8EBB; 
-  border: none; 
-  cursor: pointer; 
+  width: 25px;
+  height: 25px;
+  background-color: #3A8EBB;
+  border: none;
+  cursor: pointer;
   font-size: 20px;
-
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
 }
 
-.trashEstoque{
+.trashEstoque {
   height: 20px;
   width: 20px;
-  margin-right: 25px;
+  margin-left: 10px;
   cursor: pointer;
 }
 
@@ -109,29 +96,52 @@ font-size: 20px;
   margin-bottom: 10px;
 }
 
-.bntMaiseMenos {
-  margin: 0 5px;
+.bntMaiseMenosContainer {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
 }
 
 .fonteDetalheEstoque {
-  margin: 0 10px; /* Espaço entre texto e os botões */
+  margin: 0 10px;
 }
 
 .imagem-selecionada {
   width: 50px;
   height: 50px;
-}
-
-.bntMaiseMenosContainer {
-  display: flex;
-  align-items: center;
+  margin-left: 10px;
 }
 
 .opcao-imagem {
   margin-right: 10px;
   cursor: pointer;
+  transition: filter 0.3s ease;
 }
 
-.opcao-imagem:last-child {
-  margin-right: 0; /* Remove a margem direita do último item */
+.opcao-imagem.selecionada {
+  filter: brightness(1) saturate(40);
+}
+
+.caixaImg {
+  display: flex;
+  align-items: center;
+}
+
+.caixaImg img:hover {
+  filter: brightness(2) saturate(10);
+}
+
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #d2d3e4fa;
+  padding: 20px;
+  width: 550px;
+  border-radius: 8%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.336);
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
 }
