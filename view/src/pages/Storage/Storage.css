@@ -29,13 +29,13 @@ body{
   width: 80%;
   font-family: 'Poppins', monospace;
   padding: 20px;  
-  background-color: #d2d3e4fa;
-  
 }
 
 .img-text-container2 {
   display: flex;
   align-items: center;
+  margin-top:10px;
+  margin-left: 150px;
 }
 
 .fonte{
@@ -45,7 +45,7 @@ body{
   margin-top: -2px;
 }
 
-.fonte2{
+.fonteDetalheEstoque{
   font-size: 25px;
 }
 
@@ -61,11 +61,13 @@ margin-top: -10px;
 margin-bottom: 10px;
 font-size: 20px;
 }
+
 .caixa label {
   width: 100px; 
   margin-right: 10px; 
   font-size: 20px;
 }
+
 .caixa input {
   flex: 1; 
   font-size: 20px;
@@ -85,17 +87,51 @@ font-size: 20px;
 
 .bntMaiseMenos{
   border-radius: 50%;
-  width: 40px; 
-  height: 40px; 
+  width: 25px; 
+  height: 25px; 
   background-color: #3A8EBB; 
-  color: black; 
-  font-size: 16px; 
   border: none; 
   cursor: pointer; 
-  font-size: 30px;
-  text-align: center;
-  margin-inline: 10px;
-  cursor: pointer;
-  
+  font-size: 20px;
+
 }
 
+.trashEstoque{
+  height: 20px;
+  width: 20px;
+  margin-right: 25px;
+  cursor: pointer;
+}
+
+.item-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.bntMaiseMenos {
+  margin: 0 5px;
+}
+
+.fonteDetalheEstoque {
+  margin: 0 10px; /* Espaço entre texto e os botões */
+}
+
+.imagem-selecionada {
+  width: 50px;
+  height: 50px;
+}
+
+.bntMaiseMenosContainer {
+  display: flex;
+  align-items: center;
+}
+
+.opcao-imagem {
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.opcao-imagem:last-child {
+  margin-right: 0; /* Remove a margem direita do último item */
+}
