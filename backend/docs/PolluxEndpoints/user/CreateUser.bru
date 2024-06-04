@@ -1,0 +1,15 @@
+meta {
+  name: CreateUser
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{base_url}}/users
+  body: json
+  auth: none
+}
+
+body:json {
+  {}
+}

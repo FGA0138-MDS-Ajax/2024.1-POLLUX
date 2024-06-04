@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import './CreateAccount.css';
 import { Link } from 'react-router-dom';
+import { createUser } from '../../queries/user';
 
 function CreateAccount() {
   const [name, setName] = useState('');
@@ -53,7 +54,15 @@ function CreateAccount() {
     }
   };
 
-  const handleSubmit = (e) => {
+  const newUser = async (userData)=> {
+    try {
+      await createUser(userData)    
+    } catch (error) {
+      alert(JSON.stringify(error))
+    }
+  }
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
       setErrors({ ...errors, password: 'As senhas não conferem' });
@@ -61,14 +70,19 @@ function CreateAccount() {
     }
     // os dados que o usuario mandou chegam aqui
     console.log('Nome:', name);
-    console.log('Email: ');
+    console.log('Email: ', email);
     console.log('Matrícula:', registration);
     console.log('Senha:', password);
     console.log('Confirmar Senha:', confirmPassword);
-
     //alerta pra ver se esta recebendo os valores
     alert("Matricula : " + registration + "Email: "+ email+" Senha: " + password + " Nome: "+ name + " Senha confirmada: "+ confirmPassword);
-
+    await newUser({
+      "nome": name,
+      "matricula": registration,
+      "email": email,
+      "senha": password,
+      "cargo_id": 2 //ADICONAR CARGO !!
+    })
   };
 
   return (
