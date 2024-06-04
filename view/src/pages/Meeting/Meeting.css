@@ -1,43 +1,145 @@
-.container{
-    width:100%;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-  }
-  
-  .container img {
-    height:500px
-  }
-  
-  .container p {
-    font-size: 18px;
-  }
-  
-  .container span{
-    color: purple;
-  }
-  
-  .btn {
-    width: 250px;
-    height: 100px;
-    font-size: 25px;
-    font-weight: bold;
-    border: 0;
-    border-radius: 18px;
-    color: #fdfdfd;
-    background-color: #414191;
-    cursor: pointer;
-  }
-  
-  .btn:hover{
-    text-decoration: underline;
-  }
+/* Meeting.css */
 
-  #paginaMeeting {
-    background-color: #414191;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+body {
+  font-family: 'Poppins', monospace;
+}
+
+.documentosTitulo {
+  margin-top: 3rem;
+  text-align: center;
+  font-size: 200%;
+}
+
+.documentosCorpo {
+  text-align: left;
+  margin-left: 180px;
+  left: 9rem;
+  width: 80%;
+  font-family: 'Poppins', monospace;
+  padding: 20px;  
+}
+
+.img-text-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.fonte {
+  font-size: 40px; 
+  margin-left: 20px;
+  margin-top: -2px;
+}
+
+.fonte2 {
+  font-size: 25px;
+}
+
+.trash {
+  height: 20px;
+  width: 20px;
+  margin-right: 25px;
+  margin-top: 15px;
+  margin-left: 150px;
+  cursor: pointer;
+}
+
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #d2d3e4fa;    
+  padding: 20px;
+  width: 550px;
+  border-radius: 8%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.336);
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+}
+
+.popup-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.close {
+  font-size: 36px;
+  cursor: pointer;
+  margin-left: auto;
+  margin-bottom: 20px;
+}
+
+.caixa {
+  display: flex;
+  margin-bottom: 10px;
+  font-size: 20px;
+  flex-direction: column;
+}
+
+.caixa label {
+  width: 100%; 
+  margin-bottom: 10px; 
+}
+
+.caixa input {
+  font-size: 20px;
+  background-color: #d2d3e4fa;
+  border: none; 
+  outline: none; 
+  padding: 10px;
+}
+
+.botao {
+  font-size: 20px;
+  width: 100%;
+  padding: 10px;
+  background-color: #2683b5;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.botao:hover {
+  text-decoration: underline;
+}
+
+.displayed-links {
+  margin-top: 20px;
+}
+
+.presence-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.presence-table th, .presence-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.presence-table th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+.presence-table tr:hover {
+  background-color: #f5f5f5;
+}
+
+.presence-table input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+}
+
+.meeting {
+  border: 1px solid #ddd;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+}
