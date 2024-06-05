@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+# post '/endpoint_a_ser_criado', to 'controler_a_ser_definido#funcao_a_ser_usada'
   resources :reuniaos
   resources :documentos
   resources :tarefas

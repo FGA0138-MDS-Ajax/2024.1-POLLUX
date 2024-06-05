@@ -21,8 +21,10 @@ class CargosController < ApplicationController
 
   # POST /cargos or /cargos.json
   def create
-    @cargo = Cargo.new(cargo_params)
-
+    nome = cargo_params[:nome]
+    teste = nome+"teste"
+    @cargo = Cargo.new(nome: teste)
+    
     respond_to do |format|
       if @cargo.save
         format.html { redirect_to cargo_url(@cargo), notice: "Cargo was successfully created." }

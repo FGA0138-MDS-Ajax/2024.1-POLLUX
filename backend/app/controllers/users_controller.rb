@@ -22,7 +22,13 @@ class UsersController < ApplicationController
 
   # POST /users or /users.json
   def create
-    @user = User.new(user_params)
+    senha = user_params[:senha]
+    hash = BCrypt::Password.create(senha)
+    nome = user_params[:nome]
+    matricula = user_params[:matricula]
+    email = user_params[:email]
+    cargoID = user_params[:cargo_id]
+    @user = User.new(nome: nome,matricula: matricula,email: email,senha: hash,cargo_id: cargoID)
 
     respond_to do |format|
       if @user.save
@@ -58,10 +64,6 @@ class UsersController < ApplicationController
     end
   end
 
-  def CriaUser(nome,matricula,email,senha,cargo)
-  hash = BCrypt::Password.create(senha)
-  User.create(nome: nome,matricula: matricula,email: email,senha: hash,cargo_id: cargo.id)
-  end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
