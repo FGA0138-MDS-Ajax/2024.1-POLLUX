@@ -14,7 +14,7 @@ O projeto EDRA têm como objetivo criar uma aplicação web que sirva para divul
 
 - Gerência de calendário: página para gerenciar quadro Kanban de tarefas da equipe, e, também um calendário disponível para compromissos.
 
-- Gerência de estoque: página para controlar as peças, com suas respectivas quantidades e sstatus.
+- Gerência de estoque: página para controlar as peças, com suas respectivas quantidades e status.
 
 - Gerência de reuniões: página para adicionar atas e ter o controle de presença de reuniões.
 
