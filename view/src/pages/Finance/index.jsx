@@ -71,6 +71,22 @@ function Finance() {
     setSaldo(total);
   };
 
+  const handleDelete = (index) => {
+    const novaListaAcoes = [...acoes];
+    const acaoRemovida = novaListaAcoes.splice(index, 1)[0];
+    
+    setAcoes(novaListaAcoes);
+    
+    // Atualizar o saldo após a remoção do registro
+    let novoSaldo = saldo;
+    if (acaoRemovida.tipo === 'Entrada') {
+      novoSaldo -= acaoRemovida.valor;
+    } else if (acaoRemovida.tipo === 'Saída') {
+      novoSaldo += acaoRemovida.valor;
+    }
+    setSaldo(novoSaldo);
+  };
+
   return (
     <>
       <SideBar />
@@ -100,8 +116,9 @@ function Finance() {
           <h2>{mes} - Ações:</h2>
           <ul>
             {acoes.filter(acao => acao.mes === mes && acao.ano === ano).map((acao, index) => (
-              <li key={index}>
+              <li key={index} className={acao.tipo === 'Entrada' ? 'entrada' : 'saida'}>
                 {acao.tipo}: {acao.acao} - R$ {acao.valor.toFixed(2)}
+                <img src="trash.svg" alt="Delete" onClick={() => handleDelete(index)} />
               </li>
             ))}
           </ul>
@@ -141,3 +158,4 @@ function Finance() {
 }
 
 export default Finance;
+
