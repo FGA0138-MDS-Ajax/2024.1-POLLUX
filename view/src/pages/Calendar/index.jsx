@@ -1,6 +1,7 @@
 import React from 'react';
 import './Calendar.css';
 import SideBar from '../../components/SideBar';
+import Kanban from '../../components/Kanban';
 
 function Calendar() {
   return (
@@ -15,6 +16,7 @@ function Calendar() {
           {/* Adicione aqui o conteúdo do calendário */}
         </div>
       </div>
+      <Kanban/>
     </>
   );
 }

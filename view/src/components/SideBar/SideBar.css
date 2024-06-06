@@ -1,29 +1,73 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
 .sidebar {
     position: fixed;
     top: 0;
     left: 0;
     height: 100%;
-    width: 120px; /* Largura da sidebar */
-    background: linear-gradient(#3A8EBB 50%, #007600 50%);
+    width: 120px;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-top {
+    width: 100%;
+    background-color: #3A8EBB;
+    padding-top: 20px;
+}
+
+.sidebar-bottom {
+    width: 100%;
+    background-color: #007600;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding-bottom: 20px;
 }
 
 .sidebar img {
     display: block;
-    height: 55px ;
+    height: 40px;
     cursor: pointer;
     width: 100%;
-    margin-bottom: 30px; 
-    margin-top: 20px;
-  }
-
-.embaixo{
-    margin-top: 310px;
-    display: flex;
-    flex-direction: column;
-
+    margin-bottom: 30px;
+    object-fit: contain;
 }
 
-.edraLogo{
-    margin-left: 100%;
-    /*padding: 0px 1000px;*/
+.embaixo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: -20px;
+}
+
+.sidebar-image {
+    margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        width: 80px;
+    }
+
+    .sidebar img {
+        height: 40px;
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .sidebar {
+        width: 60px;
+    }
+
+    .sidebar img {
+        height: 35px;
+        margin-bottom: 15px;
+    }
 }
