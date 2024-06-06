@@ -5,7 +5,7 @@ function SideBar(){
     return(
         <sidebar className='sidebar'>
             <nav>
-            <Link to='/meeting'>
+            <Link to='/calendar'>
                 <img src="calendario.svg" alt="img-calendario"/>
                 </Link>
 

@@ -10,6 +10,7 @@ import Storage from './pages/Storage'
 import Documents from './pages/Documents'
 import Admin from './pages/Admin'
 import './App.css'
+import Calendar from './pages/Calendar'
 
 function AppRoutes() {
     return(
@@ -25,6 +26,7 @@ function AppRoutes() {
                 <Route path='/storage' element={<Storage/>}></Route>
                 <Route path='/documents' element={<Documents/>}></Route>
                 <Route path='/admin' element={<Admin/>}></Route>
+                <Route path='/calendar' element={<Calendar/>}></Route>
             </Routes>
         </BrowserRouter>
     )
