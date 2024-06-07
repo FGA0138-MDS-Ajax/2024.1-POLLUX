@@ -2,6 +2,8 @@ import { useState } from 'react';
 import './CreateAccount.css';
 import { Link } from 'react-router-dom';
 import { createUser } from '../../queries/user';
+import axios from 'axios';
+
 
 function CreateAccount() {
   const [name, setName] = useState('');
@@ -76,13 +78,24 @@ function CreateAccount() {
     console.log('Confirmar Senha:', confirmPassword);
     //alerta pra ver se esta recebendo os valores
     alert("Matricula : " + registration + "Email: "+ email+" Senha: " + password + " Nome: "+ name + " Senha confirmada: "+ confirmPassword);
-    await newUser({
-      "nome": name,
-      "matricula": registration,
-      "email": email,
-      "senha": password,
-      "cargo_id": 2 //ADICONAR CARGO !!
+    
+    const userData = {
+        nome: name,
+        matricula: registration,
+        email: email,
+        senha: password, // Aqui você pode usar a senha desejada
+        cargo_id: 1 // Substitua isso pelo ID do cargo desejado
+    };
+    const apiUrl = 'http://localhost:3000';
+    axios.post("http://localhost:3000/users", userData)
+    .then(response => {
+        console.log('Usuário criado com sucesso:', response.data);
     })
+    .catch(error => {
+        console.error('Ocorreu um erro ao criar o usuário:', error);
+    });
+
+
   };
 
   return (
