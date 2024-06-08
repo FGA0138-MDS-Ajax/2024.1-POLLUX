@@ -2,37 +2,24 @@ body {
   font-family: 'Poppins', monospace;
 }
 
-.estoqueTitulo {
+.tituloGeral {
   margin-top: 3rem;
   text-align: center;
-  font-size: 200%;
-}
-
-.estoqueCorpo {
-  text-align: left;
-  margin-left: 180px;
-  left: 9rem;
-  width: 80%;
-  font-family: 'Poppins', monospace;
-  padding: 20px;  
+  font-size: 180%;
+  margin-bottom: 30px;
+  margin-right: 60px;
 }
 
 .img-text-container2 {
   display: flex;
   align-items: center;
-  margin-top: 10px;
+  margin-top: 5px;
   margin-left: 150px;
+  gap: -40px;
 }
 
-.fonte {
-  font-size: 40px;
-  display: flex;
-  margin-left: 20px;
-  margin-top: -2px;
-}
-
-.fonteDetalheEstoque {
-  font-size: 25px;
+.fonteDetalheGeral {
+  font-size: 15px;
 }
 
 .close {
@@ -62,21 +49,14 @@ body {
   padding: 5px;
 }
 
-.botao {
-  font-size: 20px;
-  width: 200px;
-  margin: 10px auto;
-  display: block;
-}
-
 .bntMaiseMenos {
   border-radius: 50%;
-  width: 25px;
-  height: 25px;
+  width: 20px;
+  height: 20px;
   background-color: #3A8EBB;
   border: none;
   cursor: pointer;
-  font-size: 20px;
+  font-size: 15px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -84,16 +64,15 @@ body {
 }
 
 .trashEstoque {
-  height: 20px;
+  height: 15px;
   width: 20px;
-  margin-left: 10px;
   cursor: pointer;
 }
 
-.item-container {
+.item-container-geral {
   display: flex;
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: -15px;
 }
 
 .bntMaiseMenosContainer {
@@ -102,14 +81,12 @@ body {
   margin-right: 10px;
 }
 
-.fonteDetalheEstoque {
+.fonteDetalheGeral2 {
   margin: 0 10px;
 }
 
 .imagem-selecionada {
-  width: 50px;
-  height: 50px;
-  margin-left: 10px;
+  width: 25px;
 }
 
 .opcao-imagem {
@@ -145,3 +122,20 @@ body {
   display: flex;
   flex-direction: column;
 }
+
+.containerGeral{
+  font-size: 20px;
+  display: flex;
+  margin-left: 180px;
+  flex-direction: column;
+}
+
+.img-plusE{
+  width: 40px;
+}
+
+.fonteDetalheGeral{
+  margin-left: -15px;
+}
+
+

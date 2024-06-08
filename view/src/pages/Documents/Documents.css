@@ -16,10 +16,18 @@
 body{
     font-family: 'Poppins', monospace;
 }
-.documentosTitulo{
-    margin-top: 3rem;
-    text-align: center;
-    font-size: 200%;
+
+.tituloGeral {
+  margin-top: 3rem;
+  text-align: center;
+  font-size: 180%;
+  margin-bottom: 30px;
+  margin-right: 60px;
+}
+
+.fonteDetalheGeral {
+  font-size: 15px;
+  margin-top: 20px;
 }
 
 .documentosCorpo{
@@ -36,15 +44,25 @@ body{
     align-items: center;
 }
 
-.fonte{
-    font-size: 40px; 
-    display: flex;
-    margin-left: 20px;
-    margin-top: -2px;
+.fonteDetalheGeral2 {
+  margin: 0 10px;
 }
 
-.fonte2{
-    font-size: 25px;
+.containerGeral{
+  font-size: 20px;
+  display: flex;
+  margin-left: 180px;
+  flex-direction: column;
+}
+
+.fonteDetalheGeral{
+  margin-left: -15px;
+}
+
+.item-container-geral {
+  display: flex;
+  align-items: center;
+  margin-bottom: -15px;
 }
 
 .trash{

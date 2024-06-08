@@ -43,16 +43,17 @@ function Documents() {
   return (
     <>
     <SideBar/>
-    
-    <div className='documentosTitulo'>
+    <section className='containerGeral'>
+    <div className='tituloGeral'>
         <h1>Documentos</h1> 
     </div>
-    <div className='documentosCorpo'>
-    <div className='img-text-container'>
-      <img src="plus.svg" alt="img-plus"
-        onClick={handleImageClick} />
-      <p className='fonte'>Adicionar link</p>
-      </div>
+    
+    <div className='docsCorpo'>
+        <div className='img-text-container'>
+          <img src="plus.svg" alt="img-plus" className='img-plusE' onClick={handleImageClick} />
+          <p >Adicionar nova peça</p>
+    </div>
+
       {showPopup && (
         <div className="popup" >
           <div className="popup-content">
@@ -85,10 +86,10 @@ function Documents() {
 
         <div className="displayed-links">
         {links.map((item, index) => (
-          <div key={index}>
+          <div key={index} className='item-container-geral'>
             <div className='img-text-container'>
             <img src="trash.svg" alt='img-trash' class='trash' onClick={() => handleRemoveLink(index)}></img>
-            <p className='fonte2'>
+            <p className='fonteDetalheGeral'>
               <a href={item.link} target="_blank" rel="noopener noreferrer">{item.descricao}</a>
             </p>
             
@@ -97,6 +98,7 @@ function Documents() {
         ))}
       </div>
     </div>
+    </section>
     </>
   );
   
