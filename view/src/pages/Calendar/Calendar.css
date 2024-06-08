@@ -42,3 +42,226 @@ body {
 .calendarCorpo h2 {
   margin: 0 0 1rem 0;
 }
+
+.container {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.left, .right {
+  width: 48%;
+}
+
+.calendar {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+}
+
+.month {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.weekdays {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.weekdays div {
+  width: calc(100% / 7);
+  text-align: center;
+}
+
+.days {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.day {
+  width: calc(100% / 7);
+  height: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.prev-date, .next-date {
+  color: #d3d3d3;
+}
+
+.today {
+  background-color: #ffd700;
+  border-radius: 50%;
+}
+
+.event {
+  background-color: #ff6347;
+  border-radius: 50%;
+}
+
+.active {
+  border: 2px solid #000;
+}
+
+.event-preview {
+  font-size: 0.8rem;
+  color: #333;
+}
+
+.goto-today {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.date-input {
+  padding: 5px;
+  border: 1px solid #d3d3d3;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.goto-btn, .today-btn {
+  padding: 5px 10px;
+  border: none;
+  background-color: #4caf50;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.today-btn {
+  background-color: #2196f3;
+}
+
+.today-date {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.event-day {
+  font-size: 1.5rem;
+}
+
+.event-date {
+  font-size: 1rem;
+}
+
+.events {
+  margin-bottom: 20px;
+}
+
+.event {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #e0e0e0;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.event-title {
+  font-size: 1.2rem;
+}
+
+.event-time {
+  font-size: 1rem;
+}
+
+.no-event {
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+.add-event {
+  position: relative;
+}
+
+.add-event-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  display: none;
+}
+
+.add-event-wrapper.active {
+  display: block;
+}
+
+.add-event-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.add-event-body {
+  margin-bottom: 10px;
+}
+
+.add-event-body input {
+  width: 100%;
+  padding: 5px;
+  margin-bottom: 10px;
+  border: 1px solid #d3d3d3;
+  border-radius: 5px;
+}
+
+.add-event-body .time {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.add-event-body .time input {
+  width: calc(50% - 10px);
+}
+
+.add-event-footer {
+  text-align: center;
+}
+
+.add-event-btn {
+  padding: 10px 20px;
+  border: none;
+  background-color: #4caf50;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.add-event .close {
+  background-color: #ff6347;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 50%;
+  padding: 5px;
+}
+
+.delete-event{
+  width: 20px;
+  cursor: pointer;
+}
+.container img {
+  margin-left: 10px;
+  height: 20px;
+}
