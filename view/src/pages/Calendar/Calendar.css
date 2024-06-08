@@ -20,6 +20,14 @@ body {
   font-size: 200%;
 }
 
+.calendarSubTitulo{
+  margin-top: 3rem;
+  text-align: center;
+  font-size: 130%;
+  margin-left: 120px;
+
+}
+
 .calendarCorpo {
   width: 80%;
   background-color: #d2d3e4fa;

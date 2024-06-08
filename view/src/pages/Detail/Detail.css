@@ -1,0 +1,20 @@
+.containerDetail{
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  margin-left: 160px;
+  gap:190px;
+  margin-top: 40px;
+  font-size: 20px;
+}
+
+.edraDetail {
+  position: fixed;
+  top: 52%;
+  left: 750px;
+  transform: translateY(-50%);
+  width: 200px;
+  height: auto;
+  z-index: -1; /* Define um z-index menor para ficar atrás dos outros elementos */
+  opacity: 0.2; /* Opacidade para torná-la transparente */
+}

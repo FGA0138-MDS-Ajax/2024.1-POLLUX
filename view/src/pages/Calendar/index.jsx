@@ -16,7 +16,11 @@ function Calendar() {
           {/* Adicione aqui o conteúdo do calendário */}
         </div>
       </div>
+      <div className='calendarSubTitulo'>
+          <h1>Quadro Kanban</h1>
+        </div>
       <Kanban/>
+
     </>
   );
 }

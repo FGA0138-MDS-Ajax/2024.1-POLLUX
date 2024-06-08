@@ -28,7 +28,7 @@ function SideBar() {
                     <Link to='/'>
                         <img src="logout.svg" alt="logout" className="sidebar-image img-logout"/>
                     </Link>
-                    <Link to='/memberarea'>
+                    <Link to='/detail'>
                         <img src="edraV.svg" alt="edraV"/>
                     </Link>
                 </nav>
