@@ -89,7 +89,7 @@ function Documents() {
           <div key={index} className='item-container-geral'>
             <div className='img-text-container'>
             <img src="trash.svg" alt='img-trash' class='trash' onClick={() => handleRemoveLink(index)}></img>
-            <p className='fonteDetalheGeral'>
+            <p className='fonteDetalheGeral3'>
               <a href={item.link} target="_blank" rel="noopener noreferrer">{item.descricao}</a>
             </p>
             
