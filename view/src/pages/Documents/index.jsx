@@ -51,7 +51,7 @@ function Documents() {
     <div className='docsCorpo'>
         <div className='img-text-container'>
           <img src="plus.svg" alt="img-plus" className='img-plusE' onClick={handleImageClick} />
-          <p >Adicionar nova peça</p>
+          <p >Adicionar link</p>
     </div>
 
       {showPopup && (
