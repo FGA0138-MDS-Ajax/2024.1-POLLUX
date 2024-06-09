@@ -1,9 +1,8 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import './CreateAccount.css';
 import { Link } from 'react-router-dom';
 import { createUser } from '../../queries/user';
 import axios from 'axios';
-
 
 function CreateAccount() {
   const [name, setName] = useState('');
@@ -11,6 +10,7 @@ function CreateAccount() {
   const [registration, setRegistration] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [role, setRole] = useState(''); // Novo estado para armazenar a função do usuário
   const [errors, setErrors] = useState({
     name: '',
     email: '',
@@ -27,6 +27,7 @@ function CreateAccount() {
       setName(value);
     }
   };
+
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
   };
@@ -45,7 +46,6 @@ function CreateAccount() {
     setPassword(e.target.value);
   };
 
-  //confere se as senhas são as mesmas
   const handleConfirmPasswordChange = (e) => {
     const value = e.target.value;
     setConfirmPassword(value);
@@ -56,13 +56,9 @@ function CreateAccount() {
     }
   };
 
-  const newUser = async (userData)=> {
-    try {
-      await createUser(userData)    
-    } catch (error) {
-      alert(JSON.stringify(error))
-    }
-  }
+  const handleRoleChange = (e) => { // Função para lidar com a mudança de opção na dropbox
+    setRole(e.target.value);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -70,22 +66,15 @@ function CreateAccount() {
       setErrors({ ...errors, password: 'As senhas não conferem' });
       return;
     }
-    // os dados que o usuario mandou chegam aqui
-    console.log('Nome:', name);
-    console.log('Email: ', email);
-    console.log('Matrícula:', registration);
-    console.log('Senha:', password);
-    console.log('Confirmar Senha:', confirmPassword);
-    //alerta pra ver se esta recebendo os valores
-    alert("Matricula : " + registration + "Email: "+ email+" Senha: " + password + " Nome: "+ name + " Senha confirmada: "+ confirmPassword);
-    
+
     const userData = {
         nome: name,
         matricula: registration,
         email: email,
-        senha: password, // Aqui você pode usar a senha desejada
-        cargo_id: 1 // Substitua isso pelo ID do cargo desejado
+        senha: password,
+        cargo_id: role // Atualizado para usar o estado da dropbox
     };
+
     const apiUrl = 'http://localhost:3000';
     axios.post("http://localhost:3000/users", userData)
     .then(response => {
@@ -94,8 +83,6 @@ function CreateAccount() {
     .catch(error => {
         console.error('Ocorreu um erro ao criar o usuário:', error);
     });
-
-
   };
 
   return (
@@ -143,6 +130,13 @@ function CreateAccount() {
               onChange={handleConfirmPasswordChange}
             />
             {errors.password && <span className='error'>{errors.password}</span>}
+            {/* Dropdown para selecionar o cargo */}
+            <select value={role} onChange={handleRoleChange}>
+              <option value="">Selecione o cargo</option>
+              <option value="1">Cargo 1</option>
+              <option value="2">Cargo 2</option>
+              <option value="3">Cargo 3</option>
+            </select>
             <button type="submit">CRIAR CONTA</button>
           </form>
           <p>Já tem conta? <a href='/login'>Entrar</a></p>

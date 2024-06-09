@@ -60,7 +60,6 @@ function Login() {
                         <button type="submit"> ENTRAR</button>
                     </form>
 
-                    <p>Não possui conta? <Link to="/createAccount">Registrar-se</Link></p>
                     <p><Link to="/passwordRecovery">Esqueci a senha</Link></p>
                 </div>
             </body>
