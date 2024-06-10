@@ -3,21 +3,28 @@ import './Calendar.css';
 import SideBar from '../../components/SideBar';
 import Kanban from '../../components/Kanban';
 
-
 const Calendar = () => {
   const [today, setToday] = useState(new Date());
   const [activeDay, setActiveDay] = useState(today.getDate());
   const [month, setMonth] = useState(today.getMonth());
   const [year, setYear] = useState(today.getFullYear());
   const [eventsArr, setEventsArr] = useState([]);
+
   const listMonthEvents = () => {
     const monthEvents = eventsArr.filter(event => event.month === month + 1 && event.year === year);
     
-    // Ordenar os eventos pela data
+    // Ordenar os eventos pela data e hora
     monthEvents.sort((a, b) => a.day - b.day);
-    
+    monthEvents.forEach(eventObj => {
+      eventObj.events.sort((a, b) => {
+        const [aStart] = a.time.split(" - ");
+        const [bStart] = b.time.split(" - ");
+        return aStart.localeCompare(bStart);
+      });
+    });
+
     let eventsList = "";
-  
+
     monthEvents.forEach(eventObj => {
       eventObj.events.forEach(event => {
         eventsList += `<div class="event">
@@ -34,11 +41,11 @@ const Calendar = () => {
         </div>`;
       });
     });
-  
+
     if (eventsList === "") {
       eventsList = `<div class="no-event"><h3>Sem eventos no mês</h3></div>`;
     }
-  
+
     document.querySelector('.events-month').innerHTML = eventsList;
   };
 
@@ -151,22 +158,27 @@ const Calendar = () => {
 
   const updateEvents = (date) => {
     let events = "";
-    eventsArr.forEach((event) => {
-      if (date === event.day && month + 1 === event.month && year === event.year) {
-        event.events.forEach((event) => {
-          events += `<div class="event">
-            <div class="title">
-              <i class="fas fa-circle"></i>
-              <h3 class="event-title">${event.title}</h3>
-            </div>
-            <div class="event-time">
-              <span class="event-time">${event.time}</span>
-              <img src="trash.svg" alt="Excluir" class="delete-event" data-title="${event.title}" />
-            </div>
-          </div>`;
-        });
-      }
-    });
+    const dayEvents = eventsArr.find(eventObj => eventObj.day === date && eventObj.month === month + 1 && eventObj.year === year);
+    if (dayEvents) {
+      // Ordenar os eventos por hora
+      dayEvents.events.sort((a, b) => {
+        const [aStart] = a.time.split(" - ");
+        const [bStart] = b.time.split(" - ");
+        return aStart.localeCompare(bStart);
+      });
+      dayEvents.events.forEach((event) => {
+        events += `<div class="event">
+          <div class="title">
+            <i class="fas fa-circle"></i>
+            <h3 class="event-title">${event.title}</h3>
+          </div>
+          <div class="event-time">
+            <span class="event-time">${event.time}</span>
+            <img src="trash.svg" alt="Excluir" class="delete-event" data-title="${event.title}" />
+          </div>
+        </div>`;
+      });
+    }
 
     if (events === "") {
       events = `<div class="no-event"><h3>Sem eventos no dia</h3></div>`;
@@ -179,7 +191,6 @@ const Calendar = () => {
         deleteEvent(eventTitle);
       });
     });
-    saveEvents();
   };
 
   const saveEvents = () => {
@@ -202,13 +213,13 @@ const Calendar = () => {
       return;
     }
 
-    const timeFrom = convertTime(eventTimeFrom);
-    const timeTo = convertTime(eventTimeTo);
+    const timeFrom = eventTimeFrom;
+    const timeTo = eventTimeTo;
 
     let eventExist = false;
-    eventsArr.forEach((event) => {
-      if (event.day === activeDay && event.month === month + 1 && event.year === year) {
-        event.events.forEach((event) => {
+    eventsArr.forEach((eventObj) => {
+      if (eventObj.day === activeDay && eventObj.month === month + 1 && eventObj.year === year) {
+        eventObj.events.forEach((event) => {
           if (event.title === eventTitle) {
             eventExist = true;
           }
@@ -222,11 +233,12 @@ const Calendar = () => {
     }
 
     const newEvent = { title: eventTitle, time: `${timeFrom} - ${timeTo}` };
-    let eventAdded = false;
 
-    const updatedEventsArr = eventsArr.map(item => {
+    let eventAdded = false;
+    const updatedEventsArr = eventsArr.map((item) => {
       if (item.day === activeDay && item.month === month + 1 && item.year === year) {
         item.events.push(newEvent);
+        item.events.sort((a, b) => a.time.localeCompare(b.time));
         eventAdded = true;
       }
       return item;
@@ -255,15 +267,6 @@ const Calendar = () => {
 
     setEventsArr(updatedEventsArr);
     updateEvents(activeDay);
-  };
-
-  const convertTime = (time) => {
-    let timeArr = time.split(":");
-    let timeHour = timeArr[0];
-    let timeMin = timeArr[1];
-    let timeFormat = timeHour >= 12 ? "PM" : "AM";
-    timeHour = timeHour % 12 || 12;
-    return `${timeHour}:${timeMin} ${timeFormat}`;
   };
 
   return (
