@@ -265,3 +265,42 @@ body {
   margin-left: 10px;
   height: 20px;
 }
+
+.date{
+  text-align: center;
+  font-size: 1.2rem
+}
+
+.event-month-title{
+  text-align: center;
+  margin-top: 20px;
+  font-size: 1.5rem
+}
+
+.events-month .event {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #e0e0e0;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.events-month .event-title {
+  font-size: 1.2rem;
+}
+
+.events-month .event-time {
+  font-size: 1rem;
+}
+
+.events-month .event-date {
+  font-size: 1rem;
+  color: #333;
+}
+
+.events-month .no-event {
+  text-align: center;
+  font-size: 1.2rem;
+}

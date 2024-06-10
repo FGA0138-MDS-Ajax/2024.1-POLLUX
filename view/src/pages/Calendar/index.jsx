@@ -10,6 +10,37 @@ const Calendar = () => {
   const [month, setMonth] = useState(today.getMonth());
   const [year, setYear] = useState(today.getFullYear());
   const [eventsArr, setEventsArr] = useState([]);
+  const listMonthEvents = () => {
+    const monthEvents = eventsArr.filter(event => event.month === month + 1 && event.year === year);
+    
+    // Ordenar os eventos pela data
+    monthEvents.sort((a, b) => a.day - b.day);
+    
+    let eventsList = "";
+  
+    monthEvents.forEach(eventObj => {
+      eventObj.events.forEach(event => {
+        eventsList += `<div class="event">
+          <div class="title">
+            <i class="fas fa-circle"></i>
+            <h3 class="event-title">${event.title}</h3>
+          </div>
+          <div class="event-time">
+            <span class="event-time">${event.time}</span>
+          </div>
+          <div class="event-date">
+            <span class="event-date">${eventObj.day}/${eventObj.month}/${eventObj.year}</span>
+          </div>
+        </div>`;
+      });
+    });
+  
+    if (eventsList === "") {
+      eventsList = `<div class="no-event"><h3>Sem eventos no mês</h3></div>`;
+    }
+  
+    document.querySelector('.events-month').innerHTML = eventsList;
+  };
 
   useEffect(() => {
     const savedEvents = localStorage.getItem('events');
@@ -21,6 +52,7 @@ const Calendar = () => {
 
   useEffect(() => {
     initCalendar();
+    listMonthEvents();
   }, [month, year, eventsArr]);
 
   const months = [
@@ -250,7 +282,7 @@ const Calendar = () => {
                   <div className="prev" onClick={prevMonth}><span>&#10094;</span></div>
                   <div className="date">
                     <h1>{months[month]}</h1>
-                    <p>{year}</p>
+                    <h2>{year}</h2>
                   </div>
                   <div className="next" onClick={nextMonth}><span>&#10095;</span></div>
                 </div>
@@ -298,6 +330,8 @@ const Calendar = () => {
                   </div>
                 </div>
                 <button className="add-event-btn" onClick={() => document.querySelector('.add-event-wrapper').classList.add('active')}>Adicionar Evento</button>
+                <h3 className="event-month-title">Eventos do Mês:</h3>
+                <div className="events-month"></div>
               </div>
             </div>
           </div>
@@ -312,4 +346,3 @@ const Calendar = () => {
 };
 
 export default Calendar;
-
