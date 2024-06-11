@@ -18,13 +18,14 @@ header {
 .navHeader {
     display: flex;
     align-items: center;
+    font-weight: bold;
 }
 
 .linksHeader {
     color: white;
     margin: 0 20px;
     font-size: 25px;
-    margin-left: 37px;
+    margin-left: 150px;
 }
 
 .iconUnb {
@@ -40,7 +41,7 @@ header {
         position: absolute;
         top: 60px;
         /* ajuste conforme necessário */
-        left: 0;
+        left: 0px;
         background-color: #007600;
     }
 
