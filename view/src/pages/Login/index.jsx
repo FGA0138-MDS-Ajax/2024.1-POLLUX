@@ -27,21 +27,21 @@ function Login() {
         console.log("Matrícula:", matricula);
         console.log("Senha:", senha);
 
-     try {
-    const response = axios.post("http://localhost:3000/users/login", {
-      matricula: matricula,
-      senha: senha
-    });
-    console.log(response.data);
-  } catch (error) {
-    throw error;
-  }    
+        try {
+            const response = axios.post("http://localhost:3000/users/login", {
+                matricula: matricula,
+                senha: senha
+            });
+            console.log(response.data);
+        } catch (error) {
+            throw error;
+        }
 
-    
 
-    
 
-    //window.location.href = '/detail';
+
+
+        //window.location.href = '/detail';
 
 
     };

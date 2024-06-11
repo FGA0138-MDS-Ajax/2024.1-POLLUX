@@ -59,9 +59,9 @@ function CreateAccount() {
     setRole(e.target.value);
   };
 
-  const newUser = async (userData)=> {
+  const newUser = async (userData) => {
     try {
-      await createUser(userData)    
+      await createUser(userData)
     } catch (error) {
       alert(JSON.stringify(error))
     }

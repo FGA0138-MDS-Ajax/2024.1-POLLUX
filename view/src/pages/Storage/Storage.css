@@ -123,19 +123,17 @@ body {
   flex-direction: column;
 }
 
-.containerGeral{
+.containerGeral {
   font-size: 20px;
   display: flex;
   margin-left: 180px;
   flex-direction: column;
 }
 
-.img-plusE{
+.img-plusE {
   width: 40px;
 }
 
-.fonteDetalheGeral{
+.fonteDetalheGeral {
   margin-left: -15px;
 }
-
-

@@ -1,34 +1,59 @@
-.header{
-    width:100%;
-    height: 120px;
+header {
     background-color: #007600;
-    color: #fdfdfd;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    top: 0;
+    position: fixed;
+    z-index: 1000;
+    /* Garantir que o header fique acima de outros elementos */
+}
 
+.logoEdraHeader {
+    width: 80px;
+}
+
+.navHeader {
     display: flex;
     align-items: center;
-    justify-content: space-around;
-
 }
 
-.nav{
-    display: flex;
-    align-items: center;
+.linksHeader {
+    color: white;
+    margin: 0 20px;
+    font-size: 25px;
+    margin-left: 37px;
 }
 
-.header a {
-    font-size: 34px;
-    color: #fdfdfd;
-    text-decoration: none;
-    padding-right: 250px;
+.iconUnb {
+    width: 80px;
 }
 
-.header a:hover{
-    text-decoration: underline;
-}
+@media (max-width: 768px) {
+    .navHeader {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        text-align: center;
+        position: absolute;
+        top: 60px;
+        /* ajuste conforme necessário */
+        left: 0;
+        background-color: #007600;
+    }
 
-.header img{
-    height: 120px;
-    justify-content: flex-start;
-    cursor: pointer;
+    .linksHeader {
+        margin: 10px 0;
+        font-size: 20px;
+    }
 
+    .navHeader.active {
+        display: flex;
+    }
+
+    .logoEdraHeader {
+        display: block;
+    }
 }

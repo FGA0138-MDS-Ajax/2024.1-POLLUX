@@ -42,66 +42,66 @@ function Documents() {
 
   return (
     <>
-    <SideBar/>
-    <section className='containerGeral'>
-    <div className='tituloGeral'>
-        <h1>Documentos</h1> 
-    </div>
-    
-    <div className='docsCorpo'>
-        <div className='img-text-container'>
-          <img src="plus.svg" alt="img-plus" className='img-plusE' onClick={handleImageClick} />
-          <p >Adicionar link</p>
-    </div>
+      <SideBar />
+      <section className='containerGeral'>
+        <div className='tituloGeral'>
+          <h1>Documentos</h1>
+        </div>
 
-      {showPopup && (
-        <div className="popup" >
-          <div className="popup-content">
-            <span className="close" onClick={handleClosePopup}>
-              &times; </span>
-            <form onSubmit={handleSubmit}>
-              <label className='caixa'>
-                Insira o link:
-                <input className='caixa'
-                  type="text"
-                  value={link}
-                  onChange={handleLinkChange}
-                  required
-                />
-              </label>
-              <label className='caixa'>
-                Descrição:
-                <input className='caixa'
-                  type="text"
-                  value={descricao}
-                  onChange={handleDescricaoChange}
-                  required
-                />
-              </label>
-              <button type="submit" className='botao'>Adicionar</button>
-            </form>
+        <div className='docsCorpo'>
+          <div className='img-text-container'>
+            <img src="plus.svg" alt="img-plus" className='img-plusE' onClick={handleImageClick} />
+            <p >Adicionar link</p>
+          </div>
+
+          {showPopup && (
+            <div className="popup" >
+              <div className="popup-content">
+                <span className="close" onClick={handleClosePopup}>
+                  &times; </span>
+                <form onSubmit={handleSubmit}>
+                  <label className='caixa'>
+                    Insira o link:
+                    <input className='caixa'
+                      type="text"
+                      value={link}
+                      onChange={handleLinkChange}
+                      required
+                    />
+                  </label>
+                  <label className='caixa'>
+                    Descrição:
+                    <input className='caixa'
+                      type="text"
+                      value={descricao}
+                      onChange={handleDescricaoChange}
+                      required
+                    />
+                  </label>
+                  <button type="submit" className='botao'>Adicionar</button>
+                </form>
+              </div>
+            </div>
+          )}
+
+          <div className="displayed-links">
+            {links.map((item, index) => (
+              <div key={index} className='item-container-geral'>
+                <div className='img-text-container'>
+                  <img src="trash.svg" alt='img-trash' class='trash' onClick={() => handleRemoveLink(index)}></img>
+                  <p className='fonteDetalheGeral3'>
+                    <a href={item.link} target="_blank" rel="noopener noreferrer">{item.descricao}</a>
+                  </p>
+
+                </div>
+              </div>
+            ))}
           </div>
         </div>
-      )}
-
-        <div className="displayed-links">
-        {links.map((item, index) => (
-          <div key={index} className='item-container-geral'>
-            <div className='img-text-container'>
-            <img src="trash.svg" alt='img-trash' class='trash' onClick={() => handleRemoveLink(index)}></img>
-            <p className='fonteDetalheGeral3'>
-              <a href={item.link} target="_blank" rel="noopener noreferrer">{item.descricao}</a>
-            </p>
-            
-          </div>
-        </div>
-        ))}
-      </div>
-    </div>
-    </section>
+      </section>
     </>
   );
-  
+
 }
 
 export default Documents;

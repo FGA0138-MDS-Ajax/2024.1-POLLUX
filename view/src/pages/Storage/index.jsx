@@ -91,98 +91,98 @@ function Storage() {
     <>
       <SideBar />
       <section className='containerGeral'>
-      <div className='tituloGeral'>
-        <h1>Estoque</h1> 
-      </div>
-      
-      <div className='estoqueCorpo'>
-        <div className='img-text-container'>
-          <img src="plus.svg" alt="img-plus" className='img-plusE' onClick={handleImageClick} />
-          <p >Adicionar nova peça</p>
+        <div className='tituloGeral'>
+          <h1>Estoque</h1>
         </div>
-        
-        {showPopup && (
-          <div className="popup">
-            <div className="popup-content">
-              <span className="close" onClick={handleClosePopup}>
-                &times;
-              </span>
-              <form onSubmit={handleSubmit}>
-                <label className='caixa'>
-                  Nome da peça:
-                  <input
-                    className='caixa'
-                    type="text"
-                    value={nome}
-                    onChange={handleNomeChange}
-                    required
-                  />
-                </label>
-                <label className='caixa'>
-                  Quantidade:
-                  <input
-                    className='caixa'
-                    type="text"
-                    value={quantidade}
-                    onChange={handleQuantidadeChange}
-                    required
-                  />
-                </label>
-                <label className='caixaImg'>
-                  <img  
-                    src="/disponivel.svg"
-                    alt="Disponível"
-                    className={`opcao-imagem ${imagemSelecionada === "/disponivel.svg" ? 'selecionada' : ''}`}
-                    onClick={() => handleImageSelection("/disponivel.svg")}
-                  />
-                  <img
-                    src="/indisponivel.svg"
-                    alt="Indisponível"
-                    className={`opcao-imagem ${imagemSelecionada === "/indisponivel.svg" ? 'selecionada' : ''}`}
-                    onClick={() => handleImageSelection("/indisponivel.svg")}
-                  />
-                  <img
-                    src="/alerta.svg"
-                    alt="Alerta"
-                    className={`opcao-imagem ${imagemSelecionada === "/alerta.svg" ? 'selecionada' : ''}`}
-                    onClick={() => handleImageSelection("/alerta.svg")}
-                  />
-                </label>
-                <button type="submit" className='botao'>
-                  {editIndex > -1 ? 'Salvar' : 'Adicionar'}
-                </button>
-              </form>
-            </div>
-          </div>
-        )}
 
-        <div className="displayed-links">
-          {links.map((item, index) => (
-            <div key={index} className='item-container-geral'>
-              <div className='img-text-container2'>
-                <div className="bntMaiseMenosContainer">
-                  <button className='bntMaiseMenos' onClick={() => handleAddQuantity(index)}>+</button>
-                  <p className='fonteDetalheGeral2'>
-                    {item.quantidade}
-                  </p>
-                  <button className='bntMaiseMenos' onClick={() => handleRemoveQuantity(index)}>-</button>
-                </div>
-                <p 
-                  className='fonteDetalheGeral' 
-                  onDoubleClick={() => handleDoubleClick(index)}
-                  style={{ cursor: 'pointer' }}
-                >
-                  {item.nome}
-                </p>
-                {item.imagem && (
-                  <img src={item.imagem} alt="Status" className="imagem-selecionada" />
-                )}
-                <img src="trash.svg" alt='img-trash' className='trashEstoque' onClick={() => handleRemoveLink(index)} />
+        <div className='estoqueCorpo'>
+          <div className='img-text-container'>
+            <img src="plus.svg" alt="img-plus" className='img-plusE' onClick={handleImageClick} />
+            <p >Adicionar nova peça</p>
+          </div>
+
+          {showPopup && (
+            <div className="popup">
+              <div className="popup-content">
+                <span className="close" onClick={handleClosePopup}>
+                  &times;
+                </span>
+                <form onSubmit={handleSubmit}>
+                  <label className='caixa'>
+                    Nome da peça:
+                    <input
+                      className='caixa'
+                      type="text"
+                      value={nome}
+                      onChange={handleNomeChange}
+                      required
+                    />
+                  </label>
+                  <label className='caixa'>
+                    Quantidade:
+                    <input
+                      className='caixa'
+                      type="text"
+                      value={quantidade}
+                      onChange={handleQuantidadeChange}
+                      required
+                    />
+                  </label>
+                  <label className='caixaImg'>
+                    <img
+                      src="/disponivel.svg"
+                      alt="Disponível"
+                      className={`opcao-imagem ${imagemSelecionada === "/disponivel.svg" ? 'selecionada' : ''}`}
+                      onClick={() => handleImageSelection("/disponivel.svg")}
+                    />
+                    <img
+                      src="/indisponivel.svg"
+                      alt="Indisponível"
+                      className={`opcao-imagem ${imagemSelecionada === "/indisponivel.svg" ? 'selecionada' : ''}`}
+                      onClick={() => handleImageSelection("/indisponivel.svg")}
+                    />
+                    <img
+                      src="/alerta.svg"
+                      alt="Alerta"
+                      className={`opcao-imagem ${imagemSelecionada === "/alerta.svg" ? 'selecionada' : ''}`}
+                      onClick={() => handleImageSelection("/alerta.svg")}
+                    />
+                  </label>
+                  <button type="submit" className='botao'>
+                    {editIndex > -1 ? 'Salvar' : 'Adicionar'}
+                  </button>
+                </form>
               </div>
             </div>
-          ))}
+          )}
+
+          <div className="displayed-links">
+            {links.map((item, index) => (
+              <div key={index} className='item-container-geral'>
+                <div className='img-text-container2'>
+                  <div className="bntMaiseMenosContainer">
+                    <button className='bntMaiseMenos' onClick={() => handleAddQuantity(index)}>+</button>
+                    <p className='fonteDetalheGeral2'>
+                      {item.quantidade}
+                    </p>
+                    <button className='bntMaiseMenos' onClick={() => handleRemoveQuantity(index)}>-</button>
+                  </div>
+                  <p
+                    className='fonteDetalheGeral'
+                    onDoubleClick={() => handleDoubleClick(index)}
+                    style={{ cursor: 'pointer' }}
+                  >
+                    {item.nome}
+                  </p>
+                  {item.imagem && (
+                    <img src={item.imagem} alt="Status" className="imagem-selecionada" />
+                  )}
+                  <img src="trash.svg" alt='img-trash' className='trashEstoque' onClick={() => handleRemoveLink(index)} />
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
       </section>
     </>
   );

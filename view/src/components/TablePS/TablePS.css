@@ -1,0 +1,17 @@
+.tabelaPS {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 10px;
+    margin-top: 20px;
+}
+
+.tabelaPS th,
+.tabelaPS td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: left;
+}
+
+.tabelaPS th {
+    background-color: #f2f2f2;
+}
