@@ -1,0 +1,17 @@
+meta {
+  name: EditUser
+  type: http
+  seq: 3
+}
+
+put {
+  url: {{base_url}}/users/2
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "email": "emaildeteste123@teste.commm"
+  }
+}

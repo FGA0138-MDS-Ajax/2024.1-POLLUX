@@ -4,12 +4,16 @@ meta {
   seq: 1
 }
 
-get {
+post {
   url: {{base_url}}/users
   body: json
   auth: none
 }
 
 body:json {
-  {}
+  {"user": "Usuário de Teste 123",
+  "matricula": 190046562,
+  "email": "emaildeteste123@teste.com",
+  "senha": "senha123",
+  "cargo_id": 2}
 }
