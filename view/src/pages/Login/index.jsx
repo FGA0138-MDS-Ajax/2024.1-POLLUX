@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import './Login.css';
 import { Link } from 'react-router-dom';
+import axios from 'axios'
+
 
 function Login() {
     const [matricula, setMatricula] = useState('');
@@ -25,12 +27,23 @@ function Login() {
         console.log("Matrícula:", matricula);
         console.log("Senha:", senha);
 
-        // limpa os campos após submeter os valores
-        setMatricula('');
-        setSenha('');
+     try {
+    const response = axios.post("http://localhost:3000/users/login", {
+      matricula: matricula,
+      senha: senha
+    });
+    console.log(response.data);
+  } catch (error) {
+    throw error;
+  }    
 
-        //alerta pra ver se esta recebendo os valores
-        //alert("Matricula : " + matricula +" Senha: " + senha);
+    
+
+    
+
+    //window.location.href = '/detail';
+
+
     };
 
     return (

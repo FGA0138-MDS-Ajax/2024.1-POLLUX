@@ -1,4 +1,5 @@
 require "bcrypt"
+require 'jwt'
 class UsersController < ApplicationController
   protect_from_forgery with: :null_session
   before_action :set_user, only: %i[ show edit update destroy ]
@@ -11,6 +12,20 @@ class UsersController < ApplicationController
   def show
   end
 
+
+  def login
+   user = User.find_by(matricula: user_params[:matricula])
+   pass = BCrypt::Password.new(user.senha) 
+   if pass == user_params[:senha]
+      puts "USUARIO LOGADO ---------------------------------------------"
+
+     
+   else
+      puts "USUARIO NÃO LOGADO ---------------------------------------------"
+   
+
+   end
+  end
   # GET /users/new
   def new
     @user = User.new
@@ -72,6 +87,6 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.require(:user).permit(:nome, :matricula, :email, :senha, :cargo_id)
+      params.require(:user).permit(:nome, :matricula, :email, :senha, :cargo_id, :token)
     end
 end

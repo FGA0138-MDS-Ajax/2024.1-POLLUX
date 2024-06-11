@@ -22,7 +22,7 @@ class CargosController < ApplicationController
   # POST /cargos or /cargos.json
   def create
     nome = cargo_params[:nome]
-    teste = nome+"teste"
+    teste = nome
     @cargo = Cargo.new(nome: teste)
     
     respond_to do |format|
