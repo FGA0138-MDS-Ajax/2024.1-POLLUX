@@ -27,19 +27,14 @@ function Login() {
         console.log("Matrícula:", matricula);
         console.log("Senha:", senha);
 
-        try {
-            const response = axios.post("http://localhost:3000/users/login", {
+        axios.post("http://localhost:3000/users/login", {
                 matricula: matricula,
                 senha: senha
+            }).then(function (response) {
+                console.log(response.data);
+            }).catch(function (error) {
+                console.log(error);
             });
-            console.log(response.data);
-        } catch (error) {
-            throw error;
-        }
-
-
-
-
 
         //window.location.href = '/detail';
 
