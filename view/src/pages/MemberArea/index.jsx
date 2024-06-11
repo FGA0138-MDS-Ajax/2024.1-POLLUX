@@ -9,6 +9,7 @@ function MemberArea(){
             <div class= "sidebar">
                 <SideBar/>
             </div>
+
             <section className='container'>
             <div>
                 <edraLogo>

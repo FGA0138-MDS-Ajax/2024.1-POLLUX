@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  post "/users/new", to: 'users#create'
+  post '/users/login', to: 'users#login' 
+
+
   resources :reuniaos
   resources :documentos
   resources :tarefas

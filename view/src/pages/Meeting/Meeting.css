@@ -10,6 +10,11 @@ body {
   font-size: 200%;
 }
 
+.documentosTitulo .botao{
+  margin-top: 10px;
+  margin-left: 200px;
+}
+
 .documentosCorpo {
   text-align: left;
   margin-left: 180px;
@@ -89,22 +94,6 @@ body {
   border: none; 
   outline: none; 
   padding: 10px;
-}
-
-.botao {
-  font-size: 20px;
-  width: 100%;
-  padding: 10px;
-  background-color: #2683b5;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-top: 20px;
-}
-
-.botao:hover {
-  text-decoration: underline;
 }
 
 .displayed-links {
