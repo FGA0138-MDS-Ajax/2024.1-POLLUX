@@ -42,6 +42,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_11_054248) do
     t.index ["user_id"], name: "index_documentos_on_user_id"
   end
 
+  create_table "estoques", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "reuniaos", force: :cascade do |t|
     t.string "titulo"
     t.string "ata"

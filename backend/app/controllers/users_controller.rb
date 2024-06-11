@@ -15,16 +15,17 @@ class UsersController < ApplicationController
   end
 
   def login
-   user = User.find_by(matricula: user_params[:matricula])
-   pass = BCrypt::Password.new(user.senha) 
-   if pass == user_params[:senha]
-      puts "USUARIO LOGADO ---------------------------------------------"
-
-     
+   if User.find_by(matricula: user_params[:matricula])
+      user = User.find_by(matricula: user_params[:matricula])
+      pass = BCrypt::Password.new(user.senha) 
    else
-      puts "USUARIO NÃO LOGADO ---------------------------------------------"
-   
-
+      render json: "MATRICULA INEXISTENTE"
+   return
+   end
+   if pass == user_params[:senha]
+      render json: "USUARIO LOGADO"
+   else
+      render json: "SENHA INCORRETA" 
    end
   end
   
