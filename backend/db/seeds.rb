@@ -11,6 +11,5 @@
 ["Admin", "Membro"].each do |cargo|
   Cargo.find_or_create_by!(nome: cargo)
 end
-
 cargoAdmin = Cargo.find_by!(nome: "Admin")
-User.find_or_create_by!(nome: :admin, matricula: "000000000", email: "teste@aluno.unb.br", senha: :Teste123, cargo: cargoAdmin)
+User.find_or_create_by!(nome: :admin, matricula: "000000000", email: "teste@aluno.unb.br", senha: BCrypt::Password.create('senha123'), cargo: cargoAdmin)

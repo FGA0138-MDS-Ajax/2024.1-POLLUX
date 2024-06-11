@@ -1,2 +1,0 @@
-module EstoquesHelper
-end

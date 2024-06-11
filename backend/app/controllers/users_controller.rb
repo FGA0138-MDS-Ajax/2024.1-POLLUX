@@ -1,5 +1,5 @@
 require "bcrypt"
-require 'jwt'
+#require 'jwt'
 class UsersController < ApplicationController
   protect_from_forgery with: :null_session
   before_action :set_user, only: %i[ show edit update destroy ]
@@ -7,11 +7,12 @@ class UsersController < ApplicationController
   # GET /users or /users.json
   def index
     @users = User.all
+    render json: @users   
   end
+
   # GET /users/1 or /users/1.json
   def show
   end
-
 
   def login
    user = User.find_by(matricula: user_params[:matricula])
@@ -26,9 +27,10 @@ class UsersController < ApplicationController
 
    end
   end
+  
   # GET /users/new
   def new
-    @user = User.new
+    #@user = User.new
   end
 
   # GET /users/1/edit
@@ -45,38 +47,50 @@ class UsersController < ApplicationController
     cargoID = user_params[:cargo_id]
     @user = User.new(nome: nome,matricula: matricula,email: email,senha: hash,cargo_id: cargoID)
 
-    respond_to do |format|
-      if @user.save
-        format.html { redirect_to user_url(@user), notice: "User was successfully created." }
-        format.json { render :show, status: :created, location: @user }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
+    if @user.save
+      render json: @user
+    else
+      render json: @user.errors
     end
+      
+    #respond_to do |format|
+    #  if @user.save
+    #    format.html { redirect_to user_url(@user), notice: "User was successfully created." }
+    #    format.json { render :show, status: :created, location: @user }
+    #  else
+    #    format.html { render :new, status: :unprocessable_entity }
+    #    format.json { render json: @user.errors, status: :unprocessable_entity }
+    #  end
+    #end
   end
 
   # PATCH/PUT /users/1 or /users/1.json
   def update
-    respond_to do |format|
-      if @user.update(user_params)
-        format.html { redirect_to user_url(@user), notice: "User was successfully updated." }
-        format.json { render :show, status: :ok, location: @user }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
+    set_user
+    if @user.update(update_params)
+      render json: @user, status: :ok
+    else
+      render json: @user.errors, status: :unprocessable_entity
     end
   end
 
+  #PATCH /users/password/:id
+  def update_password
+    set_user
+    senha = password_params[:senha]
+    pp senha
+    hash = BCrypt::Password.create(senha)
+    @user.senha = hash
+    
+    if @user.save
+      render json: @user
+    else
+      render json: @user.errors
+    end
+  end
   # DELETE /users/1 or /users/1.json
   def destroy
     @user.destroy!
-
-    respond_to do |format|
-      format.html { redirect_to users_url, notice: "User was successfully destroyed." }
-      format.json { head :no_content }
-    end
   end
 
   private
@@ -88,5 +102,17 @@ class UsersController < ApplicationController
     # Only allow a list of trusted parameters through.
     def user_params
       params.require(:user).permit(:nome, :matricula, :email, :senha, :cargo_id, :token)
+    end
+
+    def update_params
+      params.require(:user).permit(:nome, :matricula, :email, :cargo_id)
+    end
+
+    def password_params
+      params.require(:user).permit(:senha)
+    end
+
+    def refresh_token
+      params.require(:user).permit(:token)
     end
 end

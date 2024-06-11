@@ -1,0 +1,18 @@
+meta {
+  name: CreateStorage
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{base_url}}/storages
+  body: json
+  auth: none
+}
+
+body:json {
+  {"nome": "Peça para Editar",
+  "quantidade": "4",
+  "status": "Alerta",
+  "user_id": 2}
+}

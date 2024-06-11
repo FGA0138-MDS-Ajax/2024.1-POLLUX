@@ -1,16 +1,15 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import './CreateAccount.css';
 import { Link } from 'react-router-dom';
 import { createUser } from '../../queries/user';
-import axios from 'axios';
 
 function CreateAccount() {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [registration, setRegistration] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [role, setRole] = useState(''); // Novo estado para armazenar a função do usuário
+  const [name, setName] = useState();
+  const [email, setEmail] = useState();
+  const [registration, setRegistration] = useState();
+  const [password, setPassword] = useState();
+  const [confirmPassword, setConfirmPassword] = useState();
+  const [role, setRole] = useState(); // Novo estado para armazenar a função do usuário
   const [errors, setErrors] = useState({
     name: '',
     email: '',
@@ -21,10 +20,10 @@ function CreateAccount() {
   const handleNameChange = (e) => {
     const value = e.target.value;
     if (/[^a-zA-Z\s]/.test(value)) {
-      setErrors({ ...errors, name: 'O nome não pode conter números ou caracteres especiais' });
+      setErrors(prev => ({ ...prev, name: 'O nome não pode conter números ou caracteres especiais' }));
     } else {
-      setErrors({ ...errors, name: '' });
-      setName(value);
+      setErrors(prev => ({ ...prev, name: '' })); //Essa função é assíncrona, não garante que vá pegar os erros se tiver setado como ...errors
+      setName(value); // Tá tendo muitos setEstate, isso pode dar problema no tempo de renderização
     }
   };
 
@@ -60,29 +59,28 @@ function CreateAccount() {
     setRole(e.target.value);
   };
 
+  const newUser = async (userData)=> {
+    try {
+      await createUser(userData)    
+    } catch (error) {
+      alert(JSON.stringify(error))
+    }
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
-      setErrors({ ...errors, password: 'As senhas não conferem' });
+      setErrors(prev => ({ ...prev, password: 'As senhas não conferem' }));
       return;
     }
 
-    const userData = {
-        nome: name,
-        matricula: registration,
-        email: email,
-        senha: password,
-        cargo_id: role // Atualizado para usar o estado da dropbox
-    };
-
-    const apiUrl = 'http://localhost:3000';
-    axios.post("http://localhost:3000/users", userData)
-    .then(response => {
-        console.log('Usuário criado com sucesso:', response.data);
+    await newUser({
+      "nome": name,
+      "matricula": registration,
+      "email": email,
+      "senha": password,
+      "cargo_id": role
     })
-    .catch(error => {
-        console.error('Ocorreu um erro ao criar o usuário:', error);
-    });
   };
 
   return (
@@ -94,7 +92,7 @@ function CreateAccount() {
           </Link>
           <span className='title'>EDRA</span>
           <span className='sub-title'>Registro</span>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit}> {/* Como esse form ta como um input controlado daria pra usar formData */}
             <input
               type="text"
               placeholder='Nome'
@@ -131,8 +129,8 @@ function CreateAccount() {
             />
             {errors.password && <span className='error'>{errors.password}</span>}
             {/* Dropdown para selecionar o cargo */}
-            <select value={role} onChange={handleRoleChange}>
-              <option value="">Selecione o cargo</option>
+            <select required value={role} onChange={handleRoleChange}>
+              <option hidden selected value={undefined}>Selecione o cargo</option>
               <option value="1">Cargo 1</option>
               <option value="2">Cargo 2</option>
               <option value="3">Cargo 3</option>

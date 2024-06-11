@@ -1,0 +1,17 @@
+meta {
+  name: EditStorage
+  type: http
+  seq: 4
+}
+
+patch {
+  url: {{base_url}}/storages/2
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "quantidade": "1"
+  }
+}

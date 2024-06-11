@@ -114,7 +114,7 @@ const Calendar = () => {
     }
 
     document.querySelector('.days').innerHTML = days;
-    addListener();
+    addListener(); //Isso vaza memória, pra que esse listener?
   };
 
   const prevMonth = () => {
@@ -193,7 +193,7 @@ const Calendar = () => {
     });
   };
 
-  const saveEvents = () => {
+  const saveEvents = () => { //Tem local storage?
     localStorage.setItem('events', JSON.stringify(eventsArr));
   };
 

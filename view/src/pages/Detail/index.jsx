@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import './Detail.css';
 import SideBar from '../../components/SideBar';
+import { editPassword } from '../../queries/user';
 
 function Detail() {
     const { usuario, matricula, nome, cargo } = useParams();
@@ -15,21 +16,36 @@ function Detail() {
     };
 
     const fecharPopup = () => {
+        setNovaSenha('')
+        setConfirmarSenha('')
         setMostrarPopup(false);
         setSenhaMatch(true); // Reinicia o estado para que a mensagem de erro desapareça quando o popup for fechado
     };
 
-    const handleSubmit = (event) => {
+    const alterarSenha = async (userId,newData)=> {
+        try {
+            await editPassword(userId, newData)
+            alert("Senha alterada com sucesso!")
+            fecharPopup()
+        } catch (error) {
+            alert(JSON.stringify(error))
+        }
+    }
+    const handleSubmit = async (event) => {
         event.preventDefault();
         // Verifica se as senhas são iguais
         if (novaSenha === confirmarSenha) {
             // Lógica para enviar a nova senha ao backend e fechar o popup
-            console.log('Nova senha:', novaSenha);
+            /*console.log('Nova senha:', novaSenha);
             console.log('Confirmar senha:', confirmarSenha);
             setNovaSenha('');
             setConfirmarSenha('');
             setMostrarPopup(false);
-            setSenhaMatch(true); // Reinicia o estado para que a mensagem de erro desapareça
+            setSenhaMatch(true); // Reinicia o estado para que a mensagem de erro desapareça*/
+            const IdUsuario = 2 //IMPORTANTE !! É preciso definir o id do usuário logado e mandar pra requisição
+            await alterarSenha(IdUsuario,{ //Precisa arrumar pra mandar o ID de usuário para alterar o cadastro
+                "senha": novaSenha,
+            })     
         } else {
             setSenhaMatch(false); // Exibe mensagem de erro
         }

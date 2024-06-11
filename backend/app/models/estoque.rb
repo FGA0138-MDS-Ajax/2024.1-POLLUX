@@ -1,2 +1,0 @@
-class Estoque < ApplicationRecord
-end
