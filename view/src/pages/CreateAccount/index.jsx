@@ -137,7 +137,6 @@ function CreateAccount() {
             </select>
             <button type="submit">CRIAR CONTA</button>
           </form>
-          <p>Já tem conta? <a href='/login'>Entrar</a></p>
         </div>
       </body>
     </>
