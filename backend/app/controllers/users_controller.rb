@@ -1,5 +1,5 @@
 require "bcrypt"
-#require 'jwt'
+require 'jwt'
 class UsersController < ApplicationController
   protect_from_forgery with: :null_session
   before_action :set_user, only: %i[ show edit update destroy ]
@@ -23,11 +23,15 @@ class UsersController < ApplicationController
    return
    end
    if pass == user_params[:senha]
-      render json: "USUARIO LOGADO"
+    hmac_secret = 'Secreto'
+    payload = user_params[:matricula]    
+    token = JWT.encode payload, hmac_secret, 'HS256'
+      render json: token
    else
       render json: "SENHA INCORRETA" 
    end
   end
+
   
   # GET /users/new
   def new
@@ -105,15 +109,4 @@ class UsersController < ApplicationController
       params.require(:user).permit(:nome, :matricula, :email, :senha, :cargo_id, :token)
     end
 
-    def update_params
-      params.require(:user).permit(:nome, :matricula, :email, :cargo_id)
-    end
-
-    def password_params
-      params.require(:user).permit(:senha)
-    end
-
-    def refresh_token
-      params.require(:user).permit(:token)
-    end
 end

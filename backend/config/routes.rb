@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   resources :storages
   post "/users/new", to: 'users#create'
   post '/users/login', to: 'users#login' 
-
+  post '/users/token', to: 'users#validaToken'
 
   resources :reuniaos
   resources :documentos
