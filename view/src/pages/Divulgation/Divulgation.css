@@ -41,6 +41,16 @@
   margin-top: 10px;
 }
 
+.circular-imagem {
+  width: 100px; 
+  height: 100px; 
+  border-radius: 50%; 
+  object-fit: cover; /* Garante que a imagem cubra completamente o elemento */
+  overflow: hidden; /* Garante que a imagem não transborde dos limites */
+  margin-left: 60px;
+  margin: 0 auto;
+}
+
 .iconDrone {
   width: 60px;
   height: auto;
@@ -119,6 +129,8 @@
 .legenda {
   margin-top: 10px;
   font-size: 10px;
+  text-align: center;
+  width: 100%;
 }
 
 .iconAgenda {
@@ -146,4 +158,23 @@
 
 .campeonatoY {
   margin-top: 20px;
+}
+
+.paragrafo {
+  
+}
+
+.fotosIntegrantes{
+  margin-top: 10px;
+  text-align: center;  
+  display: flex;
+  gap: 60px;
+  margin-bottom: 20px;
+  justify-content: center;
+}
+
+.legendaFotos {
+  margin-top: 20px; 
+  font-size: 12px; /* Tamanho da fonte (ajuste conforme necessário) */
+  text-align: center;
 }

@@ -13,7 +13,7 @@ function deletarDoc(id) {
 
 function criarDocumento(descricao, link) {
   // Variável para armazenar o ID do usuário
-  const userId = 12; // Altere conforme necessário
+  const userId = 1; // Altere conforme necessário
 
   // Dados a serem enviados no corpo da solicitação POST
   const data = {

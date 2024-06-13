@@ -6,26 +6,16 @@ function TableProx() {
         <table className="tabelaProx">
             <thead>
                 <tr>
-                    <th>Column 1</th>
-                    <th>Column 2</th>
+                    <th className='tamanhoEvento'>Evento</th>
+                    <th className='tamanhoLocal'>Local</th>
+                    <th className='tamanhoData'>Data</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>Row 1, Column 1</td>
-                    <td>Row 1, Column 2</td>
-                </tr>
-                <tr>
-                    <td>Row 2, Column 1</td>
-                    <td>Row 2, Column 2</td>
-                </tr>
-                <tr>
-                    <td>Row 3, Column 1</td>
-                    <td>Row 3, Column 2</td>
-                </tr>
-                <tr>
-                    <td>Row 4, Column 1</td>
-                    <td>Row 4, Column 2</td>
+                    <td>Competição Brasileira de Robótica (CBR)</td>
+                    <td>Goiânia - GO</td>
+                    <td>11 a 17 de Novembro</td>
                 </tr>
             </tbody>
         </table>
