@@ -6,6 +6,9 @@ function Meeting() {
     const [meetings, setMeetings] = useState([]);
     const [showPopup, setShowPopup] = useState(false);
     const [currentMeetingIndex, setCurrentMeetingIndex] = useState(null);
+    const [link, setLink] = useState('');
+    const [descricao, setDescricao] = useState('');
+    const [links, setLinks] = useState([]);
 
     const handleAddMeeting = () => {
         const newMeeting = {
@@ -18,6 +21,7 @@ function Meeting() {
             ]
         };
         setMeetings([...meetings, newMeeting]);
+        setLinks([...links, []]); // Adiciona uma nova lista vazia de links para a nova reunião
     };
 
     const handleImageClick = (index) => {
@@ -28,25 +32,6 @@ function Meeting() {
     const handleClosePopup = () => {
         setShowPopup(false);
         setCurrentMeetingIndex(null);
-    };
-
-    const handleFileChange = (e) => {
-        const updatedMeetings = [...meetings];
-        updatedMeetings[currentMeetingIndex].file = e.target.files[0];
-        updatedMeetings[currentMeetingIndex].fileName = e.target.files[0].name;
-        setMeetings(updatedMeetings);
-    };
-
-    const handleFileSubmit = (e) => {
-        e.preventDefault();
-        const updatedMeetings = [...meetings];
-        const currentMeeting = updatedMeetings[currentMeetingIndex];
-        if (currentMeeting.file && currentMeeting.fileName.trim() !== '') {
-            const dateAdded = new Date().toLocaleDateString();
-            currentMeeting.files.push({ file: currentMeeting.file, fileName: currentMeeting.fileName, dateAdded });
-        }
-        setShowPopup(false);
-        setMeetings(updatedMeetings);
     };
 
     const handleRemoveFile = (meetingIndex, fileIndex) => {
@@ -60,6 +45,32 @@ function Meeting() {
         const member = updatedMeetings[meetingIndex].members[memberIndex];
         member.presente = !member.presente;
         setMeetings(updatedMeetings);
+    };
+
+    const handleLinkChange = (e) => {
+        setLink(e.target.value);
+    };
+    
+    const handleDescricaoChange = (e) => {
+        setDescricao(e.target.value);
+    };
+    
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (link.trim() !== '' && descricao.trim() !== '') {
+            const updatedLinks = [...links];
+            updatedLinks[currentMeetingIndex] = [...updatedLinks[currentMeetingIndex], { descricao, link }];
+            setLinks(updatedLinks);
+        }
+        setShowPopup(false);
+        setLink('');
+        setDescricao('');
+    };
+
+    const handleRemoveLink = (meetingIndex, linkIndex) => {
+        const updatedLinks = [...links];
+        updatedLinks[meetingIndex].splice(linkIndex, 1);
+        setLinks(updatedLinks);
     };
 
     return (
@@ -86,6 +97,21 @@ function Meeting() {
                                             {item.fileName} (Adicionado em: {item.dateAdded})
                                         </p>
                                     </div>
+                                </div>
+                            ))}
+                        </div>
+                        <div className="displayed-links">
+                            {links[meetingIndex] && links[meetingIndex].map((link, index) => (
+                                <div key={index}>
+                                    <p>
+                                        <img 
+                                            src="trash.svg" 
+                                            alt="img-trash" 
+                                            className='trash' 
+                                            onClick={() => handleRemoveLink(meetingIndex, index)} 
+                                        />
+                                        <a href={link.link}>{link.descricao}</a>
+                                    </p>
                                 </div>
                             ))}
                         </div>
@@ -116,30 +142,26 @@ function Meeting() {
                     </div>
                 ))}
                 {showPopup && (
-                    <div className="popup">
+                    <div className="popup" >
                         <div className="popup-content">
-                            <span className="close" onClick={handleClosePopup}>&times;</span>
-                            <form onSubmit={handleFileSubmit}>
+                            <span className="close" onClick={handleClosePopup}>
+                                &times; </span>
+                            <form onSubmit={handleSubmit}>
                                 <label className='caixa'>
-                                    Nome do Arquivo:
-                                    <input
-                                        className='caixa'
+                                    Insira o link:
+                                    <input className='caixa'
                                         type="text"
-                                        value={meetings[currentMeetingIndex]?.fileName || ''}
-                                        onChange={(e) => {
-                                            const updatedMeetings = [...meetings];
-                                            updatedMeetings[currentMeetingIndex].fileName = e.target.value;
-                                            setMeetings(updatedMeetings);
-                                        }}
+                                        value={link}
+                                        onChange={handleLinkChange}
                                         required
                                     />
                                 </label>
                                 <label className='caixa'>
-                                    Selecionar Arquivo:
-                                    <input  
-                                        className='caixa'
-                                        type="file"
-                                        onChange={handleFileChange}
+                                    Descrição:
+                                    <input className='caixa'
+                                        type="text"
+                                        value={descricao}
+                                        onChange={handleDescricaoChange}
                                         required
                                     />
                                 </label>
