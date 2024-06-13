@@ -12,5 +12,9 @@ export default {
     document: {
         base: '/documents',
         single: (id) => `/documents/${id}`,
+    },
+    event: {
+        base: '/eventos',
+        single: (id) => `/eventos/${id}`,
     }
 }

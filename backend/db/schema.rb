@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_13_170605) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_13_205914) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -38,6 +38,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_13_170605) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_documentos_on_user_id"
+  end
+
+  create_table "eventos", force: :cascade do |t|
+    t.string "nome"
+    t.string "data"
+    t.string "HoraInicio"
+    t.string "HoraTermino"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_eventos_on_user_id"
   end
 
   create_table "reuniaos", force: :cascade do |t|
@@ -92,6 +103,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_13_170605) do
 
   add_foreign_key "acaos", "users"
   add_foreign_key "documentos", "users"
+  add_foreign_key "eventos", "users"
   add_foreign_key "reuniaos", "users"
   add_foreign_key "reunioes_usuarios", "reuniaos"
   add_foreign_key "reunioes_usuarios", "users"
