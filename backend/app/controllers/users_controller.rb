@@ -107,4 +107,16 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:nome, :matricula, :email, :senha, :cargo_id, :token)
   end
+
+  def update_params
+    params.require(:user).permit(:nome, :matricula, :email, :cargo_id)
+  end
+
+  def password_params
+    params.require(:user).permit(:senha)
+  end
+
+  def refresh_token
+    params.require(:user).permit(:token)
+  end
 end
