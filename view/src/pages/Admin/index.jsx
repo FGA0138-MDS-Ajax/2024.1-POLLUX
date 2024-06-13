@@ -1,203 +1,121 @@
-import React, { useState, useEffect } from "react";
-import './Admin.css';
+import { useEffect, useState } from "react";
+import "./Admin.css";
 import SideBar from "../../components/SideBar";
+import { editUser, getUsers } from "../../queries/user";
+import { parseFormData } from "../../utils/parseFormData";
 
 function Admin() {
-    const [members, setMembers] = useState([]);
-    const [newMember, setNewMember] = useState({ name: '', matricula: '', role_fin: false, role_reu: false, role_doc: false });
-    const [selectedMember, setSelectedMember] = useState(null);
-    const [editingMember, setEditingMember] = useState({ name: '', password: '', matricula: '', role_fin: false, role_reu: false, role_doc: false });
+  const [members, setMembers] = useState([]);
+  const [selectedMember, setSelectedMember] = useState(null);
 
-    useEffect(() => {
-        // dados fake
-        const dummyMembers = [
-            { id: 1, name: 'Membro1', matricula: '12345', role_fin: true, role_reu: false, role_doc: false },
-            { id: 2, name: 'Membro2', matricula: '67890', role_fin: false, role_reu: true, role_doc: true }
-        ];
+  const getUsuarios = async () => {
+    try {
+      const usuarios = await getUsers();
+      return usuarios;
+    } catch (error) {
+      alert(JSON.stringify(error));
+    }
+  };
 
-        setMembers(dummyMembers);
-    }, []);
-
-    const handleNewMemberChange = (event) => {
-        const { name, value, type, checked } = event.target;
-        setNewMember(prev => ({
-            ...prev,
-            [name]: type === 'checkbox' ? checked : value
-        }));
+  useEffect(() => {
+    const get = async () => {
+      const listaUsuarios = await getUsuarios();
+      setMembers(listaUsuarios.data);
     };
+    get();
+  }, []);
 
-    const handleAddMember = () => {
-        if (newMember.name.trim() && newMember.matricula.trim()) {
-            const newMemberData = { ...newMember, id: Date.now() };
-            setMembers([...members, newMemberData]);
-            setNewMember({ name: '', matricula: '', role_fin: false, role_reu: false, role_doc: false });
-        } else {
-            alert('O espaço não pode ficar em branco.');
-        }
-    };
+  const handleRemoveMember = (memberId) => {
+    const updatedMembers = members.filter((_, i) => i !== memberId);
+    setMembers(updatedMembers);
+    alert("Membro removido: " + "");
+  };
 
-    const handleRemoveMember = (index) => {
-        const updatedMembers = members.filter((_, i) => i !== index);
-        setMembers(updatedMembers);
-        alert("Membro removido: " + members[index].name);
-    };
+  const editarUsuario = async (dados) => {
+    try {
+      const editar = await editUser(dados.id, dados)
+      console.log(editar)
+      setSelectedMember(null)
+    } catch (error) {
+      alert("Erro ao editar o Usuário!")
+    }
+  };
+  return (
+    <>
+      <SideBar />
 
-    const handleEditMember = (member) => {
-        setSelectedMember(member);
-        setEditingMember({ 
-            name: member.name, 
-            password: '', 
-            matricula: member.matricula, 
-            role_fin: member.role_fin, 
-            role_reu: member.role_reu, 
-            role_doc: member.role_doc 
-        });
-    };
+      <div className="memberListContainer">
+        <h2>Membros</h2>
+        <ul>
+          {members.map((member) => (
+            <li key={member.id}>
+              <span onClick={() => setSelectedMember(member)}>
+                {member.nome} - {member.matricula}
+              </span>
+              <button onClick={() => handleRemoveMember(member.id)}>
+                Remover
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
 
-    const handleUpdateMember = () => {
-        const updatedMembers = members.map(member => 
-            member.id === selectedMember.id ? editingMember : member
-        );
-        setMembers(updatedMembers);
-        setSelectedMember(null);
-    };
-
-    const handleChange = (event) => {
-        const { name, value, type, checked } = event.target;
-        setEditingMember(prev => ({
-            ...prev, 
-            [name]: type === 'checkbox' ? checked : value 
-        }));
-    };
-
-    return (
-        <>
-            <SideBar />
-
-            <div className="memberListContainer">
-                <h2>Membros</h2>
-                <ul>
-                    {members.map((member, index) => (
-                        <li key={index}>
-                            <span onClick={() => handleEditMember(member)}>{member.name} - {member.matricula}</span>
-                            <button onClick={() => handleRemoveMember(index)}>Remover</button>
-                        </li>
-                    ))}
-                </ul>
+      {selectedMember && (
+        <div className="popup">
+          <div className="popup-content">
+            <h3>Editar Membro</h3>
+            <form
+              id="formAdmin"
+              onSubmit={(e) => {
+                e.preventDefault();
+                const dados = parseFormData(new FormData(e.target))
+                editarUsuario(dados);
+              }}
+            >
+              <input
+                hidden
+                type="text"
+                name="id"
+                defaultValue={selectedMember.id}
+              />
+              <label>
+                Matrícula:
                 <input
-                    type="text"
-                    placeholder="Nome do Novo Membro"
-                    name="name"
-                    value={newMember.name}
-                    onChange={handleNewMemberChange}
+                  type="text"
+                  name="matricula"
+                  defaultValue={selectedMember.matricula}
+                  required
                 />
+              </label>
+              <label>
+                Nome:
                 <input
-                    type="text"
-                    placeholder="Matrícula do Novo Membro"
-                    name="matricula"
-                    value={newMember.matricula}
-                    onChange={handleNewMemberChange}
+                  type="text"
+                  name="nome"
+                  defaultValue={selectedMember.nome}
+                  required
                 />
-                <label>
-                    Tela Fin:
-                    <input
-                        type="checkbox"
-                        name="role_fin"
-                        checked={newMember.role_fin}
-                        onChange={handleNewMemberChange}
-                    />
-                </label>
-                <label>
-                    Tela Reu:
-                    <input
-                        type="checkbox"
-                        name="role_reu"
-                        checked={newMember.role_reu}
-                        onChange={handleNewMemberChange}
-                    />
-                </label>
-                <label>
-                    Tela Doc:
-                    <input
-                        type="checkbox"
-                        name="role_doc"
-                        checked={newMember.role_doc}
-                        onChange={handleNewMemberChange}
-                    />
-                </label>
-                <button onClick={handleAddMember}>Adicionar Membro</button>
-            </div>
-
-            {selectedMember && (
-                <div className="popup">
-                    <div className="popup-content">
-                        <h3>Editar Membro</h3>
-                        <form onSubmit={(e) => { e.preventDefault(); handleUpdateMember(); }}>
-                            <label>
-                                Nome:
-                                <input
-                                    type="text"
-                                    name="name"
-                                    value={editingMember.name}
-                                    onChange={handleChange}
-                                    required
-                                />
-                            </label>
-                            <label>
-                                Senha:
-                                <input
-                                    type="password"
-                                    name="password"
-                                    value={editingMember.password}
-                                    onChange={handleChange}
-                                    required
-                                />
-                            </label>
-                            <label>
-                                Matrícula:
-                                <input
-                                    type="text"
-                                    name="matricula"
-                                    value={editingMember.matricula}
-                                    onChange={handleChange}
-                                    required
-                                />
-                            </label>
-                            <label>
-                                Tela Fin:
-                                <input
-                                    type="checkbox"
-                                    name="role_fin"
-                                    checked={editingMember.role_fin}
-                                    onChange={handleChange}
-                                />
-                            </label>
-                            <label>
-                                Tela Reu:
-                                <input
-                                    type="checkbox"
-                                    name="role_reu"
-                                    checked={editingMember.role_reu}
-                                    onChange={handleChange}
-                                />
-                            </label>
-                            <label>
-                                Tela Doc:
-                                <input
-                                    type="checkbox"
-                                    name="role_doc"
-                                    checked={editingMember.role_doc}
-                                    onChange={handleChange}
-                                />
-                            </label>
-                            <button type="submit">Atualizar</button>
-                            <button type="button" onClick={() => setSelectedMember(null)}>Cancelar</button>
-                        </form>
-                    </div>
-                </div>
-            )}
-        </>
-    );
+              </label>
+              <label>
+                Email:
+                <input
+                  type="email"
+                  name="email"
+                  defaultValue={selectedMember.email}
+                  required
+                />
+              </label>
+              <button type="">Mudar Senha</button>
+              <button type="submit">Atualizar</button>
+              <button type="button" onClick={() => setSelectedMember(null)}>
+                Cancelar
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
+    </>
+  );
 }
 
 export default Admin;
