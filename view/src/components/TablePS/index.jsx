@@ -4,28 +4,26 @@ import React from 'react';
 function TablePS() {
     return (
         <table className="tabelaPS">
-            <thead>
-                <tr>
-                    <th>Column 1</th>
-                    <th>Column 2</th>
-                </tr>
-            </thead>
             <tbody>
                 <tr>
-                    <td>Row 1, Column 1</td>
-                    <td>Row 1, Column 2</td>
+                    <td>Inicio das Inscrições</td>
+                    <td>11/03/2024</td>
                 </tr>
                 <tr>
-                    <td>Row 2, Column 1</td>
-                    <td>Row 2, Column 2</td>
+                    <td>Término das Inscrições</td>
+                    <td>12/04/2024</td>
                 </tr>
                 <tr>
-                    <td>Row 3, Column 1</td>
-                    <td>Row 3, Column 2</td>
+                    <td>Inicio do processo seletivo</td>
+                    <td>13/04/2024</td>
                 </tr>
                 <tr>
-                    <td>Row 4, Column 1</td>
-                    <td>Row 4, Column 2</td>
+                    <td>Término do processo seletivo</td>
+                    <td>01/07/2024</td>
+                </tr>
+                <tr>
+                    <td>Resultados</td>
+                    <td>02/07/2024</td>
                 </tr>
             </tbody>
         </table>
