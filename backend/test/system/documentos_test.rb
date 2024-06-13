@@ -14,6 +14,9 @@ class DocumentosTest < ApplicationSystemTestCase
     visit documentos_url
     click_on "New documento"
 
+    fill_in "Link", with: @documento.link
+    fill_in "Nome", with: @documento.nome
+    fill_in "User", with: @documento.user_id
     click_on "Create Documento"
 
     assert_text "Documento was successfully created"
@@ -24,6 +27,9 @@ class DocumentosTest < ApplicationSystemTestCase
     visit documento_url(@documento)
     click_on "Edit this documento", match: :first
 
+    fill_in "Link", with: @documento.link
+    fill_in "Nome", with: @documento.nome
+    fill_in "User", with: @documento.user_id
     click_on "Update Documento"
 
     assert_text "Documento was successfully updated"

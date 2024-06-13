@@ -1,6 +1,31 @@
 import React, { useState } from 'react';
 import SideBar from "../../components/SideBar"
 import './Documents.css';
+import axios from 'axios';
+
+function criarDocumento(descricao, link) {
+  // Variável para armazenar o ID do usuário
+  const userId = 12; // Altere conforme necessário
+
+  // Dados a serem enviados no corpo da solicitação POST
+  const data = {
+    nome: descricao,
+    link: link,
+    user_id: userId
+  };
+
+  // Fazendo a solicitação POST usando Axios
+  axios.post("http://localhost:3000/documentos", data)
+    .then(function (response) {
+      // Resposta recebida com sucesso
+      console.log("Documento criado com sucesso:", response.data);
+    })
+    .catch(function (error) {
+      // Ocorreu um erro ao fazer a solicitação
+      console.error("Erro ao criar documento:", error);
+    });
+}
+
 
 function Documents() {
   const [showPopup, setShowPopup] = useState(false);
@@ -33,6 +58,7 @@ function Documents() {
     setLink('');
     setDescricao('');
   };
+  
 
   const handleRemoveLink = (index) => {
     const updatedLinks = [...links];
@@ -78,7 +104,7 @@ function Documents() {
                       required
                     />
                   </label>
-                  <button type="submit" className='botao'>Adicionar</button>
+                  <button type="submit" className='botao' onClick={()=>criarDocumento(descricao,link)}>Adicionar</button>
                 </form>
               </div>
             </div>

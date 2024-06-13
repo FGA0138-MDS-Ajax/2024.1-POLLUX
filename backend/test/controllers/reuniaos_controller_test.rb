@@ -17,7 +17,7 @@ class ReuniaosControllerTest < ActionDispatch::IntegrationTest
 
   test "should create reuniao" do
     assert_difference("Reuniao.count") do
-      post reuniaos_url, params: { reuniao: {  } }
+      post reuniaos_url, params: { reuniao: { link: @reuniao.link, nome: @reuniao.nome, user_id: @reuniao.user_id } }
     end
 
     assert_redirected_to reuniao_url(Reuniao.last)
@@ -34,7 +34,7 @@ class ReuniaosControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update reuniao" do
-    patch reuniao_url(@reuniao), params: { reuniao: {  } }
+    patch reuniao_url(@reuniao), params: { reuniao: { link: @reuniao.link, nome: @reuniao.nome, user_id: @reuniao.user_id } }
     assert_redirected_to reuniao_url(@reuniao)
   end
 

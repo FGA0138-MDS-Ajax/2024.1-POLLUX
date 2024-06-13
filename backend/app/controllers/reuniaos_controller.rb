@@ -1,14 +1,14 @@
 class ReuniaosController < ApplicationController
-  before_action :set_reuniao, only: %i[ show edit update destroy ]
+  before_action :set_reuniao, only: %i[show edit update destroy]
 
   # GET /reuniaos or /reuniaos.json
   def index
     @reuniaos = Reuniao.all
+    render json: @reuniaos
   end
 
   # GET /reuniaos/1 or /reuniaos/1.json
-  def show
-  end
+  def show; end
 
   # GET /reuniaos/new
   def new
@@ -16,19 +16,16 @@ class ReuniaosController < ApplicationController
   end
 
   # GET /reuniaos/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /reuniaos or /reuniaos.json
   def create
-    @reuniao = Reuniao.new(reuniao_params)
-
+    nome = reuniao_params[:nome]
+    @reuniao = Reuniao.new(nome: nome, link: 'NULL', user_id: 1)
     respond_to do |format|
       if @reuniao.save
-        format.html { redirect_to reuniao_url(@reuniao), notice: "Reuniao was successfully created." }
         format.json { render :show, status: :created, location: @reuniao }
       else
-        format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @reuniao.errors, status: :unprocessable_entity }
       end
     end
@@ -38,7 +35,7 @@ class ReuniaosController < ApplicationController
   def update
     respond_to do |format|
       if @reuniao.update(reuniao_params)
-        format.html { redirect_to reuniao_url(@reuniao), notice: "Reuniao was successfully updated." }
+        format.html { redirect_to reuniao_url(@reuniao), notice: 'Reuniao was successfully updated.' }
         format.json { render :show, status: :ok, location: @reuniao }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -52,19 +49,20 @@ class ReuniaosController < ApplicationController
     @reuniao.destroy!
 
     respond_to do |format|
-      format.html { redirect_to reuniaos_url, notice: "Reuniao was successfully destroyed." }
+      format.html { redirect_to reuniaos_url, notice: 'Reuniao was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_reuniao
-      @reuniao = Reuniao.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def reuniao_params
-      params.fetch(:reuniao, {})
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_reuniao
+    @reuniao = Reuniao.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def reuniao_params
+    params.require(:reuniao).permit(:nome, :link, :user_id)
+  end
 end

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import './Meeting.css';
 import SideBar from "../../components/SideBar";
+import axios from 'axios';
 
 function Meeting() {
     const [meetings, setMeetings] = useState([]);
@@ -9,6 +10,13 @@ function Meeting() {
     const [link, setLink] = useState('');
     const [descricao, setDescricao] = useState('');
     const [links, setLinks] = useState([]);
+    let reunioes_existentes;
+axios.get("http://127.0.0.1:3000/reuniaos").then(function (response) {
+  reunioes_existentes = response.data;
+  console.log(reunioes_existentes);
+}).catch(function (error) {
+  console.error('Erro ao buscar reuniões:', error);
+});
 
     const handleAddMeeting = () => {
         const newMeeting = {
@@ -22,7 +30,8 @@ function Meeting() {
         };
         setMeetings([...meetings, newMeeting]);
         setLinks([...links, []]); // Adiciona uma nova lista vazia de links para a nova reunião
-    };
+          
+  };
 
     const handleImageClick = (index) => {
         setCurrentMeetingIndex(index);
@@ -86,7 +95,7 @@ function Meeting() {
                         <h2>{meeting.nome}</h2>
                         <div className='img-text-container'>
                             <img src="plus.svg" alt="img-plus" onClick={() => handleImageClick(meetingIndex)} />
-                            <p className='fonte'>Adicionar Arquivo</p>
+                            <p className='fonte'>Adicionar link do Arquivo</p>
                         </div>
                         <div className="displayed-links">
                             {meeting.files.map((item, fileIndex) => (
