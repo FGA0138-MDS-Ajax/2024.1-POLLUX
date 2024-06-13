@@ -1,6 +1,13 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import './Meeting.css';
 import SideBar from "../../components/SideBar";
+import axios from "axios";
+
+function criarReuniao(titulo){
+    axios.post("http://localhost:3000/reuniaos",{
+        nome: titulo
+    });
+}
 
 function Meeting() {
     const [meetings, setMeetings] = useState([]);
@@ -12,7 +19,15 @@ function Meeting() {
     const [links, setLinks] = useState([]);
     const [titulo, setTitulo] = useState('');
     const [editTitleIndex, setEditTitleIndex] = useState(-1);
+    const [reunioes, setMeet] = useState([]);
 
+
+    useEffect(()=>{
+    axios.get("http://localhost:3000/reuniaos").then(function (response){
+        setMeet(response.data);
+    });
+},[]);
+    
     const handleAddMeetingClick = () => {
         setShowPopup2(true);
     };
@@ -127,7 +142,7 @@ function Meeting() {
                                         required
                                     />
                                 </label>
-                                <button type="submit" className='botao'>{editTitleIndex > -1 ? 'Salvar' : 'Adicionar'}</button>
+                                <button type="submit" onClick={()=>criarReuniao(titulo)} className='botao'>{editTitleIndex > -1 ? 'Salvar' : 'Adicionar'}</button>
                             </form>
                         </div>
                     </div>
