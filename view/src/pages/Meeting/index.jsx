@@ -1,37 +1,46 @@
 import React, { useState } from "react";
 import './Meeting.css';
 import SideBar from "../../components/SideBar";
-import axios from 'axios';
 
 function Meeting() {
     const [meetings, setMeetings] = useState([]);
     const [showPopup, setShowPopup] = useState(false);
+    const [showPopup2, setShowPopup2] = useState(false);
     const [currentMeetingIndex, setCurrentMeetingIndex] = useState(null);
     const [link, setLink] = useState('');
     const [descricao, setDescricao] = useState('');
     const [links, setLinks] = useState([]);
-    let reunioes_existentes;
-axios.get("http://127.0.0.1:3000/reuniaos").then(function (response) {
-  reunioes_existentes = response.data;
-  console.log(reunioes_existentes);
-}).catch(function (error) {
-  console.error('Erro ao buscar reuniões:', error);
-});
+    const [titulo, setTitulo] = useState('');
+    const [editTitleIndex, setEditTitleIndex] = useState(-1);
 
-    const handleAddMeeting = () => {
+    const handleAddMeetingClick = () => {
+        setShowPopup2(true);
+    };
+
+    const handleClosePopup2 = () => {
+        setShowPopup2(false);
+    };
+
+    const handleTituloChange = (e) => {
+        setTitulo(e.target.value);
+    };
+
+    const handleAddMeeting = (e) => {
+        e.preventDefault();
         const newMeeting = {
-            nome: `Reunião ${meetings.length + 1}`,
+            nome: titulo,
             files: [],
             members: [
                 { nome: 'Membro 1', matricula: '001', presente: false },
                 { nome: 'Membro 2', matricula: '002', presente: false },
-                // eh necessario add uma lista c todos os membros
+                // Add more members as needed
             ]
         };
         setMeetings([...meetings, newMeeting]);
-        setLinks([...links, []]); // Adiciona uma nova lista vazia de links para a nova reunião
-          
-  };
+        setLinks([...links, []]); // Adds a new empty list of links for the new meeting
+        setTitulo('');
+        setShowPopup2(false);
+    };
 
     const handleImageClick = (index) => {
         setCurrentMeetingIndex(index);
@@ -41,12 +50,6 @@ axios.get("http://127.0.0.1:3000/reuniaos").then(function (response) {
     const handleClosePopup = () => {
         setShowPopup(false);
         setCurrentMeetingIndex(null);
-    };
-
-    const handleRemoveFile = (meetingIndex, fileIndex) => {
-        const updatedMeetings = [...meetings];
-        updatedMeetings[meetingIndex].files.splice(fileIndex, 1);
-        setMeetings(updatedMeetings);
     };
 
     const handlePresenceChange = (meetingIndex, memberIndex) => {
@@ -59,11 +62,11 @@ axios.get("http://127.0.0.1:3000/reuniaos").then(function (response) {
     const handleLinkChange = (e) => {
         setLink(e.target.value);
     };
-    
+
     const handleDescricaoChange = (e) => {
         setDescricao(e.target.value);
     };
-    
+
     const handleSubmit = (e) => {
         e.preventDefault();
         if (link.trim() !== '' && descricao.trim() !== '') {
@@ -82,20 +85,61 @@ axios.get("http://127.0.0.1:3000/reuniaos").then(function (response) {
         setLinks(updatedLinks);
     };
 
+    const handleDoubleClick = (index) => {
+        const meeting = meetings[index];
+        setTitulo(meeting.nome);
+        setEditTitleIndex(index);
+        setShowPopup2(true);
+    };
+
+    const handleUpdateMeetingTitle = (e) => {
+        e.preventDefault();
+        const updatedMeetings = [...meetings];
+        updatedMeetings[editTitleIndex].nome = titulo;
+        setMeetings(updatedMeetings);
+        setTitulo('');
+        setEditTitleIndex(-1);
+        setShowPopup2(false);
+    };
+
     return (
         <>
             <SideBar />
-            <div className='documentosTitulo'>
+            <section className='containerGeral'>
+            <div className='tituloGeral'>
                 <h1>Reuniões</h1>
-                <button onClick={handleAddMeeting} className="botao">Adicionar Reunião</button>
+                <button onClick={handleAddMeetingClick} className="botao">Adicionar Reunião</button>
+
+                {showPopup2 && (
+                    <div className="popup">
+                        <div className="popup-content">
+                            <span className="close" onClick={handleClosePopup2}>
+                                &times;
+                            </span>
+                            <form onSubmit={editTitleIndex > -1 ? handleUpdateMeetingTitle : handleAddMeeting}>
+                                <label className='caixa'>
+                                    Insira o título:
+                                    <input
+                                        className='caixa'
+                                        type="text"
+                                        value={titulo}
+                                        onChange={handleTituloChange}
+                                        required
+                                    />
+                                </label>
+                                <button type="submit" className='botao'>{editTitleIndex > -1 ? 'Salvar' : 'Adicionar'}</button>
+                            </form>
+                        </div>
+                    </div>
+                )}
             </div>
-            <div className='documentosCorpo'>
+            <div className='reunioesCorpo'>
                 {meetings.map((meeting, meetingIndex) => (
                     <div key={meetingIndex} className="meeting">
-                        <h2>{meeting.nome}</h2>
+                        <h2 onDoubleClick={() => handleDoubleClick(meetingIndex)}>{meeting.nome}</h2>
                         <div className='img-text-container'>
                             <img src="plus.svg" alt="img-plus" onClick={() => handleImageClick(meetingIndex)} />
-                            <p className='fonte'>Adicionar link do Arquivo</p>
+                            <p className='fonte'>Adicionar Arquivo</p>
                         </div>
                         <div className="displayed-links">
                             {meeting.files.map((item, fileIndex) => (
@@ -151,14 +195,16 @@ axios.get("http://127.0.0.1:3000/reuniaos").then(function (response) {
                     </div>
                 ))}
                 {showPopup && (
-                    <div className="popup" >
+                    <div className="popup">
                         <div className="popup-content">
                             <span className="close" onClick={handleClosePopup}>
-                                &times; </span>
+                                &times;
+                            </span>
                             <form onSubmit={handleSubmit}>
                                 <label className='caixa'>
                                     Insira o link:
-                                    <input className='caixa'
+                                    <input
+                                        className='caixa'
                                         type="text"
                                         value={link}
                                         onChange={handleLinkChange}
@@ -167,7 +213,8 @@ axios.get("http://127.0.0.1:3000/reuniaos").then(function (response) {
                                 </label>
                                 <label className='caixa'>
                                     Descrição:
-                                    <input className='caixa'
+                                    <input
+                                        className='caixa'
                                         type="text"
                                         value={descricao}
                                         onChange={handleDescricaoChange}
@@ -180,6 +227,7 @@ axios.get("http://127.0.0.1:3000/reuniaos").then(function (response) {
                     </div>
                 )}
             </div>
+            </section>
         </>
     );
 }
