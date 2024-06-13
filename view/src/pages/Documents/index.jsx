@@ -1,7 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import SideBar from "../../components/SideBar"
 import './Documents.css';
 import axios from 'axios';
+
+
+function deletarDoc(id) {
+  console.log(id);
+  axios.post('http://localhost:3000/documentos/delete',{
+    id: id
+  });
+}
 
 function criarDocumento(descricao, link) {
   // Variável para armazenar o ID do usuário
@@ -32,6 +40,14 @@ function Documents() {
   const [link, setLink] = useState('');
   const [descricao, setDescricao] = useState('');
   const [links, setLinks] = useState([]);
+  const [documentos, setDocs] = useState([]);
+
+  useEffect(()=>{
+  axios.get("http://localhost:3000/documentos").then(function (response){
+    setDocs(response.data);
+    console.log(documentos);
+  });
+  },[]);
 
   const handleImageClick = () => {
     setShowPopup(true);
@@ -111,12 +127,12 @@ function Documents() {
           )}
 
           <div className="displayed-links">
-            {links.map((item, index) => (
+            {documentos.map((item, index) => (
               <div key={index} className='item-container-geral'>
                 <div className='img-text-container'>
-                  <img src="trash.svg" alt='img-trash' class='trash' onClick={() => handleRemoveLink(index)}></img>
+                  <img src="trash.svg" alt='img-trash' class='trash' onClick={() => deletarDoc(item.id)}></img>
                   <p className='fonteDetalheGeral3'>
-                    <a href={item.link} target="_blank" rel="noopener noreferrer">{item.descricao}</a>
+                    <a href={item.link} target="_blank" rel="noopener noreferrer">{item.nome}</a>
                   </p>
 
                 </div>

@@ -1,11 +1,14 @@
 Rails.application.routes.draw do
   resources :reuniaos
   resources :storages
+  resources :documentos
   post '/users/new', to: 'users#create'
   post '/users/login', to: 'users#login'
   post '/users/token', to: 'users#validaToken'
   post '/reuniaos', to: 'reuniaos#create'
   post '/documentos', to: 'documentos#create'
+  post '/documentos/delete', to: 'documentos#destroy'
+
   resources :tarefas
   resources :acaos
   resources :cargos
