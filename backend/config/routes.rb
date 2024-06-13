@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :eventos
   resources :reuniaos
   resources :storages
   resources :documentos

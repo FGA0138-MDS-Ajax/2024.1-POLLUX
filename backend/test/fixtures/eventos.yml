@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  nome: MyString
+  string: MyString
+  data: MyString
+  string: MyString
+  HoraInicio: MyString
+  HoraTermino: MyString
+  user: one
+
+two:
+  nome: MyString
+  string: MyString
+  data: MyString
+  string: MyString
+  HoraInicio: MyString
+  HoraTermino: MyString
+  user: two
