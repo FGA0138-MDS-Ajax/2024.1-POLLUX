@@ -1,12 +1,251 @@
 .footer {
-    width:100%;
-    height: 120px;
     background-color: #2683b5;
-    color: #fdfdfd;
-    font-size: 12px;
+    color: white;
+    display: flex;
+    margin-top: 40px;
+    min-height: 150px;
+    flex-wrap: wrap;
+}
+
+/*.esquerda*/
+.logoNome {
+    display: flex;
+    flex-direction: column;
+    font-size: 10px;
+    max-width: 120px;
+    align-items: center;
+    text-align: center;
+}
+
+.logoNome img {
+    width: 70px;
     margin-top: 20px;
+    margin-left: 0px;
+    margin-bottom: 10px;
+}
+
+.meio1 {
+    margin-left: 50px;
+    margin-top: 20px;
+}
+
+.localizacao {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px 0;
+    font-size: 10px;
+    max-width: 150px;
+}
+
+.localizacao a {
+    color: inherit;
+}
+
+.localizacao a:hover {
+    text-decoration: underline;
+}
+
+.loc {
+    margin-bottom: 15px;
+    width: 30px;
+    height: auto;
+}
+
+.meio2 {
+    margin-left: 50px;
+    margin-top: 20px;
+}
+
+.meio2 a:hover {
+    text-decoration: underline;
+}
+
+.contatos {
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    margin: 10px 0;
+    font-size: 10px;
+}
+
+.contatos img {
+    margin-right: 10px;
+    width: 20px;
+    height: auto;
+}
+
+.contatos a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.contatos a:hover {
+    text-decoration: underline;
+}
+
+.meio3 {
+    margin-left: 50px;
+    margin-top: 20px;
+    color: inherit;
+    text-decoration: none;
 
 }
+
+.meio3 a {
+    color: white;
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+    margin: 13px 0;
+}
+
+.meio3 a:hover {
+    text-decoration: underline;
+}
+
+.direita {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    margin-left: 300px
+}
+
+.unbFooter {
+    width: 60px;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+.hydra {
+    width: 60px;
+    height: auto;
+}
+
+/*.footer {
+    background-color: #2683b5;
+    color: white;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.logoNome {
+    display: flex;
+    flex-direction: column;
+    font-size: 10px;
+    max-width: 120px;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.logoNome img {
+    width: 70px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.meio1 {
+    margin-left: 30px;
+    margin-top: 20px;
+    flex: 1;
+    max-width: 200px; 
+}
+
+.localizacao {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 10px;
+    max-width: 150px;
+    margin: 10px 0;
+}
+
+.localizacao a {
+    color: inherit;
+}
+
+.localizacao a:hover {
+    text-decoration: underline;
+}
+
+.loc {
+    width: 30px;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.meio2 {
+    margin-left: 30px;
+    margin-top: 20px;
+    flex: 1;
+    max-width: 200px; 
+}
+
+.meio2 a:hover {
+    text-decoration: underline;
+}
+
+.contatos {
+    display: flex;
+    align-items: center;
+    font-size: 10px;
+    margin: 10px 0;
+}
+
+.contatos img {
+    margin-right: 10px;
+    width: 20px;
+    height: auto;
+}
+
+.contatos a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.contatos a:hover {
+    text-decoration: underline;
+}
+
+.meio3 {
+    margin-left: 30px;
+    margin-top: 20px;
+    color: inherit;
+    text-decoration: none;
+    flex: 1;
+    max-width: 200px; 
+}
+
+.meio3 a {
+    color: white;
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+}
+
+.meio3 a:hover {
+    text-decoration: underline;
+}
+
+.direita {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.unbFooter {
+    width: 60px;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.hydra {
+    width: 60px;
+    height: auto;
+}
+*/

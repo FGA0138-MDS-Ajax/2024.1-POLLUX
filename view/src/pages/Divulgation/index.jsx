@@ -199,7 +199,6 @@ function Divulgation() {
                     <p className="legenda">
                         (*) Atualizado em: 26/06/2024. Mais informações no instagram
                     </p>
-                    <img className='img-edraV' src='/edraV.svg' alt='logoedraV' />
             </section >
 
         <Footer />
