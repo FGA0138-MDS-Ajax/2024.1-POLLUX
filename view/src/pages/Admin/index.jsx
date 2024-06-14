@@ -17,11 +17,12 @@ function Admin() {
     }
   };
 
+  const get = async () => {
+    const listaUsuarios = await getUsuarios();
+    setMembers(listaUsuarios.data);
+  };
+
   useEffect(() => {
-    const get = async () => {
-      const listaUsuarios = await getUsuarios();
-      setMembers(listaUsuarios.data);
-    };
     get();
   }, []);
 
@@ -33,8 +34,8 @@ function Admin() {
 
   const editarUsuario = async (dados) => {
     try {
-      const editar = await editUser(dados.id, dados)
-      console.log(editar)
+      await editUser(dados.id, dados)
+      await get()
       setSelectedMember(null)
     } catch (error) {
       alert("Erro ao editar o Usuário!")
@@ -50,7 +51,7 @@ function Admin() {
           {members.map((member) => (
             <li key={member.id}>
               <span onClick={() => setSelectedMember(member)}>
-                {member.nome} - {member.matricula}
+              {member.nome} - {member.matricula}
               </span>
               <button onClick={() => handleRemoveMember(member.id)}>
                 Remover
@@ -69,6 +70,7 @@ function Admin() {
               onSubmit={(e) => {
                 e.preventDefault();
                 const dados = parseFormData(new FormData(e.target))
+                console.log(dados)
                 editarUsuario(dados);
               }}
             >
