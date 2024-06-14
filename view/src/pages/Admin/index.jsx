@@ -4,6 +4,7 @@ import SideBar from "../../components/SideBar";
 import { editUser, getUsers } from "../../queries/user";
 import { parseFormData } from "../../utils/parseFormData";
 
+
 function Admin() {
   const [members, setMembers] = useState([]);
   const [selectedMember, setSelectedMember] = useState(null);
@@ -23,7 +24,7 @@ function Admin() {
   };
 
   useEffect(() => {
-    get();
+   get();
   }, []);
 
   const handleRemoveMember = (memberId) => {
@@ -59,7 +60,10 @@ function Admin() {
             </li>
           ))}
         </ul>
-      </div>
+        <a href= "/createAccount">
+          <button type="button"> Adicionar Membro </button> 
+      </a>
+    </div>
 
       {selectedMember && (
         <div className="popup">
@@ -87,6 +91,8 @@ function Admin() {
                   name="matricula"
                   defaultValue={selectedMember.matricula}
                   required
+                  maxLength={9}
+                  pattern='[1-9]*'
                 />
               </label>
               <label>
@@ -107,7 +113,106 @@ function Admin() {
                   required
                 />
               </label>
-              <button type="">Mudar Senha</button>
+              <fieldset>
+                <legend>Edição de Telas</legend>
+                <div>
+                  <input
+                    type="checkbox"
+                    id="telaCalendario"
+                    name="checkboxEdiçãoTela"
+                    value="calendario" 
+                    />
+                  <label> Calendário </label>
+                </div>
+                <div>
+                  <input
+                  type="checkbox"
+                  id="telaEstoque"
+                  name="checkboxEdiçãoTela" 
+                  value="estoque" 
+                  />
+                  <label> Estoque </label>
+                </div>
+                <div>
+                  <input
+                  type="checkbox"
+                  id="telaReunioes"
+                  name="checkboxEdiçãoTela" 
+                  value="reunioes" 
+                  />
+                  <label> Reuniões </label>
+                </div>
+                <div>
+                  <input
+                  type="checkbox"
+                  id="telaFinanceiro"
+                  name="checkboxEdiçãoTela" 
+                  value="financeiro" 
+                  />
+                  <label> Financeiro </label>
+                </div>
+                <div>
+                  <input
+                  type="checkbox"
+                  id="telaDocumentos"
+                  name="checkboxEdiçãoTela" 
+                  value="documentos" 
+                  />
+                  <label> Documentos </label>
+                </div>
+              </fieldset>
+              <fieldset>
+                <legend>Vizualização de Telas</legend>
+                <div>
+                  <input
+                    type="checkbox"
+                    id="telaCalendario"
+                    name="checkboxEdiçãoTela"
+                    value="calendario"
+                    checked
+                    />
+                  <label> Calendário </label>
+                </div>
+                <div>
+                  <input
+                  type="checkbox"
+                  id="telaEstoque"
+                  name="checkboxEdiçãoTela" 
+                  value="estoque"
+                  checked
+                  />
+                  <label> Estoque </label>
+                </div>
+                <div>
+                  <input
+                  type="checkbox"
+                  id="telaReunioes"
+                  name="checkboxEdiçãoTela" 
+                  value="reunioes" 
+                  checked
+                  />
+                  <label> Reuniões </label>
+                </div>
+                <div>
+                  <input
+                  type="checkbox"
+                  id="telaFinanceiro"
+                  name="checkboxEdiçãoTela" 
+                  value="financeiro" 
+                  />
+                  <label> Financeiro </label>
+                </div>
+                <div>
+                  <input
+                  type="checkbox"
+                  id="telaDocumentos"
+                  name="checkboxEdiçãoTela" 
+                  value="documentos"
+                  checked 
+                  />
+                  <label> Documentos </label>
+                </div>
+              </fieldset>
               <button type="submit">Atualizar</button>
               <button type="button" onClick={() => setSelectedMember(null)}>
                 Cancelar

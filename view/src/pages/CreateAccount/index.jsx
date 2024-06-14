@@ -87,7 +87,7 @@ function CreateAccount() {
     <>
       <body id='paginaCreateAccount'>
         <div className='divC'>
-          <Link to="/">
+          <Link to="/admin">
             <img className='img-setaCreat' src='/seta.svg' alt='seta' />
           </Link>
           <span className='title'>EDRA</span>
