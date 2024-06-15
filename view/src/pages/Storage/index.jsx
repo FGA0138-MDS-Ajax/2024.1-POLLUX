@@ -1,6 +1,78 @@
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import SideBar from "../../components/SideBar";
 import './Storage.css';
+import axios from 'axios';
+
+
+function editQuantidade(id, qtd) {
+  axios.get("http://localhost:3000/storages/" + id)
+    .then(function (response) {
+      // Captura a resposta HTML em um elemento temporário
+      let tempElement = document.createElement('div');
+      tempElement.innerHTML = response.data;
+      
+      // Encontra o elemento que contém a quantidade
+      let pQuantidade = tempElement.querySelector('#storage_' + id + ' p:nth-child(2)');
+      
+      // Obtém o texto dentro do elemento <p> que contém a quantidade
+      let textoQuantidade = pQuantidade.textContent.trim();
+      
+      // Extrai o número da quantidade
+      let quantidade = parseInt(textoQuantidade.split(':')[1].trim());
+      
+      console.log("Quantidade obtida:", quantidade);
+      
+      // Calcula a quantidade final que será enviada na requisição POST
+      let quantity = qtd + quantidade;
+      if(quantity<0){
+        quantity = 0;
+      }
+      
+      // Realiza a requisição POST para editar a quantidade
+      axios.post("http://localhost:3000/storages/edit", {
+        id: id,
+        quantidade: quantity
+      })
+      .then(function (response) {
+        console.log("Quantidade editada com sucesso:", response.data);
+      })
+      .catch(function (error) {
+        console.error("Erro ao editar quantidade:", error);
+      });
+    })
+    .catch(function (error) {
+      console.error("Erro ao obter dados do storage:", error);
+    });
+  }
+
+function editaItem(id,nome,quantidade,status,user_id){
+  axios.post("http://localhost:3000/storages/edit",{
+    id: id,
+    nome: nome,
+    quantidade: quantidade,
+    status: status,
+    user_id
+  });
+}
+
+function deletaItem(id){
+  axios.post("http://localhost:3000/storages/delete",{
+    id: id
+  });
+}
+
+function criarEstoque(nome,quantidade,status,user_id){//adicionar o token no userID  
+  axios.post("http://localhost:3000/storages",{
+    nome: nome,
+    quantidade: quantidade,
+    status: status,
+    user_id: user_id
+  }).catch(function (error){
+    console.log(error);
+  }).then(function (response){
+    console.log("@@@@@@@@@@@@@@@@@@"+response.data);
+  });
+}
 
 function Storage() {
   const [showPopup, setShowPopup] = useState(false);
@@ -9,6 +81,15 @@ function Storage() {
   const [links, setLinks] = useState([]);
   const [imagemSelecionada, setImagemSelecionada] = useState(null);
   const [editIndex, setEditIndex] = useState(-1); // Estado para rastrear o índice do item em edição
+  const [itemEstoque, setItem] = useState([]);
+
+  useEffect(()=>{
+    axios.get("http://localhost:3000/storages").then(function (response){
+        setItem(response.data);
+    }).catch(function (error){
+        console.log(error);
+  });},[]);
+
 
   const handleImageClick = () => {
     setShowPopup(true);
@@ -78,11 +159,10 @@ function Storage() {
     setLinks(updatedLinks);
   };
 
-  const handleDoubleClick = (index) => {
-    const item = links[index];
+  const handleDoubleClick = (item,index) => {
     setNome(item.nome);
     setQuantidade(item.quantidade);
-    setImagemSelecionada(item.imagem);
+    setImagemSelecionada(item.status);
     setEditIndex(index); // Definir o índice do item em edição
     setShowPopup(true); // Mostrar o pop-up de edição
   };
@@ -148,7 +228,17 @@ function Storage() {
                       onClick={() => handleImageSelection("/alerta.svg")}
                     />
                   </label>
-                  <button type="submit" className='botao'>
+                  <button
+                    type="submit"
+                    className='botao'
+                    onClick={() => {
+                    if (editIndex > -1) {
+                      editaItem(editIndex, nome, quantidade, imagemSelecionada, 1);
+                      setShowPopup(false);  // Chamando outra função junto com editaItem
+                    } else {
+                      criarEstoque(nome, quantidade, imagemSelecionada, 1);
+                    }
+                    }}>
                     {editIndex > -1 ? 'Salvar' : 'Adicionar'}
                   </button>
                 </form>
@@ -157,27 +247,27 @@ function Storage() {
           )}
 
           <div className="displayed-links">
-            {links.map((item, index) => (
+            {itemEstoque.map((item, index) => (
               <div key={index} className='item-container-geral'>
                 <div className='img-text-container2'>
                   <div className="bntMaiseMenosContainer">
-                    <button className='bntMaiseMenos' onClick={() => handleAddQuantity(index)}>+</button>
+                    <button className='bntMaiseMenos' onClick={() => editQuantidade(item.id,1)}>+</button>
                     <p className='fonteDetalheGeral2'>
                       {item.quantidade}
                     </p>
-                    <button className='bntMaiseMenos' onClick={() => handleRemoveQuantity(index)}>-</button>
+                    <button className='bntMaiseMenos' onClick={() => editQuantidade(item.id,-1)}>-</button>
                   </div>
                   <p
                     className='fonteDetalheGeral'
-                    onDoubleClick={() => handleDoubleClick(index)}
+                    onDoubleClick={() => handleDoubleClick(item,item.id)}//AXIOS EDIT
                     style={{ cursor: 'pointer' }}
                   >
                     {item.nome}
                   </p>
-                  {item.imagem && (
-                    <img src={item.imagem} alt="Status" className="imagem-selecionada" />
+                  {item.status && (
+                    <img src={item.status} alt="Status" className="imagem-selecionada" />
                   )}
-                  <img src="trash.svg" alt='img-trash' className='trashEstoque' onClick={() => handleRemoveLink(index)} />
+                  <img src="trash.svg" alt='img-trash' className='trashEstoque' onClick={() => deletaItem(item.id)} />
                 </div>
               </div>
             ))}

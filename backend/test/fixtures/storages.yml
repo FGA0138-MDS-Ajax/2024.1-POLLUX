@@ -2,10 +2,12 @@
 
 one:
   nome: MyString
-  quantidade: MyString
+  quantidade: 1
   status: MyString
+  user: one
 
 two:
   nome: MyString
-  quantidade: MyString
+  quantidade: 1
   status: MyString
+  user: two

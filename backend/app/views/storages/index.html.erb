@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Storages</h1>
+
+<div id="storages">
+  <% @storages.each do |storage| %>
+    <%= render storage %>
+    <p>
+      <%= link_to "Show this storage", storage %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New storage", new_storage_path %>

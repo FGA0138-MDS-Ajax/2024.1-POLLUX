@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
+  resources :storages
   resources :eventos
   resources :reuniaos
-  resources :storages
   resources :documentos
   post '/users/new', to: 'users#create'
   post '/users/login', to: 'users#login'
@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   post '/reuniaos', to: 'reuniaos#create'
   post '/documentos', to: 'documentos#create'
   post '/documentos/delete', to: 'documentos#destroy'
+  post '/storages/delete', to: 'storages#destroy'
+  post '/storages/edit', to: 'storages#update'
 
   resources :tarefas
   resources :acaos
