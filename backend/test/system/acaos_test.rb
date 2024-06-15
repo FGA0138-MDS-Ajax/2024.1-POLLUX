@@ -14,6 +14,11 @@ class AcaosTest < ApplicationSystemTestCase
     visit acaos_url
     click_on "New acao"
 
+    fill_in "Ano", with: @acao.ano
+    fill_in "Mes", with: @acao.mes
+    check "Tipo" if @acao.tipo
+    fill_in "Titulo", with: @acao.titulo
+    fill_in "Valor", with: @acao.valor
     click_on "Create Acao"
 
     assert_text "Acao was successfully created"
@@ -24,6 +29,11 @@ class AcaosTest < ApplicationSystemTestCase
     visit acao_url(@acao)
     click_on "Edit this acao", match: :first
 
+    fill_in "Ano", with: @acao.ano
+    fill_in "Mes", with: @acao.mes
+    check "Tipo" if @acao.tipo
+    fill_in "Titulo", with: @acao.titulo
+    fill_in "Valor", with: @acao.valor
     click_on "Update Acao"
 
     assert_text "Acao was successfully updated"

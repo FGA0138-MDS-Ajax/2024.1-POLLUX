@@ -3,13 +3,13 @@
 one:
   titulo: MyString
   valor: 1.5
-  type: false
-  data: MyString
-  user: one
+  tipo: false
+  mes: MyString
+  ano: MyString
 
 two:
   titulo: MyString
   valor: 1.5
-  type: false
-  data: MyString
-  user: two
+  tipo: false
+  mes: MyString
+  ano: MyString

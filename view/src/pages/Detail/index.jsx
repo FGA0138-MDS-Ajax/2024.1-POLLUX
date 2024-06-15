@@ -7,7 +7,7 @@ import Cookies from 'universal-cookie';
 import axios from 'axios'
 
 function Detail() {
-    const { usuario, matricula, nome, cargo } = useParams();
+    const { usuario, matricula, nome, email } = useParams();
     const [mostrarPopup, setMostrarPopup] = useState(false);
     const [novaSenha, setNovaSenha] = useState('');
     const [confirmarSenha, setConfirmarSenha] = useState('');
@@ -19,9 +19,9 @@ function Detail() {
             token: token
         }).then(function (response){
                 console.log(response.data);
-            });
+    });
     
-
+    
     const handleAlterarSenha = () => {
         setMostrarPopup(true);
     };
@@ -79,7 +79,7 @@ function Detail() {
                         <br />
                         Matrícula: {matricula}
                         <br />
-                        Cargo: {cargo}
+                        E-mail: {email}
                     </p>
                 </div>
 

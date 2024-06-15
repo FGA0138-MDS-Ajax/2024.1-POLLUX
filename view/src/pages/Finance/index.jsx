@@ -1,6 +1,30 @@
 import React, { useState, useEffect } from "react";
 import './Finance.css';
 import SideBar from "../../components/SideBar";
+import axios from 'axios';
+
+function criarItem(titulo,valor,tipo,mes,ano){
+  let bool;
+  if (tipo === 'Entrada'){
+    bool = true;
+  }else{
+    bool = false;
+  }
+  axios.post("http://localhost:3000/acaos",{
+    titulo: titulo,
+    valor: valor,
+    tipo: bool,
+    mes: mes,
+    ano: ano,
+    user_id: 1 
+  });
+}
+
+function deletaItem(id){
+  axios.post("http://localhost:3000/acaos/delete",{
+    id: id
+  });
+}
 
 function Finance() {
   const [showPopup, setShowPopup] = useState(false);
@@ -11,10 +35,14 @@ function Finance() {
   const [tipo, setTipo] = useState('Entrada');
   const [acoes, setAcoes] = useState([]);
   const [saldo, setSaldo] = useState(0);
+  const [item,setItem] = useState([]);
 
   useEffect(() => {
-    calcularSaldo();
-  }, [acoes]);
+    axios.get("http://localhost:3000/acaos").then(function (response){
+      setItem(response.data);
+    });
+    saldoTotal(item);
+  }, []);
 
   const handleAnoChange = (e) => {
     setAno(e.target.value);
@@ -71,6 +99,18 @@ function Finance() {
     setSaldo(total);
   };
 
+  const saldoTotal = (item) => {
+    let total = 0;
+    item.forEach(acao =>{
+      if(acao.tipo){
+        total += acao.valor;
+      }else{
+        total-= acao.valor;
+      }
+    });
+    setSaldo(total);
+  };
+
   const handleDelete = (index) => {
     const novaListaAcoes = [...acoes];
     const acaoRemovida = novaListaAcoes.splice(index, 1)[0];
@@ -98,7 +138,7 @@ function Finance() {
           <div className='caixa'>
             <label htmlFor="ano">Ano:</label>
             <select id="ano" value={ano} onChange={handleAnoChange}>
-              {Array.from({ length: 11 }, (_, i) => 2020 + i).map(year => (
+              {Array.from({ length: 7 }, (_, i) => 2024 + i).map(year => (
                 <option key={year} value={year}>{year}</option>
               ))}
             </select>
@@ -115,10 +155,10 @@ function Finance() {
         <div className='financeCorpo'>
           <h2>{mes} - Ações:</h2>
           <ul>
-            {acoes.filter(acao => acao.mes === mes && acao.ano === ano).map((acao, index) => (
-              <li key={index} className={acao.tipo === 'Entrada' ? 'entrada' : 'saida'}>
-                {acao.tipo}: {acao.acao} - R$ {acao.valor.toFixed(2)}
-                <img src="trash.svg" alt="Delete" onClick={() => handleDelete(index)} />
+            {item.filter(acao => acao.mes === mes && acao.ano === ano).map((acao, index) => (
+              <li key={index} className={acao.tipo === true ? 'entrada' : 'saida'}>
+                {acao.tipo} {acao.titulo} - R$ {acao.valor.toFixed(2)}
+                <img src="trash.svg" alt="Delete" onClick={() => deletaItem(acao.id)} />
               </li>
             ))}
           </ul>
@@ -147,7 +187,7 @@ function Finance() {
                     <option value="Saída">Saída</option>
                   </select>
                 </div>
-                <button type="submit" className='botao'>Salvar</button>
+                <button type="submit" className='botao' onClick={()=>criarItem(acao,valor,tipo,mes,ano)}>Salvar</button>
               </form>
             </div>
           </div>
@@ -158,4 +198,3 @@ function Finance() {
 }
 
 export default Finance;
-

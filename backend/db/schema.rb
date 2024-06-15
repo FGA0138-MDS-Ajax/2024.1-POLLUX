@@ -10,19 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_14_215105) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_15_164148) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "acaos", force: :cascade do |t|
     t.string "titulo"
     t.float "valor"
-    t.boolean "type"
-    t.string "data"
-    t.bigint "user_id", null: false
+    t.boolean "tipo"
+    t.string "mes"
+    t.string "ano"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_acaos_on_user_id"
   end
 
   create_table "cargos", force: :cascade do |t|
@@ -101,7 +100,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_14_215105) do
     t.index ["cargo_id"], name: "index_users_on_cargo_id"
   end
 
-  add_foreign_key "acaos", "users"
   add_foreign_key "documentos", "users"
   add_foreign_key "eventos", "users"
   add_foreign_key "reuniaos", "users"

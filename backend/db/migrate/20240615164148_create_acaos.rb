@@ -3,9 +3,9 @@ class CreateAcaos < ActiveRecord::Migration[7.1]
     create_table :acaos do |t|
       t.string :titulo
       t.float :valor
-      t.boolean :type
-      t.string :data
-      t.references :user, null: false, foreign_key: true
+      t.boolean :tipo
+      t.string :mes
+      t.string :ano
 
       t.timestamps
     end
