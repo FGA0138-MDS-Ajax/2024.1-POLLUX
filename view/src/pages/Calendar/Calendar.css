@@ -6,7 +6,6 @@ body {
 }
 
 #paginaCalendar {
-  background-color: #fdfdfd;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -17,11 +16,13 @@ body {
 .calendarTitulo {
   margin-top: 3rem;
   text-align: center;
-  font-size: 200%;
+  font-size: 180%;
+  margin-bottom: 30px;
+  margin-left: 80px;
 }
 
-.calendarSubTitulo{
-  margin-top: 3rem;
+.calendarSubTitulo {
+  margin-top: 2rem;
   text-align: center;
   font-size: 130%;
   margin-left: 120px;
@@ -30,10 +31,9 @@ body {
 
 .calendarCorpo {
   width: 80%;
-  background-color: #d2d3e4fa;
+  background-color: #2683b5a1;
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.336);
   margin-bottom: 2rem;
   color: #070606;
   margin-left: 120px;
@@ -49,8 +49,13 @@ body {
   justify-content: space-between;
 }
 
-.left, .right {
+.left,
+.right {
   width: 48%;
+}
+
+.day.today.active.event {
+  background-color: #cbcbda;
 }
 
 .calendar {
@@ -66,6 +71,7 @@ body {
   align-items: center;
   font-size: 1.5rem;
   margin-bottom: 10px;
+  cursor: pointer;
 }
 
 .weekdays {
@@ -94,17 +100,13 @@ body {
   cursor: pointer;
 }
 
-.prev-date, .next-date {
+.prev-date,
+.next-date {
   color: #d3d3d3;
 }
 
 .today {
-  background-color: #ffd700;
-  border-radius: 50%;
-}
-
-.event {
-  background-color: #ff6347;
+  background-color: #414191;
   border-radius: 50%;
 }
 
@@ -131,7 +133,8 @@ body {
   margin-right: 10px;
 }
 
-.goto-btn, .today-btn {
+.goto-btn,
+.today-btn {
   padding: 5px 10px;
   border: none;
   background-color: #4caf50;
@@ -141,7 +144,7 @@ body {
 }
 
 .today-btn {
-  background-color: #2196f3;
+  background-color: #4caf50;
 }
 
 .today-date {
@@ -152,11 +155,13 @@ body {
 }
 
 .event-day {
-  font-size: 1.5rem;
+  font-size: 20px;
+  font-weight: bold;
 }
 
 .event-date {
-  font-size: 1rem;
+  font-size: 20px;
+  font-weight: bold;
 }
 
 .events {
@@ -167,7 +172,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #e0e0e0;
+  background-color: white;
   padding: 10px;
   border-radius: 5px;
   margin-bottom: 10px;
@@ -255,33 +260,41 @@ body {
   cursor: pointer;
   border-radius: 50%;
   padding: 5px;
+  margin-left: 20px;
 }
 
-.delete-event{
+.delete-event {
   width: 20px;
   cursor: pointer;
 }
+
 .container img {
   margin-left: 10px;
   height: 20px;
 }
 
-.date{
+.date {
   text-align: center;
-  font-size: 1.2rem
+  font-size: 15px;
 }
 
-.event-month-title{
+.event-month-title {
   text-align: center;
   margin-top: 20px;
-  font-size: 1.5rem
+  font-size: 20px;
+}
+
+.no-event h3 {
+  font-weight: normal;
+  font-size: 15px;
+  margin-top: 10px;
 }
 
 .events-month .event {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #e0e0e0;
+  background-color: white;
   padding: 10px;
   border-radius: 5px;
   margin-bottom: 10px;
@@ -302,5 +315,5 @@ body {
 
 .events-month .no-event {
   text-align: center;
-  font-size: 1.2rem;
+  font-size: 10px;
 }

@@ -24,7 +24,7 @@ function Admin() {
   };
 
   useEffect(() => {
-   get();
+    get();
   }, []);
 
   const handleRemoveMember = (memberId) => {
@@ -52,7 +52,7 @@ function Admin() {
           {members.map((member) => (
             <li key={member.id}>
               <span onClick={() => setSelectedMember(member)}>
-              {member.nome} - {member.matricula}
+                {member.nome} - {member.matricula}
               </span>
               <button onClick={() => handleRemoveMember(member.id)}>
                 Remover
@@ -60,10 +60,10 @@ function Admin() {
             </li>
           ))}
         </ul>
-        <a href= "/createAccount">
-          <button type="button"> Adicionar Membro </button> 
-      </a>
-    </div>
+        <a href="/createAccount">
+          <button type="button"> Adicionar Membro </button>
+        </a>
+      </div>
 
       {selectedMember && (
         <div className="popup">
@@ -120,43 +120,43 @@ function Admin() {
                     type="checkbox"
                     id="telaCalendario"
                     name="checkboxEdiçãoTela"
-                    value="calendario" 
-                    />
+                    value="calendario"
+                  />
                   <label> Calendário </label>
                 </div>
                 <div>
                   <input
-                  type="checkbox"
-                  id="telaEstoque"
-                  name="checkboxEdiçãoTela" 
-                  value="estoque" 
+                    type="checkbox"
+                    id="telaEstoque"
+                    name="checkboxEdiçãoTela"
+                    value="estoque"
                   />
                   <label> Estoque </label>
                 </div>
                 <div>
                   <input
-                  type="checkbox"
-                  id="telaReunioes"
-                  name="checkboxEdiçãoTela" 
-                  value="reunioes" 
+                    type="checkbox"
+                    id="telaReunioes"
+                    name="checkboxEdiçãoTela"
+                    value="reunioes"
                   />
                   <label> Reuniões </label>
                 </div>
                 <div>
                   <input
-                  type="checkbox"
-                  id="telaFinanceiro"
-                  name="checkboxEdiçãoTela" 
-                  value="financeiro" 
+                    type="checkbox"
+                    id="telaFinanceiro"
+                    name="checkboxEdiçãoTela"
+                    value="financeiro"
                   />
                   <label> Financeiro </label>
                 </div>
                 <div>
                   <input
-                  type="checkbox"
-                  id="telaDocumentos"
-                  name="checkboxEdiçãoTela" 
-                  value="documentos" 
+                    type="checkbox"
+                    id="telaDocumentos"
+                    name="checkboxEdiçãoTela"
+                    value="documentos"
                   />
                   <label> Documentos </label>
                 </div>
@@ -170,45 +170,45 @@ function Admin() {
                     name="checkboxEdiçãoTela"
                     value="calendario"
                     checked
-                    />
+                  />
                   <label> Calendário </label>
                 </div>
                 <div>
                   <input
-                  type="checkbox"
-                  id="telaEstoque"
-                  name="checkboxEdiçãoTela" 
-                  value="estoque"
-                  checked
+                    type="checkbox"
+                    id="telaEstoque"
+                    name="checkboxEdiçãoTela"
+                    value="estoque"
+                    checked
                   />
                   <label> Estoque </label>
                 </div>
                 <div>
                   <input
-                  type="checkbox"
-                  id="telaReunioes"
-                  name="checkboxEdiçãoTela" 
-                  value="reunioes" 
-                  checked
+                    type="checkbox"
+                    id="telaReunioes"
+                    name="checkboxEdiçãoTela"
+                    value="reunioes"
+                    checked
                   />
                   <label> Reuniões </label>
                 </div>
                 <div>
                   <input
-                  type="checkbox"
-                  id="telaFinanceiro"
-                  name="checkboxEdiçãoTela" 
-                  value="financeiro" 
+                    type="checkbox"
+                    id="telaFinanceiro"
+                    name="checkboxEdiçãoTela"
+                    value="financeiro"
                   />
                   <label> Financeiro </label>
                 </div>
                 <div>
                   <input
-                  type="checkbox"
-                  id="telaDocumentos"
-                  name="checkboxEdiçãoTela" 
-                  value="documentos"
-                  checked 
+                    type="checkbox"
+                    id="telaDocumentos"
+                    name="checkboxEdiçãoTela"
+                    value="documentos"
+                    checked
                   />
                   <label> Documentos </label>
                 </div>

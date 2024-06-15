@@ -1,12 +1,4 @@
-body {
-  font-family: 'Poppins', monospace;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 #paginaFinance {
-  background-color: #fdfdfd;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -17,7 +9,9 @@ body {
 .financeTitulo {
   margin-top: 3rem;
   text-align: center;
-  font-size: 200%;
+  font-size: 180%;
+  margin-bottom: 30px;
+  margin-left: 80px;
 }
 
 .img-text-container2 {
@@ -34,7 +28,8 @@ body {
   align-items: flex-start;
   font-size: 1rem;
   margin: 0 10px;
-  color: #070606; /* Altere a cor do texto dentro das caixas para preto */
+  color: #070606;
+  /* Altere a cor do texto dentro das caixas para preto */
 }
 
 .caixa label {
@@ -60,7 +55,8 @@ body {
   margin-left: 120px;
 }
 
-.financeCorpo h2, .financeCorpo h3 {
+.financeCorpo h2,
+.financeCorpo h3 {
   margin: 0 0 1rem 0;
 }
 
@@ -124,7 +120,9 @@ body {
   align-self: flex-end;
 }
 
-.caixa input[type="text"], .caixa input[type="number"], .caixa select {
+.caixa input[type="text"],
+.caixa input[type="number"],
+.caixa select {
   width: calc(100% - 10px);
   background-color: #fdfdfd;
   padding: 10px;
@@ -146,7 +144,8 @@ body {
 }
 
 .popup label {
-  color: black; /* Ensure labels inside popup are black */
+  color: black;
+  /* Ensure labels inside popup are black */
 }
 
 
@@ -159,11 +158,11 @@ body {
 
 .financeCorpo li img {
   cursor: pointer;
-    height: 20px;
-    width: 20px;
-    margin-right: 25px;
-    margin-top: 15px;
-    margin-left: 150px;
+  height: 20px;
+  width: 20px;
+  margin-right: 25px;
+  margin-top: 15px;
+  margin-left: 150px;
 }
 
 

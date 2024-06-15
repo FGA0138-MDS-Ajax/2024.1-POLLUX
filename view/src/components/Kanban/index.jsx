@@ -61,7 +61,7 @@ function Kanban() {
       setQuem('');
     }
   };
-  
+
 
   const handleRemoveTarefa = (column, index) => {
     const updatedTarefas = [...tarefas[column]];
@@ -113,8 +113,8 @@ function Kanban() {
     setCurrentColumn(column); // Define a coluna atual para uso na edição
     setShowPopup(true); // Mostrar o popup de edição
   };
-  
-  
+
+
 
   return (
     <div className='kanban'>

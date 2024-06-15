@@ -1,9 +1,9 @@
-.containerDetail{
+.containerDetail {
   display: flex;
   flex-direction: column;
   text-align: left;
   margin-left: 160px;
-  gap:190px;
+  gap: 190px;
   margin-top: 40px;
   font-size: 20px;
 }
@@ -15,8 +15,10 @@
   transform: translateY(-50%);
   width: 200px;
   height: auto;
-  z-index: -1; /* Define um z-index menor para ficar atrás dos outros elementos */
-  opacity: 0.2; /* Opacidade para torná-la transparente */
+  z-index: -1;
+  /* Define um z-index menor para ficar atrás dos outros elementos */
+  opacity: 0.2;
+  /* Opacidade para torná-la transparente */
 }
 
 
@@ -39,7 +41,8 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   max-width: 300px;
   width: 100%;
-  position: relative; /* Para que o posicionamento absoluto do fecharPopup funcione corretamente */
+  position: relative;
+  /* Para que o posicionamento absoluto do fecharPopup funcione corretamente */
 }
 
 .fecharPopup {
@@ -57,7 +60,7 @@
 }
 
 .conteudo3 button {
-  background-color: #4CAF50; 
+  background-color: #4CAF50;
   font-size: 1em;
   color: white;
   padding: 10px 20px;
@@ -68,6 +71,5 @@
 }
 
 .conteudo3 button:hover {
-  background-color: #45a049; 
+  background-color: #45a049;
 }
-

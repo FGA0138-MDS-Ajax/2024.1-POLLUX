@@ -1,10 +1,10 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import './Meeting.css';
 import SideBar from "../../components/SideBar";
 import axios from "axios";
 
-function criarReuniao(titulo){
-    axios.post("http://localhost:3000/reuniaos",{
+function criarReuniao(titulo) {
+    axios.post("http://localhost:3000/reuniaos", {
         nome: titulo
     });
 }
@@ -22,12 +22,12 @@ function Meeting() {
     const [reunioes, setMeet] = useState([]);
 
 
-    useEffect(()=>{
-    axios.get("http://localhost:3000/reuniaos").then(function (response){
-        setMeet(response.data);
-    });
-},[]);
-    
+    useEffect(() => {
+        axios.get("http://localhost:3000/reuniaos").then(function (response) {
+            setMeet(response.data);
+        });
+    }, []);
+
     const handleAddMeetingClick = () => {
         setShowPopup2(true);
     };
@@ -121,127 +121,127 @@ function Meeting() {
         <>
             <SideBar />
             <section className='containerGeral'>
-            <div className='tituloGeral'>
-                <h1>Reuniões</h1>
-                <button onClick={handleAddMeetingClick} className="botao">Adicionar Reunião</button>
+                <div className='tituloGeral'>
+                    <h1>Reuniões</h1>
+                    <button onClick={handleAddMeetingClick} className="botao">Adicionar Reunião</button>
 
-                {showPopup2 && (
-                    <div className="popup">
-                        <div className="popup-content">
-                            <span className="close" onClick={handleClosePopup2}>
-                                &times;
-                            </span>
-                            <form onSubmit={editTitleIndex > -1 ? handleUpdateMeetingTitle : handleAddMeeting}>
-                                <label className='caixa'>
-                                    Insira o título:
-                                    <input
-                                        className='caixa'
-                                        type="text"
-                                        value={titulo}
-                                        onChange={handleTituloChange}
-                                        required
-                                    />
-                                </label>
-                                <button type="submit" onClick={()=>criarReuniao(titulo)} className='botao'>{editTitleIndex > -1 ? 'Salvar' : 'Adicionar'}</button>
-                            </form>
+                    {showPopup2 && (
+                        <div className="popup">
+                            <div className="popup-content">
+                                <span className="close" onClick={handleClosePopup2}>
+                                    &times;
+                                </span>
+                                <form onSubmit={editTitleIndex > -1 ? handleUpdateMeetingTitle : handleAddMeeting}>
+                                    <label className='caixa'>
+                                        Insira o título:
+                                        <input
+                                            className='caixa'
+                                            type="text"
+                                            value={titulo}
+                                            onChange={handleTituloChange}
+                                            required
+                                        />
+                                    </label>
+                                    <button type="submit" onClick={() => criarReuniao(titulo)} className='botao'>{editTitleIndex > -1 ? 'Salvar' : 'Adicionar'}</button>
+                                </form>
+                            </div>
                         </div>
-                    </div>
-                )}
-            </div>
-            <div className='reunioesCorpo'>
-                {meetings.map((meeting, meetingIndex) => (
-                    <div key={meetingIndex} className="meeting">
-                        <h2 onDoubleClick={() => handleDoubleClick(meetingIndex)}>{meeting.nome}</h2>
-                        <div className='img-text-container'>
-                            <img src="plus.svg" alt="img-plus" onClick={() => handleImageClick(meetingIndex)} />
-                            <p className='fonte'>Adicionar Arquivo</p>
-                        </div>
-                        <div className="displayed-links">
-                            {meeting.files.map((item, fileIndex) => (
-                                <div key={fileIndex}>
-                                    <div className='img-text-container'>
-                                        <img src="trash.svg" alt='img-trash' className='trash' onClick={() => handleRemoveFile(meetingIndex, fileIndex)} />
-                                        <p className='fonte2'>
-                                            {item.fileName} (Adicionado em: {item.dateAdded})
+                    )}
+                </div>
+                <div className='reunioeCorpo'>
+                    {meetings.map((meeting, meetingIndex) => (
+                        <div key={meetingIndex} className="meeting">
+                            <h2 onDoubleClick={() => handleDoubleClick(meetingIndex)}>{meeting.nome}</h2>
+                            <div className='img-text-container'>
+                                <img src="plus.svg" alt="img-plus" className="bntMeeting" onClick={() => handleImageClick(meetingIndex)} />
+                                <p className='fonteMeeting'>Adicionar Arquivo</p>
+                            </div>
+                            <div className="displayed-links">
+                                {meeting.files.map((item, fileIndex) => (
+                                    <div key={fileIndex}>
+                                        <div className='img-text-container'>
+                                            <img src="trash.svg" alt='img-trash' className='trash' onClick={() => handleRemoveFile(meetingIndex, fileIndex)} />
+                                            <p className='fonte2'>
+                                                {item.fileName} (Adicionado em: {item.dateAdded})
+                                            </p>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                            <div className="displayed-links">
+                                {links[meetingIndex] && links[meetingIndex].map((link, index) => (
+                                    <div key={index}>
+                                        <p>
+                                            <img
+                                                src="trash.svg"
+                                                alt="img-trash"
+                                                className='trash'
+                                                onClick={() => handleRemoveLink(meetingIndex, index)}
+                                            />
+                                            <a href={link.link}>{link.descricao}</a>
                                         </p>
                                     </div>
-                                </div>
-                            ))}
-                        </div>
-                        <div className="displayed-links">
-                            {links[meetingIndex] && links[meetingIndex].map((link, index) => (
-                                <div key={index}>
-                                    <p>
-                                        <img 
-                                            src="trash.svg" 
-                                            alt="img-trash" 
-                                            className='trash' 
-                                            onClick={() => handleRemoveLink(meetingIndex, index)} 
-                                        />
-                                        <a href={link.link}>{link.descricao}</a>
-                                    </p>
-                                </div>
-                            ))}
-                        </div>
-                        <table className="presence-table">
-                            <thead>
-                                <tr>
-                                    <th>Nome</th>
-                                    <th>Matrícula</th>
-                                    <th>Presença</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {meeting.members.map((member, memberIndex) => (
-                                    <tr key={memberIndex}>
-                                        <td>{member.nome}</td>
-                                        <td>{member.matricula}</td>
-                                        <td>
-                                            <input
-                                                type="checkbox"
-                                                checked={member.presente}
-                                                onChange={() => handlePresenceChange(meetingIndex, memberIndex)}
-                                            />
-                                        </td>
-                                    </tr>
                                 ))}
-                            </tbody>
-                        </table>
-                    </div>
-                ))}
-                {showPopup && (
-                    <div className="popup">
-                        <div className="popup-content">
-                            <span className="close" onClick={handleClosePopup}>
-                                &times;
-                            </span>
-                            <form onSubmit={handleSubmit}>
-                                <label className='caixa'>
-                                    Insira o link:
-                                    <input
-                                        className='caixa'
-                                        type="text"
-                                        value={link}
-                                        onChange={handleLinkChange}
-                                        required
-                                    />
-                                </label>
-                                <label className='caixa'>
-                                    Descrição:
-                                    <input
-                                        className='caixa'
-                                        type="text"
-                                        value={descricao}
-                                        onChange={handleDescricaoChange}
-                                        required
-                                    />
-                                </label>
-                                <button type="submit" className='botao'>Adicionar</button>
-                            </form>
+                            </div>
+                            <table className="presence-table">
+                                <thead>
+                                    <tr>
+                                        <th>Nome</th>
+                                        <th>Matrícula</th>
+                                        <th>Presença</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {meeting.members.map((member, memberIndex) => (
+                                        <tr key={memberIndex}>
+                                            <td>{member.nome}</td>
+                                            <td>{member.matricula}</td>
+                                            <td>
+                                                <input
+                                                    type="checkbox"
+                                                    checked={member.presente}
+                                                    onChange={() => handlePresenceChange(meetingIndex, memberIndex)}
+                                                />
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
                         </div>
-                    </div>
-                )}
-            </div>
+                    ))}
+                    {showPopup && (
+                        <div className="popup">
+                            <div className="popup-content">
+                                <span className="close" onClick={handleClosePopup}>
+                                    &times;
+                                </span>
+                                <form onSubmit={handleSubmit}>
+                                    <label className='caixa'>
+                                        Insira o link:
+                                        <input
+                                            className='caixa'
+                                            type="text"
+                                            value={link}
+                                            onChange={handleLinkChange}
+                                            required
+                                        />
+                                    </label>
+                                    <label className='caixa'>
+                                        Descrição:
+                                        <input
+                                            className='caixa'
+                                            type="text"
+                                            value={descricao}
+                                            onChange={handleDescricaoChange}
+                                            required
+                                        />
+                                    </label>
+                                    <button type="submit" className='botao'>Adicionar</button>
+                                </form>
+                            </div>
+                        </div>
+                    )}
+                </div>
             </section>
         </>
     );
