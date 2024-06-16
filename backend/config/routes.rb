@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   post '/storages/delete', to: 'storages#destroy'
   post '/storages/edit', to: 'storages#update'
   post '/acaos/delete', to: 'acaos#destroy'
+  post '/eventos/delete', to: 'eventos#destroy'
 
   resources :tarefas
   resources :cargos
