@@ -17,7 +17,7 @@ class AcaosControllerTest < ActionDispatch::IntegrationTest
 
   test "should create acao" do
     assert_difference("Acao.count") do
-      post acaos_url, params: { acao: {  } }
+      post acaos_url, params: { acao: { ano: @acao.ano, mes: @acao.mes, tipo: @acao.tipo, titulo: @acao.titulo, valor: @acao.valor } }
     end
 
     assert_redirected_to acao_url(Acao.last)
@@ -34,7 +34,7 @@ class AcaosControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update acao" do
-    patch acao_url(@acao), params: { acao: {  } }
+    patch acao_url(@acao), params: { acao: { ano: @acao.ano, mes: @acao.mes, tipo: @acao.tipo, titulo: @acao.titulo, valor: @acao.valor } }
     assert_redirected_to acao_url(@acao)
   end
 

@@ -22,31 +22,31 @@ export const getSingleDocument = async (documentId) => {
 };
 
 export const createDocument = async (data) => {
-    try {
-      const document = await server.post(endpoints.document.base, data);
-      return document;
-    } catch (error) {
-      console.log(error);
-      throw error;
-    }
-  };
+  try {
+    const document = await server.post(endpoints.document.base, data);
+    return document;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
 
-  export const editDocument = async (documentId, data) => {
-    try {
-      const document = await server.put(endpoints.document.single(documentId), data);
-      return document;
-    } catch (error) {
-      console.log(error);
-      throw error;
-    }
-  };
+export const editDocument = async (documentId, data) => {
+  try {
+    const document = await server.put(endpoints.document.single(documentId), data);
+    return document;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
 
-  export const deleteDocument = async (documentId) => {
-    try {
-      const document = await server.delete(endpoints.document.single(documentId));
-      return document;
-    } catch (error) {
-      console.log(error);
-      throw error;
-    }
-  };
+export const deleteDocument = async (documentId) => {
+  try {
+    const document = await server.delete(endpoints.document.single(documentId));
+    return document;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};

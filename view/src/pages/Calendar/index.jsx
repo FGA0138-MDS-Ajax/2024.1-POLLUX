@@ -12,7 +12,7 @@ const Calendar = () => {
 
   const listMonthEvents = () => {
     const monthEvents = eventsArr.filter(event => event.month === month + 1 && event.year === year);
-    
+
     // Ordenar os eventos pela data e hora
     monthEvents.sort((a, b) => a.day - b.day);
     monthEvents.forEach(eventObj => {
@@ -277,7 +277,6 @@ const Calendar = () => {
           <h1>Calendário</h1>
         </div>
         <div className='calendarCorpo'>
-          <h2>Bem-vindo ao calendário</h2>
           <div className="container">
             <div className="left">
               <div className="calendar">

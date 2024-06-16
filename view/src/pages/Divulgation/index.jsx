@@ -87,121 +87,121 @@ function Divulgation() {
                         <p>Lucas Mateus</p>
                     </div>
                     <div className="legendaFotos">
-                            <img src="Luis.svg" alt="fotoIntegrante" className='circular-imagem' />
-                      <p>Luis Eduardo</p>
+                        <img src="Luis.svg" alt="fotoIntegrante" className='circular-imagem' />
+                        <p>Luis Eduardo</p>
                     </div>
                     <div className="legendaFotos">
                         <img src="MatheusRodrigues.svg" alt="fotoIntegrante" className='circular-imagem' />
                         <p>Matheus Rodrigues</p>
                     </div>
-        
-                     <div className="legendaFotos">
-                <img src="Nathan.svg" alt="fotoIntegrante" className='circular-imagem' />
-                <p>Nathan Henrique</p>
-                        </div >
-            <div className="legendaFotos">
-                <img src="Suyanne.svg" alt="fotoIntegrante" className='circular-imagem' />
-                <p>Pedro Araujo</p>
-            </div >
-            </div>
-                    <section id="nossosDrones"></section>
-                    <div className="tituloComIcon">
 
-                        <h1 className="topicos" >
-                            Nossos drones
-                        </h1>
-                        <img src="drone.svg" alt="iconDrone" className='iconDrone' />
-                    </div>
-                    <div className="corpoDrones">
-                        <img src="droneX.svg" alt="iconDroneX" className='iconDroneX' />
-                        <div className="textoDrones">
-                            <h4 className="subTopico">
-                                DRONE X
-                            </h4>
-                            <p className="corpoTexto">
-                                Jorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
-                            </p>
-                        </div>
-                    </div>
+                    <div className="legendaFotos">
+                        <img src="Nathan.svg" alt="fotoIntegrante" className='circular-imagem' />
+                        <p>Nathan Henrique</p>
+                    </div >
+                    <div className="legendaFotos">
+                        <img src="Suyanne.svg" alt="fotoIntegrante" className='circular-imagem' />
+                        <p>Pedro Araujo</p>
+                    </div >
+                </div>
+                <section id="nossosDrones"></section>
+                <div className="tituloComIcon">
 
-                    <div className="corpoDrones">
-                        <img src="droneY.svg" alt="iconDroneY" className='iconDroneY' />
-                        <div className="textoDrones">
-                            <h4 className="subTopico">
-                                DRONE Y
-                            </h4>
-                            <p className="corpoTexto">
-                                Jorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
-                            </p>
-                        </div>
+                    <h1 className="topicos" >
+                        Nossos drones
+                    </h1>
+                    <img src="drone.svg" alt="iconDrone" className='iconDrone' />
+                </div>
+                <div className="corpoDrones">
+                    <img src="droneX.svg" alt="iconDroneX" className='iconDroneX' />
+                    <div className="textoDrones">
+                        <h4 className="subTopico">
+                            DRONE X
+                        </h4>
+                        <p className="corpoTexto">
+                            Jorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+                        </p>
                     </div>
-                    <section id="processoSeletivo"></section>
-                    <div className="tituloComIcon">
-                        <h1 className="topicos">
-                            Processo seletivo
-                        </h1>
-                        <img src="lupa.svg" alt="iconLupa" className='iconLupa' />
-                    </div>
-                    <h4 className="subTopico">
-                        Porque entrar para a EDRA?
-                    </h4>
-                    <p className="corpoTexto">
-                        Ao ingressar na EDRA, você tem a oportunidade de entender como funcionam os relacionamentos empresariais. Além disso, você cria conexões profissionais que podem moldar seu futuro, estabelecendo uma rede de contatos valiosa. Participar de uma equipe multidisciplinar permite que você faça amizades com pessoas de diversos cursos, enriquecendo ainda mais sua experiência e proporcionando um ambiente de aprendizado colaborativo e dinâmico. Essa vivência prática complementa a formação acadêmica, preparando você para os desafios do mercado de trabalho e ampliando suas perspectivas profissionais.
-                    </p>
-                    <div className="bntPS">
-                        <button className="bntEditalForms">Edital</button>
-                        <button className="bntEditalForms">Forms</button>
-                    </div>
+                </div>
 
-                    <h4 className="subTopico">
-                        Cronograma do PS
-                    </h4>
-                    <TablePS />
-                    <p className="legenda">
-                        (*) Atualizado em: 26/06/2024; Caso tenha alterações, mais informações no instagram
-                    </p>
-                    <section id="eventosCompeticoes"></section>
-                    <div className="tituloComIcon">
-
-                        <h1 className="topicos">
-                            Eventos e competições
-                        </h1>
-                        <img src="trofeu.svg" alt="iconAgenda" className='iconAgenda' />
+                <div className="corpoDrones">
+                    <img src="droneY.svg" alt="iconDroneY" className='iconDroneY' />
+                    <div className="textoDrones">
+                        <h4 className="subTopico">
+                            DRONE Y
+                        </h4>
+                        <p className="corpoTexto">
+                            Jorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+                        </p>
                     </div>
-                    <div className="corpoEventos">
-                        <img src="campeonatoX.svg" alt="campeonatoX" className='campeonatoX' />
-                        <div className="textoEventos">
-                            <h4 className="subTopico">
-                                Campeonato X
-                            </h4>
-                            <p className="corpoTexto">
-                                Jorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
-                            </p>
-                        </div>
-                    </div>
+                </div>
+                <section id="processoSeletivo"></section>
+                <div className="tituloComIcon">
+                    <h1 className="topicos">
+                        Processo seletivo
+                    </h1>
+                    <img src="lupa.svg" alt="iconLupa" className='iconLupa' />
+                </div>
+                <h4 className="subTopico">
+                    Porque entrar para a EDRA?
+                </h4>
+                <p className="corpoTexto">
+                    Ao ingressar na EDRA, você tem a oportunidade de entender como funcionam os relacionamentos empresariais. Além disso, você cria conexões profissionais que podem moldar seu futuro, estabelecendo uma rede de contatos valiosa. Participar de uma equipe multidisciplinar permite que você faça amizades com pessoas de diversos cursos, enriquecendo ainda mais sua experiência e proporcionando um ambiente de aprendizado colaborativo e dinâmico. Essa vivência prática complementa a formação acadêmica, preparando você para os desafios do mercado de trabalho e ampliando suas perspectivas profissionais.
+                </p>
+                <div className="bntPS">
+                    <button className="bntEditalForms">Edital</button>
+                    <button className="bntEditalForms">Forms</button>
+                </div>
 
-                    <div className="corpoEventos">
-                        <img src="campeonatoY.svg" alt="campeonatoY" className='campeonatoY' />
-                        <div className="textoEventos">
-                            <h4 className="subTopico">
-                                CampeonatoY
-                            </h4>
-                            <p className="corpoTexto">
-                                Jorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
-                            </p>
-                        </div>
-                    </div>
+                <h4 className="subTopico">
+                    Cronograma do PS
+                </h4>
+                <TablePS />
+                <p className="legenda">
+                    (*) Atualizado em: 26/06/2024; Caso tenha alterações, mais informações no instagram.
+                </p>
+                <section id="eventosCompeticoes"></section>
+                <div className="tituloComIcon">
 
-                    <h4 className="subTopico">
-                        Próximos eventos e competições
-                    </h4>
-                    <TableProx />
-                    <p className="legenda">
-                        (*) Atualizado em: 26/06/2024. Mais informações no instagram
-                    </p>
+                    <h1 className="topicos">
+                        Eventos e competições
+                    </h1>
+                    <img src="trofeu.svg" alt="iconAgenda" className='iconAgenda' />
+                </div>
+                <div className="corpoEventos">
+                    <img src="campeonatoX.svg" alt="campeonatoX" className='campeonatoX' />
+                    <div className="textoEventos">
+                        <h4 className="subTopico">
+                            Campeonato X
+                        </h4>
+                        <p className="corpoTexto">
+                            Jorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+                        </p>
+                    </div>
+                </div>
+
+                <div className="corpoEventos">
+                    <img src="campeonatoY.svg" alt="campeonatoY" className='campeonatoY' />
+                    <div className="textoEventos">
+                        <h4 className="subTopico">
+                            CampeonatoY
+                        </h4>
+                        <p className="corpoTexto">
+                            Jorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+                        </p>
+                    </div>
+                </div>
+
+                <h4 className="subTopico">
+                    Próximos eventos e competições
+                </h4>
+                <TableProx />
+                <p className="legenda">
+                    (*) Atualizado em: 26/06/2024. Mais informações no instagram.
+                </p>
             </section >
 
-        <Footer />
+            <Footer />
         </>
     )
 }

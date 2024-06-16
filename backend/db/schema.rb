@@ -10,19 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema[7.1].define(version: 2024_06_15_232147) do
+=======
+ActiveRecord::Schema[7.1].define(version: 2024_06_15_164148) do
+>>>>>>> e5212feec200c9d7dd7c62da240634e12332a30b
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "acaos", force: :cascade do |t|
     t.string "titulo"
     t.float "valor"
-    t.boolean "type"
-    t.string "data"
-    t.bigint "user_id", null: false
+    t.boolean "tipo"
+    t.string "mes"
+    t.string "ano"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_acaos_on_user_id"
   end
 
   create_table "acessos", force: :cascade do |t|

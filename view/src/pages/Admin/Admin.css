@@ -3,7 +3,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: #d2d3e4fa;    
+  background-color: #d2d3e4fa;
   padding: 20px;
   width: 550px;
   border-radius: 8%;
@@ -29,7 +29,7 @@ body {
   left: 9rem;
   width: 80%;
   font-family: 'Poppins', monospace;
-  padding: 20px;  
+  padding: 20px;
 }
 
 .img-text-container {
@@ -38,7 +38,7 @@ body {
 }
 
 .fonte {
-  font-size: 40px; 
+  font-size: 40px;
   display: flex;
   margin-left: 20px;
   margin-top: -2px;
@@ -70,17 +70,17 @@ body {
 }
 
 .caixa label {
-  width: 100px; 
-  margin-right: 10px; 
+  width: 100px;
+  margin-right: 10px;
   font-size: 20px;
 }
 
 .caixa input {
-  flex: 1; 
+  flex: 1;
   font-size: 20px;
   background-color: #d2d3e4fa;
-  border: none; 
-  outline: none; 
+  border: none;
+  outline: none;
 }
 
 .botao {
