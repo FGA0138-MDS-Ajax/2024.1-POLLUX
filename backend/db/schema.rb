@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_14_215105) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_15_232147) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -25,10 +25,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_14_215105) do
     t.index ["user_id"], name: "index_acaos_on_user_id"
   end
 
-  create_table "cargos", force: :cascade do |t|
-    t.string "nome"
+  create_table "acessos", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.boolean "acesso_documents", default: false
+    t.boolean "acesso_meetings", default: false
+    t.boolean "acesso_calendar", default: false
+    t.boolean "acesso_finance", default: false
+    t.boolean "acesso_admin", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_acessos_on_user_id"
   end
 
   create_table "documentos", force: :cascade do |t|
@@ -95,13 +101,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_14_215105) do
     t.string "matricula"
     t.string "email"
     t.string "senha"
-    t.bigint "cargo_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["cargo_id"], name: "index_users_on_cargo_id"
   end
 
   add_foreign_key "acaos", "users"
+  add_foreign_key "acessos", "users"
   add_foreign_key "documentos", "users"
   add_foreign_key "eventos", "users"
   add_foreign_key "reuniaos", "users"
@@ -109,5 +114,4 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_14_215105) do
   add_foreign_key "reunioes_usuarios", "users"
   add_foreign_key "storages", "users"
   add_foreign_key "tarefas", "users"
-  add_foreign_key "users", "cargos"
 end

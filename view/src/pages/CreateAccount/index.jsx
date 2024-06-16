@@ -9,7 +9,6 @@ function CreateAccount() {
   const [registration, setRegistration] = useState();
   const [password, setPassword] = useState();
   const [confirmPassword, setConfirmPassword] = useState();
-  const [role, setRole] = useState(); // Novo estado para armazenar a função do usuário
   const [errors, setErrors] = useState({
     name: '',
     email: '',
@@ -55,10 +54,6 @@ function CreateAccount() {
     }
   };
 
-  const handleRoleChange = (e) => { // Função para lidar com a mudança de opção na dropbox
-    setRole(e.target.value);
-  };
-
   const newUser = async (userData) => {
     try {
       await createUser(userData)
@@ -79,13 +74,12 @@ function CreateAccount() {
       "matricula": registration,
       "email": email,
       "senha": password,
-      "cargo_id": role
     })
   };
 
   return (
     <>
-      <body id='paginaCreateAccount'>
+      <div id='paginaCreateAccount'>
         <div className='divC'>
           <Link to="/admin">
             <img className='img-setaCreat' src='/seta.svg' alt='seta' />
@@ -128,17 +122,10 @@ function CreateAccount() {
               onChange={handleConfirmPasswordChange}
             />
             {errors.password && <span className='error'>{errors.password}</span>}
-            {/* Dropdown para selecionar o cargo */}
-            <select required value={role} onChange={handleRoleChange}>
-              <option hidden selected value={undefined}>Selecione o cargo</option>
-              <option value="1">Cargo 1</option>
-              <option value="2">Cargo 2</option>
-              <option value="3">Cargo 3</option>
-            </select>
             <button type="submit">CRIAR CONTA</button>
           </form>
         </div>
-      </body>
+      </div>
     </>
   );
 }

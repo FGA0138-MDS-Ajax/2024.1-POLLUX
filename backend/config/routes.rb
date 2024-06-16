@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :acessos
   resources :storages
   resources :eventos
   resources :reuniaos
@@ -14,7 +15,6 @@ Rails.application.routes.draw do
 
   resources :tarefas
   resources :acaos
-  resources :cargos
   resources :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

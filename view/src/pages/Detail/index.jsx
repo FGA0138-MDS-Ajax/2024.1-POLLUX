@@ -3,20 +3,20 @@ import { useParams } from 'react-router-dom';
 import './Detail.css';
 import SideBar from '../../components/SideBar';
 import { editPassword } from '../../queries/user';
-import Cookies from 'universal-cookie'; 
+// import Cookies from 'universal-cookie'; 
 import axios from 'axios'
 
 function Detail() {
-    const { usuario, matricula, nome, cargo } = useParams();
+    const { usuario, matricula, nome} = useParams();
     const [mostrarPopup, setMostrarPopup] = useState(false);
     const [novaSenha, setNovaSenha] = useState('');
     const [confirmarSenha, setConfirmarSenha] = useState('');
     const [senhaMatch, setSenhaMatch] = useState(true);
-    const cookies = new Cookies();
+    //const cookies = new Cookies();
     
-    const token = cookies.get('jwtToken');
+    //const token = cookies.get('jwtToken');
     axios.post("http://localhost:3000/users/token",{
-            token: token
+            // token: token
         }).then(function (response){
                 console.log(response.data);
             });
@@ -79,7 +79,6 @@ function Detail() {
                         <br />
                         Matrícula: {matricula}
                         <br />
-                        Cargo: {cargo}
                     </p>
                 </div>
 
