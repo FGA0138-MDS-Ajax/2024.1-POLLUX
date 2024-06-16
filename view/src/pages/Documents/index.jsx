@@ -6,7 +6,7 @@ import axios from 'axios';
 
 function deletarDoc(id) {
   console.log(id);
-  axios.post('http://localhost:3000/documentos/delete',{
+  axios.post('http://localhost:3000/documentos/delete', {
     id: id
   });
 }
@@ -42,12 +42,12 @@ function Documents() {
   const [links, setLinks] = useState([]);
   const [documentos, setDocs] = useState([]);
 
-  useEffect(()=>{
-  axios.get("http://localhost:3000/documentos").then(function (response){
-    setDocs(response.data);
-    console.log(documentos);
-  });
-  },[]);
+  useEffect(() => {
+    axios.get("http://localhost:3000/documentos").then(function (response) {
+      setDocs(response.data);
+      console.log(documentos);
+    });
+  }, []);
 
   const handleImageClick = () => {
     setShowPopup(true);
@@ -74,7 +74,7 @@ function Documents() {
     setLink('');
     setDescricao('');
   };
-  
+
 
   const handleRemoveLink = (index) => {
     const updatedLinks = [...links];
@@ -120,7 +120,7 @@ function Documents() {
                       required
                     />
                   </label>
-                  <button type="submit" className='botao' onClick={()=>criarDocumento(descricao,link)}>Adicionar</button>
+                  <button type="submit" className='botao' onClick={() => criarDocumento(descricao, link)}>Adicionar</button>
                 </form>
               </div>
             </div>

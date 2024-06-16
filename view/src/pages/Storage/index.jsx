@@ -1,4 +1,4 @@
-import { useState,useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import SideBar from "../../components/SideBar";
 import './Storage.css';
 import axios from 'axios';
@@ -10,43 +10,43 @@ function editQuantidade(id, qtd) {
       // Captura a resposta HTML em um elemento temporário
       let tempElement = document.createElement('div');
       tempElement.innerHTML = response.data;
-      
+
       // Encontra o elemento que contém a quantidade
       let pQuantidade = tempElement.querySelector('#storage_' + id + ' p:nth-child(2)');
-      
+
       // Obtém o texto dentro do elemento <p> que contém a quantidade
       let textoQuantidade = pQuantidade.textContent.trim();
-      
+
       // Extrai o número da quantidade
       let quantidade = parseInt(textoQuantidade.split(':')[1].trim());
-      
+
       console.log("Quantidade obtida:", quantidade);
-      
+
       // Calcula a quantidade final que será enviada na requisição POST
       let quantity = qtd + quantidade;
-      if(quantity<0){
+      if (quantity < 0) {
         quantity = 0;
       }
-      
+
       // Realiza a requisição POST para editar a quantidade
       axios.post("http://localhost:3000/storages/edit", {
         id: id,
         quantidade: quantity
       })
-      .then(function (response) {
-        console.log("Quantidade editada com sucesso:", response.data);
-      })
-      .catch(function (error) {
-        console.error("Erro ao editar quantidade:", error);
-      });
+        .then(function (response) {
+          console.log("Quantidade editada com sucesso:", response.data);
+        })
+        .catch(function (error) {
+          console.error("Erro ao editar quantidade:", error);
+        });
     })
     .catch(function (error) {
       console.error("Erro ao obter dados do storage:", error);
     });
-  }
+}
 
-function editaItem(id,nome,quantidade,status,user_id){
-  axios.post("http://localhost:3000/storages/edit",{
+function editaItem(id, nome, quantidade, status, user_id) {
+  axios.post("http://localhost:3000/storages/edit", {
     id: id,
     nome: nome,
     quantidade: quantidade,
@@ -55,22 +55,22 @@ function editaItem(id,nome,quantidade,status,user_id){
   });
 }
 
-function deletaItem(id){
-  axios.post("http://localhost:3000/storages/delete",{
+function deletaItem(id) {
+  axios.post("http://localhost:3000/storages/delete", {
     id: id
   });
 }
 
-function criarEstoque(nome,quantidade,status,user_id){//adicionar o token no userID  
-  axios.post("http://localhost:3000/storages",{
+function criarEstoque(nome, quantidade, status, user_id) {//adicionar o token no userID  
+  axios.post("http://localhost:3000/storages", {
     nome: nome,
     quantidade: quantidade,
     status: status,
     user_id: user_id
-  }).catch(function (error){
+  }).catch(function (error) {
     console.log(error);
-  }).then(function (response){
-    console.log("@@@@@@@@@@@@@@@@@@"+response.data);
+  }).then(function (response) {
+    console.log("@@@@@@@@@@@@@@@@@@" + response.data);
   });
 }
 
@@ -83,12 +83,13 @@ function Storage() {
   const [editIndex, setEditIndex] = useState(-1); // Estado para rastrear o índice do item em edição
   const [itemEstoque, setItem] = useState([]);
 
-  useEffect(()=>{
-    axios.get("http://localhost:3000/storages").then(function (response){
-        setItem(response.data);
-    }).catch(function (error){
-        console.log(error);
-  });},[]);
+  useEffect(() => {
+    axios.get("http://localhost:3000/storages").then(function (response) {
+      setItem(response.data);
+    }).catch(function (error) {
+      console.log(error);
+    });
+  }, []);
 
 
   const handleImageClick = () => {
@@ -159,7 +160,7 @@ function Storage() {
     setLinks(updatedLinks);
   };
 
-  const handleDoubleClick = (item,index) => {
+  const handleDoubleClick = (item, index) => {
     setNome(item.nome);
     setQuantidade(item.quantidade);
     setImagemSelecionada(item.status);
@@ -232,12 +233,12 @@ function Storage() {
                     type="submit"
                     className='botao'
                     onClick={() => {
-                    if (editIndex > -1) {
-                      editaItem(editIndex, nome, quantidade, imagemSelecionada, 1);
-                      setShowPopup(false);  // Chamando outra função junto com editaItem
-                    } else {
-                      criarEstoque(nome, quantidade, imagemSelecionada, 1);
-                    }
+                      if (editIndex > -1) {
+                        editaItem(editIndex, nome, quantidade, imagemSelecionada, 1);
+                        setShowPopup(false);  // Chamando outra função junto com editaItem
+                      } else {
+                        criarEstoque(nome, quantidade, imagemSelecionada, 1);
+                      }
                     }}>
                     {editIndex > -1 ? 'Salvar' : 'Adicionar'}
                   </button>
@@ -251,15 +252,15 @@ function Storage() {
               <div key={index} className='item-container-geral'>
                 <div className='img-text-container2'>
                   <div className="bntMaiseMenosContainer">
-                    <button className='bntMaiseMenos' onClick={() => editQuantidade(item.id,1)}>+</button>
+                    <button className='bntMaiseMenos' onClick={() => editQuantidade(item.id, 1)}>+</button>
                     <p className='fonteDetalheGeral2'>
                       {item.quantidade}
                     </p>
-                    <button className='bntMaiseMenos' onClick={() => editQuantidade(item.id,-1)}>-</button>
+                    <button className='bntMaiseMenos' onClick={() => editQuantidade(item.id, -1)}>-</button>
                   </div>
                   <p
                     className='fonteDetalheGeral'
-                    onDoubleClick={() => handleDoubleClick(item,item.id)}//AXIOS EDIT
+                    onDoubleClick={() => handleDoubleClick(item, item.id)}//AXIOS EDIT
                     style={{ cursor: 'pointer' }}
                   >
                     {item.nome}

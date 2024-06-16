@@ -6,13 +6,14 @@
     margin-top: 20px;
 }
 
-.tabelaPS th{
+.tabelaPS th {
     border: 1px solid black;
     padding: 8px;
     text-align: left;
     width: 20%;
 
 }
+
 .tabelaPS td {
     border: 1px solid black;
     padding: 8px;

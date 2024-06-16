@@ -1,5 +1,6 @@
 class User < ApplicationRecord
-  belongs_to :cargo
+  has_one :acesso, dependent: :destroy
+  accepts_nested_attributes_for :acesso
   has_many :estoques
   has_many :eventos
   has_many :documentos

@@ -14,7 +14,6 @@ class UsersTest < ApplicationSystemTestCase
     visit users_url
     click_on "New user"
 
-    fill_in "Cargo", with: @user.cargo_id
     fill_in "Email", with: @user.email
     fill_in "Matricula", with: @user.matricula
     fill_in "Nome", with: @user.nome
@@ -29,7 +28,6 @@ class UsersTest < ApplicationSystemTestCase
     visit user_url(@user)
     click_on "Edit this user", match: :first
 
-    fill_in "Cargo", with: @user.cargo_id
     fill_in "Email", with: @user.email
     fill_in "Matricula", with: @user.matricula
     fill_in "Nome", with: @user.nome

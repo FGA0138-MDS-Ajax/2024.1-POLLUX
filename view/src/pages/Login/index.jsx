@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import './Login.css';
 import { Link, Navigate } from 'react-router-dom';
 import axios from 'axios'
-import Cookies from 'universal-cookie';
+// import Cookies from 'universal-cookie';
 
 function Login() {
     const [matricula, setMatricula] = useState('');
     const [senha, setSenha] = useState('');
-    const cookies = new Cookies();
+    //const cookies = new Cookies(null, server);
     const handleMatriculaChange = (event) => {
         const { value } = event.target;
         // Checa se o valor esta vazio ou se sao apenas numeros
@@ -28,19 +28,19 @@ function Login() {
         console.log("Senha:", senha);
 
         axios.post("http://localhost:3000/users/login", {
-                matricula: matricula,
-                senha: senha
-            }).then(function (response) {
-                console.log(response.data);
-                cookies.set('jwtToken', response.data, {
-                    path: '/',
-                    secure: true,
-                    sameSite: 'None'
-                });
-                <Navigate to="/details"/>
-            }).catch(function (error) {
-                console.log(error);
+            matricula: matricula,
+            senha: senha
+        }).then(function (response) {
+            console.log(response.data);
+            cookies.set('jwtToken', response.data, {
+                path: '/',
+                secure: true,
+                sameSite: 'None'
             });
+            <Navigate to="/details" />
+        }).catch(function (error) {
+            console.log(error);
+        });
 
         //window.location.href = '/detail';
 

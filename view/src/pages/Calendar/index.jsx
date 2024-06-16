@@ -362,7 +362,6 @@ function deletaEvento(id){
           <h1>Calendário</h1>
         </div>
         <div className='calendarCorpo'>
-          <h2>Bem-vindo ao calendário</h2>
           <div className="container">
             <div className="left">
               <div className="calendar">

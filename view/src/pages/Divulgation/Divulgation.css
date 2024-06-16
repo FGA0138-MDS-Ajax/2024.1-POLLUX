@@ -42,11 +42,13 @@
 }
 
 .circular-imagem {
-  width: 100px; 
-  height: 100px; 
-  border-radius: 50%; 
-  object-fit: cover; /* Garante que a imagem cubra completamente o elemento */
-  overflow: hidden; /* Garante que a imagem não transborde dos limites */
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  /* Garante que a imagem cubra completamente o elemento */
+  overflow: hidden;
+  /* Garante que a imagem não transborde dos limites */
   margin-left: 60px;
   margin: 0 auto;
 }
@@ -160,13 +162,11 @@
   margin-top: 20px;
 }
 
-.paragrafo {
-  
-}
+.paragrafo {}
 
-.fotosIntegrantes{
+.fotosIntegrantes {
   margin-top: 10px;
-  text-align: center;  
+  text-align: center;
   display: flex;
   gap: 60px;
   margin-bottom: 20px;
@@ -174,7 +174,8 @@
 }
 
 .legendaFotos {
-  margin-top: 20px; 
-  font-size: 12px; /* Tamanho da fonte (ajuste conforme necessário) */
+  margin-top: 20px;
+  font-size: 12px;
+  /* Tamanho da fonte (ajuste conforme necessário) */
   text-align: center;
 }

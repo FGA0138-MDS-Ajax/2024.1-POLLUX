@@ -3,25 +3,25 @@ import './Finance.css';
 import SideBar from "../../components/SideBar";
 import axios from 'axios';
 
-function criarItem(titulo,valor,tipo,mes,ano){
+function criarItem(titulo, valor, tipo, mes, ano) {
   let bool;
-  if (tipo === 'Entrada'){
+  if (tipo === 'Entrada') {
     bool = true;
-  }else{
+  } else {
     bool = false;
   }
-  axios.post("http://localhost:3000/acaos",{
+  axios.post("http://localhost:3000/acaos", {
     titulo: titulo,
     valor: valor,
     tipo: bool,
     mes: mes,
     ano: ano,
-    user_id: 1 
+    user_id: 1
   });
 }
 
-function deletaItem(id){
-  axios.post("http://localhost:3000/acaos/delete",{
+function deletaItem(id) {
+  axios.post("http://localhost:3000/acaos/delete", {
     id: id
   });
 }
@@ -35,10 +35,10 @@ function Finance() {
   const [tipo, setTipo] = useState('Entrada');
   const [acoes, setAcoes] = useState([]);
   const [saldo, setSaldo] = useState(0);
-  const [item,setItem] = useState([]);
+  const [item, setItem] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:3000/acaos").then(function (response){
+    axios.get("http://localhost:3000/acaos").then(function (response) {
       setItem(response.data);
     });
     saldoTotal(item);
@@ -101,11 +101,11 @@ function Finance() {
 
   const saldoTotal = (item) => {
     let total = 0;
-    item.forEach(acao =>{
-      if(acao.tipo){
+    item.forEach(acao => {
+      if (acao.tipo) {
         total += acao.valor;
-      }else{
-        total-= acao.valor;
+      } else {
+        total -= acao.valor;
       }
     });
     setSaldo(total);
@@ -114,9 +114,9 @@ function Finance() {
   const handleDelete = (index) => {
     const novaListaAcoes = [...acoes];
     const acaoRemovida = novaListaAcoes.splice(index, 1)[0];
-    
+
     setAcoes(novaListaAcoes);
-    
+
     // Atualizar o saldo após a remoção do registro
     let novoSaldo = saldo;
     if (acaoRemovida.tipo === 'Entrada') {
@@ -136,7 +136,7 @@ function Finance() {
         </div>
         <div className='img-text-container2'>
           <div className='caixa'>
-            <label htmlFor="ano">Ano:</label>
+            <label htmlFor="ano" className="anoMes">Ano:</label>
             <select id="ano" value={ano} onChange={handleAnoChange}>
               {Array.from({ length: 7 }, (_, i) => 2024 + i).map(year => (
                 <option key={year} value={year}>{year}</option>
@@ -144,7 +144,7 @@ function Finance() {
             </select>
           </div>
           <div className='caixa'>
-            <label htmlFor="mes">Mês:</label>
+            <label htmlFor="mes" className="anoMes">Mês:</label>
             <select id="mes" value={mes} onChange={handleMesChange}>
               {['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'].map(month => (
                 <option key={month} value={month}>{month}</option>
@@ -187,7 +187,7 @@ function Finance() {
                     <option value="Saída">Saída</option>
                   </select>
                 </div>
-                <button type="submit" className='botao' onClick={()=>criarItem(acao,valor,tipo,mes,ano)}>Salvar</button>
+                <button type="submit" className='botao' onClick={() => criarItem(acao, valor, tipo, mes, ano)}>Salvar</button>
               </form>
             </div>
           </div>

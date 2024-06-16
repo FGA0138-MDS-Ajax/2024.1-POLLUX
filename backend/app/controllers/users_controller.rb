@@ -6,12 +6,14 @@ class UsersController < ApplicationController
 
   # GET /users or /users.json
   def index
-    @users = User.order(:id).all
-    render json: @users
+    @users = User.includes(:acesso).order(:id).all
+    render json: @users.to_json(include: :acesso)
   end
 
   # GET /users/1 or /users/1.json
-  def show; end
+  def show
+    render json: @user.to_json(include: :acesso)
+  end
 
   def login
     if User.find_by(matricula: user_params[:matricula])
@@ -46,13 +48,13 @@ class UsersController < ApplicationController
     nome = user_params[:nome]
     matricula = user_params[:matricula]
     email = user_params[:email]
-    cargoID = user_params[:cargo_id]
-    @user = User.new(nome:, matricula:, email:, senha: hash, cargo_id: cargoID)
+    @user = User.new(nome:, matricula:, email:, senha: hash)
+    @user.build_acesso(acesso_params)
 
     if @user.save
-      render json: @user
+      render json: @user, status: :created
     else
-      render json: @user.errors
+      render json: @user.errors, status: :unprocessable_entity
     end
 
     # respond_to do |format|
@@ -70,6 +72,11 @@ class UsersController < ApplicationController
   def update
     set_user
     if @user.update(update_params)
+      if @user.acesso.present?
+        @user.acesso.update(acesso_params)
+      else
+        @user.create_acesso(acesso_params)
+      end
       render json: @user, status: :ok
     else
       render json: @user.errors, status: :unprocessable_entity
@@ -93,7 +100,10 @@ class UsersController < ApplicationController
 
   # DELETE /users/1 or /users/1.json
   def destroy
-    @user.destroy!
+    set_user
+    @user.destroy
+
+    @user.acesso.destroy if @user.acesso.present?
   end
 
   private
@@ -105,11 +115,15 @@ class UsersController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def user_params
-    params.require(:user).permit(:nome, :matricula, :email, :senha, :cargo_id, :token)
+    params.require(:user).permit(:nome, :matricula, :email, :senha, :token)
+  end
+
+  def acesso_params
+    params.require(:acesso).permit(:acesso_documents, :acesso_meetings, :acesso_calendar, :acesso_finance, :acesso_admin)
   end
 
   def update_params
-    params.require(:user).permit(:nome, :matricula, :email, :cargo_id)
+    params.require(:user).permit(:nome, :matricula, :email)
   end
 
   def password_params

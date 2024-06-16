@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import './Detail.css';
 import SideBar from '../../components/SideBar';
 import { editPassword } from '../../queries/user';
-import Cookies from 'universal-cookie'; 
+import Cookies from 'universal-cookie';
 import axios from 'axios'
 
 function Detail() {
@@ -13,15 +13,15 @@ function Detail() {
     const [confirmarSenha, setConfirmarSenha] = useState('');
     const [senhaMatch, setSenhaMatch] = useState(true);
     const cookies = new Cookies();
-    
+
     const token = cookies.get('jwtToken');
-    axios.post("http://localhost:3000/users/token",{
-            token: token
-        }).then(function (response){
-                console.log(response.data);
+    axios.post("http://localhost:3000/users/token", {
+        token: token
+    }).then(function (response) {
+        console.log(response.data);
     });
-    
-    
+
+
     const handleAlterarSenha = () => {
         setMostrarPopup(true);
     };
@@ -33,7 +33,7 @@ function Detail() {
         setSenhaMatch(true); // Reinicia o estado para que a mensagem de erro desapareça quando o popup for fechado
     };
 
-    const alterarSenha = async (userId,newData)=> {
+    const alterarSenha = async (userId, newData) => {
         try {
             await editPassword(userId, newData)
             alert("Senha alterada com sucesso!")
@@ -54,9 +54,9 @@ function Detail() {
             setMostrarPopup(false);
             setSenhaMatch(true); // Reinicia o estado para que a mensagem de erro desapareça*/
             const IdUsuario = 2 //IMPORTANTE !! É preciso definir o id do usuário logado e mandar pra requisição
-            await alterarSenha(IdUsuario,{ //Precisa arrumar pra mandar o ID de usuário para alterar o cadastro
+            await alterarSenha(IdUsuario, { //Precisa arrumar pra mandar o ID de usuário para alterar o cadastro
                 "senha": novaSenha,
-            })     
+            })
         } else {
             setSenhaMatch(false); // Exibe mensagem de erro
         }

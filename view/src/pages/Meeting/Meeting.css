@@ -10,18 +10,36 @@ body {
   font-size: 200%;
 }
 
-.documentosTitulo .botao{
+.documentosTitulo .botao {
   margin-top: 10px;
   margin-left: 200px;
 }
 
-.documentosCorpo {
+.reunioesCorpo {
   text-align: left;
   margin-left: 180px;
   left: 9rem;
   width: 80%;
   font-family: 'Poppins', monospace;
-  padding: 20px;  
+  padding: 20px;
+}
+
+.presence-table th, td{
+  font-size: 12px;
+}
+
+.meeting h2{
+font-size: 20px;
+}
+
+.bntMeeting{
+  width: 25px;
+  height: auto;
+  margin-right: 10px;
+}
+
+.fonteMeeting{
+font-size: 15px;
 }
 
 .img-text-container {
@@ -31,7 +49,7 @@ body {
 }
 
 .fonte {
-  font-size: 40px; 
+  font-size: 40px;
   margin-left: 20px;
   margin-top: -2px;
 }
@@ -54,7 +72,7 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: #d2d3e4fa;    
+  background-color: #d2d3e4fa;
   padding: 20px;
   width: 550px;
   border-radius: 8%;
@@ -84,15 +102,15 @@ body {
 }
 
 .caixa label {
-  width: 100%; 
-  margin-bottom: 10px; 
+  width: 100%;
+  margin-bottom: 10px;
 }
 
 .caixa input {
   font-size: 20px;
   background-color: #d2d3e4fa;
-  border: none; 
-  outline: none; 
+  border: none;
+  outline: none;
   padding: 10px;
 }
 
@@ -106,7 +124,8 @@ body {
   margin-top: 20px;
 }
 
-.presence-table th, .presence-table td {
+.presence-table th,
+.presence-table td {
   border: 1px solid #ddd;
   padding: 8px;
   text-align: left;
@@ -131,4 +150,6 @@ body {
   padding: 20px;
   margin-bottom: 20px;
   border-radius: 8px;
+  margin-right: 60px;
 }
+

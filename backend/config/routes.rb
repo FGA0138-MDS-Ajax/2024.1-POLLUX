@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :acessos
   resources :acaos
   resources :storages
   resources :eventos
@@ -16,7 +17,7 @@ Rails.application.routes.draw do
   post '/eventos/delete', to: 'eventos#destroy'
 
   resources :tarefas
-  resources :cargos
+  resources :acaos
   resources :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
