@@ -10,6 +10,11 @@ class StoragesController < ApplicationController
   # GET /storages/1 or /storages/1.json
   def show; end
 
+  def getStorage
+    estoque = Storage.find_by(id: storage_params[:id])
+    render json: estoque
+  end
+
   # GET /storages/new
   def new
     @storage = Storage.new

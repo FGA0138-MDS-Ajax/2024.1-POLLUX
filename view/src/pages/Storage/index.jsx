@@ -2,33 +2,21 @@ import { useState, useEffect } from 'react';
 import SideBar from "../../components/SideBar";
 import './Storage.css';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 
 function editQuantidade(id, qtd) {
-  axios.get("http://localhost:3000/storages/" + id)
+  axios.post("http://localhost:3000/storages/index",{
+    id: id
+  })
     .then(function (response) {
-      // Captura a resposta HTML em um elemento temporário
-      let tempElement = document.createElement('div');
-      tempElement.innerHTML = response.data;
-
-      // Encontra o elemento que contém a quantidade
-      let pQuantidade = tempElement.querySelector('#storage_' + id + ' p:nth-child(2)');
-
-      // Obtém o texto dentro do elemento <p> que contém a quantidade
-      let textoQuantidade = pQuantidade.textContent.trim();
-
-      // Extrai o número da quantidade
-      let quantidade = parseInt(textoQuantidade.split(':')[1].trim());
-
+      let quantidade = response.data.quantidade;
       console.log("Quantidade obtida:", quantidade);
-
-      // Calcula a quantidade final que será enviada na requisição POST
       let quantity = qtd + quantidade;
       if (quantity < 0) {
         quantity = 0;
       }
 
-      // Realiza a requisição POST para editar a quantidade
       axios.post("http://localhost:3000/storages/edit", {
         id: id,
         quantidade: quantity
@@ -82,14 +70,32 @@ function Storage() {
   const [imagemSelecionada, setImagemSelecionada] = useState(null);
   const [editIndex, setEditIndex] = useState(-1); // Estado para rastrear o índice do item em edição
   const [itemEstoque, setItem] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
+    try {
+      var cookieValue = document.cookie.split(';').map(cookie => cookie.split('=')).reduce((accumulator, [key, value]) => ({ ...accumulator, [key.trim()]: decodeURIComponent(value) }), {});
+      let token = cookieValue.jwtToken.toString();
+      axios.post("http://localhost:3000/users/token", {
+          token: token
+      }).then(function(response) {
+          if(response.data){
+          }else{
+              navigate("/login")
+          }
+      }).catch(function(error) {
+          console.error(error);
+      });
+  } catch (err) {
+      navigate("/login");
+  } 
     axios.get("http://localhost:3000/storages").then(function (response) {
       setItem(response.data);
     }).catch(function (error) {
       console.log(error);
     });
-  }, [itemEstoque]);
+
+  },[itemEstoque]);
 
 
   const handleImageClick = () => {

@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   post '/storages/edit', to: 'storages#update'
   post '/acaos/delete', to: 'acaos#destroy'
   post '/eventos/delete', to: 'eventos#destroy'
+  post '/storages/index', to: 'storages#getStorage'
 
   resources :tarefas
   resources :acaos

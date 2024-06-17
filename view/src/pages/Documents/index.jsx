@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import SideBar from "../../components/SideBar"
 import './Documents.css';
 import axios from 'axios';
-
+import { useNavigate } from 'react-router-dom';
 
 function deletarDoc(id) {
   console.log(id);
@@ -41,8 +41,25 @@ function Documents() {
   const [descricao, setDescricao] = useState('');
   const [links, setLinks] = useState([]);
   const [documentos, setDocs] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
+    try {
+      var cookieValue = document.cookie.split(';').map(cookie => cookie.split('=')).reduce((accumulator, [key, value]) => ({ ...accumulator, [key.trim()]: decodeURIComponent(value) }), {});
+      let token = cookieValue.jwtToken.toString();
+      axios.post("http://localhost:3000/users/token", {
+          token: token
+      }).then(function(response) {
+          if(response.data){
+          }else{
+              navigate("/login")
+          }
+      }).catch(function(error) {
+          console.error(error);
+      });
+  } catch (err) {
+      navigate("/login");
+  }
     axios.get("http://localhost:3000/documentos").then(function (response) {
       setDocs(response.data);
       console.log(documentos);
