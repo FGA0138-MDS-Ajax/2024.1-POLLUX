@@ -85,7 +85,7 @@ function Kanban() {
     const data = JSON.parse(ev.dataTransfer.getData('text/plain'));
     const { column: sourceColumn, index: sourceIndex } = data;
     if (sourceColumn === targetColumn) {
-      // Reorder tasks within the same column
+      // Reorganiza na mesma coluna
       const newTasks = Array.from(tarefas[targetColumn]);
       const [removedTask] = newTasks.splice(sourceIndex, 1);
       newTasks.splice(ev.target.dataset.index, 0, removedTask);
@@ -94,7 +94,7 @@ function Kanban() {
         [targetColumn]: newTasks
       }));
     } else {
-      // Move task to a different column
+      // Move para uma coluna diferente
       const task = tarefas[sourceColumn][sourceIndex];
       const newSourceTasks = tarefas[sourceColumn].filter((_, i) => i !== sourceIndex);
       setTarefas((prevTarefas) => ({

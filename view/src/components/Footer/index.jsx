@@ -40,7 +40,6 @@ function Footer() {
                 <img src="hydra.svg" alt="hydra" className='hydra' />
             </div>
         </footer>
-
     );
 }
 

@@ -66,21 +66,15 @@ function Detail() {
         <>
             <SideBar />
             <section className="containerDetail">
-                <div className="edraDetail">
-                    <img className="img-edraV" src="/edraV.svg" alt="logo edraV" />
-                </div>
+                    <img className="edraDetail" src="/edraV.svg" alt="logo edraV" />
                 <div className="conteudo1">
                     <p>Olá {usuario}!</p>
                 </div>
 
                 <div className="conteudo2">
-                    <p>
-                        Nome: {nome}
-                        <br />
-                        Matrícula: {matricula}
-                        <br />
-                        E-mail: {email}
-                    </p>
+                    <p> Nome: {nome} </p>
+                        <p> Matrícula: {matricula} </p>
+                       <p> E-mail: {email} </p>
                 </div>
 
                 <div className="conteudo3">

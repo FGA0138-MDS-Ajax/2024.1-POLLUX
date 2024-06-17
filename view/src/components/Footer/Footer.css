@@ -2,40 +2,42 @@
     background-color: #2683b5;
     color: white;
     display: flex;
-    margin-top: 40px;
-    min-height: 150px;
+    justify-content: space-around;
+    align-items: flex-start;
+    padding: 20px;
     flex-wrap: wrap;
+    margin-top: 40px;
 }
 
-/*.esquerda*/
 .logoNome {
     display: flex;
     flex-direction: column;
-    font-size: 10px;
-    max-width: 120px;
     align-items: center;
     text-align: center;
+    max-width: 120px;
 }
 
 .logoNome img {
     width: 70px;
-    margin-top: 20px;
-    margin-left: 0px;
-    margin-bottom: 10px;
+    margin-top: 10px;
+    margin-bottom: 5px;
 }
 
+.descricao {
+    font-size: 10px;
+}
+
+/* localização */
 .meio1 {
-    margin-left: 50px;
-    margin-top: 20px;
+    margin: 10px;
+    max-width: 150px;
 }
 
 .localizacao {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 10px 0;
     font-size: 10px;
-    max-width: 150px;
 }
 
 .localizacao a {
@@ -47,31 +49,28 @@
 }
 
 .loc {
-    margin-bottom: 15px;
     width: 30px;
     height: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
+/* contatos */
 .meio2 {
-    margin-left: 50px;
-    margin-top: 20px;
-}
-
-.meio2 a:hover {
-    text-decoration: underline;
+    margin: 10px;
 }
 
 .contatos {
     display: flex;
     align-items: center;
-    margin: 10px 0;
     font-size: 10px;
+    margin: 10px 0;
 }
 
 .contatos img {
-    margin-right: 10px;
     width: 20px;
     height: auto;
+    margin-right: 10px;
 }
 
 .contatos a {
@@ -83,19 +82,15 @@
     text-decoration: underline;
 }
 
+/* notícias */
 .meio3 {
-    margin-left: 50px;
-    margin-top: 20px;
-    color: inherit;
-    text-decoration: none;
-
+    margin: 10px;
 }
 
 .meio3 a {
     color: white;
     font-size: 10px;
-    display: flex;
-    align-items: center;
+    display: block;
     margin: 13px 0;
 }
 
@@ -107,135 +102,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 20px;
-    margin-left: 300px
-}
-
-.unbFooter {
-    width: 60px;
-    height: auto;
-    margin-bottom: 20px;
-}
-
-.hydra {
-    width: 60px;
-    height: auto;
-}
-
-/*.footer {
-    background-color: #2683b5;
-    color: white;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    padding: 20px;
-}
-
-.logoNome {
-    display: flex;
-    flex-direction: column;
-    font-size: 10px;
-    max-width: 120px;
-    align-items: center;
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.logoNome img {
-    width: 70px;
-    margin-top: 10px;
-    margin-bottom: 5px;
-}
-
-.meio1 {
-    margin-left: 30px;
-    margin-top: 20px;
-    flex: 1;
-    max-width: 200px; 
-}
-
-.localizacao {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-size: 10px;
-    max-width: 150px;
-    margin: 10px 0;
-}
-
-.localizacao a {
-    color: inherit;
-}
-
-.localizacao a:hover {
-    text-decoration: underline;
-}
-
-.loc {
-    width: 30px;
-    height: auto;
-    margin-bottom: 10px;
-}
-
-.meio2 {
-    margin-left: 30px;
-    margin-top: 20px;
-    flex: 1;
-    max-width: 200px; 
-}
-
-.meio2 a:hover {
-    text-decoration: underline;
-}
-
-.contatos {
-    display: flex;
-    align-items: center;
-    font-size: 10px;
-    margin: 10px 0;
-}
-
-.contatos img {
-    margin-right: 10px;
-    width: 20px;
-    height: auto;
-}
-
-.contatos a {
-    color: inherit;
-    text-decoration: none;
-}
-
-.contatos a:hover {
-    text-decoration: underline;
-}
-
-.meio3 {
-    margin-left: 30px;
-    margin-top: 20px;
-    color: inherit;
-    text-decoration: none;
-    flex: 1;
-    max-width: 200px; 
-}
-
-.meio3 a {
-    color: white;
-    font-size: 10px;
-    display: flex;
-    align-items: center;
-    margin: 10px 0;
-}
-
-.meio3 a:hover {
-    text-decoration: underline;
-}
-
-.direita {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 20px;
+    margin: 10px;
 }
 
 .unbFooter {
@@ -248,4 +115,20 @@
     width: 60px;
     height: auto;
 }
-*/
+
+@media (max-width: 768px) {
+    .footer {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .meio1,
+    .meio2,
+    .meio3,
+    .direita,
+    .logoNome {
+        margin-left: 0;
+        margin-right: 0;
+        text-align: center;
+    }
+}

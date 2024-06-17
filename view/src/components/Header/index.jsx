@@ -21,7 +21,7 @@ function Header() {
         event.preventDefault();
         const targetId = event.target.getAttribute('href').slice(1);
         const targetSection = document.getElementById(targetId);
-        const yOffset = -80; // Ajuste conforme necessário
+        const yOffset = -80; // Adjust as needed
         const y = targetSection.getBoundingClientRect().top + window.pageYOffset + yOffset;
 
         window.scrollTo({ top: y, behavior: 'smooth' });
@@ -29,10 +29,10 @@ function Header() {
 
     return (
         <header className='containerHeader'>
+            <Link to="/login" >
+                <img src="edraV.svg" alt="edraV" className='logoEdraHeader' />
+            </Link>
             <nav className='navHeader'>
-                <Link to="/login" >
-                    <img src="edraV.svg" alt="edraV" className='logoEdraHeader' />
-                </Link>
                 <a href='#quemSomos' className='linksHeader'>
                     Quem somos
                 </a>
