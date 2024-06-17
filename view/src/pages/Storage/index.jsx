@@ -89,7 +89,7 @@ function Storage() {
     }).catch(function (error) {
       console.log(error);
     });
-  }, []);
+  }, [itemEstoque]);
 
 
   const handleImageClick = () => {

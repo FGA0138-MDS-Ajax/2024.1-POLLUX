@@ -47,7 +47,7 @@ function Documents() {
       setDocs(response.data);
       console.log(documentos);
     });
-  }, []);
+  }, [documentos]);
 
   const handleImageClick = () => {
     setShowPopup(true);

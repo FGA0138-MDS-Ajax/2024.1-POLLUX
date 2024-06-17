@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from 'react-router-dom';
 import './Finance.css';
 import SideBar from "../../components/SideBar";
 import axios from 'axios';
@@ -36,13 +37,30 @@ function Finance() {
   const [acoes, setAcoes] = useState([]);
   const [saldo, setSaldo] = useState(0);
   const [item, setItem] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
+    try {
+      var cookieValue = document.cookie.split(';').map(cookie => cookie.split('=')).reduce((accumulator, [key, value]) => ({ ...accumulator, [key.trim()]: decodeURIComponent(value) }), {});
+      let token = cookieValue.jwtToken.toString();
+      axios.post("http://localhost:3000/users/token", {
+          token: token
+      }).then(function(response) {
+          if(response.data){
+          }else{
+              navigate("/login")
+          }
+      }).catch(function(error) {
+          console.error(error);
+      });
+  } catch (err) {
+      navigate("/login");
+  }
     axios.get("http://localhost:3000/acaos").then(function (response) {
       setItem(response.data);
     });
     saldoTotal(item);
-  }, []);
+  }, [item]);
 
   const handleAnoChange = (e) => {
     setAno(e.target.value);
