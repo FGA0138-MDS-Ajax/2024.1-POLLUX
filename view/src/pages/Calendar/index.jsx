@@ -2,6 +2,27 @@ import React, { useState, useEffect } from 'react';
 import './Calendar.css';
 import SideBar from '../../components/SideBar';
 import Kanban from '../../components/Kanban';
+import axios from 'axios';
+
+
+const fetchEvents = async () => {
+  try {
+    const response = await axios.get('http://localhost:3000/eventos');
+    console.log('Resposta da API:', response.data);
+
+    if (Array.isArray(response.data)) {
+      return response.data;
+    } else {
+      console.error('A resposta da API não é um array:', response.data);
+      return [];
+    }
+  } catch (error) {
+    console.error('Erro ao buscar eventos:', error);
+    return [];
+  }
+};
+
+
 
 const Calendar = () => {
   const [today, setToday] = useState(new Date());
@@ -10,44 +31,49 @@ const Calendar = () => {
   const [year, setYear] = useState(today.getFullYear());
   const [eventsArr, setEventsArr] = useState([]);
 
-  const listMonthEvents = () => {
-    const monthEvents = eventsArr.filter(event => event.month === month + 1 && event.year === year);
-
-    // Ordenar os eventos pela data e hora
-    monthEvents.sort((a, b) => a.day - b.day);
-    monthEvents.forEach(eventObj => {
-      eventObj.events.sort((a, b) => {
-        const [aStart] = a.time.split(" - ");
-        const [bStart] = b.time.split(" - ");
-        return aStart.localeCompare(bStart);
+  const listMonthEvents = async () => {
+    try {
+      const response = await fetchEvents();
+      console.log('Eventos obtidos do banco de dados:', response);
+  
+      if (!Array.isArray(response)) {
+        console.error('Erro: response não é um array');
+        return;
+      }
+  
+      // Filtrar eventos para o mês atual
+      const monthEvents = response.filter(eventObj => {
+        const eventDate = new Date(eventObj.data);
+        return eventDate.getMonth() === month && eventDate.getFullYear() === year;
       });
-    });
-
-    let eventsList = "";
-
-    monthEvents.forEach(eventObj => {
-      eventObj.events.forEach(event => {
+  
+      // Ordenar os eventos pela data e hora
+      let eventsList = "";
+      monthEvents.forEach(eventObj => {
         eventsList += `<div class="event">
           <div class="title">
             <i class="fas fa-circle"></i>
-            <h3 class="event-title">${event.title}</h3>
+            <h3 class="event-title">${eventObj.nome}</h3>
           </div>
           <div class="event-time">
-            <span class="event-time">${event.time}</span>
+            <span class="event-time">${eventObj.HoraInicio} - ${eventObj.HoraTermino}</span>
           </div>
           <div class="event-date">
-            <span class="event-date">${eventObj.day}/${eventObj.month}/${eventObj.year}</span>
+            <span class="event-date">${eventObj.data}</span>
           </div>
         </div>`;
       });
-    });
-
-    if (eventsList === "") {
-      eventsList = `<div class="no-event"><h3>Sem eventos no mês</h3></div>`;
+  
+      if (eventsList === "") {
+        eventsList = `<div class="no-event"><h3>Sem eventos no mês</h3></div>`;
+      }
+  
+      document.querySelector('.events-month').innerHTML = eventsList;
+    } catch (error) {
+      console.error('Erro ao buscar eventos:', error);
     }
-
-    document.querySelector('.events-month').innerHTML = eventsList;
   };
+  
 
   useEffect(() => {
     const savedEvents = localStorage.getItem('events');
@@ -156,41 +182,57 @@ const Calendar = () => {
     document.querySelector('.event-date').innerHTML = `${date} ${months[month]} ${year}`;
   };
 
-  const updateEvents = (date) => {
-    let events = "";
-    const dayEvents = eventsArr.find(eventObj => eventObj.day === date && eventObj.month === month + 1 && eventObj.year === year);
-    if (dayEvents) {
-      // Ordenar os eventos por hora
-      dayEvents.events.sort((a, b) => {
-        const [aStart] = a.time.split(" - ");
-        const [bStart] = b.time.split(" - ");
-        return aStart.localeCompare(bStart);
+  const updateEvents = async (date) => {
+    try {
+      const allEvents = await fetchEvents();
+      console.log('Eventos obtidos do banco de dados:', allEvents);
+  
+      if (!Array.isArray(allEvents)) {
+        console.error('Erro: allEvents não é um array');
+        return;
+      }
+  
+      // Filtrar eventos para a data específica
+      const dayEvents = allEvents.filter(eventObj =>
+        new Date(eventObj.data).getDate() === date &&
+        new Date(eventObj.data).getMonth() === month &&
+        new Date(eventObj.data).getFullYear() === year
+      );
+  
+      console.log('Eventos do dia filtrados:', dayEvents);
+  
+      let events = "";
+      if (dayEvents.length > 0) {
+        // Ordenar os eventos por hora
+        dayEvents.sort((a, b) => {
+          return a.HoraInicio.localeCompare(b.HoraInicio);
+        });
+        dayEvents.forEach((event) => {
+          events += `<div class="event">
+            <div class="title">
+              <i class="fas fa-circle"></i>
+              <h3 class="event-title">${event.nome}</h3>
+            </div>
+            <div class="event-time">
+              <span class="event-time">${event.HoraInicio} - ${event.HoraTermino}</span>
+              <img src="trash.svg" alt="Excluir" class="delete-event" data-id="${event.id}" />
+            </div>
+          </div>`;
+        });
+      } else {
+        events = `<div class="no-event"><h3>Sem eventos no dia</h3></div>`;
+      }
+  
+      document.querySelector('.events').innerHTML = events;
+      document.querySelectorAll('.delete-event').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const eventId = e.target.getAttribute('data-id');
+          deletaEvento(eventId);
+        });
       });
-      dayEvents.events.forEach((event) => {
-        events += `<div class="event">
-          <div class="title">
-            <i class="fas fa-circle"></i>
-            <h3 class="event-title">${event.title}</h3>
-          </div>
-          <div class="event-time">
-            <span class="event-time">${event.time}</span>
-            <img src="trash.svg" alt="Excluir" class="delete-event" data-title="${event.title}" />
-          </div>
-        </div>`;
-      });
+    } catch (error) {
+      console.error('Erro ao buscar eventos:', error);
     }
-
-    if (events === "") {
-      events = `<div class="no-event"><h3>Sem eventos no dia</h3></div>`;
-    }
-
-    document.querySelector('.events').innerHTML = events;
-    document.querySelectorAll('.delete-event').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        const eventTitle = e.target.getAttribute('data-title');
-        deleteEvent(eventTitle);
-      });
-    });
   };
 
   const saveEvents = () => { //Tem local storage?
@@ -201,6 +243,7 @@ const Calendar = () => {
     const eventTitle = document.querySelector('.event-name').value;
     const eventTimeFrom = document.querySelector('.event-time-from').value;
     const eventTimeTo = document.querySelector('.event-time-to').value;
+    const eventDate = document.querySelector('.event-date').innerHTML; 
     if (eventTitle === "" || eventTimeFrom === "" || eventTimeTo === "") {
       alert("Por favor, preencha todos os campos");
       return;
@@ -254,20 +297,62 @@ const Calendar = () => {
     document.querySelector('.event-time-from').value = "";
     document.querySelector('.event-time-to').value = "";
     updateEvents(activeDay);
+
+    const res = {
+      nome: eventTitle,
+      data: eventDate,
+      HoraInicio: timeFrom,
+      HoraTermino: eventTimeTo,
+      user_id: 1
+    }
+
+    axios.post("http://localhost:3000/eventos", res)
+    .then(function (response) {
+      // Resposta recebida com sucesso
+      console.log("Documento criado com sucesso:", response.data);
+      const currentDate = new Date();
+      updateEvents(currentDate.getDate(), currentDate.getMonth(), currentDate.getFullYear())
+    })
+    .catch(function (error) {
+      // Ocorreu um erro ao fazer a solicitação
+      console.error("Erro ao criar documento:", error);
+    });
+
   };
 
-  const deleteEvent = (eventTitle) => {
-    const updatedEventsArr = eventsArr.map((eventObj) => {
-      if (eventObj.day === activeDay && eventObj.month === month + 1 && eventObj.year === year) {
-        const updatedEvents = eventObj.events.filter(event => event.title !== eventTitle);
-        return { ...eventObj, events: updatedEvents };
-      }
-      return eventObj;
-    }).filter(eventObj => eventObj.events.length > 0);
+function deletaEvento(id){
+  axios.post("http://localhost:3000/eventos/delete",{
+    id: id
+  });
+  updateEvents();
+}
 
-    setEventsArr(updatedEventsArr);
-    updateEvents(activeDay);
+
+  const deleteEvent = (eventId) => {
+    axios.delete(`http://localhost:3000/eventos/${eventId}`)
+      .then(response => {
+        // Remove the event from the state
+        const updatedEventsArr = eventsArr.map(eventObj => {
+          if (eventObj.day === activeDay && eventObj.month === month + 1 && eventObj.year === year) {
+            const updatedEvents = eventObj.events.filter(event => event.id !== eventId);
+            return { ...eventObj, events: updatedEvents };
+          }
+          return eventObj;
+        }).filter(eventObj => eventObj.events.length > 0);
+  
+        // Update the state with the modified events array
+        setEventsArr(updatedEventsArr);
+  
+        // Update the UI
+        updateEvents(activeDay);
+  
+        console.log("Evento deletado com sucesso:", response.data);
+      })
+      .catch(error => {
+        console.error("Erro ao deletar evento:", error);
+      });
   };
+  
 
   return (
     <>

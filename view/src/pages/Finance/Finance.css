@@ -17,9 +17,10 @@
 .img-text-container2 {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 20px;
+  gap: 10px;
   margin-bottom: 2rem;
+  margin-left: auto; 
+  margin-right: 70px; 
 }
 
 .caixa {
