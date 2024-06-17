@@ -17,6 +17,16 @@ function TableProx() {
                     <td>Goiânia - GO</td>
                     <td>11 a 17 de Novembro</td>
                 </tr>
+                <tr>
+                    <td>SAE Eletroquad 2025</td>
+                    <td>São José dos Campos – SP</td>
+                    <td>Maio de 2025</td>
+                </tr>
+                <tr>
+                    <td>ICUAS 2025</td>
+                    <td>A definir</td>
+                    <td>Junho de 2025</td>
+                </tr>
             </tbody>
         </table>
     );

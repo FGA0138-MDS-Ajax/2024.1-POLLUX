@@ -7,8 +7,8 @@
   margin-right: 30px;
 }
 
-/* Adicionado */
 .corpoTexto,
+.corpoTextoAreas,
 .textoDrones,
 .subTopico,
 .legenda {
@@ -20,7 +20,7 @@
   position: absolute;
   height: auto;
   /* Mantém a proporção da imagem */
-  z-index: 1;
+  z-index: -1;
 }
 
 .fotoGeral {
@@ -30,15 +30,26 @@
 .topicos {
   margin-top: 50px;
   padding-right: 10px;
+  font-size: 35px;
 }
 
 .subTopico {
   margin-left: 40px;
   margin-top: 20px;
+  font-size: 20px;
 }
 
 .corpoTexto {
   margin-top: 10px;
+}
+
+.corpoTextoAreas {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  color: #414191;
+  font-size: 18px;
 }
 
 .circular-imagem {
@@ -69,21 +80,26 @@
   display: flex;
   align-items: flex-start;
   margin-bottom: 20px;
-  /* Espaço entre os itens */
 }
 
-.iconDroneX {
-  margin-right: 20px;
+.tudoDrones {
+  margin-top: 20px;
+  margin-left: 40px;
+  margin-right: 40px;
+}
+
+.iconDroneImg {
+  margin-right: 80px;
   /* Espaço entre a imagem e o texto */
-  width: 100px;
+  width: 400px;
   height: auto;
   margin-top: 20px;
 }
 
-.iconDroneY {
-  margin-right: 20px;
+.iconEventoImg {
+  margin-right: 80px;
   /* Espaço entre a imagem e o texto */
-  width: 100px;
+  width: 400px;
   height: auto;
   margin-top: 20px;
 }
@@ -113,7 +129,7 @@
 }
 
 .bntEditalForms {
-  padding: 10px 40px;
+  padding: 15px 70px;
   font-size: 16px;
   font-family: Poppins;
   background-color: #414191;
@@ -142,11 +158,16 @@
   margin-top: 50px;
 }
 
+.tudoEventosComp {
+  margin-top: 20px;
+  margin-left: 40px;
+  margin-right: 40px;
+}
+
 .corpoEventos {
   display: flex;
   align-items: flex-start;
   margin-bottom: 20px;
-  /* Espaço entre os itens */
 }
 
 .textoEventos {
