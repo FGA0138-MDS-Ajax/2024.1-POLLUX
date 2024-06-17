@@ -1,5 +1,5 @@
 require 'bcrypt'
-# require 'jwt'
+require 'jwt'
 class UsersController < ApplicationController
   protect_from_forgery with: :null_session
   before_action :set_user, only: %i[show edit update destroy]
@@ -119,7 +119,8 @@ class UsersController < ApplicationController
   end
 
   def acesso_params
-    params.require(:acesso).permit(:acesso_documents, :acesso_meetings, :acesso_calendar, :acesso_finance, :acesso_admin)
+    params.require(:acesso).permit(:acesso_documents, :acesso_meetings, :acesso_calendar, :acesso_finance,
+                                   :acesso_admin)
   end
 
   def update_params

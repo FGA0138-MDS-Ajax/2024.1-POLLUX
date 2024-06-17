@@ -10,11 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
 ActiveRecord::Schema[7.1].define(version: 2024_06_15_232147) do
-=======
-ActiveRecord::Schema[7.1].define(version: 2024_06_15_164148) do
->>>>>>> e5212feec200c9d7dd7c62da240634e12332a30b
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -108,7 +104,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_15_164148) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "acaos", "users"
   add_foreign_key "acessos", "users"
   add_foreign_key "documentos", "users"
   add_foreign_key "eventos", "users"
