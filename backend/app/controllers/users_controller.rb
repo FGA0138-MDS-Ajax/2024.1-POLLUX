@@ -15,6 +15,18 @@ class UsersController < ApplicationController
     render json: @user.to_json(include: :acesso)
   end
 
+  def autenticar
+    token = user_params[:token]
+    hmac_secret = 'Secreto'
+    decoded_token = JWT.decode token, hmac_secret, true, { algorithm: 'HS256' }
+    a_Validar = decoded_token[0]
+    if User.find_by(matricula: a_Validar)
+      render json: "1"
+    else
+      render json: "0"
+    end
+  end
+
   def login
     if User.find_by(matricula: user_params[:matricula])
       user = User.find_by(matricula: user_params[:matricula])

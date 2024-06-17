@@ -2,13 +2,14 @@ import { useState,useEffect } from 'react';
 import './Login.css';
 import { Link,useNavigate } from 'react-router-dom';
 import axios from 'axios'
-import Cookies from 'universal-cookie';
+import { useCookies } from 'react-cookie';
 
 // Dentro do seu componente ou função assíncrona onde você está fazendo a requisição
 function Login() {
     const [matricula, setMatricula] = useState('');
     const [senha, setSenha] = useState('');
-    const cuukies = new Cookies(null, { path: '/' });
+    const [cookies, setCookie] = useCookies(['jwtToken']);
+    const [cookie] = useCookies(['jwtToken']);
     const navigate = useNavigate();
     const handleMatriculaChange = (event) => {
         const { value } = event.target;
@@ -18,8 +19,24 @@ function Login() {
         }
     };
     useEffect(()=>{
-    let token = cuukies.get('jwtToken',undefined);
-    console.log(cuukies.get('jwtToken'));
+        try {
+            var cookieValue = document.cookie.split(';').map(cookie => cookie.split('=')).reduce((accumulator, [key, value]) => ({ ...accumulator, [key.trim()]: decodeURIComponent(value) }), {});
+            let token = cookieValue.jwtToken.toString();
+            console.log(token);
+        
+            axios.post("http://localhost:3000/users/token", {
+                token: token
+            }).then(function(response) {
+                if(response.data){
+                    navigate("/detail");
+                }
+            }).catch(function(error) {
+                console.error(error);
+            });
+        } catch (err) {
+            //console.error('Ocorreu um erro:', err);
+        }
+        
   },[]);
 
     const handleSenhaChange = (event) => {
@@ -36,15 +53,9 @@ function Login() {
             matricula: matricula,
             senha: senha
         }).then(function (response) {
-            console.log(response.data);
-            
-
         if(response.data !=  'MATRICULA INEXISTENTE' && response.data !=  'SENHA INCORRETA'){
-        cuukies.set('jwtToken', response.data, {
-                path: '/',
-                secure: true,
-                sameSite: 'None',
-                maxAge: 1
+        setCookie('jwtToken', response.data, {
+                path: '/'
         });
             navigate("/detail");
         }

@@ -1,10 +1,9 @@
-import { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useState,useEffect } from 'react';
+import { useParams,useNavigate  } from 'react-router-dom';
 import './Detail.css';
 import SideBar from '../../components/SideBar';
 import { editPassword } from '../../queries/user';
-import Cookies from 'universal-cookie';
-import axios from 'axios'
+import axios from 'axios';
 
 function Detail() {
     const { usuario, matricula, nome, email } = useParams();
@@ -12,14 +11,27 @@ function Detail() {
     const [novaSenha, setNovaSenha] = useState('');
     const [confirmarSenha, setConfirmarSenha] = useState('');
     const [senhaMatch, setSenhaMatch] = useState(true);
-    const cookies = new Cookies();
+    const navigate = useNavigate();
 
-    const token = cookies.get('jwtToken');
-    axios.post("http://localhost:3000/users/token", {
-        token: token
-    }).then(function (response) {
-        console.log(response.data);
-    });
+    useEffect(()=>{
+        try {
+            var cookieValue = document.cookie.split(';').map(cookie => cookie.split('=')).reduce((accumulator, [key, value]) => ({ ...accumulator, [key.trim()]: decodeURIComponent(value) }), {});
+            let token = cookieValue.jwtToken.toString();
+            axios.post("http://localhost:3000/users/token", {
+                token: token
+            }).then(function(response) {
+                if(response.data){
+                }else{
+                    navigate("/login")
+                }
+            }).catch(function(error) {
+                console.error(error);
+            });
+        } catch (err) {
+            navigate("/login");
+        }
+        
+  },[]);
 
 
     const handleAlterarSenha = () => {
@@ -32,7 +44,7 @@ function Detail() {
         setMostrarPopup(false);
         setSenhaMatch(true); // Reinicia o estado para que a mensagem de erro desapareça quando o popup for fechado
     };
-
+;
     const alterarSenha = async (userId, newData) => {
         try {
             await editPassword(userId, newData)
