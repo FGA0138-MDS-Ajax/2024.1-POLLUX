@@ -20,14 +20,11 @@ class ReuniaosController < ApplicationController
 
   # POST /reuniaos or /reuniaos.json
   def create
-    nome = reuniao_params[:nome]
-    @reuniao = Reuniao.new(nome: nome, link: 'NULL', user_id: 1)
-    respond_to do |format|
-      if @reuniao.save
-        format.json { render :show, status: :created, location: @reuniao }
-      else
-        format.json { render json: @reuniao.errors, status: :unprocessable_entity }
-      end
+    @reuniao = Reuniao.new(reuniao_params)
+    if @reuniao.save
+      render json: @reuniao, status: :created
+    else
+      render json: @reuniao.errors, status: :unprocessable_entity
     end
   end
 
@@ -35,7 +32,6 @@ class ReuniaosController < ApplicationController
   def update
     respond_to do |format|
       if @reuniao.update(reuniao_params)
-        format.html { redirect_to reuniao_url(@reuniao), notice: 'Reuniao was successfully updated.' }
         format.json { render :show, status: :ok, location: @reuniao }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -49,7 +45,6 @@ class ReuniaosController < ApplicationController
     @reuniao.destroy!
 
     respond_to do |format|
-      format.html { redirect_to reuniaos_url, notice: 'Reuniao was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

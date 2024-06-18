@@ -1,13 +1,9 @@
 import React, { useState, useEffect } from "react";
 import './Meeting.css';
 import SideBar from "../../components/SideBar";
-import axios from "axios";
+import { createMeeting, getMeetings } from "../../queries/meetings";
 
-function criarReuniao(titulo) {
-    axios.post("http://localhost:3000/reuniaos", {
-        nome: titulo
-    });
-}
+
 
 function Meeting() {
     const [meetings, setMeetings] = useState([]);
@@ -23,10 +19,36 @@ function Meeting() {
 
 
     useEffect(() => {
-        axios.get("http://localhost:3000/reuniaos").then(function (response) {
-            setMeet(response.data);
-        });
+        get();
     }, []);
+
+    const getReunioes = async () => {
+        try {
+          const reunioes = await getMeetings();
+          return reunioes;
+        } catch (error) {
+          alert(JSON.stringify(error));
+        }
+      };
+    
+      const get = async () => {
+        const listaReunioes = await getReunioes();
+        console.log(listaReunioes)
+        setMeetings(listaReunioes.data);
+      };
+
+    async function criarReuniao(titulo) {
+        const userId = 1
+        try {
+            await createMeeting({
+                nome: titulo,
+                user_id: userId
+            });
+            await get()
+          } catch (error) {
+            alert(JSON.stringify(error));
+          }
+    }
 
     const handleAddMeetingClick = () => {
         setShowPopup2(true);
@@ -157,7 +179,7 @@ function Meeting() {
                                 <p className='fonteMeeting'>Adicionar Arquivo</p>
                             </div>
                             <div className="displayed-links">
-                                {meeting.files.map((item, fileIndex) => (
+                                {/*meeting.files.map((item, fileIndex) => (
                                     <div key={fileIndex}>
                                         <div className='img-text-container'>
                                             <img src="trash.svg" alt='img-trash' className='trash' onClick={() => handleRemoveFile(meetingIndex, fileIndex)} />
@@ -166,7 +188,7 @@ function Meeting() {
                                             </p>
                                         </div>
                                     </div>
-                                ))}
+                                ))*/}
                             </div>
                             <div className="displayed-links">
                                 {links[meetingIndex] && links[meetingIndex].map((link, index) => (
@@ -192,7 +214,7 @@ function Meeting() {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {meeting.members.map((member, memberIndex) => (
+                                    {/*meeting.members.map((member, memberIndex) => (
                                         <tr key={memberIndex}>
                                             <td>{member.nome}</td>
                                             <td>{member.matricula}</td>
@@ -204,7 +226,7 @@ function Meeting() {
                                                 />
                                             </td>
                                         </tr>
-                                    ))}
+                                    ))*/}
                                 </tbody>
                             </table>
                         </div>

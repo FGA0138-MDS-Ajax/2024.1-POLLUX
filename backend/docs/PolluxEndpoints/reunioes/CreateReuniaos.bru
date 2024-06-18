@@ -5,7 +5,12 @@ meta {
 }
 
 post {
-  url: 
-  body: none
+  url: {{base_url}}/reuniaos
+  body: json
   auth: none
+}
+
+body:json {
+  {"nome": "Reunião Bruno",
+  "user_id": 2}
 }

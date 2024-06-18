@@ -14,7 +14,6 @@ Rails.application.routes.draw do
   post '/users/token', to: 'users#autenticar'
   post '/users/edit', to: 'users#edit'
   post '/users/delete/:id', to: 'users#destroy'
-  post '/reuniaos', to: 'reuniaos#create'
   post '/documentos', to: 'documentos#create'
   post '/documentos/delete', to: 'documentos#destroy'
   post '/storages/delete', to: 'storages#destroy'

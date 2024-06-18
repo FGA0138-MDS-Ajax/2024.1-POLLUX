@@ -17,5 +17,9 @@ export default {
     event: {
         base: '/eventos',
         single: (id) => `/eventos/${id}`,
+    },
+    meeting: {
+        base: '/reuniaos',
+        single: (id) => `/reuniaos/${id}`,
     }
 }
