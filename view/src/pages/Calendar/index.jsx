@@ -327,33 +327,6 @@ function deletaEvento(id){
   updateEvents();
 }
 
-
-  const deleteEvent = (eventId) => {
-    axios.delete(`http://localhost:3000/eventos/${eventId}`)
-      .then(response => {
-        // Remove the event from the state
-        const updatedEventsArr = eventsArr.map(eventObj => {
-          if (eventObj.day === activeDay && eventObj.month === month + 1 && eventObj.year === year) {
-            const updatedEvents = eventObj.events.filter(event => event.id !== eventId);
-            return { ...eventObj, events: updatedEvents };
-          }
-          return eventObj;
-        }).filter(eventObj => eventObj.events.length > 0);
-  
-        // Update the state with the modified events array
-        setEventsArr(updatedEventsArr);
-  
-        // Update the UI
-        updateEvents(activeDay);
-  
-        console.log("Evento deletado com sucesso:", response.data);
-      })
-      .catch(error => {
-        console.error("Erro ao deletar evento:", error);
-      });
-  };
-  
-
   return (
     <>
       <SideBar />

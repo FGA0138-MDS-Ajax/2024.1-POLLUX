@@ -5,13 +5,20 @@ meta {
 }
 
 patch {
-  url: {{base_url}}/users/11
+  url: {{base_url}}/users/2
   body: json
   auth: none
 }
 
 body:json {
   {
-    "email": "emaildeteste333@teste.com"
+    "email": "emaildeteste333@teste.com",
+    "acesso": {
+        "acesso_documents": true,
+        "acesso_meetings": true,
+        "acesso_calendar": true,
+        "acesso_finance": true,
+        "acesso_admin": true
+      }
   }
 }

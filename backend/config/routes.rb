@@ -5,9 +5,15 @@ Rails.application.routes.draw do
   resources :eventos
   resources :reuniaos
   resources :documentos
+  resources :tarefas
+  resources :acaos
+  resources :users
+
   post '/users/new', to: 'users#create'
   post '/users/login', to: 'users#login'
   post '/users/token', to: 'users#autenticar'
+  post '/users/edit', to: 'users#edit'
+  post '/users/delete/:id', to: 'users#destroy'
   post '/reuniaos', to: 'reuniaos#create'
   post '/documentos', to: 'documentos#create'
   post '/documentos/delete', to: 'documentos#destroy'
@@ -17,9 +23,6 @@ Rails.application.routes.draw do
   post '/eventos/delete', to: 'eventos#destroy'
   post '/storages/index', to: 'storages#getStorage'
 
-  resources :tarefas
-  resources :acaos
-  resources :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

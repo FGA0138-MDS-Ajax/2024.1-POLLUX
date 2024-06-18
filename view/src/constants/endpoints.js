@@ -2,7 +2,8 @@ export default {
     user: {
         base: '/users',
         single: (id) => `/users/${id}`,
-        password: (id) => `/users/password/${id}`
+        password: (id) => `/users/password/${id}`,
+        delete: (id) => `/users/delete/${id}`
     },
 
     storage: {

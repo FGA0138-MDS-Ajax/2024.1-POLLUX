@@ -18,6 +18,14 @@ body {
   text-align: center;
   width: 500px;
 
+  fieldset {
+    padding: 1rem;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    text-align: left;
+  }
+
   form {
     display: flex;
     flex-direction: column;

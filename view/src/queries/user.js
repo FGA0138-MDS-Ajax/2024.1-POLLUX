@@ -53,7 +53,7 @@ export const editPassword = async (userId, newPassword) => {
 
 export const deleteUser = async (userId) => {
   try {
-    const user = await server.delete(endpoints.user.single(userId));
+    const user = await server.post(endpoints.user.delete(userId));
     return user;
   } catch (error) {
     console.log(error);

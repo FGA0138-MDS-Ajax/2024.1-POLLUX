@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import "./Admin.css";
 import SideBar from "../../components/SideBar";
-import { editUser, getUsers } from "../../queries/user";
+import { deleteUser, editUser, getUsers } from "../../queries/user";
 import { parseFormData } from "../../utils/parseFormData";
-
 
 function Admin() {
   const [members, setMembers] = useState([]);
@@ -27,19 +26,38 @@ function Admin() {
     get();
   }, []);
 
-  const handleRemoveMember = (memberId) => {
-    const updatedMembers = members.filter((_, i) => i !== memberId);
+  const handleRemoveMember = async (memberId) => {
+    try {
+      await deleteUser(memberId)
+      await get();
+      setSelectedMember(null);
+    } catch (error) {
+      alert("Erro ao deletar o Usuário!");
+    }
     setMembers(updatedMembers);
     alert("Membro removido: " + "");
   };
 
   const editarUsuario = async (dados) => {
+    console.log(dados)
     try {
-      await editUser(dados.id, dados)
-      await get()
-      setSelectedMember(null)
+      await editUser(dados.id, {
+        nome: dados.nome,
+        matricula: dados.matricula,
+        email: dados.email,
+        senha: dados.senha,
+        acesso: {
+          acesso_documents: dados.acesso_documents?? false,
+          acesso_meetings: dados.acesso_meetings?? false,
+          acesso_calendar: dados.acesso_calendar?? false,
+          acesso_finance: dados.acesso_finance?? false,
+          acesso_admin: dados.acesso_admin?? false,
+        }
+      });
+      await get();
+      setSelectedMember(null);
     } catch (error) {
-      alert("Erro ao editar o Usuário!")
+      alert("Erro ao editar o Usuário!");
     }
   };
   return (
@@ -51,7 +69,12 @@ function Admin() {
         <ul>
           {members.map((member) => (
             <li key={member.id}>
-              <span onClick={() => setSelectedMember(member)}>
+              <span
+                onClick={() => {
+                  setSelectedMember(member);
+                  console.log(member)
+                }}
+              >
                 {member.nome} - {member.matricula}
               </span>
               <button onClick={() => handleRemoveMember(member.id)}>
@@ -73,8 +96,7 @@ function Admin() {
               id="formAdmin"
               onSubmit={(e) => {
                 e.preventDefault();
-                const dados = parseFormData(new FormData(e.target))
-                console.log(dados)
+                const dados = parseFormData(new FormData(e.target));
                 editarUsuario(dados);
               }}
             >
@@ -92,7 +114,7 @@ function Admin() {
                   defaultValue={selectedMember.matricula}
                   required
                   maxLength={9}
-                  pattern='[1-9]*'
+                  pattern="[0-9]+"
                 />
               </label>
               <label>
@@ -114,103 +136,51 @@ function Admin() {
                 />
               </label>
               <fieldset>
-                <legend>Edição de Telas</legend>
+                <legend>Acessos</legend>
                 <div>
                   <input
                     type="checkbox"
-                    id="telaCalendario"
-                    name="checkboxEdiçãoTela"
-                    value="calendario"
+                    name="acesso_documents"
+                    defaultChecked={selectedMember.acesso["acesso_documents"] ?? false}
+                    value={true}
                   />
-                  <label> Calendário </label>
+                  <label> Documentos </label>
                 </div>
                 <div>
                   <input
                     type="checkbox"
-                    id="telaEstoque"
-                    name="checkboxEdiçãoTela"
-                    value="estoque"
-                  />
-                  <label> Estoque </label>
-                </div>
-                <div>
-                  <input
-                    type="checkbox"
-                    id="telaReunioes"
-                    name="checkboxEdiçãoTela"
-                    value="reunioes"
+                    name="acesso_meetings"
+                    defaultChecked={selectedMember.acesso["acesso_meetings"] ?? false}
+                    value={true}
                   />
                   <label> Reuniões </label>
                 </div>
                 <div>
                   <input
                     type="checkbox"
-                    id="telaFinanceiro"
-                    name="checkboxEdiçãoTela"
-                    value="financeiro"
-                  />
-                  <label> Financeiro </label>
-                </div>
-                <div>
-                  <input
-                    type="checkbox"
-                    id="telaDocumentos"
-                    name="checkboxEdiçãoTela"
-                    value="documentos"
-                  />
-                  <label> Documentos </label>
-                </div>
-              </fieldset>
-              <fieldset>
-                <legend>Vizualização de Telas</legend>
-                <div>
-                  <input
-                    type="checkbox"
-                    id="telaCalendario"
-                    name="checkboxEdiçãoTela"
-                    value="calendario"
-                    checked
+                    name="acesso_calendar"
+                    defaultChecked={selectedMember.acesso["acesso_calendar"] ?? false}
+                    value={true}
                   />
                   <label> Calendário </label>
                 </div>
                 <div>
                   <input
                     type="checkbox"
-                    id="telaEstoque"
-                    name="checkboxEdiçãoTela"
-                    value="estoque"
-                    checked
-                  />
-                  <label> Estoque </label>
-                </div>
-                <div>
-                  <input
-                    type="checkbox"
-                    id="telaReunioes"
-                    name="checkboxEdiçãoTela"
-                    value="reunioes"
-                    checked
-                  />
-                  <label> Reuniões </label>
-                </div>
-                <div>
-                  <input
-                    type="checkbox"
-                    id="telaFinanceiro"
-                    name="checkboxEdiçãoTela"
-                    value="financeiro"
+                    name="acesso_finance"
+                    defaultChecked={selectedMember.acesso["acesso_finance"] ?? false}
+                    value={true}
                   />
                   <label> Financeiro </label>
                 </div>
                 <div>
                   <input
                     type="checkbox"
-                    id="telaDocumentos"
-                    name="checkboxEdiçãoTela"
-                    value="documentos"
-                    checked
+                    name="acesso_admin"
+                    defaultChecked={selectedMember.acesso["acesso_admin"] ?? false}
+                    value={true}
                   />
-                  <label> Documentos </label>
+                  <label> Tela Admin </label>
                 </div>
               </fieldset>
               <button type="submit">Atualizar</button>

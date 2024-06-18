@@ -1,7 +1,8 @@
-import { useState } from 'react';
-import './CreateAccount.css';
-import { Link } from 'react-router-dom';
-import { createUser } from '../../queries/user';
+import { useState } from "react";
+import "./CreateAccount.css";
+import { Link, useNavigate } from "react-router-dom";
+import { createUser } from "../../queries/user";
+import { parseFormData } from "../../utils/parseFormData";
 
 function CreateAccount() {
   const [name, setName] = useState();
@@ -10,118 +11,124 @@ function CreateAccount() {
   const [password, setPassword] = useState();
   const [confirmPassword, setConfirmPassword] = useState();
   const [errors, setErrors] = useState({
-    name: '',
-    email: '',
-    registration: '',
-    password: '',
+    name: "",
+    email: "",
+    registration: "",
+    password: "",
   });
-
-  const handleNameChange = (e) => {
-    const value = e.target.value;
-    if (/[^a-zA-Z\s]/.test(value)) {
-      setErrors(prev => ({ ...prev, name: 'O nome não pode conter números ou caracteres especiais' }));
-    } else {
-      setErrors(prev => ({ ...prev, name: '' })); //Essa função é assíncrona, não garante que vá pegar os erros se tiver setado como ...errors
-      setName(value); // Tá tendo muitos setEstate, isso pode dar problema no tempo de renderização
-    }
-  };
-
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
-  };
-
-  const handleRegistrationChange = (e) => {
-    const value = e.target.value;
-    if (/[^0-9]/.test(value)) {
-      setErrors({ ...errors, registration: 'A matrícula deve conter apenas números' });
-    } else {
-      setErrors({ ...errors, registration: '' });
-      setRegistration(value);
-    }
-  };
-
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
-  };
-
-  const handleConfirmPasswordChange = (e) => {
-    const value = e.target.value;
-    setConfirmPassword(value);
-    if (password !== value) {
-      setErrors({ ...errors, password: 'As senhas não conferem' });
-    } else {
-      setErrors({ ...errors, password: '' });
-    }
-  };
+  const navigate = useNavigate()
 
   const newUser = async (userData) => {
     try {
-      await createUser(userData)
+      await createUser(userData);
     } catch (error) {
-      alert(JSON.stringify(error))
+      alert(JSON.stringify(error));
     }
-  }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
-      setErrors(prev => ({ ...prev, password: 'As senhas não conferem' }));
+      setErrors((prev) => ({ ...prev, password: "As senhas não conferem" }));
       return;
     }
 
+    const dados = parseFormData(new FormData(e.target));
+    console.log(dados);
     await newUser({
-      "nome": name,
-      "matricula": registration,
-      "email": email,
-      "senha": password,
+      nome: dados.nome,
+      matricula: dados.matricula,
+      email: dados.email,
+      senha: dados.password,
+      acesso: {
+        acesso_documents: dados.acesso_documents?? false,
+        acesso_meetings: dados.acesso_meetings?? false,
+        acesso_calendar: dados.acesso_calendar?? false,
+        acesso_finance: dados.acesso_finance?? false,
+        acesso_admin: dados.acesso_admin?? false,
+      },
     })
+    navigate("/admin")
   };
 
   return (
     <>
-      <div id='paginaCreateAccount'>
-        <div className='divC'>
+      <div id="paginaCreateAccount">
+        <div className="divC">
           <Link to="/admin">
-            <img className='img-setaCreat' src='/seta.svg' alt='seta' />
+            <img className="img-setaCreat" src="/seta.svg" alt="seta" />
           </Link>
-          <span className='title'>EDRA</span>
-          <span className='sub-title'>Registro</span>
-          <form onSubmit={handleSubmit}> {/* Como esse form ta como um input controlado daria pra usar formData */}
+          <span className="title">EDRA</span>
+          <span className="sub-title">Registro</span>
+          <form onSubmit={handleSubmit}>
+            {" "}
+            {/* Como esse form ta como um input controlado daria pra usar formData */}
+            <input type="text" placeholder="Nome" name="nome" />
             <input
               type="text"
-              placeholder='Nome'
-              value={name}
-              onChange={handleNameChange}
-            />
-            {errors.name && <span className='error'>{errors.name}</span>}
-            <input
-              type="text"
-              placeholder='E-Mail'
-              value={email}
-              onChange={handleEmailChange}
-            />
-            <input
-              type="text"
-              placeholder='Matrícula'
-              value={registration}
-              onChange={handleRegistrationChange}
+              placeholder="Matrícula"
               maxLength={9}
-              pattern='[1-9]*'
+              pattern="[0-9]+"
+              name="matricula"
             />
-            {errors.registration && <span className='error'>{errors.registration}</span>}
-            <input
-              type="password"
-              placeholder='Senha'
-              value={password}
-              onChange={handlePasswordChange}
-            />
-            <input
-              type="password"
-              placeholder='Confirmar Senha'
-              value={confirmPassword}
-              onChange={handleConfirmPasswordChange}
-            />
-            {errors.password && <span className='error'>{errors.password}</span>}
+            {errors.registration && (
+              <span className="error">{errors.registration}</span>
+            )}
+            {errors.name && <span className="error">{errors.name}</span>}
+            <input type="text" placeholder="E-Mail" name="email" />
+            <input type="password" placeholder="Senha" />
+            <input type="password" placeholder="Confirmar Senha" />
+            <fieldset>
+              <legend>Acessos</legend>
+              <div>
+                <input
+                  type="checkbox"
+                  name="acesso_documents"
+                  defaultChecked={false}
+                  value={true}
+                />
+                <label> Documentos </label>
+              </div>
+              <div>
+                <input
+                  type="checkbox"
+                  name="acesso_meetings"
+                  defaultChecked={false}
+                  value={true}
+                />
+                <label> Reuniões </label>
+              </div>
+              <div>
+                <input
+                  type="checkbox"
+                  name="acesso_calendar"
+                  defaultChecked={false}
+                  value={true}
+                />
+                <label> Calendário </label>
+              </div>
+              <div>
+                <input
+                  type="checkbox"
+                  name="acesso_finance"
+                  defaultChecked={false}
+                  value={true}
+                />
+                <label> Financeiro </label>
+              </div>
+              <div>
+                <input
+                  type="checkbox"
+                  name="acesso_admin"
+                  defaultChecked={false}
+                  value={true}
+                />
+                <label> Tela Admin </label>
+              </div>
+            </fieldset>
+            {errors.password && (
+              <span className="error">{errors.password}</span>
+            )}
             <button type="submit">CRIAR CONTA</button>
           </form>
         </div>

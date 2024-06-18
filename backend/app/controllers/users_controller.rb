@@ -99,7 +99,6 @@ class UsersController < ApplicationController
   def update_password
     set_user
     senha = password_params[:senha]
-    pp senha
     hash = BCrypt::Password.create(senha)
     @user.senha = hash
 
@@ -131,8 +130,7 @@ class UsersController < ApplicationController
   end
 
   def acesso_params
-    params.require(:acesso).permit(:acesso_documents, :acesso_meetings, :acesso_calendar, :acesso_finance,
-                                   :acesso_admin)
+    params.require(:acesso).permit(:acesso_documents, :acesso_meetings, :acesso_calendar, :acesso_finance,:acesso_admin)
   end
 
   def update_params
