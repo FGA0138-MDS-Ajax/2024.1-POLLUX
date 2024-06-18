@@ -5,16 +5,11 @@ import { createUser } from "../../queries/user";
 import { parseFormData } from "../../utils/parseFormData";
 
 function CreateAccount() {
-  const [name, setName] = useState();
-  const [email, setEmail] = useState();
-  const [registration, setRegistration] = useState();
-  const [password, setPassword] = useState();
-  const [confirmPassword, setConfirmPassword] = useState();
   const [errors, setErrors] = useState({
     name: "",
     email: "",
-    registration: "",
-    password: "",
+    matricula: "",
+    senha: "",
   });
   const navigate = useNavigate()
 
@@ -28,13 +23,11 @@ function CreateAccount() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (password !== confirmPassword) {
+    const dados = parseFormData(new FormData(e.target));
+    if (dados.password !== dados.confirmPassword) {
       setErrors((prev) => ({ ...prev, password: "As senhas não conferem" }));
       return;
     }
-
-    const dados = parseFormData(new FormData(e.target));
-    console.log(dados);
     await newUser({
       nome: dados.nome,
       matricula: dados.matricula,
@@ -61,8 +54,6 @@ function CreateAccount() {
           <span className="title">EDRA</span>
           <span className="sub-title">Registro</span>
           <form onSubmit={handleSubmit}>
-            {" "}
-            {/* Como esse form ta como um input controlado daria pra usar formData */}
             <input type="text" placeholder="Nome" name="nome" />
             <input
               type="text"
@@ -76,8 +67,8 @@ function CreateAccount() {
             )}
             {errors.name && <span className="error">{errors.name}</span>}
             <input type="text" placeholder="E-Mail" name="email" />
-            <input type="password" placeholder="Senha" />
-            <input type="password" placeholder="Confirmar Senha" />
+            <input type="password" name="password" placeholder="Senha" />
+            <input type="password" name="confirmPassword" placeholder="Confirmar Senha" />
             <fieldset>
               <legend>Acessos</legend>
               <div>

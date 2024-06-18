@@ -5,5 +5,5 @@ class User < ApplicationRecord
   has_many :eventos
   has_many :documentos
   has_many :reunioes_usuarios
-  has_many :reuniaos, through: :reunioes_usuarios
+  has_many :reuniao, through: :reunioes_usuarios
 end

@@ -3,7 +3,7 @@ class CreateReunioesUsuarios < ActiveRecord::Migration[7.1]
     create_table :reunioes_usuarios do |t|
       t.references :reuniao, null: false, foreign_key: true
       t.references :user, null: false, foreign_key: true
-
+      t.boolean :present, default: false
       t.timestamps
     end
   end

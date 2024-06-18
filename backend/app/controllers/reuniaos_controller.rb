@@ -3,7 +3,7 @@ class ReuniaosController < ApplicationController
 
   # GET /reuniaos or /reuniaos.json
   def index
-    @reuniaos = Reuniao.all
+    @reuniaos = Reuniao.includes(:reunioes_links).includes(:reunioes_usuarios).order(:id).all
     render json: @reuniaos
   end
 
@@ -63,6 +63,6 @@ class ReuniaosController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def reuniao_params
-    params.require(:reuniao).permit(:nome, :link, :user_id)
+    params.require(:reuniao).permit(:nome, :user_id)
   end
 end
