@@ -7,5 +7,6 @@ Um documento de arquitetura de software, apresenta uma visão detalhada e estrut
 </div>
 </p>
 
+O documento de arquitetura - versão 01 do projeto pode ser acessado no link a seguir: [Documento de Arquitetura (V1)](documento-arquitetura(v01).pdf)
 
-O documento de arquitetura do projeto pode ser acessado e será sempre atualizado no link do documento a seguir: [Documento de Arquitetura (V1)](documento-arquitetura(v01).pdf)
+O documento de arquitetura - versão 02 do projeto pode ser acessado no link a seguir: [Documento de Arquitetura (V2)](documento-arquitetura(v02).pdf)

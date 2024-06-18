@@ -11,4 +11,4 @@ Caso sejam feitas alterações e correções, será colocado um novo arquivo ind
 
 O documento de visão - versão 01 do projeto pode ser acessado no link a seguir: [Documento de Visão (V1)](documento-visao(v01).pdf)
 
-O documento de visão- versão 01 do projeto pode ser acessado no link a seguir: [Documento de Visão (V2)](documento-visao(v02).pdf)
+O documento de visão - versão 02 do projeto pode ser acessado no link a seguir: [Documento de Visão (V2)](documento-visao(v02).pdf)
