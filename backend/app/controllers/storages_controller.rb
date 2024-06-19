@@ -27,15 +27,11 @@ class StoragesController < ApplicationController
   def create
     @storage = Storage.new(storage_params)
 
-    respond_to do |format|
       if @storage.save
-        format.html { redirect_to storage_url(@storage), notice: 'Storage was successfully created.' }
-        format.json { render :show, status: :created, location: @storage }
+        render json: @storage
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @storage.errors, status: :unprocessable_entity }
+        render json: @storage.errors
       end
-    end
   end
 
   # PATCH/PUT /storages/1 or /storages/1.json
