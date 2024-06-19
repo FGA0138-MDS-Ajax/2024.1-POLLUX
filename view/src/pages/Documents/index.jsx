@@ -50,10 +50,16 @@ function Documents() {
       axios.post("http://localhost:3000/users/token", {
           token: token
       }).then(function(response) {
-          if(response.data){
-          }else{
-              navigate("/login")
-          }
+        if(!(response.data < 0)){
+          axios.get("http://localhost:3000/users/"+response.data.id).then(function (resposta){
+            if(resposta.data.acesso.acesso_documents){
+            }else{
+              navigate("/detail")
+            }
+          });
+        }else{
+            navigate("/login")
+        }
       }).catch(function(error) {
           console.error(error);
       });

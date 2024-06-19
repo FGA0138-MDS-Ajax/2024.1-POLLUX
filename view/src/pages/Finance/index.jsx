@@ -46,7 +46,13 @@ function Finance() {
       axios.post("http://localhost:3000/users/token", {
           token: token
       }).then(function(response) {
-          if(response.data){
+          if(!(response.data < 0)){
+            axios.get("http://localhost:3000/users/"+response.data.id).then(function (resposta){
+              if(resposta.data.acesso.acesso_finance){
+              }else{
+                navigate("/detail")
+              }
+            });
           }else{
               navigate("/login")
           }
@@ -60,7 +66,7 @@ function Finance() {
       setItem(response.data);
     });
     saldoTotal(item);
-  }, [item]);
+  }, []);
 
   const handleAnoChange = (e) => {
     setAno(e.target.value);

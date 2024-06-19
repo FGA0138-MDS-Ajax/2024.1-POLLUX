@@ -6,7 +6,10 @@ import { editPassword } from '../../queries/user';
 import axios from 'axios';
 
 function Detail() {
-    const { usuario, matricula, nome, email } = useParams();
+    const [email,setEmail] = useState('');
+    const [usuario,setUsuario] = useState('');
+    const [nome,setNome] = useState('');
+    const [matricula,setMatricula] = useState('');
     const [mostrarPopup, setMostrarPopup] = useState(false);
     const [novaSenha, setNovaSenha] = useState('');
     const [confirmarSenha, setConfirmarSenha] = useState('');
@@ -20,7 +23,11 @@ function Detail() {
             axios.post("http://localhost:3000/users/token", {
                 token: token
             }).then(function(response) {
-                if(response.data){
+                if(!(response.data < 0)){
+                    setUsuario(response.data.nome);
+                    setNome(response.data.nome);
+                    setEmail(response.data.email);
+                    setMatricula(response.data.matricula);
                 }else{
                     navigate("/login")
                 }

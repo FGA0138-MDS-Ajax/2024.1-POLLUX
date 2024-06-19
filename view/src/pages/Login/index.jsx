@@ -27,7 +27,7 @@ function Login() {
             axios.post("http://localhost:3000/users/token", {
                 token: token
             }).then(function(response) {
-                if(response.data){
+                if(!(response.data < 0)){
                     navigate("/detail");
                 }
             }).catch(function(error) {

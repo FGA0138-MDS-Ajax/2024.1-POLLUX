@@ -21,9 +21,10 @@ class UsersController < ApplicationController
     decoded_token = JWT.decode token, hmac_secret, true, { algorithm: 'HS256' }
     a_Validar = decoded_token[0]
     if User.find_by(matricula: a_Validar)
-      render json: "1"
+      user = User.find_by(matricula: a_Validar)
+      render json: user
     else
-      render json: "0"
+      render json: "-1"
     end
   end
 
