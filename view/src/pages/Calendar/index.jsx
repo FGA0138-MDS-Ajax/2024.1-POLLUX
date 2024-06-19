@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Calendar.css';
 import SideBar from '../../components/SideBar';
 import Kanban from '../../components/Kanban';
@@ -30,6 +31,7 @@ const Calendar = () => {
   const [month, setMonth] = useState(today.getMonth());
   const [year, setYear] = useState(today.getFullYear());
   const [eventsArr, setEventsArr] = useState([]);
+  const navigate = useNavigate();
 
   const listMonthEvents = async () => {
     try {
@@ -76,6 +78,28 @@ const Calendar = () => {
   
 
   useEffect(() => {
+    try {
+      var cookieValue = document.cookie.split(';').map(cookie => cookie.split('=')).reduce((accumulator, [key, value]) => ({ ...accumulator, [key.trim()]: decodeURIComponent(value) }), {});
+      let token = cookieValue.jwtToken.toString();
+      axios.post("http://localhost:3000/users/token", {
+        token: token
+      }).then(function(response) {
+        if(!(response.data < 0)){
+          axios.get("http://localhost:3000/users/"+response.data.id).then(function (resposta){
+            if(resposta.data.acesso.acesso_calendar){
+            }else{
+              navigate("/detail")
+            }
+          });
+        }else{
+            navigate("/login")
+          }
+      }).catch(function(error) {
+          console.error(error);
+      });
+  } catch (err) {
+      navigate("/login");
+    }
     const savedEvents = localStorage.getItem('events');
     if (savedEvents) {
       setEventsArr(JSON.parse(savedEvents));

@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import './Meeting.css';
 import SideBar from "../../components/SideBar";
 import { createMeeting, getMeetings } from "../../queries/meetings";
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 
 
@@ -16,10 +18,34 @@ function Meeting() {
     const [titulo, setTitulo] = useState('');
     const [editTitleIndex, setEditTitleIndex] = useState(-1);
     const [reunioes, setMeet] = useState([]);
+    const navigate = useNavigate();
 
 
     useEffect(() => {
         get();
+        try {
+            var cookieValue = document.cookie.split(';').map(cookie => cookie.split('=')).reduce((accumulator, [key, value]) => ({ ...accumulator, [key.trim()]: decodeURIComponent(value) }), {});
+            let token = cookieValue.jwtToken.toString();
+            axios.post("http://localhost:3000/users/token", {
+                token: token
+            }).then(function(response) {
+              if(!(response.data < 0)){
+                axios.get("http://localhost:3000/users/"+response.data.id).then(function (resposta){
+                  if(resposta.data.acesso.acesso_meetings){
+                  }else{
+                    navigate("/detail")
+                  }
+                });
+              }else{
+                  navigate("/login")
+              }
+            }).catch(function(error) {
+                console.error(error);
+            });
+        } catch (err) {
+            console.log(err);
+            navigate("/login");
+        }
     }, []);
 
     const getReunioes = async () => {

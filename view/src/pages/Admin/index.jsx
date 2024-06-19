@@ -3,10 +3,13 @@ import "./Admin.css";
 import SideBar from "../../components/SideBar";
 import { deleteUser, editUser, getUsers } from "../../queries/user";
 import { parseFormData } from "../../utils/parseFormData";
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function Admin() {
   const [members, setMembers] = useState([]);
   const [selectedMember, setSelectedMember] = useState(null);
+  const navigate = useNavigate();
 
   const getUsuarios = async () => {
     try {
@@ -23,7 +26,30 @@ function Admin() {
   };
 
   useEffect(() => {
+    try {
+      var cookieValue = document.cookie.split(';').map(cookie => cookie.split('=')).reduce((accumulator, [key, value]) => ({ ...accumulator, [key.trim()]: decodeURIComponent(value) }), {});
+      let token = cookieValue.jwtToken.toString();
+      axios.post("http://localhost:3000/users/token", {
+        token: token
+      }).then(function(response) {
+        if(!(response.data < 0)){
+          axios.get("http://localhost:3000/users/"+response.data.id).then(function (resposta){
+            if(resposta.data.acesso.acesso_admin){
+            }else{
+              navigate("/detail")
+            }
+          });
+        }else{
+            navigate("/login")
+          }
+      }).catch(function(error) {
+          console.error(error);
+      });
+  } catch (err) {
+      navigate("/login");
+    }
     get();
+    
   }, []);
 
   const handleRemoveMember = async (memberId) => {
