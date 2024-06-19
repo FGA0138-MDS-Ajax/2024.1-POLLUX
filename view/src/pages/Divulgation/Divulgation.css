@@ -30,17 +30,18 @@
 .topicos {
   margin-top: 50px;
   padding-right: 10px;
-  font-size: 35px;
+  font-size: 40px;
 }
 
 .subTopico {
   margin-left: 40px;
   margin-top: 20px;
-  font-size: 20px;
+  font-size: 30px;
 }
 
 .corpoTexto {
   margin-top: 10px;
+  font-size: 20px;;
 }
 
 .corpoTextoAreas {
@@ -49,7 +50,7 @@
   justify-content: center;
   margin-top: 30px;
   color: #414191;
-  font-size: 18px;
+  font-size: 27px;
 }
 
 .circular-imagem {

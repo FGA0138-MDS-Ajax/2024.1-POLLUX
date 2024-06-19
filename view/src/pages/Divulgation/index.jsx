@@ -51,7 +51,7 @@ function Divulgation() {
                 </h4>
 
                 <p className="corpoTextoAreas">
-                    <strong>Controle e Software:</strong>
+                    <strong>Controle e Software</strong>
                 </p>
                 <p className="corpoTexto">
                     A área de Controle e Software é responsável pelo desenvolvimento dos sistemas autônomos de navegação, algoritmos de visão computacional,  simulações de voo,  planejamento dos métodos de resolução das missões e também de analisar os parâmetros de estabilidade do drone para conseguir obter um voo mais fluido e constante.
@@ -84,7 +84,7 @@ function Divulgation() {
                 </div>
 
                 <p className="corpoTextoAreas">
-                    <strong>Design estrutural:</strong>
+                    <strong>Design estrutural</strong>
                 </p>
                 <p className="corpoTexto">
                     A área de Design Estrutural é responsável pelo planejamento, construção, design e testagem de todos os componentes estruturais dos drones. A área determina as dimensões dos drones de cada missão, define os materiais, analisa as cargas estáticas, decide a geometria, analisa as demandas estruturais das áreas adjacentes e soluciona os problemas de otimização dos frames. Além disso, produz simulações estruturais para garantir que todos os critérios estejam sendo seguidos e validados. Dessa forma, consegue chegar nas melhores alternativas estruturais de acordo com a disponibilidade dos componentes da equipe.
@@ -101,7 +101,7 @@ function Divulgation() {
                 </div>
 
                 <p className="corpoTextoAreas">
-                    <strong>Eletrônica:</strong>
+                    <strong>Eletrônica</strong>
                 </p>
                 <p className="corpoTexto">
                     A área de Eletrônica é responsável por embarcar os projetos de Controle e Software no drone, se preocupando com os objetos embarcados, analisando a posição e efetuando a manutenção dos componentes, soldando os dispositivos e distribuição de cabos, evitando curtos-circuitos e disposições incorretas dos fios nas peças. Com isso, a área trabalha efetivamente nos sensores, transmissores, receptores e as placas controladoras, fazendo a interação entre esses componentes, permitindo que todo tipo de dado coletado e produzido pelo drone tenha valor.
