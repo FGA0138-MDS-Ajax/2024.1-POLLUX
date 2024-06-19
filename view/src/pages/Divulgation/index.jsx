@@ -16,7 +16,7 @@ function Divulgation() {
                     Quem somos?
                 </h1>
                 <h4 className="subTopico">
-                    Apresentação e objetivo
+                    Apresentação
                 </h4>
                 <p className="corpoTexto">
                     A Equipe de Robótica Aérea (EDRA) é uma equipe de competição da Universidade de Brasília especializada em aeronaves de voo vertical. A equipe teve início no primeiro semestre de 2016, por iniciativa de um grupo de alunos de Engenharia Aeroespacial que buscavam participar de uma competição de helidesign. Hoje, almejando capacitar-se para uma realidade mais emergente no campo das asas rotativas, o foco da equipe está nas competições de micro-veículos aéreos não tripulados e com rotores, popularmente conhecidos como drones.
@@ -39,6 +39,9 @@ function Divulgation() {
                 <p className="corpoTexto">
                     Em 2023, participamos pela primeira vez de uma competição nacional, a Competição Brasileira de Robótica (CBR), que ocorreu em Salvador, na Bahia. Dentro da competição, competimos na Flying Robot League, ao lado de equipes de faculdades brasileiras extremamente renomadas. Assim, mesmo com todas as dificuldades enfrentadas pela equipe durante o processo de planejamento e produção do projeto, conseguimos conquistar o segundo lugar.
                 </p>
+                <h4 className="subTopico">
+                    Objetivo
+                </h4>
                 <p className="corpoTexto">
                     (*) A Equipe de Robótica Aérea (EDRA) é uma equipe de competição especializada em competições de aeronaves de voo vertical. Um dos nossos objetivos é integrar os conhecimentos adquiridos na teoria com a prática a fim de aprimorar capacidades.
                 </p>
@@ -139,7 +142,7 @@ function Divulgation() {
                     </div>
                     <div className="legendaFotos">
                         <img src="MatheusFaria.svg" alt="fotoIntegrante" className='circular-imagem' />
-                        <p>Matheus Henrique</p>
+                        <p>Matheus Faria</p>
                     </div>
                 </div>
 
@@ -152,14 +155,15 @@ function Divulgation() {
                     <img src="drone.svg" alt="iconDrone" className='iconDrone' />
                 </div>
                 <div className="tudoDrones">
+
                     <div className="corpoDrones">
-                        <img src="acaiGuarana.svg" alt="iconAcaiGuarana" className='iconDroneImg' />
+                        <img src="thor.svg" alt="iconThor" className='iconDroneImg' />
                         <div className="textoDrones">
                             <h4 className="subTopico">
-                                Acaí e Guaraná
+                                Thor 2018
                             </h4>
                             <p className="corpoTexto">
-                                (*)
+                                O drone THOR, Tactical Hovering Optimized Rotorcraft, foi o primeiro projeto desenvolvido pela equipe, que consistia em uma aeronave inovadora capaz de suportar os desafios de um voo muito longo, que pairasse no ar por cerca de 24 horas.
                             </p>
                         </div>
                     </div>
@@ -213,6 +217,18 @@ function Divulgation() {
                     </div>
 
                     <div className="corpoDrones">
+                        <img src="acaiGuarana.svg" alt="iconAcaiGuarana" className='iconDroneImg' />
+                        <div className="textoDrones">
+                            <h4 className="subTopico">
+                                Acaí e Guaraná
+                            </h4>
+                            <p className="corpoTexto">
+                                (*)
+                            </p>
+                        </div>
+                    </div>
+
+                    <div className="corpoDrones">
                         <img src="gambyHyarra.svg" alt="iconGambyHyarra" className='iconDroneImg' />
                         <div className="textoDrones">
                             <h4 className="subTopico">
@@ -236,17 +252,6 @@ function Divulgation() {
                         </div>
                     </div>
 
-                    <div className="corpoDrones">
-                        <img src="thor.svg" alt="iconThor" className='iconDroneImg' />
-                        <div className="textoDrones">
-                            <h4 className="subTopico">
-                                Thor 2018
-                            </h4>
-                            <p className="corpoTexto">
-                                O drone THOR, Tactical Hovering Optimized Rotorcraft, foi o primeiro projeto desenvolvido pela equipe, que consistia em uma aeronave inovadora capaz de suportar os desafios de um voo muito longo, que pairasse no ar por cerca de 24 horas.
-                            </p>
-                        </div>
-                    </div>
                 </div>
 
 
@@ -288,59 +293,61 @@ function Divulgation() {
                     <img src="trofeu.svg" alt="iconAgenda" className='iconAgenda' />
                 </div>
                 <div className="tudoEventosComp">
-                    <div className="corpoEventos">
-                        <div className="legendaFotos">
-                            <img src="campus18.svg" alt="eventoCampus18" className='iconEventoImg' />
-                            <p className="legendaEventos"> Campus Party 2018 </p>
+                    <div className="corpoEventosContainer">
+                        <div className="corpoEventos">
+                            <div className="legendaFotos">
+                                <img src="ahs.svg" alt="eventoCampus18" className='IconEventoImg2' />
+                                <p className="legendaEventos"> Campus Party 2018 </p>
+                            </div>
                         </div>
-                    </div>
 
-                    <div className="corpoEventos">
-                        <div className="legendaFotos">
-                            <img src="campus19.svg" alt="eventoCampus19" className='iconEventoImg' />
-                            <p className="legendaEventos"> Campus Party 2019 </p>
+                        <div className="corpoEventos">
+                            <div className="legendaFotos">
+                                <img src="ahs.svg" alt="eventoCampus19" className='IconEventoImg2' />
+                                <p className="legendaEventos"> Campus Party 2019 </p>
+                            </div>
                         </div>
-                    </div>
 
-                    <div className="corpoEventos">
-                        <div className="legendaFotos">
-                            <img src="campus22.svg" alt="eventoCampus22" className='iconEventoImg' />
-                            <p className="legendaEventos"> Campus Party 2022 </p>
+                        <div className="corpoEventos">
+                            <div className="legendaFotos">
+                                <img src="ahs.svg" alt="eventoCampus22" className='IconEventoImg2' />
+                                <p className="legendaEventos"> Campus Party 2022 </p>
+                            </div>
                         </div>
-                    </div>
 
-                    <div className="corpoEventos">
-                        <div className="legendaFotos">
-                            <img src="space22.svg" alt="eventoSpace22" className='iconEventoImg' />
-                            <p className="legendaEventos"> SpaceBR 2022 </p>
+                        <div className="corpoEventos">
+                            <div className="legendaFotos">
+                                <img src="ahs.svg" alt="eventoSpace22" className='IconEventoImg2' />
+                                <p className="legendaEventos"> SpaceBR 2022 </p>
+                            </div>
                         </div>
-                    </div>
 
-                    <div className="corpoEventos">
-                        <div className="legendaFotos">
-                            <img src="space23.svg" alt="eventoSpace23" className='iconEventoImg' />
-                            <p className="legendaEventos"> SpaceBR 2023 </p>
+                        <div className="corpoEventos">
+                            <div className="legendaFotos">
+                                <img src="ahs.svg" alt="eventoSpace23" className='IconEventoImg2' />
+                                <p className="legendaEventos"> SpaceBR 2023 </p>
+                            </div>
                         </div>
-                    </div>
 
-                    <div className="corpoEventos">
-                        <div className="legendaFotos">
-                            <img src="campus23.svg" alt="eventoCampus23" className='iconEventoImg' />
-                            <p className="legendaEventos"> Campus Party 2023 </p>
+                        <div className="corpoEventos">
+                            <div className="legendaFotos">
+                                <img src="ahs.svg" alt="eventoCampus23" className='IconEventoImg2' />
+                                <p className="legendaEventos"> Campus Party 2023 </p>
+                            </div>
                         </div>
-                    </div>
 
-                    <div className="corpoEventos">
-                        <div className="legendaFotos">
-                            <img src="space24.svg" alt="eventoSpace24" className='iconEventoImg' />
-                            <p className="legendaEventos"> SpaceBR 2024 </p>
+                        <div className="corpoEventos">
+                            <div className="legendaFotos">
+                                <img src="ahs.svg" alt="eventoSpace24" className='IconEventoImg2' />
+                                <p className="legendaEventos"> SpaceBR 2024 </p>
+                            </div>
                         </div>
-                    </div>
 
-                    <div className="corpoEventos">
-                        <div className="legendaFotos">
-                            <img src="campus24.svg" alt="eventoCampus24" className='iconEventoImg' />
-                            <p className="legendaEventos"> Campus Party 2024 </p>
+                        <div className="corpoEventos">
+                            <div className="legendaFotos">
+                                <img src="ahs.svg" alt="eventoCampus24" className='IconEventoImg2' />
+                                <p className="legendaEventos"> Campus Party 2024 </p>
+                            </div>
                         </div>
                     </div>
 

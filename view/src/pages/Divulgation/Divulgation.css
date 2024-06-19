@@ -3,8 +3,8 @@
   /* Ajuste este valor conforme a altura do header */
   position: relative;
   z-index: 2;
-  margin-left: 30px;
-  margin-right: 30px;
+  margin-left: 120px;
+  margin-right: 120px;
 }
 
 .corpoTexto,
@@ -96,12 +96,32 @@
   margin-top: 20px;
 }
 
+.corpoEventosContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+
+.corpoEventos {
+  text-align: center;
+
+}
+
+.legendaEventos {
+  font-size: 16px;
+  margin: 0;
+}
+
 .iconEventoImg {
   margin-right: 80px;
   /* Espaço entre a imagem e o texto */
   width: 400px;
   height: auto;
   margin-top: 20px;
+}
+
+.IconEventoImg2 {
+  width: 300px;
+  height: auto;
 }
 
 .textoDrones {
