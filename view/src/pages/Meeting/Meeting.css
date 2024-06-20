@@ -153,3 +153,29 @@ font-size: 15px;
   margin-right: 60px;
 }
 
+.botaoAdd {
+  font-size: 1.25rem;
+  width: 200px;
+  padding: 10px;
+  font-weight: bold;
+  border: none;
+  border-radius: 18px;
+  color: #fdfdfd;
+  background-color: #007600;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 20px;
+}
+
+.botaoRemove {
+  font-size: 1.25rem;
+  width: 200px;
+  padding: 10px;
+  font-weight: bold;
+  border: none;
+  border-radius: 18px;
+  color: #fdfdfd;
+  background-color: red;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
