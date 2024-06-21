@@ -21,7 +21,8 @@ Rails.application.routes.draw do
   post '/acaos/delete', to: 'acaos#destroy'
   post '/eventos/delete', to: 'eventos#destroy'
   post '/storages/index', to: 'storages#getStorage'
-
+  post 'password/forgot', to: 'passwords#forgot'
+  post 'password/reset', to: 'passwords#reset'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
