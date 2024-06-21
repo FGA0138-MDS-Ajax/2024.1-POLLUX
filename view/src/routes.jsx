@@ -28,7 +28,7 @@ function AppRoutes() {
                 <Route path='/documents' element={<Documents />}></Route>
                 <Route path='/admin' element={<Admin />}></Route>
                 <Route path='/calendar' element={<Calendar />}></Route>
-                <Route path='/newPassword' element={<NewPassword />}></Route>
+                <Route path='/newPassword/:token' element={<NewPassword />}></Route>
             </Routes>
         </BrowserRouter>
     )

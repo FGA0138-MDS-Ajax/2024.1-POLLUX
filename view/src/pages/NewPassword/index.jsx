@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './NewPassword.css';
-import { Link, useNavigate } from 'react-router-dom';
-// import axios from 'axios'
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import axios from 'axios'
 // import { useCookies } from 'react-cookie';
 
 function NewPassword() {
@@ -9,6 +9,7 @@ function NewPassword() {
     const [novaSenha, setNovaSenha] = useState('');
     const [confirmarSenha, setConfirmarSenha] = useState('');
     const navigate = useNavigate();
+    const { token } = useParams();
 
     // const [cookies, setCookie] = useCookies(['jwtToken']);
     // const [cookie] = useCookies(['jwtToken']);
@@ -43,24 +44,16 @@ function NewPassword() {
             return; // Impede o envio do formulário se as senhas não coincidirem
         }
 
-        // manda o que o usuário enviou nos campos, para o console
-        console.log("Nova Senha:", novaSenha);
-        console.log("Confirmar senha:", confirmarSenha);
 
-        /*axios.post("http://localhost:3000/users/newPassword", {
-            novaSenha: novaSenha,
-            confirmarSenha: confirmarSenha
+        axios.post("http://localhost:3000/password/reset", {
+            password: novaSenha,
+            token: token
         }).then(function (response) {
-        if(response.data !=  'NovaSenha INEXISTENTE' && response.data !=  'SENHA INCORRETA'){
-        setCookie('jwtToken', response.data, {
-                path: '/'
-        });
-            navigate("/detail");
-        }
-
+            alert('senha alterada com sucesso.');
+            navigate("/");
       }).catch(function (error) {
             console.log(error);
-            });*/
+            });
 
     };
 
