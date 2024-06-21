@@ -21,5 +21,6 @@ export default {
     meeting: {
         base: '/reuniaos',
         single: (id) => `/reuniaos/${id}`,
+        delete: (id) => `/reuniaos/delete/${id}`,
     }
 }

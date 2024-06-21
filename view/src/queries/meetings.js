@@ -43,7 +43,7 @@ export const editMeeting = async (meetingId, data) => {
 
 export const deleteMeeting = async (meetingId) => {
   try {
-    const meeting = await server.delete(endpoints.meeting.single(meetingId));
+    const meeting = await server.post(endpoints.meeting.delete(meetingId))
     return meeting;
   } catch (error) {
     console.log(error);

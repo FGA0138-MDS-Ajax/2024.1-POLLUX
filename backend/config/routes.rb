@@ -3,11 +3,16 @@ Rails.application.routes.draw do
   resources :acaos
   resources :storages
   resources :eventos
-  resources :reuniaos
   resources :documentos
   resources :tarefas
   resources :acaos
   resources :users
+  resources :reuniaos do
+    post 'new_link', on: :member
+    put 'update_link/:link_id', action: 'update_link'
+    delete 'delete_link/:link_id', action: 'delete_link'
+    put 'edit_presence', on: :member
+  end
 
   post '/users/new', to: 'users#create'
   post '/users/login', to: 'users#login'
@@ -21,6 +26,7 @@ Rails.application.routes.draw do
   post '/acaos/delete', to: 'acaos#destroy'
   post '/eventos/delete', to: 'eventos#destroy'
   post '/storages/index', to: 'storages#getStorage'
+  post '/reuniaos/delete/:id', to: 'reuniaos#destroy'
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
