@@ -41,7 +41,6 @@ function Meeting() {
 
     const get = async () => {
         const listaReunioes = await getReunioes();
-        console.log(listaReunioes);
         setMeetings(listaReunioes.data);
     };
 
@@ -163,7 +162,6 @@ function Meeting() {
 
     const handleRemoveMeeting = async (meeting) => {
         try {
-            console.log(meeting.id);
             await deleteMeeting(meeting.id);
             await get();
         } catch (error) {
@@ -235,7 +233,7 @@ function Meeting() {
                         <button onClick={() => toggleCollapse(index)} className="botao">
                             {isCollapsed[index] ? 'Mostrar Detalhes' : 'Ocultar Detalhes'}
                         </button>
-                        <button onClick={() => handleRemoveMeeting(meetingIndex)} className="botaoRemove"> 
+                        <button onClick={() => handleRemoveMeeting(meeting)} className="botaoRemove"> 
                             Remover Reunião
                         </button>
                         {!isCollapsed[index] && (
@@ -296,7 +294,7 @@ function Meeting() {
                             <span className="close" onClick={handleClosePopup}>
                                 &times;
                             </span>
-                            <form onSubmit={handleSubmit}>
+                            <form onSubmit={handleSubmitLink}>
                                 <label className='caixa'>
                                     Insira o link:
                                     <input
