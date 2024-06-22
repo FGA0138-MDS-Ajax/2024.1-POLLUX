@@ -21,6 +21,11 @@ export default {
     meeting: {
         base: '/reuniaos',
         single: (id) => `/reuniaos/${id}`,
-        delete: (id) => `/reuniaos/delete/${id}`,
+        delete: (id) => `/reuniaos/${id}/delete`,
+        edit: (id) => `/reuniaos/${id}/edit`,
+        newLink: (id) => `/reuniaos/${id}/new_link`,
+        updateLink: (id, linkId) => `/reuniaos/${id}/update_link/${linkId}`,
+        deleteLink: (id, linkId) => `/reuniaos/${id}/delete_link/${linkId}`,
+        editPresence: (id) => `/reuniaos/${id}/edit_presence`,
     }
 }

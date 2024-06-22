@@ -10,10 +10,13 @@ Rails.application.routes.draw do
   resources :reuniaos do
     post 'new_link', on: :member
     put 'update_link/:link_id', action: 'update_link'
-    delete 'delete_link/:link_id', action: 'delete_link'
+    post 'delete_link/:link_id', action: 'delete_link'
     put 'edit_presence', on: :member
+    post 'delete', action: 'destroy'
+    put 'edit', action: 'update'
   end
 
+  patch 'users/password/:id', to: 'users#update_password'
   post '/users/new', to: 'users#create'
   post '/users/login', to: 'users#login'
   post '/users/token', to: 'users#autenticar'
@@ -26,15 +29,12 @@ Rails.application.routes.draw do
   post '/acaos/delete', to: 'acaos#destroy'
   post '/eventos/delete', to: 'eventos#destroy'
   post '/storages/index', to: 'storages#getStorage'
-  post '/reuniaos/delete/:id', to: 'reuniaos#destroy'
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get 'up' => 'rails/health#show', as: :rails_health_check
-
-  patch 'users/password/:id', to: 'users#update_password'
 
   # Defines the root path route ("/")
   # root "posts#index"

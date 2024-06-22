@@ -1,5 +1,5 @@
 class ReunioesUsuario < ApplicationRecord
     belongs_to :reuniao
-    has_many :user
+    belongs_to :user
     validates :reuniao, presence: true
 end

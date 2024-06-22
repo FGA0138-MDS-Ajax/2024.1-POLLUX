@@ -5,7 +5,13 @@ meta {
 }
 
 put {
-  url: 
-  body: none
+  url: {{base_url}}/reuniaos/9/edit
+  body: json
   auth: none
+}
+
+body:json {
+  {
+    "nome": "Reunião editada bruno"
+  }
 }

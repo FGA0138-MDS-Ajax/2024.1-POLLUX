@@ -4,8 +4,13 @@ class ReuniaosController < ApplicationController
 
   # GET /reuniaos or /reuniaos.json
   def index
-    @reuniaos = Reuniao.includes(:reunioes_links).includes(:reunioes_usuarios).order(:id).all
-    render json: @reuniaos.to_json(include: [:reunioes_links, :reunioes_usuarios])
+    #@reuniaos = Reuniao.includes(:reunioes_links).includes(:reunioes_usuarios).order(:id).all
+    #render json: @reuniaos.to_json(include: [:reunioes_links, :reunioes_usuarios])
+    @reuniaos = Reuniao.includes(:reunioes_links, reunioes_usuarios: :user).order(:id).all
+    render json: @reuniaos.to_json(include: { 
+      reunioes_links: {}, 
+      reunioes_usuarios: { include: { user: { only: [:nome, :matricula] } } }
+    })
   end
 
   # GET /reuniaos/1 or /reuniaos/1.json
@@ -32,19 +37,18 @@ class ReuniaosController < ApplicationController
 
   # PATCH/PUT /reuniaos/1 or /reuniaos/1.json
   def update
-    respond_to do |format|
-      if @reuniao.update(reuniao_params)
-        format.json { render :show, status: :ok, location: @reuniao }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @reuniao.errors, status: :unprocessable_entity }
-      end
+    set_reuniao
+    if @reuniao.update(reuniao_params)
+      render json: @reuniao, status: :ok
+    else
+      render json: @reuniao.errors, status: :unprocessable_entity
     end
   end
 
   # DELETE /reuniaos/1 or /reuniaos/1.json
   def destroy
     @reuniao.destroy
+    head :no_content
   end
 
   # POST /reuniaos/link
@@ -118,7 +122,7 @@ class ReuniaosController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_reuniao
-    @reuniao = Reuniao.find_by(id: params[:reuniao_id])
+    @reuniao = Reuniao.find_by(id: params[:reuniao_id] || params[:id])
     unless @reuniao
       render json: { error: "Reuniao not found with ID #{params[:reuniao_id]}" }, status: :not_found
     end
