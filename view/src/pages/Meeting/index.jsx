@@ -3,6 +3,7 @@ import './Meeting.css';
 import SideBar from "../../components/SideBar";
 import { createLink, createMeeting, deleteMeeting, destroyLink, editMeeting, getMeetings, savePresence } from "../../queries/meetings";
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 function Meeting() {
     const [meetings, setMeetings] = useState([]);
@@ -22,6 +23,12 @@ function Meeting() {
         get();
         setIsCollapsed(Array(meetings.length).fill(true));
     }, []);
+
+    useEffect(() => {
+        if (meetings.length > 0) {
+            setIsCollapsed(Array(meetings.length).fill(true));
+        }
+    }, [meetings]);
 
     const getReunioes = async () => {
         try {
@@ -63,9 +70,16 @@ function Meeting() {
         setTitulo(e.target.value);
     };
 
-    const handleAddMeeting = async (e) => {
+    const handleAddMeeting = (e) => {
         e.preventDefault();
-        await criarReuniao(titulo);
+        const newMeeting = {
+            nome: titulo,
+            files: [],
+            members: []
+        };
+        setMeetings([...meetings, newMeeting]);
+        setLinks([...links, []]); // Adds a new empty list of links for the new meeting
+        setIsCollapsed([...isCollapsed, true]); // Add the new meeting as collapsed
         setTitulo('');
         setShowPopup2(false);
     };
@@ -126,9 +140,10 @@ function Meeting() {
         }
     };
 
-    const handleDoubleClick = (meeting) => {
+    const handleDoubleClick = (index) => {
+        const meeting = meetings[index];
         setTitulo(meeting.nome);
-        setEditTitleIndex(meeting.id);
+        setEditTitleIndex(index);
         setShowPopup2(true);
     };
 
@@ -208,7 +223,7 @@ function Meeting() {
                                             required
                                         />
                                     </label>
-                                    <button type="submit" className='botao'>{editTitleIndex > -1 ? 'Salvar' : 'Adicionar'}</button>
+                                    <button type="submit" onClick={() => criarReuniao(titulo)} className='botao'>{editTitleIndex > -1 ? 'Salvar' : 'Adicionar'}</button>
                                 </form>
                             </div>
                         </div>
@@ -220,7 +235,7 @@ function Meeting() {
                         <button onClick={() => toggleCollapse(index)} className="botao">
                             {isCollapsed[index] ? 'Mostrar Detalhes' : 'Ocultar Detalhes'}
                         </button>
-                        <button onClick={() => handleRemoveMeeting(meeting)} className="botaoRemove">
+                        <button onClick={() => handleRemoveMeeting(meetingIndex)} className="botaoRemove"> 
                             Remover Reunião
                         </button>
                         {!isCollapsed[index] && (
@@ -281,7 +296,7 @@ function Meeting() {
                             <span className="close" onClick={handleClosePopup}>
                                 &times;
                             </span>
-                            <form id="formLink" onSubmit={handleSubmitLink}>
+                            <form onSubmit={handleSubmit}>
                                 <label className='caixa'>
                                     Insira o link:
                                     <input
