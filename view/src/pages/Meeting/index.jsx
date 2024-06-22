@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import './Meeting.css';
 import SideBar from "../../components/SideBar";
-import { createMeeting, getMeetings } from "../../queries/meetings";
+import { createLink, createMeeting, deleteMeeting, destroyLink, editMeeting, getMeetings, savePresence } from "../../queries/meetings";
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
@@ -15,10 +15,14 @@ function Meeting() {
     const [links, setLinks] = useState([]);
     const [titulo, setTitulo] = useState('');
     const [editTitleIndex, setEditTitleIndex] = useState(-1);
-    const [reunioes, setMeet] = useState([]);
     const [isCollapsed, setIsCollapsed] = useState([]);
 
     const navigate = useNavigate();
+
+    useEffect(() => {
+        get();
+        setIsCollapsed(Array(meetings.length).fill(true));
+    }, []);
 
     useEffect(() => {
         if (meetings.length > 0) {
@@ -75,12 +79,13 @@ function Meeting() {
         };
         setMeetings([...meetings, newMeeting]);
         setLinks([...links, []]); // Adds a new empty list of links for the new meeting
+        setIsCollapsed([...isCollapsed, true]); // Add the new meeting as collapsed
         setTitulo('');
         setShowPopup2(false);
     };
 
-    const handleImageClick = (index) => {
-        setCurrentMeetingIndex(index);
+    const handleImageClick = (meetingId) => {
+        setCurrentMeetingIndex(meetingId);
         setShowPopup(true);
     };
 
@@ -91,8 +96,8 @@ function Meeting() {
 
     const handlePresenceChange = (meetingIndex, memberIndex) => {
         const updatedMeetings = [...meetings];
-        const member = updatedMeetings[meetingIndex].members[memberIndex];
-        member.presente = !member.presente;
+        const member = updatedMeetings[meetingIndex].reunioes_usuarios[memberIndex];
+        member.present = !member.present;
         setMeetings(updatedMeetings);
     };
 
@@ -104,22 +109,35 @@ function Meeting() {
         setDescricao(e.target.value);
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmitLink = async (e) => {
         e.preventDefault();
         if (link.trim() !== '' && descricao.trim() !== '') {
-            const updatedLinks = [...links];
-            updatedLinks[currentMeetingIndex] = [...updatedLinks[currentMeetingIndex], { descricao, link }];
-            setLinks(updatedLinks);
+            try {
+                await createLink(currentMeetingIndex, {
+                    reunioes_link: {  
+                        link: link,
+                        descricao: descricao
+                    }
+                });
+                await get();
+            } catch (error) {
+                console.error("Error creating link:", error);
+                alert("Erro ao criar o link!");
+            }
         }
         setShowPopup(false);
         setLink('');
         setDescricao('');
     };
 
-    const handleRemoveLink = (meetingIndex, linkIndex) => {
-        const updatedLinks = [...links];
-        updatedLinks[meetingIndex].splice(linkIndex, 1);
-        setLinks(updatedLinks);
+    const handleRemoveLink = async (meetingIndex, linkIndex) => {
+        try {
+            await destroyLink(meetingIndex, linkIndex)
+            await get()
+        } catch (error) {
+            console.error("Error deleting link:", error);
+            alert("Erro ao deletar o link!");
+        }
     };
 
     const handleDoubleClick = (index) => {
@@ -129,26 +147,55 @@ function Meeting() {
         setShowPopup2(true);
     };
 
-    const handleUpdateMeetingTitle = (e) => {
+    const handleUpdateMeetingTitle = async (e) => {
         e.preventDefault();
-        const updatedMeetings = [...meetings];
-        updatedMeetings[editTitleIndex].nome = titulo;
-        setMeetings(updatedMeetings);
+        try {
+            await editMeeting(editTitleIndex, { nome: titulo });
+            await get();
+        } catch (error) {
+            console.error("Error editing meeting:", error);
+            alert("Erro ao editar a Reunião!");
+        }
         setTitulo('');
         setEditTitleIndex(-1);
         setShowPopup2(false);
     };
 
-    const handleRemoveMeeting = (meetingIndex) => {
-        const updatedMeetings = [...meetings];
-        updatedMeetings.splice(meetingIndex, 1);
-        setMeetings(updatedMeetings);
-        setIsCollapsed(isCollapsed.filter((_, i) => i !== meetingIndex));
+    const handleRemoveMeeting = async (meeting) => {
+        try {
+            console.log(meeting.id);
+            await deleteMeeting(meeting.id);
+            await get();
+        } catch (error) {
+            console.error("Error deleting meeting:", error);
+            alert("Erro ao deletar a Reunião!");
+        }
     };
 
-    const toggleCollapse = (meetingIndex) => {
+    const updatePresenceStatus = async (meetingIndex) => {
+        const updatedMeeting = meetings[meetingIndex];
+        const formatedData = updatedMeeting.reunioes_usuarios.map((r_user) => {
+            return ({
+                user_id: r_user.user_id,
+                present: r_user.present
+            })
+        })
+        try {
+            await savePresence(updatedMeeting.id, {user: formatedData});
+            await get();
+        } catch (error) {
+            console.error("Error updating presence:", error);
+            alert("Erro ao atualizar a presença!");
+        }
+    };
+
+    const handleSavePresence = async (meetingIndex) => {
+        await updatePresenceStatus(meetingIndex);
+    };
+
+    const toggleCollapse = (index) => {
         const updatedCollapseState = [...isCollapsed];
-        updatedCollapseState[meetingIndex] = !updatedCollapseState[meetingIndex];
+        updatedCollapseState[index] = !updatedCollapseState[index];
         setIsCollapsed(updatedCollapseState);
     };
 
@@ -182,30 +229,30 @@ function Meeting() {
                         </div>
                     )}
                 </div>
-                {meetings.map((meeting, meetingIndex) => (
-                    <div key={meetingIndex} className="meeting">
-                        <h2 onDoubleClick={() => handleDoubleClick(meetingIndex)}>{meeting.nome}</h2>
-                        <button onClick={() => toggleCollapse(meetingIndex)} className="botao">
-                            {isCollapsed[meetingIndex] ? 'Mostrar Detalhes' : 'Ocultar Detalhes'}
+                {meetings.map((meeting, index) => (
+                    <div key={meeting.id} className="meeting">
+                        <h2 onDoubleClick={() => handleDoubleClick(meeting)}>{meeting.nome}</h2>
+                        <button onClick={() => toggleCollapse(index)} className="botao">
+                            {isCollapsed[index] ? 'Mostrar Detalhes' : 'Ocultar Detalhes'}
                         </button>
-                        <button onClick={() => handleRemoveMeeting(meetingIndex)} className="botaoRemove">
+                        <button onClick={() => handleRemoveMeeting(meetingIndex)} className="botaoRemove"> 
                             Remover Reunião
                         </button>
-                        {!isCollapsed[meetingIndex] && (
+                        {!isCollapsed[index] && (
                             <div>
                                 <div className='img-text-container'>
-                                    <img src="plus.svg" alt="img-plus" className="bntMeeting" onClick={() => handleImageClick(meetingIndex)} />
+                                    <img src="plus.svg" alt="img-plus" className="bntMeeting" onClick={() => handleImageClick(9)} />
                                     <p className='fonteMeeting'>Adicionar Arquivo</p>
                                 </div>
                                 <div className="displayed-links">
-                                    {links[meetingIndex] && links[meetingIndex].map((link, index) => (
-                                        <div key={index}>
+                                    {meeting.reunioes_links.map((link) => (
+                                        <div key={link.id}>
                                             <p>
                                                 <img
                                                     src="trash.svg"
                                                     alt="img-trash"
                                                     className='trash'
-                                                    onClick={() => handleRemoveLink(meetingIndex, index)}
+                                                    onClick={() => handleRemoveLink(meeting.id, link.id)}
                                                 />
                                                 <a href={link.link}>{link.descricao}</a>
                                             </p>
@@ -221,24 +268,24 @@ function Meeting() {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {/*meeting.members.map((member, memberIndex) => (
-                                            <tr key={memberIndex}>
-                                                <td>{member.nome}</td>
-                                                <td>{member.matricula}</td>
+                                        {meeting.reunioes_usuarios.map((member, memberIndex) => (
+                                            <tr key={member.id}>
+                                                <td>{member.user.nome}</td>
+                                                <td>{member.user.matricula}</td>
                                                 <td>
                                                     <input
                                                         type="checkbox"
-                                                        checked={member.presente}
-                                                        onChange={() => handlePresenceChange(meetingIndex, memberIndex)}
+                                                        checked={member.present}
+                                                        onChange={() => handlePresenceChange(index, memberIndex)}
                                                     />
                                                 </td>
                                             </tr>
-                                        ))*/}
+                                        ))}
                                     </tbody>
                                 </table>
-                                <button onClick={() => handlePresenceChange(meetingIndex, memberIndex) /*ainda nao funciona*/ }className="botaoAdd">
-                            Salvar Presença 
-                        </button> 
+                                <button onClick={() => handleSavePresence(index)} className="botaoAdd">
+                                    Salvar Presença
+                                </button>
                             </div>
                         )}
                     </div>

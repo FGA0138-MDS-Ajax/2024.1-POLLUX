@@ -1,0 +1,22 @@
+meta {
+  name: editPresenca
+  type: http
+  seq: 8
+}
+
+put {
+  url: {{base_url}}/reuniaos/9/edit_presence
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "user": [
+      {"user_id": 1, "present": true},
+      {"user_id": 2, "present": false},
+      {"user_id": 3, "present": true}
+    ]
+  }
+  
+}

@@ -1,0 +1,21 @@
+meta {
+  name: updateLink
+  type: http
+  seq: 6
+}
+
+put {
+  url: {{base_url}}/reuniaos/9/update_link/3
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "reunioes_link": {
+      "link": "google.com",
+      "descricao": "link editado"
+    }
+  }
+  
+}
