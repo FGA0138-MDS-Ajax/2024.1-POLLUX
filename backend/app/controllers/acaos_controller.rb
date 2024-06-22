@@ -22,15 +22,11 @@ class AcaosController < ApplicationController
   def create
     @acao = Acao.new(acao_params)
 
-    respond_to do |format|
       if @acao.save
-        format.html { redirect_to acao_url(@acao), notice: 'Acao was successfully created.' }
-        format.json { render :show, status: :created, location: @acao }
+        render json: @acao
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @acao.errors, status: :unprocessable_entity }
+        render json: "erro"
       end
-    end
   end
 
   # PATCH/PUT /acaos/1 or /acaos/1.json
@@ -49,11 +45,7 @@ class AcaosController < ApplicationController
   # DELETE /acaos/1 or /acaos/1.json
   def destroy
     @acao.destroy!
-
-    respond_to do |format|
-      format.html { redirect_to acaos_url, notice: 'Acao was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    render json: @acao
   end
 
   private

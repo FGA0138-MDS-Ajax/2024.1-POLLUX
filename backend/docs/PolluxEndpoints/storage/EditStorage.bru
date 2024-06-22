@@ -4,14 +4,18 @@ meta {
   seq: 4
 }
 
-patch {
-  url: {{base_url}}/storages/2
+post {
+  url: http://localhost:3000/storages/edit
   body: json
   auth: none
 }
 
 body:json {
   {
-    "quantidade": "1"
+    "id": 3,
+    "nome": "peça",
+    "quantidade": 90,
+    "status": "/disponivel.svg",
+    "user_id":1
   }
 }

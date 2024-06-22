@@ -4,8 +4,14 @@ meta {
   seq: 3
 }
 
-delete {
-  url: {{base_url}}/acaos
-  body: none
+post {
+  url: http://localhost:3000/acaos/delete
+  body: json
   auth: none
+}
+
+body:json {
+  {
+    "id":3
+  }
 }

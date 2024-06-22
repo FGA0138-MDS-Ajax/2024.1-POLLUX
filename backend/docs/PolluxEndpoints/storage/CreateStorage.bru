@@ -5,14 +5,16 @@ meta {
 }
 
 post {
-  url: {{base_url}}/storages
+  url: http://localhost:3000/storages
   body: json
   auth: none
 }
 
 body:json {
-  {"nome": "peça",
-  "quantidade": "6",
-  "status": "Alerta",
-  "user_id": 1}
+  {
+    "nome": "peça",
+    "quantidade": "6",
+    "status": "/alerta.svg",
+    "user_id": 1
+  }
 }

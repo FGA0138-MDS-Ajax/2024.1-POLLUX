@@ -5,7 +5,15 @@ meta {
 }
 
 post {
-  url: {{base_url}}/documentos
-  body: none
+  url: http://localhost:3000/documentos
+  body: json
   auth: none
+}
+
+body:json {
+  {
+    "nome": "red hat fedora 2",
+    "link": "https://www.redhat.com/en",
+    "user_id": 1
+  }
 }

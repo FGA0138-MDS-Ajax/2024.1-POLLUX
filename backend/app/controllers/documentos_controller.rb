@@ -22,14 +22,10 @@ class DocumentosController < ApplicationController
   def create
     @documento = Documento.new(documento_params)
 
-    respond_to do |format|
-      if @documento.save
-        format.html { redirect_to documento_url(@documento), notice: 'Documento was successfully created.' }
-        format.json { render :show, status: :created, location: @documento }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @documento.errors, status: :unprocessable_entity }
-      end
+    if @documento.save
+      render json: @documento
+    else
+      render json: "erro"
     end
   end
 
@@ -49,11 +45,7 @@ class DocumentosController < ApplicationController
   # DELETE /documentos/1 or /documentos/1.json
   def destroy
     @documento.destroy!
-
-    respond_to do |format|
-      format.html { redirect_to documentos_url, notice: 'Documento was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    render json: @documento
   end
 
   private

@@ -4,8 +4,14 @@ meta {
   seq: 3
 }
 
-delete {
-  url: {{base_url}}/storages/5
-  body: none
+post {
+  url: http://localhost:3000/storages/delete
+  body: json
   auth: none
+}
+
+body:json {
+  {
+    "id":1
+  }
 }

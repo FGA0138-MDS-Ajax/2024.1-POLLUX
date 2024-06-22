@@ -36,25 +36,17 @@ class StoragesController < ApplicationController
 
   # PATCH/PUT /storages/1 or /storages/1.json
   def update
-    respond_to do |format|
       if @storage.update(storage_params)
-        format.html { redirect_to storage_url(@storage), notice: 'Storage was successfully updated.' }
-        format.json { render :show, status: :ok, location: @storage }
+       render json: @storage
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @storage.errors, status: :unprocessable_entity }
+        render json: @storage.errors
       end
-    end
   end
 
   # DELETE /storages/1 or /storages/1.json
   def destroy
     @storage.destroy!
-
-    respond_to do |format|
-      format.html { redirect_to storages_url, notice: 'Storage was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    render json: @storage
   end
 
   private

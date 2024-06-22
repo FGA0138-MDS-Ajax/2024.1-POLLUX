@@ -40,6 +40,10 @@ function Finance() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    axios.get("http://localhost:3000/acaos").then(function (response) {
+      setItem(response.data);
+    });
+    saldoTotal(item);
     try {
       var cookieValue = document.cookie.split(';').map(cookie => cookie.split('=')).reduce((accumulator, [key, value]) => ({ ...accumulator, [key.trim()]: decodeURIComponent(value) }), {});
       let token = cookieValue.jwtToken.toString();
@@ -62,11 +66,7 @@ function Finance() {
   } catch (err) {
       navigate("/login");
   }
-    axios.get("http://localhost:3000/acaos").then(function (response) {
-      setItem(response.data);
-    });
-    saldoTotal(item);
-  }, []);
+  }, [item]);
 
   const handleAnoChange = (e) => {
     setAno(e.target.value);

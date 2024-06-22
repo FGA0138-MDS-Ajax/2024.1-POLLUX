@@ -5,7 +5,6 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 function deletarDoc(id) {
-  console.log(id);
   axios.post('http://localhost:3000/documentos/delete', {
     id: id
   });

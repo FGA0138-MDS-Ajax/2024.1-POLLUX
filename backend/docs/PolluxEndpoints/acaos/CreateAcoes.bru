@@ -5,7 +5,17 @@ meta {
 }
 
 post {
-  url: {{base_url}}/acaos
-  body: none
+  url: http://localhost:3000/acaos
+  body: json
   auth: none
+}
+
+body:json {
+  {
+    "titulo":"compra drone",
+    "valor":400.00,
+    "tipo":false,
+    "mes":"Junho",
+    "ano":"2024"
+  }
 }
