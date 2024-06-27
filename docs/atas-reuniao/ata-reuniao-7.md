@@ -2,7 +2,7 @@
 | :----: | :--: | :--------------------: | :-------------------: |
 | 1.0 | 27/06/2024 | Registro da ata da reunião 7 | Júlia Fortunato e Maria Clara |
 
-# Reunião 6 - Grupo Pollux
+# Reunião 7 - Grupo Pollux
 
 ## Informações gerais
 
