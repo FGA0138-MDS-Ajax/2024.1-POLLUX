@@ -1,9 +1,17 @@
+html,
+body {
+  overflow-x: hidden;
+  /* Impedir rolagem horizontal */
+}
+
 .containerDivulgacao {
   padding-top: 7.5rem;
   position: relative;
   z-index: 2;
   margin-left: 7.5rem;
   margin-right: 7.5rem;
+  overflow-x: hidden;
+  /* Impedir rolagem horizontal */
 }
 
 .corpoTexto,
@@ -14,11 +22,113 @@
   text-align: justify;
 }
 
-.img-edraV {
+
+.logo1 {
   opacity: 0.2;
   position: absolute;
   height: auto;
   z-index: -1;
+  left: 50%;
+  transform: translateX(-50%) translateY(40%);
+}
+
+.logo2 {
+  opacity: 0.2;
+  position: absolute;
+  height: auto;
+  z-index: -1;
+  left: 100%;
+  transform: translateX(-50%) translateY(180%);
+}
+
+.logo3 {
+  opacity: 0.2;
+  position: absolute;
+  height: auto;
+  z-index: -1;
+  left: 0%;
+  transform: translateX(-50%) translateY(320%);
+}
+
+.logo4 {
+  opacity: 0.2;
+  position: absolute;
+  height: auto;
+  z-index: -1;
+  left: 50%;
+  transform: translateX(-50%) translateY(460%);
+}
+
+.logo5 {
+  opacity: 0.2;
+  position: absolute;
+  height: auto;
+  z-index: -1;
+  left: 100%;
+  transform: translateX(-50%) translateY(600%);
+}
+
+.logo6 {
+  opacity: 0.2;
+  position: absolute;
+  height: auto;
+  z-index: -1;
+  left: 0%;
+  transform: translateX(-50%) translateY(740%);
+}
+
+.logo7 {
+  opacity: 0.2;
+  position: absolute;
+  height: auto;
+  z-index: -1;
+  left: 50%;
+  transform: translateX(-50%) translateY(880%);
+}
+
+.logo8 {
+  opacity: 0.2;
+  position: absolute;
+  height: auto;
+  z-index: -1;
+  left: 100%;
+  transform: translateX(-50%) translateY(1020%);
+}
+
+.logo9 {
+  opacity: 0.2;
+  position: absolute;
+  height: auto;
+  z-index: -1;
+  left: 0%;
+  transform: translateX(-50%) translateY(1160%);
+}
+
+.logo10 {
+  opacity: 0.2;
+  position: absolute;
+  height: auto;
+  z-index: -1;
+  left: 50%;
+  transform: translateX(-50%) translateY(1300%);
+}
+
+.logo11 {
+  opacity: 0.2;
+  position: absolute;
+  height: auto;
+  z-index: -1;
+  left: 100%;
+  transform: translateX(-50%) translateY(1440%);
+}
+
+.logo12 {
+  opacity: 0.2;
+  position: absolute;
+  height: auto;
+  z-index: -1;
+  left: 0%;
+  transform: translateX(-50%) translateY(1580%);
 }
 
 .fotoGeral {

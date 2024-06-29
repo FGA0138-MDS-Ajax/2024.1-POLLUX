@@ -17,9 +17,24 @@ function Divulgation() {
     return (
         <>
             <Header />
+            <img src="fotoGeral.svg" alt="fotoGeral" className='fotoGeral' />
+
+            <div class="logo-container">
+                <img className='logo1' src='/edraV.svg' alt='logoedraV' />
+                <img className='logo2' src='/edraV.svg' alt='logoedraV' />
+                <img className='logo3' src='/edraV.svg' alt='logoedraV' />
+                <img className='logo4' src='/edraV.svg' alt='logoedraV' />
+                <img className='logo5' src='/edraV.svg' alt='logoedraV' />
+                <img className='logo6' src='/edraV.svg' alt='logoedraV' />
+                <img className='logo7' src='/edraV.svg' alt='logoedraV' />
+                <img className='logo8' src='/edraV.svg' alt='logoedraV' />
+                <img className='logo9' src='/edraV.svg' alt='logoedraV' />
+                <img className='logo10' src='/edraV.svg' alt='logoedraV' />
+                <img className='logo11' src='/edraV.svg' alt='logoedraV' />
+                <img className='logo12' src='/edraV.svg' alt='logoedraV' />
+            </div>
+
             <section className='containerDivulgacao'>
-                <img className='img-edraV' src='/edraV.svg' alt='logoedraV' />
-                <img src="fotoGeral.svg" alt="fotoGeral" className='fotoGeral' />
                 <section id="quemSomos"></section>
                 <h1 className="topicos">
                     Quem somos?
@@ -30,9 +45,11 @@ function Divulgation() {
                 <p className="corpoTexto">
                     A Equipe de Robótica Aérea (EDRA) é uma equipe de competição da Universidade de Brasília especializada em aeronaves de voo vertical. A equipe teve início no primeiro semestre de 2016, por iniciativa de um grupo de alunos de Engenharia Aeroespacial que buscavam participar de uma competição de helidesign. Hoje, almejando capacitar-se para uma realidade mais emergente no campo das asas rotativas, o foco da equipe está nas competições de micro-veículos aéreos não tripulados e com rotores, popularmente conhecidos como drones.
                 </p>
+
                 <p className="corpoTexto">
                     A equipe começou com 18 membros, dentre eles, alunos das engenharias Aeroespacial, Eletrônica e de Software - do campus UnB Gama, evidenciando a interdisciplinaridade da equipe e dos projetos realizados. Nossa principal missão era desenvolver tecnologias e aliar conhecimentos adquiridos em sala de aula à execução de projetos e ao exercício da liderança. Capacitando-nos, assim, para participar de eventos que visem ao desenvolvimento técnico de cada membro, bem como da equipe como um todo.
                 </p>
+
                 <p className="corpoTexto">
                     Em 2017, a primeira competição da qual a EDRA participou foi organizada pela American Helicopter Society (AHS) e era intitulada "24 Hour Hovering Machine Conceptual Design". O projeto consistia no desenvolvimento conceitual de uma aeronave que fosse capaz de pairar no ar durante 24 horas por um circuito pré-estabelecido. A EDRA foi uma das primeiras equipes do País a participar dessa competição, em que universidades de vários países também submeteram seus projetos.
                 </p>
@@ -51,6 +68,7 @@ function Divulgation() {
                 <h4 className="subTopico">
                     Objetivo
                 </h4>
+
                 <p className="corpoTexto">
                     (*) A Equipe de Robótica Aérea (EDRA) é uma equipe de competição especializada em competições de aeronaves de voo vertical. Um dos nossos objetivos é integrar os conhecimentos adquiridos na teoria com a prática a fim de aprimorar capacidades.
                 </p>
@@ -95,6 +113,7 @@ function Divulgation() {
                 <p className="corpoTextoAreas">
                     <strong>Design estrutural</strong>
                 </p>
+
                 <p className="corpoTexto">
                     A área de Design Estrutural é responsável pelo planejamento, construção, design e testagem de todos os componentes estruturais dos drones. A área determina as dimensões dos drones de cada missão, define os materiais, analisa as cargas estáticas, decide a geometria, analisa as demandas estruturais das áreas adjacentes e soluciona os problemas de otimização dos frames. Além disso, produz simulações estruturais para garantir que todos os critérios estejam sendo seguidos e validados. Dessa forma, consegue chegar nas melhores alternativas estruturais de acordo com a disponibilidade dos componentes da equipe.
                 </p>
@@ -154,7 +173,6 @@ function Divulgation() {
                         <p>Matheus Faria</p>
                     </div>
                 </div>
-
 
                 <section id="nossosDrones"></section>
                 <div className="tituloComIcon">
@@ -262,7 +280,6 @@ function Divulgation() {
                     </div>
 
                 </div>
-
 
                 <section id="processoSeletivo"></section>
                 <div className="tituloComIcon">
