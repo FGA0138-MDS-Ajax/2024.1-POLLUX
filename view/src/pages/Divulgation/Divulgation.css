@@ -1,10 +1,9 @@
 .containerDivulgacao {
-  padding-top: 120px;
-  /* Ajuste este valor conforme a altura do header */
+  padding-top: 7.5rem;
   position: relative;
   z-index: 2;
-  margin-left: 120px;
-  margin-right: 120px;
+  margin-left: 7.5rem;
+  margin-right: 7.5rem;
 }
 
 .corpoTexto,
@@ -19,7 +18,6 @@
   opacity: 0.2;
   position: absolute;
   height: auto;
-  /* Mantém a proporção da imagem */
   z-index: -1;
 }
 
@@ -28,48 +26,43 @@
 }
 
 .topicos {
-  margin-top: 50px;
-  padding-right: 10px;
-  font-size: 40px;
+  margin-top: 3.125rem;
+  padding-right: 0.625rem;
+  font-size: 2rem;
 }
 
 .subTopico {
-  margin-left: 40px;
-  margin-top: 20px;
-  font-size: 30px;
+  margin-left: 2.5rem;
+  margin-top: 1.25rem;
+  font-size: 1.4rem;
 }
 
 .corpoTexto {
-  margin-top: 10px;
-  font-size: 20px;;
+  margin-top: 0.625rem;
+  font-size: 1rem;
 }
 
 .corpoTextoAreas {
-  margin-top: 10px;
+  margin-top: 1.875rem;
   display: flex;
   justify-content: center;
-  margin-top: 30px;
   color: #414191;
-  font-size: 27px;
+  font-size: 1.25rem;
 }
 
 .circular-imagem {
-  width: 100px;
-  height: 100px;
+  width: 6.25rem;
+  height: 6.25rem;
   border-radius: 50%;
   object-fit: cover;
-  /* Garante que a imagem cubra completamente o elemento */
   overflow: hidden;
-  /* Garante que a imagem não transborde dos limites */
-  margin-left: 60px;
   margin: 0 auto;
 }
 
 .iconDrone {
-  width: 60px;
+  width: 3.75rem;
   height: auto;
-  /* Mantém a proporção da imagem */
-  margin-top: 50px;
+  margin-top: 3.125rem;
 }
 
 .tituloComIcon {
@@ -80,48 +73,45 @@
 .corpoDrones {
   display: flex;
   align-items: flex-start;
-  margin-bottom: 20px;
+  margin-bottom: 1.25rem;
 }
 
 .tudoDrones {
-  margin-top: 20px;
-  margin-left: 40px;
-  margin-right: 40px;
+  margin-top: 1.25rem;
+  margin-left: 2.5rem;
+  margin-right: 2.5rem;
 }
 
 .iconDroneImg {
-  margin-right: 80px;
-  /* Espaço entre a imagem e o texto */
-  width: 400px;
+  margin-right: 5rem;
+  width: 25rem;
   height: auto;
-  margin-top: 20px;
+  margin-top: 1.25rem;
 }
 
 .corpoEventosContainer {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(18.75rem, 1fr));
 }
 
 .corpoEventos {
   text-align: center;
-
 }
 
 .legendaEventos {
-  font-size: 16px;
+  font-size: 1rem;
   margin: 0;
 }
 
 .iconEventoImg {
-  margin-right: 80px;
-  /* Espaço entre a imagem e o texto */
-  width: 400px;
+  margin-right: 5rem;
+  width: 25rem;
   height: auto;
-  margin-top: 20px;
+  margin-top: 1.25rem;
 }
 
 .IconEventoImg2 {
-  width: 300px;
+  width: 18.75rem;
   height: auto;
 }
 
@@ -131,34 +121,31 @@
 }
 
 .iconLupa {
-  width: 30px;
+  width: 1.875rem;
   height: auto;
-  /* Mantém a proporção da imagem */
-  margin-top: 50px;
-  margin-right: 20px;
+  margin-top: 3.125rem;
+  margin-right: 1.25rem;
 }
 
 .bntPS {
   display: flex;
   justify-content: center;
-  /* Horizontalmente */
-  gap: 120px;
+  gap: 7.5rem;
   align-items: center;
-  /* Verticalmente */
   width: 100%;
-  padding: 20px;
+  padding: 1.25rem;
 }
 
 .bntEditalForms {
-  padding: 15px 70px;
-  font-size: 16px;
+  padding: 0.9375rem 4.375rem;
+  font-size: 1rem;
   font-family: Poppins;
   background-color: #414191;
-  color: White;
+  color: white;
   border: none;
-  border-radius: 10px;
+  border-radius: 0.625rem;
   cursor: pointer;
-  margin-top: 10px;
+  margin-top: 0.625rem;
 }
 
 .bntEditalForms:hover {
@@ -166,29 +153,29 @@
 }
 
 .legenda {
-  margin-top: 10px;
-  font-size: 10px;
+  margin-top: 0.625rem;
+  font-size: 0.625rem;
   text-align: center;
   width: 100%;
 }
 
 .iconAgenda {
-  margin-right: 20px;
-  width: 30px;
+  margin-right: 1.25rem;
+  width: 1.875rem;
   height: auto;
-  margin-top: 50px;
+  margin-top: 3.125rem;
 }
 
 .tudoEventosComp {
-  margin-top: 20px;
-  margin-left: 40px;
-  margin-right: 40px;
+  margin-top: 1.25rem;
+  margin-left: 2.5rem;
+  margin-right: 2.5rem;
 }
 
 .corpoEventos {
   display: flex;
   align-items: flex-start;
-  margin-bottom: 20px;
+  margin-bottom: 1.25rem;
 }
 
 .textoEventos {
@@ -197,27 +184,26 @@
 }
 
 .campeonatoX {
-  margin-top: 20px;
+  margin-top: 1.25rem;
 }
 
 .campeonatoY {
-  margin-top: 20px;
+  margin-top: 1.25rem;
 }
 
 .paragrafo {}
 
 .fotosIntegrantes {
-  margin-top: 10px;
+  margin-top: 0.625rem;
   text-align: center;
   display: flex;
-  gap: 60px;
-  margin-bottom: 20px;
+  gap: 3.75rem;
+  margin-bottom: 1.25rem;
   justify-content: center;
 }
 
 .legendaFotos {
-  margin-top: 20px;
-  font-size: 12px;
-  /* Tamanho da fonte (ajuste conforme necessário) */
+  margin-top: 1.25rem;
+  font-size: 0.75rem;
   text-align: center;
 }

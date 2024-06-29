@@ -4,7 +4,16 @@ import TablePS from "../../components/TablePS";
 import TableProx from "../../components/TableProx";
 import './Divulgation.css'
 
+const handleButtonClick = (url) => {
+    if (!url) {
+        alert('Não está disponível no momento');
+    } else {
+        window.location.href = url;
+    }
+};
+
 function Divulgation() {
+
     return (
         <>
             <Header />
@@ -272,8 +281,12 @@ function Divulgation() {
                     Na EDRA, você terá a chance de trabalhar em projetos reais e inovadores, desenvolvendo habilidades em programação, eletrônica, mecânica, sistemas propulsivos e gestão de projetos. Essa vivência prática será um diferencial no seu currículo, ampliando suas perspectivas profissionais e podendo abrir portas para oportunidades incríveis. Não perca a chance de fazer parte da maior equipe de drones autônomos do Centro-Oeste! Inscreva-se no nosso processo seletivo e dê o primeiro passo rumo a um futuro brilhante!
                 </p>
                 <div className="bntPS">
-                    <button className="bntEditalForms">Edital</button>
-                    <button className="bntEditalForms">Forms</button>
+                    <button className="bntEditalForms" onClick={() => handleButtonClick('')}>
+                        Edital
+                    </button>
+                    <button className="bntEditalForms" onClick={() => handleButtonClick('')}>
+                        Forms
+                    </button>
                 </div>
 
                 <h4 className="subTopico">
