@@ -9,16 +9,16 @@ import axios from 'axios';
 const fetchEvents = async () => {
   try {
     const response = await axios.get('http://localhost:3000/eventos');
-    console.log('Resposta da API:', response.data);
+    //console.log('Resposta da API:', response.data);
 
     if (Array.isArray(response.data)) {
       return response.data;
     } else {
-      console.error('A resposta da API não é um array:', response.data);
+      //console.error('A resposta da API não é um array:', response.data);
       return [];
     }
   } catch (error) {
-    console.error('Erro ao buscar eventos:', error);
+    //console.error('Erro ao buscar eventos:', error);
     return [];
   }
 };
@@ -36,10 +36,10 @@ const Calendar = () => {
   const listMonthEvents = async () => {
     try {
       const response = await fetchEvents();
-      console.log('Eventos obtidos do banco de dados:', response);
+      //console.log('Eventos obtidos do banco de dados:', response);
   
       if (!Array.isArray(response)) {
-        console.error('Erro: response não é um array');
+        //console.error('Erro: response não é um array');
         return;
       }
   
@@ -72,7 +72,7 @@ const Calendar = () => {
   
       document.querySelector('.events-month').innerHTML = eventsList;
     } catch (error) {
-      console.error('Erro ao buscar eventos:', error);
+      //console.error('Erro ao buscar eventos:', error);
     }
   };
   
@@ -95,7 +95,7 @@ const Calendar = () => {
             navigate("/login")
           }
       }).catch(function(error) {
-          console.error(error);
+          //console.error(error);
       });
   } catch (err) {
       navigate("/login");
@@ -209,10 +209,10 @@ const Calendar = () => {
   const updateEvents = async (date) => {
     try {
       const allEvents = await fetchEvents();
-      console.log('Eventos obtidos do banco de dados:', allEvents);
+      //console.log('Eventos obtidos do banco de dados:', allEvents);
   
       if (!Array.isArray(allEvents)) {
-        console.error('Erro: allEvents não é um array');
+        //console.error('Erro: allEvents não é um array');
         return;
       }
   
@@ -223,7 +223,7 @@ const Calendar = () => {
         new Date(eventObj.data).getFullYear() === year
       );
   
-      console.log('Eventos do dia filtrados:', dayEvents);
+      //console.log('Eventos do dia filtrados:', dayEvents);
   
       let events = "";
       if (dayEvents.length > 0) {
@@ -255,7 +255,7 @@ const Calendar = () => {
         });
       });
     } catch (error) {
-      console.error('Erro ao buscar eventos:', error);
+      //console.error('Erro ao buscar eventos:', error);
     }
   };
 
@@ -332,13 +332,13 @@ const Calendar = () => {
     axios.post("http://localhost:3000/eventos", res)
     .then(function (response) {
       // Resposta recebida com sucesso
-      console.log("Documento criado com sucesso:", response.data);
+      //console.log("Documento criado com sucesso:", response.data);
       const currentDate = new Date();
       updateEvents(currentDate.getDate(), currentDate.getMonth(), currentDate.getFullYear())
     })
     .catch(function (error) {
       // Ocorreu um erro ao fazer a solicitação
-      console.error("Erro ao criar documento:", error);
+      //console.error("Erro ao criar documento:", error);
     });
 
   };

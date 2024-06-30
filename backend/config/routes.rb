@@ -4,6 +4,15 @@ Rails.application.routes.draw do
   resources :storages
   resources :documentos
   resources :users
+  resources :tasks do
+    member do
+      post 'delete', action: 'destroy'
+      post 'edit', action: 'update'
+    end
+    collection do
+      patch 'batch_update', action: 'batch_update'
+    end
+  end
   resources :acaos
   resources :reuniaos do
     post 'new_link', on: :member

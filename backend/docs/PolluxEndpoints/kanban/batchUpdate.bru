@@ -1,0 +1,34 @@
+meta {
+  name: batchUpdate
+  type: http
+  seq: 5
+}
+
+patch {
+  url: {{base_url}}/tasks/batch_update
+  body: json
+  auth: none
+}
+
+body:json {
+  [
+    {
+      "id":1,
+      "task":{
+      "quem":"Fulano de Tals",
+      "tarefa":"Teste Update",
+      "position":0,
+      "status":"Em andamento"
+      }
+    }
+    ,{
+      "id":2,
+      "task":{
+      "quem":"eu",
+      "tarefa":"Teste Create Front ",
+      "position":1,
+      "status":"Pendente"
+      }
+    }
+  ]
+}

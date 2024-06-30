@@ -1,11 +1,13 @@
+import { getTasks, createTask, updateTask, deleteTask, batchUpdateTask } from '../../queries/kanban';
 import './Kanban.css';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 function Kanban() {
   const [showPopup, setShowPopup] = useState(false);
   const [currentColumn, setCurrentColumn] = useState(null);
   const [tarefa, setTarefa] = useState('');
   const [quem, setQuem] = useState('');
+  const [position, setPosition] = useState('');
   const [editIndex, setEditIndex] = useState(-1); // Adiciona um estado para controlar o índice da tarefa em edição
 
   const [tarefas, setTarefas] = useState({
@@ -14,12 +16,32 @@ function Kanban() {
     Finalizado: []
   });
 
+  useEffect(() => {
+    loadTasks();
+  }, []);
+
+  const loadTasks = async () => {
+    const response = await getTasks();
+    const tasks = response.data.reduce((acc, task) => {
+      acc[task.status] = acc[task.status] || [];
+      acc[task.status].push({ id: task.id, quem: task.assignee, tarefa: task.title });
+      return acc;
+    }, {
+      Pendente: [],
+      'Em andamento': [],
+      Finalizado: []
+    });
+    setTarefas(tasks);
+  };
+
   const handleBntClick = (column) => {
     setCurrentColumn(column);
     setShowPopup(true);
     setEditIndex(-1); // Limpar o editIndex ao abrir o pop-up para adicionar nova tarefa
+    const newPosition = tarefas[column].length + 1; //posição de uma nova tarefa
     setTarefa(''); // Limpar os campos ao abrir o pop-up para adicionar nova tarefa
     setQuem(''); // Limpar os campos ao abrir o pop-up para adicionar nova tarefa
+    setPosition(newPosition); //setar a posição na coluna de cada card
   };
 
   const handleClosePopup = () => {
@@ -35,26 +57,24 @@ function Kanban() {
     setQuem(e.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (tarefa.trim() !== '' && quem.trim() !== '') {
-      if (editIndex >= 0) { // Alterado para verificar se editIndex é maior ou igual a 0
+      const taskData = {
+        title: tarefa,
+        assignee: quem,
+        status: currentColumn,
+        position: position
+      };
+      if (editIndex >= 0) {// Alterado para verificar se editIndex é maior ou igual a 0
         // Se editIndex for maior ou igual a 0, significa que estamos editando uma tarefa existente
-        setTarefas((prevTarefas) => {
-          const newTarefas = [...prevTarefas[currentColumn]];
-          newTarefas[editIndex] = { quem, tarefa };
-          return {
-            ...prevTarefas,
-            [currentColumn]: newTarefas,
-          };
-        });
-        setEditIndex(-1); // Limpa o editIndex após a edição
+        const task = tarefas[currentColumn][editIndex];
+        await updateTask(task.id, taskData);
+        loadTasks();
       } else {
         // Caso contrário, estamos adicionando uma nova tarefa
-        setTarefas((prevTarefas) => ({
-          ...prevTarefas,
-          [currentColumn]: [...prevTarefas[currentColumn], { quem, tarefa }]
-        }));
+        await createTask(taskData);
+        loadTasks();
       }
       setShowPopup(false);
       setTarefa('');
@@ -62,14 +82,10 @@ function Kanban() {
     }
   };
 
-
-  const handleRemoveTarefa = (column, index) => {
-    const updatedTarefas = [...tarefas[column]];
-    updatedTarefas.splice(index, 1);
-    setTarefas((prevTarefas) => ({
-      ...prevTarefas,
-      [column]: updatedTarefas
-    }));
+  const handleRemoveTarefa = async (column, index) => {
+    const task = tarefas[column][index];
+    await deleteTask(task.id);
+    loadTasks();
   };
 
   const handleDragStart = (ev, column, index) => {
@@ -80,118 +96,125 @@ function Kanban() {
     ev.preventDefault();
   };
 
-  const handleDrop = (ev, targetColumn) => {
+  const handleDrop = async (ev, targetColumn) => {
     ev.preventDefault();
     const data = JSON.parse(ev.dataTransfer.getData('text/plain'));
     const { column: sourceColumn, index: sourceIndex } = data;
+    let newTasks = { ...tarefas };
+
     if (sourceColumn === targetColumn) {
-      // Reorganiza na mesma coluna
-      const newTasks = Array.from(tarefas[targetColumn]);
-      const [removedTask] = newTasks.splice(sourceIndex, 1);
-      newTasks.splice(ev.target.dataset.index, 0, removedTask);
-      setTarefas((prevTarefas) => ({
-        ...prevTarefas,
-        [targetColumn]: newTasks
-      }));
+      // Reordenar na mesma coluna
+      const reorderedTasks = Array.from(newTasks[targetColumn]);
+      const [movedTask] = reorderedTasks.splice(sourceIndex, 1);
+      const targetIndex = parseInt(ev.target.dataset.index, 10);
+      reorderedTasks.splice(targetIndex, 0, movedTask);
+
+      // Update positions
+      reorderedTasks.forEach((task, idx) => task.position = idx);
+      newTasks[targetColumn] = reorderedTasks;
+
+      await batchUpdateTask({tasks: reorderedTasks});
     } else {
-      // Move para uma coluna diferente
-      const task = tarefas[sourceColumn][sourceIndex];
-      const newSourceTasks = tarefas[sourceColumn].filter((_, i) => i !== sourceIndex);
-      setTarefas((prevTarefas) => ({
-        ...prevTarefas,
-        [sourceColumn]: newSourceTasks,
-        [targetColumn]: [...prevTarefas[targetColumn], task]
-      }));
+      // Mover para outra coluna
+      const sourceTasks = Array.from(newTasks[sourceColumn]);
+      const [movedTask] = sourceTasks.splice(sourceIndex, 1);
+      movedTask.position = newTasks[targetColumn].length;
+      movedTask.status = targetColumn;
+      newTasks[targetColumn] = [...newTasks[targetColumn], movedTask];
+      newTasks[sourceColumn] = sourceTasks;
+
+      // Mudar posições na coluna
+      newTasks[targetColumn].forEach((task, idx) => task.position = idx);
+      newTasks[sourceColumn].forEach((task, idx) => task.position = idx);
+
+      await batchUpdateTask({tasks: [...newTasks[targetColumn], ...newTasks[sourceColumn]]});
     }
+
+    setTarefas(newTasks);
   };
 
   const handleDoubleClick = (task, column) => {
-    const { quem, tarefa } = task;
-    setTarefa(tarefa);
-    setQuem(quem);
+    setTarefa(task.tarefa);
+    setQuem(task.quem);
     setEditIndex(tarefas[column].findIndex(t => t.tarefa === task.tarefa)); // Encontra o índice da tarefa na coluna específica comparando o texto da tarefa
     setCurrentColumn(column); // Define a coluna atual para uso na edição
     setShowPopup(true); // Mostrar o popup de edição
   };
 
-
-
-  return (
-    <div className='kanban'>
-
-      <div className='container'>
-        {['Pendente', 'Em andamento', 'Finalizado'].map(column => (
-          <div
-            key={column}
-            className='colunas'
-            onDragOver={handleDragOver}
-            onDrop={(e) => handleDrop(e, column)}
-          >
-            <div className='tituloColuna'>
-              <h3>{column}</h3>
-            </div>
-            <div className='corpoColuna'>
-              {tarefas[column].map((tarefa, index) => (
-                <div
-                  key={index}
-                  className='tarefaItem'
-                  draggable='true'
-                  onDragStart={(e) => handleDragStart(e, column, index)}
-                  data-index={index} // Add index to the data attribute
-                  onDoubleClick={() => handleDoubleClick(tarefa, column)} // Handle double click
-                >
-                  <p>{tarefa.tarefa}</p>
-                  <div className="separador"></div>
-                  <p>{tarefa.quem}</p>
-                  <img
-                    src='trash.svg'
-                    alt='img-trash'
-                    onClick={() => handleRemoveTarefa(column, index)}
-                  />
-                </div>
-              ))}
-            </div>
-            <button className='bntTarefa' onClick={() => handleBntClick(column)}>
-              +
-            </button>
+return (
+  <div className='kanban'>
+    <div className='container'>
+      {['Pendente', 'Em andamento', 'Finalizado'].map(column => (
+        <div
+          key={column}
+          className='colunas'
+          onDragOver={handleDragOver}
+          onDrop={(e) => handleDrop(e, column)}
+        >
+          <div className='tituloColuna'>
+            <h3>{column}</h3>
           </div>
-        ))}
-      </div>
-
-      {showPopup && (
-        <div className='popup'>
-          <div className='popup-content'>
-            <span className='close' onClick={handleClosePopup}>
-              &times;
-            </span>
-            <form onSubmit={handleSubmit}>
-              <label className='caixa'>
-                Insira a tarefa:
-                <input
-                  type='text'
-                  value={tarefa}
-                  onChange={handleTarefaChange}
-                  required
+          <div className='corpoColuna'>
+            {tarefas[column].map((tarefa, index) => (
+              <div
+                key={index}
+                className='tarefaItem'
+                draggable='true'
+                onDragStart={(e) => handleDragStart(e, column, index)}
+                data-index={index} // Adiciona um rastreador para os dados
+                onDoubleClick={() => handleDoubleClick(tarefa, column)} // Handler do double click (editar/excluir)
+              >
+                <p>{tarefa.tarefa}</p>
+                <div className="separador"></div>
+                <p>{tarefa.quem}</p>
+                <img
+                  src='trash.svg'
+                  alt='img-trash'
+                  onClick={() => handleRemoveTarefa(column, index)}
                 />
-              </label>
-              <label className='caixa'>
-                Responsáveis:
-                <input
-                  type='text'
-                  value={quem}
-                  onChange={handleQuemChange}
-                  required
-                />
-              </label>
-              <button type='submit' className='botao'>
-                {editIndex > -1 ? 'Salvar' : 'Adicionar'} {/* Alterar o texto do botão dependendo se está editando ou adicionando */}
-              </button>
-            </form>
+              </div>
+            ))}
           </div>
+          <button className='bntTarefa' onClick={() => handleBntClick(column)}>
+            +
+          </button>
         </div>
-      )}
+      ))}
     </div>
-  );
+    {showPopup && (
+      <div className='popup'>
+        <div className='popup-content'>
+          <span className='close' onClick={handleClosePopup}>
+            &times;
+          </span>
+          <form onSubmit={handleSubmit}>
+            <label className='caixa'>
+              Insira a tarefa:
+              <input
+                type='text'
+                value={tarefa}
+                onChange={handleTarefaChange}
+                required
+              />
+            </label>
+            <label className='caixa'>
+              Responsáveis:
+              <input
+                type='text'
+                value={quem}
+                onChange={handleQuemChange}
+                required
+              />
+            </label>
+            <button type='submit' className='botao'>
+              {editIndex > -1 ? 'Salvar' : 'Adicionar'} {/* Alterar o texto do botão dependendo se está editando ou adicionando */}
+            </button>
+          </form>
+        </div>
+      </div>
+    )}
+  </div>
+);
 }
 
 export default Kanban;
