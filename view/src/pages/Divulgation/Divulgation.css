@@ -2,14 +2,17 @@ html,
 body {
   overflow-x: hidden;
   /* Impedir rolagem horizontal */
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  overflow-y: auto;
 }
 
 .containerDivulgacao {
   padding-top: 7.5rem;
   position: relative;
   z-index: 2;
-  margin-left: 7.5rem;
-  margin-right: 7.5rem;
+  margin: 0 7.5rem;
   overflow-x: hidden;
   /* Impedir rolagem horizontal */
 }
@@ -22,113 +25,81 @@ body {
   text-align: justify;
 }
 
-
-.logo1 {
-  opacity: 0.2;
-  position: absolute;
-  height: auto;
-  z-index: -1;
-  left: 50%;
-  transform: translateX(-50%) translateY(40%);
-}
-
-.logo2 {
-  opacity: 0.2;
-  position: absolute;
-  height: auto;
-  z-index: -1;
-  left: 100%;
-  transform: translateX(-50%) translateY(180%);
-}
-
-.logo3 {
-  opacity: 0.2;
-  position: absolute;
-  height: auto;
-  z-index: -1;
-  left: 0%;
-  transform: translateX(-50%) translateY(320%);
-}
-
-.logo4 {
-  opacity: 0.2;
-  position: absolute;
-  height: auto;
-  z-index: -1;
-  left: 50%;
-  transform: translateX(-50%) translateY(460%);
-}
-
-.logo5 {
-  opacity: 0.2;
-  position: absolute;
-  height: auto;
-  z-index: -1;
-  left: 100%;
-  transform: translateX(-50%) translateY(600%);
-}
-
-.logo6 {
-  opacity: 0.2;
-  position: absolute;
-  height: auto;
-  z-index: -1;
-  left: 0%;
-  transform: translateX(-50%) translateY(740%);
-}
-
-.logo7 {
-  opacity: 0.2;
-  position: absolute;
-  height: auto;
-  z-index: -1;
-  left: 50%;
-  transform: translateX(-50%) translateY(880%);
-}
-
-.logo8 {
-  opacity: 0.2;
-  position: absolute;
-  height: auto;
-  z-index: -1;
-  left: 100%;
-  transform: translateX(-50%) translateY(1020%);
-}
-
-.logo9 {
-  opacity: 0.2;
-  position: absolute;
-  height: auto;
-  z-index: -1;
-  left: 0%;
-  transform: translateX(-50%) translateY(1160%);
-}
-
+.logo1,
+.logo2,
+.logo3,
+.logo4,
+.logo5,
+.logo6,
+.logo7,
+.logo8,
+.logo9,
 .logo10 {
   opacity: 0.2;
   position: absolute;
   height: auto;
   z-index: -1;
   left: 50%;
-  transform: translateX(-50%) translateY(1300%);
+  transform: translateX(-50%);
+  width: 41%;
 }
 
-.logo11 {
-  opacity: 0.2;
-  position: absolute;
-  height: auto;
-  z-index: -1;
+.logo1 {
+  top: 40%;
+}
+
+.logo2 {
+  top: 180%;
   left: 100%;
-  transform: translateX(-50%) translateY(1440%);
+  transform: translateX(-50%);
 }
 
-.logo12 {
-  opacity: 0.2;
-  position: absolute;
-  height: auto;
-  z-index: -1;
+.logo3 {
+  top: 320%;
   left: 0%;
-  transform: translateX(-50%) translateY(1580%);
+  transform: translateX(-50%);
+}
+
+.logo4 {
+  top: 460%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.logo5 {
+  top: 600%;
+  left: 100%;
+  transform: translateX(-50%);
+}
+
+.logo6 {
+  top: 740%;
+  left: 0%;
+  transform: translateX(-50%);
+}
+
+.logo7 {
+  top: 880%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.logo8 {
+  top: 1020%;
+  left: 100%;
+  transform: translateX(-50%);
+}
+
+.logo9 {
+  top: 1160%;
+  left: 0%;
+  transform: translateX(-50%);
+}
+
+.logo10 {
+  left: 50%;
+  transform: translateX(-50%);
+  top: calc(1300% - 9.2rem);
 }
 
 .fotoGeral {
@@ -187,9 +158,7 @@ body {
 }
 
 .tudoDrones {
-  margin-top: 1.25rem;
-  margin-left: 2.5rem;
-  margin-right: 2.5rem;
+  margin: 1.25rem 2.5rem;
 }
 
 .iconDroneImg {
@@ -277,9 +246,7 @@ body {
 }
 
 .tudoEventosComp {
-  margin-top: 1.25rem;
-  margin-left: 2.5rem;
-  margin-right: 2.5rem;
+  margin: 1.25rem 2.5rem;
 }
 
 .corpoEventos {
@@ -316,4 +283,44 @@ body {
   margin-top: 1.25rem;
   font-size: 0.75rem;
   text-align: center;
+}
+
+/* Media queries para telas menores */
+@media (max-width: 100px) {
+  .containerDivulgacao {
+    margin: 0 3rem;
+  }
+
+  .logo1,
+  .logo2,
+  .logo3,
+  .logo4,
+  .logo5,
+  .logo6,
+  .logo7,
+  .logo8,
+  .logo9,
+  .logo10,
+  .logo11,
+  .logo12 {
+    display: none; /* Oculta as logos em telas menores que 1200px */
+  }
+}
+
+/* Ajuste de tamanho das logos para telas maiores */
+@media (min-width: 1800px) {
+  .logo1,
+  .logo2,
+  .logo3,
+  .logo4,
+  .logo5,
+  .logo6,
+  .logo7,
+  .logo8,
+  .logo9,
+  .logo10,
+  .logo11,
+  .logo12 {
+    max-width: 200%; /* Aumenta o tamanho das logos em telas maiores que 1600px */
+  }
 }

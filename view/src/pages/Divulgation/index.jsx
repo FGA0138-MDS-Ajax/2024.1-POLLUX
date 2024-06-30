@@ -19,19 +19,10 @@ function Divulgation() {
             <Header />
             <img src="fotoGeral.svg" alt="fotoGeral" className='fotoGeral' />
 
-            <div class="logo-container">
-                <img className='logo1' src='/edraV.svg' alt='logoedraV' />
-                <img className='logo2' src='/edraV.svg' alt='logoedraV' />
-                <img className='logo3' src='/edraV.svg' alt='logoedraV' />
-                <img className='logo4' src='/edraV.svg' alt='logoedraV' />
-                <img className='logo5' src='/edraV.svg' alt='logoedraV' />
-                <img className='logo6' src='/edraV.svg' alt='logoedraV' />
-                <img className='logo7' src='/edraV.svg' alt='logoedraV' />
-                <img className='logo8' src='/edraV.svg' alt='logoedraV' />
-                <img className='logo9' src='/edraV.svg' alt='logoedraV' />
-                <img className='logo10' src='/edraV.svg' alt='logoedraV' />
-                <img className='logo11' src='/edraV.svg' alt='logoedraV' />
-                <img className='logo12' src='/edraV.svg' alt='logoedraV' />
+            <div className="logo-container">
+                {[...Array(10)].map((_, index) => (
+                    <img key={index} className={`logo${index + 1}`} src="/edraV.svg" alt={`logoedraV${index + 1}`} />
+                ))}
             </div>
 
             <section className='containerDivulgacao'>
