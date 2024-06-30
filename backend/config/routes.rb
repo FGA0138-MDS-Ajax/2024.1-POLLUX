@@ -7,6 +7,15 @@ Rails.application.routes.draw do
   resources :tarefas
   resources :acaos
   resources :users
+  resources :tasks do
+    member do
+      post 'delete', action: 'destroy'
+      post 'edit', action: 'update'
+    end
+    collection do
+      patch 'batch_update', action: 'batch_update'
+    end
+  end
   resources :reuniaos do
     post 'new_link', on: :member
     put 'update_link/:link_id', action: 'update_link'

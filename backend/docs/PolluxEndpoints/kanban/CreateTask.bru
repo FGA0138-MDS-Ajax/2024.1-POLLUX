@@ -1,0 +1,21 @@
+meta {
+  name: CreateTask
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{base_url}}/tasks
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "title": "Teste Update",
+    "assignee": "Fulano de Tals",
+    "status": "Pendente",
+    "position": 1
+  }
+      
+}

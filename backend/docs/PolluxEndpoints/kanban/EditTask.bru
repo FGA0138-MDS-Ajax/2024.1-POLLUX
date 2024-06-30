@@ -1,0 +1,20 @@
+meta {
+  name: EditTask
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{base_url}}/tasks/3/edit
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "title": "Task editada bruno",
+    "assignee": "Fulano de Tals",
+    "status": "Pendente",
+    "position": 1
+  }
+}

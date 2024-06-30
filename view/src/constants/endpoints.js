@@ -27,5 +27,11 @@ export default {
         updateLink: (id, linkId) => `/reuniaos/${id}/update_link/${linkId}`,
         deleteLink: (id, linkId) => `/reuniaos/${id}/delete_link/${linkId}`,
         editPresence: (id) => `/reuniaos/${id}/edit_presence`,
+    },
+    task: {
+        base: '/tasks',
+        single: (id) => `/tasks/${id}`,
+        batch: '/tasks/batch_update',
+        delete: (id) => `/tasks/${id}/delete`,
     }
 }
