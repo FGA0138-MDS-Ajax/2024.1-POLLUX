@@ -1,5 +1,10 @@
 import './SideBar.css';
 import { Link } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
+
+function logOut(){
+        document.cookie = `jwtToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+}
 
 function SideBar() {
     return (
@@ -25,8 +30,8 @@ function SideBar() {
             </div>
             <div className='sidebar-bottom'>
                 <nav className="embaixo">
-                    <Link to='/'>
-                        <img src="logout.svg" alt="logout" className="sidebar-image img-logout" />
+                    <Link to='/' onClick={() => logOut()}>
+                        <img src="logout.svg" alt="logout" className="sidebar-image img-logout"/>
                     </Link>
                     <Link to='/detail'>
                         <img src="edraV.svg" alt="edraV" />
