@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_18_024138) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_30_021134) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -25,12 +25,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_18_024138) do
   end
 
   create_table "acessos", force: :cascade do |t|
+    t.boolean "acesso_documents"
+    t.boolean "acesso_meetings"
+    t.boolean "acesso_calendar"
+    t.boolean "acesso_finance"
+    t.boolean "acesso_admin"
     t.bigint "user_id", null: false
-    t.boolean "acesso_documents", default: false
-    t.boolean "acesso_meetings", default: false
-    t.boolean "acesso_calendar", default: false
-    t.boolean "acesso_finance", default: false
-    t.boolean "acesso_admin", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_acessos_on_user_id"
@@ -39,10 +39,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_18_024138) do
   create_table "documentos", force: :cascade do |t|
     t.string "nome"
     t.string "link"
-    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_documentos_on_user_id"
   end
 
   create_table "eventos", force: :cascade do |t|
@@ -50,24 +48,20 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_18_024138) do
     t.string "data"
     t.string "HoraInicio"
     t.string "HoraTermino"
-    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_eventos_on_user_id"
   end
 
   create_table "reuniaos", force: :cascade do |t|
     t.string "nome"
-    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_reuniaos_on_user_id"
   end
 
   create_table "reunioes_links", force: :cascade do |t|
-    t.bigint "reuniao_id", null: false
     t.string "link"
     t.string "descricao"
+    t.bigint "reuniao_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["reuniao_id"], name: "index_reunioes_links_on_reuniao_id"
@@ -76,7 +70,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_18_024138) do
   create_table "reunioes_usuarios", force: :cascade do |t|
     t.bigint "reuniao_id", null: false
     t.bigint "user_id", null: false
-    t.boolean "present", default: false
+    t.boolean "present"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["reuniao_id"], name: "index_reunioes_usuarios_on_reuniao_id"
@@ -87,21 +81,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_18_024138) do
     t.string "nome"
     t.integer "quantidade"
     t.string "status"
-    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_storages_on_user_id"
-  end
-
-  create_table "tarefas", force: :cascade do |t|
-    t.string "titulo"
-    t.string "descricao"
-    t.string "data"
-    t.integer "prioridade"
-    t.bigint "user_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_tarefas_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -109,18 +90,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_18_024138) do
     t.string "matricula"
     t.string "email"
     t.string "senha"
+    t.string "token"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "token"
   end
 
   add_foreign_key "acessos", "users"
-  add_foreign_key "documentos", "users"
-  add_foreign_key "eventos", "users"
-  add_foreign_key "reuniaos", "users"
   add_foreign_key "reunioes_links", "reuniaos"
   add_foreign_key "reunioes_usuarios", "reuniaos"
   add_foreign_key "reunioes_usuarios", "users"
-  add_foreign_key "storages", "users"
-  add_foreign_key "tarefas", "users"
 end

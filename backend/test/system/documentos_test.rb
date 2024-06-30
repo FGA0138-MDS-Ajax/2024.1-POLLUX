@@ -16,7 +16,6 @@ class DocumentosTest < ApplicationSystemTestCase
 
     fill_in "Link", with: @documento.link
     fill_in "Nome", with: @documento.nome
-    fill_in "User", with: @documento.user_id
     click_on "Create Documento"
 
     assert_text "Documento was successfully created"
@@ -29,7 +28,6 @@ class DocumentosTest < ApplicationSystemTestCase
 
     fill_in "Link", with: @documento.link
     fill_in "Nome", with: @documento.nome
-    fill_in "User", with: @documento.user_id
     click_on "Update Documento"
 
     assert_text "Documento was successfully updated"

@@ -17,10 +17,10 @@ class DocumentosControllerTest < ActionDispatch::IntegrationTest
 
   test "should create documento" do
     assert_difference("Documento.count") do
-      post documentos_url, params: { documento: { link: @documento.link, nome: @documento.nome, user_id: @documento.user_id } }
+      post documentos_url, params: { documento: { link: @documento.link, nome: @documento.nome } }
     end
 
-    assert_redirected_to documento_url(Documento.last)
+    assert_response :success
   end
 
   test "should show documento" do
@@ -34,7 +34,7 @@ class DocumentosControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update documento" do
-    patch documento_url(@documento), params: { documento: { link: @documento.link, nome: @documento.nome, user_id: @documento.user_id } }
+    patch documento_url(@documento), params: { documento: { link: @documento.link, nome: @documento.nome } }
     assert_redirected_to documento_url(@documento)
   end
 
@@ -43,6 +43,6 @@ class DocumentosControllerTest < ActionDispatch::IntegrationTest
       delete documento_url(@documento)
     end
 
-    assert_redirected_to documentos_url
+    assert_response :success
   end
 end

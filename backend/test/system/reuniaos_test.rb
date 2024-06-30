@@ -14,9 +14,7 @@ class ReuniaosTest < ApplicationSystemTestCase
     visit reuniaos_url
     click_on "New reuniao"
 
-    fill_in "Link", with: @reuniao.link
     fill_in "Nome", with: @reuniao.nome
-    fill_in "User", with: @reuniao.user_id
     click_on "Create Reuniao"
 
     assert_text "Reuniao was successfully created"
@@ -27,9 +25,7 @@ class ReuniaosTest < ApplicationSystemTestCase
     visit reuniao_url(@reuniao)
     click_on "Edit this reuniao", match: :first
 
-    fill_in "Link", with: @reuniao.link
     fill_in "Nome", with: @reuniao.nome
-    fill_in "User", with: @reuniao.user_id
     click_on "Update Reuniao"
 
     assert_text "Reuniao was successfully updated"

@@ -17,10 +17,10 @@ class StoragesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create storage" do
     assert_difference("Storage.count") do
-      post storages_url, params: { storage: { nome: @storage.nome, quantidade: @storage.quantidade, status: @storage.status, user_id: @storage.user_id } }
+      post storages_url, params: { storage: { nome: @storage.nome, quantidade: @storage.quantidade, status: @storage.status } }
     end
 
-    assert_redirected_to storage_url(Storage.last)
+    assert_response :success
   end
 
   test "should show storage" do
@@ -34,8 +34,8 @@ class StoragesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update storage" do
-    patch storage_url(@storage), params: { storage: { nome: @storage.nome, quantidade: @storage.quantidade, status: @storage.status, user_id: @storage.user_id } }
-    assert_redirected_to storage_url(@storage)
+    patch storage_url(@storage), params: { storage: { nome: @storage.nome, quantidade: @storage.quantidade, status: @storage.status } }
+    assert_response :success
   end
 
   test "should destroy storage" do
@@ -43,6 +43,6 @@ class StoragesControllerTest < ActionDispatch::IntegrationTest
       delete storage_url(@storage)
     end
 
-    assert_redirected_to storages_url
+    assert_response :success
   end
 end

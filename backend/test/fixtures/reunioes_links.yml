@@ -2,6 +2,10 @@
 
 one:
   link: MyString
+  descricao: MyString
+  reuniao: one
 
 two:
   link: MyString
+  descricao: MyString
+  reuniao: two

@@ -4,7 +4,6 @@ class CreateStorages < ActiveRecord::Migration[7.1]
       t.string :nome
       t.integer :quantidade
       t.string :status
-      t.references :user, null: false, foreign_key: true
 
       t.timestamps
     end

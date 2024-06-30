@@ -1,12 +1,10 @@
 Rails.application.routes.draw do
-  resources :acessos
-  resources :acaos
-  resources :storages
+  resources :reuniaos
   resources :eventos
+  resources :storages
   resources :documentos
-  resources :tarefas
-  resources :acaos
   resources :users
+  resources :acaos
   resources :reuniaos do
     post 'new_link', on: :member
     put 'update_link/:link_id', action: 'update_link'

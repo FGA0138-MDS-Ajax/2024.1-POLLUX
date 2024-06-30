@@ -5,7 +5,6 @@ class CreateEventos < ActiveRecord::Migration[7.1]
       t.string :data
       t.string :HoraInicio
       t.string :HoraTermino
-      t.references :user, null: false, foreign_key: true
 
       t.timestamps
     end

@@ -5,11 +5,11 @@ one:
   matricula: MyString
   email: MyString
   senha: MyString
-  cargo: one
+  token: MyString
 
 two:
   nome: MyString
   matricula: MyString
   email: MyString
   senha: MyString
-  cargo: two
+  token: MyString

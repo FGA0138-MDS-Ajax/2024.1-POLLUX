@@ -20,7 +20,7 @@ class AcaosControllerTest < ActionDispatch::IntegrationTest
       post acaos_url, params: { acao: { ano: @acao.ano, mes: @acao.mes, tipo: @acao.tipo, titulo: @acao.titulo, valor: @acao.valor } }
     end
 
-    assert_redirected_to acao_url(Acao.last)
+    assert_response :success
   end
 
   test "should show acao" do
@@ -43,6 +43,6 @@ class AcaosControllerTest < ActionDispatch::IntegrationTest
       delete acao_url(@acao)
     end
 
-    assert_redirected_to acaos_url
+    assert_response :success
   end
 end

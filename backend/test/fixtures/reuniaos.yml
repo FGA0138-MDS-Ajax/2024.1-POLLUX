@@ -2,10 +2,6 @@
 
 one:
   nome: MyString
-  link: MyString
-  user: one
 
 two:
   nome: MyString
-  link: MyString
-  user: two
