@@ -290,7 +290,7 @@ body {
   text-align: center;
 }
 
-.footer ~ * {
+.footer~* {
   display: none;
 }
 
@@ -308,13 +308,15 @@ body {
   .logo6,
   .logo7,
   .logo8,
-  .logo9{
-    display: none; /* Oculta as logos em telas menores que 1200px */
+  .logo9 {
+    display: none;
+    /* Oculta as logos em telas menores que 1200px */
   }
 }
 
 /* Ajuste de tamanho das logos para telas maiores */
 @media (min-width: 1800px) {
+
   .logo1,
   .logo2,
   .logo3,
@@ -324,6 +326,7 @@ body {
   .logo7,
   .logo8,
   .logo9 {
-    max-width: 150%; /* Aumenta o tamanho das logos em telas maiores que 1600px */
+    max-width: 150%;
+    /* Aumenta o tamanho das logos em telas maiores que 1600px */
   }
 }

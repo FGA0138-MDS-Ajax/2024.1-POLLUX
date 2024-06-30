@@ -16,18 +16,15 @@ function Divulgation() {
 
     return (
         <>
-            
-                <Header />
-                <div className="area">
+
+            <Header />
+            <div className="area">
                 <img src="edraV.svg" alt="logoEdra" className='logo1' />
                 <img src="edraV.svg" alt="logoEdra" className='logo2' />
                 <img src="edraV.svg" alt="logoEdra" className='logo3' />
                 <img src="edraV.svg" alt="logoEdra" className='logo4' />
                 <img src="edraV.svg" alt="logoEdra" className='logo5' />
                 <img src="edraV.svg" alt="logoEdra" className='logo6' />
-                <img src="edraV.svg" alt="logoEdra" className='logo7' />
-                <img src="edraV.svg" alt="logoEdra" className='logo8' />
-                <img src="edraV.svg" alt="logoEdra" className='logo9' />
                 <img src="fotoGeral.svg" alt="fotoGeral" className='fotoGeral' />
 
                 <section className='containerDivulgacao'>
@@ -471,9 +468,9 @@ function Divulgation() {
                         (*) Atualizado em: 26/06/2024. Mais informações no instagram.
                     </p>
                 </section >
-                </div>
-                <Footer />
-            
+            </div>
+            <Footer />
+
         </>
     )
 }
