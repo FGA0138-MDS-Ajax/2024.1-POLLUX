@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import "./CreateAccount.css";
 import { Link, useNavigate } from "react-router-dom";
 import { createUser } from "../../queries/user";
@@ -12,6 +12,9 @@ function CreateAccount() {
     senha: "",
   });
   const navigate = useNavigate()
+  useEffect(()=>{
+    document.title = 'Criar Conta';
+  },[]);
 
   const newUser = async (userData) => {
     try {

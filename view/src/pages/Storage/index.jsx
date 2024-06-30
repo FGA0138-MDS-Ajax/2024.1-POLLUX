@@ -74,6 +74,7 @@ function Storage() {
 
   useEffect(() => {
     try {
+      document.title = 'Estoque';
       var cookieValue = document.cookie.split(';').map(cookie => cookie.split('=')).reduce((accumulator, [key, value]) => ({ ...accumulator, [key.trim()]: decodeURIComponent(value) }), {});
       let token = cookieValue.jwtToken.toString();
       axios.post("http://localhost:3000/users/token", {
@@ -95,7 +96,7 @@ function Storage() {
       console.log(error);
     });
 
-  },[itemEstoque]);
+  },[nome,quantidade,links,imagemSelecionada,editIndex,showPopup]);
 
 
   const handleImageClick = () => {

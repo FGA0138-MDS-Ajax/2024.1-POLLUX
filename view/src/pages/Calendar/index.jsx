@@ -78,6 +78,7 @@ const Calendar = () => {
   
 
   useEffect(() => {
+    document.title = 'Calendário';
     try {
       var cookieValue = document.cookie.split(';').map(cookie => cookie.split('=')).reduce((accumulator, [key, value]) => ({ ...accumulator, [key.trim()]: decodeURIComponent(value) }), {});
       let token = cookieValue.jwtToken.toString();

@@ -79,3 +79,12 @@
 .conteudo3 button:hover {
   background-color: #45a049;
 }
+.botaoAdmin{
+  margin-left: 20px;
+}
+
+.botaoNAOAdmin {
+  opacity: 0.0;
+  pointer-events: none;
+  cursor: default;
+}

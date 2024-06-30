@@ -20,6 +20,7 @@ function Meeting() {
     const navigate = useNavigate();
 
     useEffect(() => {
+        document.title = 'Reuniões';
         get();
         setIsCollapsed(Array(meetings.length).fill(true));
     }, []);

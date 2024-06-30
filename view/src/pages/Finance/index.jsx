@@ -40,6 +40,7 @@ function Finance() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    document.title = 'Financeiro';
     axios.get("http://localhost:3000/acaos").then(function (response) {
       setItem(response.data);
     });

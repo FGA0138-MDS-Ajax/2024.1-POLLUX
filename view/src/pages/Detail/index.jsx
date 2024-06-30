@@ -15,9 +15,11 @@ function Detail() {
   const [confirmarSenha, setConfirmarSenha] = useState("");
   const [senhaMatch, setSenhaMatch] = useState(true);
   const [userId, setUserId] = useState("");
+  const [admin, setAdmin] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
+    document.title = 'Detalhe';
     try {
       var cookieValue = document.cookie
         .split(";")
@@ -41,6 +43,18 @@ function Detail() {
             setEmail(response.data.email);
             setMatricula(response.data.matricula);
             setUserId(response.data.id);
+            axios.get("http://localhost:3000/users/"+response.data.id).then(function (resposta){
+              if(resposta.data.acesso.acesso_admin){
+                const estiloBotao = {
+                  opacity: 1.0, // Define a opacidade desejada aqui
+                };
+                setAdmin(resposta.data.acesso.acesso_admin);
+              }else{
+                const estiloBotao = {
+                  opacity: 0.0, // Define a opacidade desejada aqui
+                };
+              }
+            });
           } else {
             navigate("/login");
           }
@@ -93,6 +107,13 @@ function Detail() {
     }
   };
 
+  const AdminTela = () => {
+    console.log(admin);
+    if(admin){
+    navigate("/Admin"); // Redireciona para pag Admin
+    }
+  };
+
   return (
     <>
       <SideBar />
@@ -110,6 +131,9 @@ function Detail() {
 
         <div className="conteudo3">
           <button onClick={handleAlterarSenha}>Alterar senha</button>
+          <button className={`botaoAdmin ${!admin ? 'botaoNAOAdmin' : ''}`}onClick={AdminTela}>
+      Gerenciamento
+    </button>
           {mostrarPopup && (
             <div className="popupContainer">
               <div className="alterarSenhaPopup">
