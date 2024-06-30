@@ -17,7 +17,6 @@ class StoragesTest < ApplicationSystemTestCase
     fill_in "Nome", with: @storage.nome
     fill_in "Quantidade", with: @storage.quantidade
     fill_in "Status", with: @storage.status
-    fill_in "User", with: @storage.user_id
     click_on "Create Storage"
 
     assert_text "Storage was successfully created"
@@ -31,7 +30,6 @@ class StoragesTest < ApplicationSystemTestCase
     fill_in "Nome", with: @storage.nome
     fill_in "Quantidade", with: @storage.quantidade
     fill_in "Status", with: @storage.status
-    fill_in "User", with: @storage.user_id
     click_on "Update Storage"
 
     assert_text "Storage was successfully updated"

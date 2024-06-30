@@ -12,13 +12,11 @@ function deletarDoc(id) {
 
 function criarDocumento(descricao, link) {
   // Variável para armazenar o ID do usuário
-  const userId = 1; // Altere conforme necessário
 
   // Dados a serem enviados no corpo da solicitação POST
   const data = {
     nome: descricao,
-    link: link,
-    user_id: userId
+    link: link
   };
 
   // Fazendo a solicitação POST usando Axios

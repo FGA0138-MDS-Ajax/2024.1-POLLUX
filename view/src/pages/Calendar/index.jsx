@@ -326,8 +326,7 @@ const Calendar = () => {
       nome: eventTitle,
       data: eventDate,
       HoraInicio: timeFrom,
-      HoraTermino: eventTimeTo,
-      user_id: 1
+      HoraTermino: eventTimeTo
     }
 
     axios.post("http://localhost:3000/eventos", res)

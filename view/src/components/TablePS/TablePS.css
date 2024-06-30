@@ -1,22 +1,21 @@
 .tabelaPS {
-    width: 800px;
+    width: 100%;
+    max-width: 25rem;
     border-collapse: collapse;
-    margin-bottom: 10px;
-    margin: 20px auto 10px auto;
-    margin-top: 20px;
+    margin: 1.25rem auto 0.625rem auto;
+}
+
+.tabelaPS th,
+.tabelaPS td {
+    border: 1px solid black;
+    padding: 0.5rem;
+    text-align: left;
 }
 
 .tabelaPS th {
-    border: 1px solid black;
-    padding: 8px;
-    text-align: left;
     width: 30%;
-
 }
 
 .tabelaPS td {
-    border: 1px solid black;
-    padding: 8px;
-    text-align: left;
     width: 70%;
 }

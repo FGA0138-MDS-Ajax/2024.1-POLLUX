@@ -18,6 +18,7 @@ class UsersTest < ApplicationSystemTestCase
     fill_in "Matricula", with: @user.matricula
     fill_in "Nome", with: @user.nome
     fill_in "Senha", with: @user.senha
+    fill_in "Token", with: @user.token
     click_on "Create User"
 
     assert_text "User was successfully created"
@@ -32,6 +33,7 @@ class UsersTest < ApplicationSystemTestCase
     fill_in "Matricula", with: @user.matricula
     fill_in "Nome", with: @user.nome
     fill_in "Senha", with: @user.senha
+    fill_in "Token", with: @user.token
     click_on "Update User"
 
     assert_text "User was successfully updated"

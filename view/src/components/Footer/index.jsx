@@ -31,9 +31,9 @@ function Footer() {
             </div>
             <div className="meio3">
                 <strong>Notícias:</strong>
-                <a href="https://bsbcapital.com.br/drone-leva-estudantes-a-madri/?fbclid=IwAR1PY0myy1npAyXhQhjOd6oHayBDdkn0gBU25ZZGEvvNgbg1IrWvwEVJon0">Drone leva estudantes a Madri </a>
-                <a href='https://www.correiobraziliense.com.br/app/noticia/eu-estudante/trabalho-e-formacao/2019/07/28/interna-trabalhoeformacao-2019,774255/produtores-de-drone-do-gama.shtml' target='_blank' rel="noopener noreferrer">Produtores de drone do Gama  </a>
-                <a href='https://www.noticias.unb.br/67-ensino/3172-semana-aeroespacial-apresenta-oportunidades-da-area' target='_blank' rel="noopener noreferrer">Estudantes fazem drone para competição internacional </a>
+                <a href="https://noticias.unb.br/ensino/6927-unb-leva-podio-na-competicao-brasileira-de-robotica-2023" target='_blank' rel="noopener noreferrer">UnB leva pódio na CBR 2023 </a>
+                <a href="https://spacebrshow.com/es/2022/05/04/equipe-de-robotica-aerea-da-unb-marca-presenca-no-spacebr-show-2022/ " target='_blank' rel="noopener noreferrer"> EDRA presente no SpaceBR Show 2022</a>
+                <a href="https://www.correiobraziliense.com.br/euestudante/trabalho-e-formacao/2022/05/5010477-equipe-de-robotica-da-unb-cria-vaquinha-para-participar-de-competicao-internacional.html " target='_blank' rel="noopener noreferrer">Vaquinha para participar de competição internacional.</a>
             </div>
             <div className='direita'>
                 <img src="unb.svg" alt="unb" className='unbFooter' />

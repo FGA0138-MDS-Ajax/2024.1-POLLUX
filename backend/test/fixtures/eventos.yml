@@ -2,18 +2,12 @@
 
 one:
   nome: MyString
-  string: MyString
   data: MyString
-  string: MyString
   HoraInicio: MyString
   HoraTermino: MyString
-  user: one
 
 two:
   nome: MyString
-  string: MyString
   data: MyString
-  string: MyString
   HoraInicio: MyString
   HoraTermino: MyString
-  user: two

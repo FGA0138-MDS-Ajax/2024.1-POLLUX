@@ -14,6 +14,10 @@ class EventosTest < ApplicationSystemTestCase
     visit eventos_url
     click_on "New evento"
 
+    fill_in "Horainicio", with: @evento.HoraInicio
+    fill_in "Horatermino", with: @evento.HoraTermino
+    fill_in "Data", with: @evento.data
+    fill_in "Nome", with: @evento.nome
     click_on "Create Evento"
 
     assert_text "Evento was successfully created"
@@ -24,6 +28,10 @@ class EventosTest < ApplicationSystemTestCase
     visit evento_url(@evento)
     click_on "Edit this evento", match: :first
 
+    fill_in "Horainicio", with: @evento.HoraInicio
+    fill_in "Horatermino", with: @evento.HoraTermino
+    fill_in "Data", with: @evento.data
+    fill_in "Nome", with: @evento.nome
     click_on "Update Evento"
 
     assert_text "Evento was successfully updated"

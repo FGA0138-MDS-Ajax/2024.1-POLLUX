@@ -4,13 +4,28 @@ import TablePS from "../../components/TablePS";
 import TableProx from "../../components/TableProx";
 import './Divulgation.css'
 
+const handleButtonClick = (url) => {
+    if (!url) {
+        alert('Não está disponível no momento');
+    } else {
+        window.location.href = url;
+    }
+};
+
 function Divulgation() {
+
     return (
         <>
             <Header />
+            <img src="fotoGeral.svg" alt="fotoGeral" className='fotoGeral' />
+
+            <div className="logo-container">
+                {[...Array(10)].map((_, index) => (
+                    <img key={index} className={`logo${index + 1}`} src="/edraV.svg" alt={`logoedraV${index + 1}`} />
+                ))}
+            </div>
+
             <section className='containerDivulgacao'>
-                <img className='img-edraV' src='/edraV.svg' alt='logoedraV' />
-                <img src="fotoGeral.svg" alt="fotoGeral" className='fotoGeral' />
                 <section id="quemSomos"></section>
                 <h1 className="topicos">
                     Quem somos?
@@ -21,9 +36,11 @@ function Divulgation() {
                 <p className="corpoTexto">
                     A Equipe de Robótica Aérea (EDRA) é uma equipe de competição da Universidade de Brasília especializada em aeronaves de voo vertical. A equipe teve início no primeiro semestre de 2016, por iniciativa de um grupo de alunos de Engenharia Aeroespacial que buscavam participar de uma competição de helidesign. Hoje, almejando capacitar-se para uma realidade mais emergente no campo das asas rotativas, o foco da equipe está nas competições de micro-veículos aéreos não tripulados e com rotores, popularmente conhecidos como drones.
                 </p>
+
                 <p className="corpoTexto">
                     A equipe começou com 18 membros, dentre eles, alunos das engenharias Aeroespacial, Eletrônica e de Software - do campus UnB Gama, evidenciando a interdisciplinaridade da equipe e dos projetos realizados. Nossa principal missão era desenvolver tecnologias e aliar conhecimentos adquiridos em sala de aula à execução de projetos e ao exercício da liderança. Capacitando-nos, assim, para participar de eventos que visem ao desenvolvimento técnico de cada membro, bem como da equipe como um todo.
                 </p>
+
                 <p className="corpoTexto">
                     Em 2017, a primeira competição da qual a EDRA participou foi organizada pela American Helicopter Society (AHS) e era intitulada "24 Hour Hovering Machine Conceptual Design". O projeto consistia no desenvolvimento conceitual de uma aeronave que fosse capaz de pairar no ar durante 24 horas por um circuito pré-estabelecido. A EDRA foi uma das primeiras equipes do País a participar dessa competição, em que universidades de vários países também submeteram seus projetos.
                 </p>
@@ -42,6 +59,7 @@ function Divulgation() {
                 <h4 className="subTopico">
                     Objetivo
                 </h4>
+
                 <p className="corpoTexto">
                     (*) A Equipe de Robótica Aérea (EDRA) é uma equipe de competição especializada em competições de aeronaves de voo vertical. Um dos nossos objetivos é integrar os conhecimentos adquiridos na teoria com a prática a fim de aprimorar capacidades.
                 </p>
@@ -86,6 +104,7 @@ function Divulgation() {
                 <p className="corpoTextoAreas">
                     <strong>Design estrutural</strong>
                 </p>
+
                 <p className="corpoTexto">
                     A área de Design Estrutural é responsável pelo planejamento, construção, design e testagem de todos os componentes estruturais dos drones. A área determina as dimensões dos drones de cada missão, define os materiais, analisa as cargas estáticas, decide a geometria, analisa as demandas estruturais das áreas adjacentes e soluciona os problemas de otimização dos frames. Além disso, produz simulações estruturais para garantir que todos os critérios estejam sendo seguidos e validados. Dessa forma, consegue chegar nas melhores alternativas estruturais de acordo com a disponibilidade dos componentes da equipe.
                 </p>
@@ -145,7 +164,6 @@ function Divulgation() {
                         <p>Matheus Faria</p>
                     </div>
                 </div>
-
 
                 <section id="nossosDrones"></section>
                 <div className="tituloComIcon">
@@ -254,7 +272,6 @@ function Divulgation() {
 
                 </div>
 
-
                 <section id="processoSeletivo"></section>
                 <div className="tituloComIcon">
                     <h1 className="topicos">
@@ -272,8 +289,12 @@ function Divulgation() {
                     Na EDRA, você terá a chance de trabalhar em projetos reais e inovadores, desenvolvendo habilidades em programação, eletrônica, mecânica, sistemas propulsivos e gestão de projetos. Essa vivência prática será um diferencial no seu currículo, ampliando suas perspectivas profissionais e podendo abrir portas para oportunidades incríveis. Não perca a chance de fazer parte da maior equipe de drones autônomos do Centro-Oeste! Inscreva-se no nosso processo seletivo e dê o primeiro passo rumo a um futuro brilhante!
                 </p>
                 <div className="bntPS">
-                    <button className="bntEditalForms">Edital</button>
-                    <button className="bntEditalForms">Forms</button>
+                    <button className="bntEditalForms" onClick={() => handleButtonClick('')}>
+                        Edital
+                    </button>
+                    <button className="bntEditalForms" onClick={() => handleButtonClick('')}>
+                        Forms
+                    </button>
                 </div>
 
                 <h4 className="subTopico">

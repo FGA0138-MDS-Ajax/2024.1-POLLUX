@@ -1,11 +1,8 @@
 Rails.application.routes.draw do
-  resources :acessos
-  resources :acaos
-  resources :storages
+  resources :reuniaos
   resources :eventos
+  resources :storages
   resources :documentos
-  resources :tarefas
-  resources :acaos
   resources :users
   resources :tasks do
     member do
@@ -16,6 +13,7 @@ Rails.application.routes.draw do
       patch 'batch_update', action: 'batch_update'
     end
   end
+  resources :acaos
   resources :reuniaos do
     post 'new_link', on: :member
     put 'update_link/:link_id', action: 'update_link'
