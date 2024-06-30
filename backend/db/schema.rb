@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_30_021134) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_30_015248) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -54,14 +54,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_30_021134) do
 
   create_table "reuniaos", force: :cascade do |t|
     t.string "nome"
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_reuniaos_on_user_id"
   end
 
   create_table "reunioes_links", force: :cascade do |t|
+    t.bigint "reuniao_id", null: false
     t.string "link"
     t.string "descricao"
-    t.bigint "reuniao_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["reuniao_id"], name: "index_reunioes_links_on_reuniao_id"
@@ -70,7 +72,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_30_021134) do
   create_table "reunioes_usuarios", force: :cascade do |t|
     t.bigint "reuniao_id", null: false
     t.bigint "user_id", null: false
-    t.boolean "present"
+    t.boolean "present", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["reuniao_id"], name: "index_reunioes_usuarios_on_reuniao_id"
@@ -96,6 +98,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_30_021134) do
   end
 
   add_foreign_key "acessos", "users"
+  add_foreign_key "reuniaos", "users"
   add_foreign_key "reunioes_links", "reuniaos"
   add_foreign_key "reunioes_usuarios", "reuniaos"
   add_foreign_key "reunioes_usuarios", "users"

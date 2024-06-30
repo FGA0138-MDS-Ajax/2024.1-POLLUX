@@ -239,7 +239,7 @@ function Meeting() {
                         {!isCollapsed[index] && (
                             <div>
                                 <div className='img-text-container'>
-                                    <img src="plus.svg" alt="img-plus" className="bntMeeting" onClick={() => handleImageClick(9)} />
+                                    <img src="plus.svg" alt="img-plus" className="bntMeeting" onClick={() => handleImageClick(meeting.id)} />
                                     <p className='fonteMeeting'>Adicionar Arquivo</p>
                                 </div>
                                 <div className="displayed-links">
