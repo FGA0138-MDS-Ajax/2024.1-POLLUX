@@ -55,7 +55,7 @@ body {
 }
 
 .day.today.active.event {
-  background-color: white;
+  background-color: e0e0e0;
 }
 
 .calendar {
@@ -318,4 +318,3 @@ body {
   text-align: center;
   font-size: 10px;
 }
-
