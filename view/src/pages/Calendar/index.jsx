@@ -5,7 +5,6 @@ import SideBar from '../../components/SideBar';
 import Kanban from '../../components/Kanban';
 import axios from 'axios';
 
-
 const fetchEvents = async () => {
   try {
     const response = await axios.get('http://localhost:3000/eventos');
@@ -23,8 +22,6 @@ const fetchEvents = async () => {
   }
 };
 
-
-
 const Calendar = () => {
   const [today, setToday] = useState(new Date());
   const [activeDay, setActiveDay] = useState(today.getDate());
@@ -36,20 +33,23 @@ const Calendar = () => {
   const listMonthEvents = async () => {
     try {
       const response = await fetchEvents();
-      //console.log('Eventos obtidos do banco de dados:', response);
   
       if (!Array.isArray(response)) {
-        //console.error('Erro: response não é um array');
         return;
       }
   
-      // Filtrar eventos para o mês atual
       const monthEvents = response.filter(eventObj => {
         const eventDate = new Date(eventObj.data);
         return eventDate.getMonth() === month && eventDate.getFullYear() === year;
       });
   
-      // Ordenar os eventos pela data e hora
+   
+      monthEvents.sort((a, b) => {
+        const dateA = new Date(a.data + ' ' + a.HoraInicio);
+        const dateB = new Date(b.data + ' ' + b.HoraInicio);
+        return dateA - dateB;
+      });
+  
       let eventsList = "";
       monthEvents.forEach(eventObj => {
         eventsList += `<div class="event">
@@ -72,39 +72,43 @@ const Calendar = () => {
   
       document.querySelector('.events-month').innerHTML = eventsList;
     } catch (error) {
-      //console.error('Erro ao buscar eventos:', error);
+      console.error('Erro ao buscar eventos:', error);
     }
   };
-  
 
   useEffect(() => {
     try {
-      var cookieValue = document.cookie.split(';').map(cookie => cookie.split('=')).reduce((accumulator, [key, value]) => ({ ...accumulator, [key.trim()]: decodeURIComponent(value) }), {});
+      const cookieValue = document.cookie.split(';').map(cookie => cookie.split('=')).reduce((accumulator, [key, value]) => ({ ...accumulator, [key.trim()]: decodeURIComponent(value) }), {});
       let token = cookieValue.jwtToken.toString();
       axios.post("http://localhost:3000/users/token", {
         token: token
-      }).then(function(response) {
-        if(!(response.data < 0)){
-          axios.get("http://localhost:3000/users/"+response.data.id).then(function (resposta){
-            if(resposta.data.acesso.acesso_calendar){
-            }else{
-              navigate("/detail")
+      }).then(function (response) {
+        if (!(response.data < 0)) {
+          axios.get("http://localhost:3000/users/" + response.data.id).then(function (resposta) {
+            if (resposta.data.acesso.acesso_calendar) {
+            } else {
+              navigate("/detail");
             }
           });
-        }else{
-            navigate("/login")
-          }
-      }).catch(function(error) {
-          //console.error(error);
+        } else {
+          navigate("/login");
+        }
+      }).catch(function (error) {
+        console.error(error);
       });
-  } catch (err) {
+    } catch (err) {
       navigate("/login");
     }
-    const savedEvents = localStorage.getItem('events');
-    if (savedEvents) {
-      setEventsArr(JSON.parse(savedEvents));
-    }
-    initCalendar();
+  
+  
+    const loadEvents = async () => {
+      const events = await fetchEvents();
+      setEventsArr(events);
+      initCalendar();
+      listMonthEvents();
+    };
+  
+    loadEvents();
   }, []);
 
   useEffect(() => {
@@ -127,17 +131,17 @@ const Calendar = () => {
     const lastDate = lastDay.getDate();
     const day = firstDay.getDay();
     const nextDays = 7 - lastDay.getDay() - 1;
-
+  
     let days = "";
-
+  
     for (let x = day; x > 0; x--) {
       days += `<div class="day prev-date">${prevDays - x + 1}</div>`;
     }
-
+  
     for (let i = 1; i <= lastDate; i++) {
       let event = false;
       eventsArr.forEach((eventObj) => {
-        if (eventObj.day === i && eventObj.month === month + 1 && eventObj.year === year) {
+        if (new Date(eventObj.data).getDate() === i && new Date(eventObj.data).getMonth() === month && new Date(eventObj.data).getFullYear() === year) {
           event = true;
         }
       });
@@ -158,13 +162,13 @@ const Calendar = () => {
         }
       }
     }
-
+  
     for (let j = 1; j <= nextDays; j++) {
       days += `<div class="day next-date">${j}</div>`;
     }
-
+  
     document.querySelector('.days').innerHTML = days;
-    addListener(); //Isso vaza memória, pra que esse listener?
+    addListener();
   };
 
   const prevMonth = () => {
