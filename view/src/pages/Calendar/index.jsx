@@ -86,8 +86,7 @@ const Calendar = () => {
       }).then(function (response) {
         if (!(response.data < 0)) {
           axios.get("http://localhost:3000/users/" + response.data.id).then(function (resposta) {
-            if (resposta.data.acesso.acesso_calendar) {
-            } else {
+            if (!resposta.data.acesso.acesso_calendar){
               navigate("/detail");
             }
           });
@@ -101,26 +100,26 @@ const Calendar = () => {
       navigate("/login");
     }
   
-  
-    const loadEvents = async () => {
-      const events = await fetchEvents();
-      setEventsArr(events);
-      initCalendar();
-      listMonthEvents();
-    };
-  
     loadEvents();
   }, []);
 
-  useEffect(() => {
+  /*useEffect(() => {
     initCalendar();
     listMonthEvents();
-  }, [month, year, eventsArr]);
+    loadEvents();
+  }, [month, year, eventsArr]);*/
 
   const months = [
     "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
     "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
   ];
+
+  const loadEvents = async () => {
+    const events = await fetchEvents();
+    setEventsArr(events);
+    initCalendar();
+    listMonthEvents();
+  };
 
   const weekdays = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
 
@@ -345,13 +344,15 @@ const Calendar = () => {
       // Ocorreu um erro ao fazer a solicitação
       //console.error("Erro ao criar documento:", error);
     });
+    loadEvents()
 
   };
 
 function deletaEvento(id){
   axios.post("http://localhost:3000/eventos/delete",{
-    id: id
+    id: id  
   });
+  loadEvents()
   updateEvents();
 }
 
