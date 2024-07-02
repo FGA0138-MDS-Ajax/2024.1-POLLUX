@@ -5,6 +5,7 @@ import SideBar from '../../components/SideBar';
 import Kanban from '../../components/Kanban';
 import axios from 'axios';
 
+
 const fetchEvents = async () => {
   try {
     const response = await axios.get('http://localhost:3000/eventos');
@@ -21,6 +22,8 @@ const fetchEvents = async () => {
     return [];
   }
 };
+
+
 
 const Calendar = () => {
   const [today, setToday] = useState(new Date());
@@ -77,7 +80,6 @@ const Calendar = () => {
   };
 
   useEffect(() => {
-    document.title = 'Calendário';
     try {
       const cookieValue = document.cookie.split(';').map(cookie => cookie.split('=')).reduce((accumulator, [key, value]) => ({ ...accumulator, [key.trim()]: decodeURIComponent(value) }), {});
       let token = cookieValue.jwtToken.toString();
@@ -86,7 +88,8 @@ const Calendar = () => {
       }).then(function (response) {
         if (!(response.data < 0)) {
           axios.get("http://localhost:3000/users/" + response.data.id).then(function (resposta) {
-            if (!resposta.data.acesso.acesso_calendar){
+            if (resposta.data.acesso.acesso_calendar) {
+            } else {
               navigate("/detail");
             }
           });
@@ -100,26 +103,26 @@ const Calendar = () => {
       navigate("/login");
     }
   
+  
+    const loadEvents = async () => {
+      const events = await fetchEvents();
+      setEventsArr(events);
+      initCalendar();
+      listMonthEvents();
+    };
+  
     loadEvents();
   }, []);
 
-  /*useEffect(() => {
+  useEffect(() => {
     initCalendar();
     listMonthEvents();
-    loadEvents();
-  }, [month, year, eventsArr]);*/
+  }, [month, year, eventsArr]);
 
   const months = [
     "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
     "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
   ];
-
-  const loadEvents = async () => {
-    const events = await fetchEvents();
-    setEventsArr(events);
-    initCalendar();
-    listMonthEvents();
-  };
 
   const weekdays = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
 
@@ -344,15 +347,13 @@ const Calendar = () => {
       // Ocorreu um erro ao fazer a solicitação
       //console.error("Erro ao criar documento:", error);
     });
-    loadEvents()
 
   };
 
 function deletaEvento(id){
   axios.post("http://localhost:3000/eventos/delete",{
-    id: id  
+    id: id
   });
-  loadEvents()
   updateEvents();
 }
 
