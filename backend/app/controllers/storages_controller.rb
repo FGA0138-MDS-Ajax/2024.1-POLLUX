@@ -3,7 +3,7 @@ class StoragesController < ApplicationController
 
   # GET /storages or /storages.json
   def index
-    @storages = Storage.all
+    @storages = Storage.all.order(:id)
     render json: @storages
   end
 

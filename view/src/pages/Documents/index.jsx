@@ -3,33 +3,7 @@ import SideBar from "../../components/SideBar"
 import './Documents.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-
-function deletarDoc(id) {
-  axios.post('http://localhost:3000/documentos/delete', {
-    id: id
-  });
-}
-
-function criarDocumento(descricao, link) {
-  // Variável para armazenar o ID do usuário
-
-  // Dados a serem enviados no corpo da solicitação POST
-  const data = {
-    nome: descricao,
-    link: link
-  };
-
-  // Fazendo a solicitação POST usando Axios
-  axios.post("http://localhost:3000/documentos", data)
-    .then(function (response) {
-      // Resposta recebida com sucesso
-      console.log("Documento criado com sucesso:", response.data);
-    })
-    .catch(function (error) {
-      // Ocorreu um erro ao fazer a solicitação
-      console.error("Erro ao criar documento:", error);
-    });
-}
+import { createDocument, deleteDocument, getDocuments } from '../../queries/documents';
 
 
 function Documents() {
@@ -41,6 +15,7 @@ function Documents() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    get()
     try {
       document.title = 'Documentos';
       var cookieValue = document.cookie.split(';').map(cookie => cookie.split('=')).reduce((accumulator, [key, value]) => ({ ...accumulator, [key.trim()]: decodeURIComponent(value) }), {});
@@ -64,11 +39,43 @@ function Documents() {
   } catch (err) {
       navigate("/login");
   }
-    axios.get("http://localhost:3000/documentos").then(function (response) {
-      setDocs(response.data);
-      console.log(documentos);
-    });
-  }, [documentos]);
+  }, []);
+
+  const deletarDoc = async (id) => {
+    try {
+      await deleteDocument({
+        id: id
+      })
+      get()
+    } catch (error) {
+      console.log(error)
+      alert("Erro ao deletar documento!")
+    }
+  }
+  
+  const criarDocumento = async (descricao, link) => {
+    // Variável para armazenar o ID do usuário
+  
+    // Dados a serem enviados no corpo da solicitação POST
+    const data = {
+      nome: descricao,
+      link: link
+    };
+  
+    // Fazendo a solicitação POST usando Axios
+    try {
+      await createDocument(data)
+      get()
+    } catch (error) {
+      console.log(error)
+      alert("Erro ao criar documento!")
+    }
+  }
+
+  const get = async () => {
+    const response = await getDocuments()
+    setDocs(response.data);
+  }
 
   const handleImageClick = () => {
     setShowPopup(true);
@@ -151,7 +158,7 @@ function Documents() {
             {documentos.map((item, index) => (
               <div key={index} className='item-container-geral'>
                 <div className='img-text-container'>
-                  <img src="trash.svg" alt='img-trash' class='trash' onClick={() => deletarDoc(item.id)}></img>
+                  <img src="trash.svg" alt='img-trash' className='trash' onClick={() => deletarDoc(item.id)}></img>
                   <p className='fonteDetalheGeral3'>
                     <a href={item.link} target="_blank" rel="noopener noreferrer">{item.nome}</a>
                   </p>

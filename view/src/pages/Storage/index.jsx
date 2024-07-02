@@ -97,34 +97,18 @@ function Storage() {
     }
   };
 
-  function editQuantidade(id, qtd) {
-    axios
-      .post("http://localhost:3000/storages/index", {
-        id: id,
-      })
-      .then(function (response) {
-        let quantidade = response.data.quantidade;
-        console.log("Quantidade obtida:", quantidade);
-        let quantity = qtd + quantidade;
-        if (quantity < 0) {
-          quantity = 0;
-        }
-  
-        axios
-          .post("http://localhost:3000/storages/edit", {
-            id: id,
-            quantidade: quantity,
-          })
-          .then(function (response) {
-            console.log("Quantidade editada com sucesso:", response.data);
-          })
-          .catch(function (error) {
-            console.error("Erro ao editar quantidade:", error);
-          });
-      })
-      .catch(function (error) {
-        console.error("Erro ao obter dados do storage:", error);
-      });
+  const editQuantidade =  async (id, qtd, btn) =>{
+      const quantidade = qtd + btn;
+      console.log(quantidade)
+      try {
+        await editStorage(id, {
+          quantidade: quantidade
+        })
+      } catch (error) {
+        console.error(error);
+        alert("Erro ao editar quantidade!")
+      }
+      get()
   }
 
   const handleImageClick = () => {
@@ -320,14 +304,14 @@ function Storage() {
                   <div className="bntMaiseMenosContainer">
                     <button
                       className="bntMaiseMenos"
-                      onClick={() => editQuantidade(item.id, 1)}
+                      onClick={() => editQuantidade(item.id, item.quantidade, 1)}
                     >
                       +
                     </button>
                     <p className="fonteDetalheGeral2">{item.quantidade}</p>
                     <button
                       className="bntMaiseMenos"
-                      onClick={() => editQuantidade(item.id, -1)}
+                      onClick={() => editQuantidade(item.id, item.quantidade, -1)}
                     >
                       -
                     </button>

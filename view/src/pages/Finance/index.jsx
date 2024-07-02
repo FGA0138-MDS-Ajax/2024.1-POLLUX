@@ -56,7 +56,7 @@ function Finance() {
     } catch (err) {
       navigate("/login");
     }
-  }, [item]);
+  }, []);
 
   const deletaItem = async (id) => {
     await deleteAction({ id: id });
