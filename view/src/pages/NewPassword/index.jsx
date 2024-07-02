@@ -21,7 +21,7 @@ function NewPassword() {
             let token = cookieValue.jwtToken.toString();
             console.log(token);
         
-            axios.post("http://localhost:3000/users/token", {
+            axios.post("http://18.209.49.236:3000/users/token", {
                 token: token
             }).then(function(response) {
                 if(!(response.data < 0)){
@@ -45,7 +45,7 @@ function NewPassword() {
         }
 
 
-        axios.post("http://localhost:3000/password/reset", {
+        axios.post("http://18.209.49.236:3000/password/reset", {
             password: novaSenha,
             token: token
         }).then(function (response) {

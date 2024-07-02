@@ -25,7 +25,7 @@ function Login() {
             let token = cookieValue.jwtToken.toString();
             console.log(token);
         
-            axios.post("http://localhost:3000/users/token", {
+            axios.post("http://18.209.49.236:3000/users/token", {
                 token: token
             }).then(function(response) {
                 if(!(response.data < 0)){
@@ -50,7 +50,7 @@ function Login() {
         console.log("Matrícula:", matricula);
         console.log("Senha:", senha);
         
-        axios.post("http://localhost:3000/users/login", {
+        axios.post("http://18.209.49.236:3000/users/login", {
             matricula: matricula,
             senha: senha
         }).then(function (response) {

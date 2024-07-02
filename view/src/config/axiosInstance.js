@@ -8,7 +8,7 @@ import axios from 'axios'
 // Criação da instância do Axios com configurações específicas para o servidor local
 
 const server = axios.create({
-    baseURL: 'http://localhost:3000/',
+    baseURL: 'http://18.209.49.236:3000/',
     headers: {
         'Content-Type': 'application/json'
     }
