@@ -30,7 +30,7 @@ function SideBar() {
             </div>
             <div className='sidebar-bottom'>
                 <nav className="embaixo">
-                    <Link to='/' onClick={() => logOut()}>
+                    <Link to='/' onClick={() => {logOut();document.title = 'EDRA'}}>
                         <img src="logout.svg" alt="logout" className="sidebar-image img-logout"/>
                     </Link>
                     <Link to='/detail'>

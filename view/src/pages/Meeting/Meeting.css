@@ -167,15 +167,10 @@ font-size: 15px;
   margin-top: 20px;
 }
 
-.botaoRemove {
-  font-size: 1.25rem;
-  width: 200px;
-  padding: 10px;
-  font-weight: bold;
-  border: none;
-  border-radius: 18px;
-  color: #fdfdfd;
-  background-color: red;
-  cursor: pointer;
-  transition: background-color 0.3s;
+
+.trash{
+  position: relative;
+    left: 950px;
+    bottom: 35px;
+    cursor: pointer;
 }

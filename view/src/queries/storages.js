@@ -33,7 +33,7 @@ export const createStorage = async (data) => {
 
 export const editStorage = async (storageId, data) => {
   try {
-    const storage = await server.put(endpoints.storage.single(storageId), data);
+    const storage = await server.post(endpoints.storage.edit(storageId), data);
     return storage;
   } catch (error) {
     console.log(error);
@@ -43,7 +43,7 @@ export const editStorage = async (storageId, data) => {
 
 export const deleteStorage = async (storageId) => {
   try {
-    const storage = await server.delete(endpoints.storage.single(storageId));
+    const storage = await server.post(endpoints.storage.delete(storageId));
     return storage;
   } catch (error) {
     console.log(error);

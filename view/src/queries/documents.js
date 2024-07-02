@@ -31,9 +31,9 @@ export const createDocument = async (data) => {
   }
 };
 
-export const editDocument = async (documentId, data) => {
+export const editDocument = async (data) => {
   try {
-    const document = await server.put(endpoints.document.single(documentId), data);
+    const document = await server.post(endpoints.document.edit, data);
     return document;
   } catch (error) {
     console.log(error);
@@ -41,9 +41,9 @@ export const editDocument = async (documentId, data) => {
   }
 };
 
-export const deleteDocument = async (documentId) => {
+export const deleteDocument = async (data) => {
   try {
-    const document = await server.delete(endpoints.document.single(documentId));
+    const document = await server.post(endpoints.document.delete, data);
     return document;
   } catch (error) {
     console.log(error);

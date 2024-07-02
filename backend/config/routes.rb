@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
   resources :reuniaos
   resources :eventos
-  resources :storages
+  resources :storages do
+    post 'delete', action: 'destroy'
+    post 'edit', action: 'update'
+  end
+
   resources :documentos
   resources :users
   resources :tasks do
@@ -13,6 +17,7 @@ Rails.application.routes.draw do
       patch 'batch_update', action: 'batch_update'
     end
   end
+  
   resources :acaos
   resources :reuniaos do
     post 'new_link', on: :member
@@ -31,11 +36,8 @@ Rails.application.routes.draw do
   post '/users/delete/:id', to: 'users#destroy'
   post '/documentos', to: 'documentos#create'
   post '/documentos/delete', to: 'documentos#destroy'
-  post '/storages/delete', to: 'storages#destroy'
-  post '/storages/edit', to: 'storages#update'
   post '/acaos/delete', to: 'acaos#destroy'
   post '/eventos/delete', to: 'eventos#destroy'
-  post '/storages/index', to: 'storages#getStorage'
   post 'password/forgot', to: 'passwords#forgot'
   post 'password/reset', to: 'passwords#reset'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

@@ -3,7 +3,7 @@ class StoragesController < ApplicationController
 
   # GET /storages or /storages.json
   def index
-    @storages = Storage.all
+    @storages = Storage.all.order(:id)
     render json: @storages
   end
 
@@ -53,7 +53,7 @@ class StoragesController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_storage
-    @storage = Storage.find(params[:id])
+    @storage = Storage.find(params[:storage_id] || params[:id])
   end
 
   # Only allow a list of trusted parameters through.

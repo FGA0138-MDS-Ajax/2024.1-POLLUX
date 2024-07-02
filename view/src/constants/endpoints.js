@@ -6,13 +6,24 @@ export default {
         delete: (id) => `/users/delete/${id}`
     },
 
+    action: {
+        base: '/acaos',
+        single: (id) => `/acaos/${id}`,
+        edit: `/acaos/edit`,
+        delete: `/acaos/delete`,
+    },
+
     storage: {
         base: '/storages',
         single: (id) => `/storages/${id}`,
+        edit: (id) => `/storages/${id}/edit`,
+        delete: (id) => `/storages/${id}/delete`,
     },
     document: {
-        base: '/documents',
-        single: (id) => `/documents/${id}`,
+        base: '/documentos',
+        single: (id) => `/documentos/${id}`,
+        //edit: `/documentos/edit`,
+        delete: `/documentos/delete`,
     },
     event: {
         base: '/eventos',
