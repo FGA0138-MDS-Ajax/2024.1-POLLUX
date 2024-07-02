@@ -234,9 +234,10 @@ function Meeting() {
                         <button onClick={() => toggleCollapse(index)} className="botao">
                             {isCollapsed[index] ? 'Mostrar Detalhes' : 'Ocultar Detalhes'}
                         </button>
-                        <button onClick={() => handleRemoveMeeting(meeting)} className="botaoRemove"> 
-                            Remover Reunião
-                        </button>
+                         
+                        <img src="trash.svg" alt='img-trash' className='trash' onClick={() => handleRemoveMeeting(meeting)}></img>
+                            
+                        
                         {!isCollapsed[index] && (
                             <div>
                                 <div className='img-text-container'>
