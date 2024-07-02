@@ -41,9 +41,9 @@ export const editAction = async (actionId, data) => {
   }
 };
 
-export const deleteAction = async (actionId) => {
+export const deleteAction = async (data) => {
   try {
-    const action = await server.delete(endpoints.action.single(actionId));
+    const action = await server.post(endpoints.action.single(data));
     return action;
   } catch (error) {
     console.log(error);
