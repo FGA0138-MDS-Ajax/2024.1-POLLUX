@@ -4,23 +4,7 @@ import './Calendar.css';
 import SideBar from '../../components/SideBar';
 import Kanban from '../../components/Kanban';
 import axios from 'axios';
-
-const fetchEvents = async () => {
-  try {
-    const response = await axios.get('http://localhost:3000/eventos');
-    //console.log('Resposta da API:', response.data);
-
-    if (Array.isArray(response.data)) {
-      return response.data;
-    } else {
-      //console.error('A resposta da API não é um array:', response.data);
-      return [];
-    }
-  } catch (error) {
-    //console.error('Erro ao buscar eventos:', error);
-    return [];
-  }
-};
+import { deleteEvent, getEvents } from '../../queries/events';
 
 const Calendar = () => {
   const [today, setToday] = useState(new Date());
@@ -78,6 +62,7 @@ const Calendar = () => {
 
   useEffect(() => {
     document.title = 'Calendário';
+    loadEvents();
     try {
       const cookieValue = document.cookie.split(';').map(cookie => cookie.split('=')).reduce((accumulator, [key, value]) => ({ ...accumulator, [key.trim()]: decodeURIComponent(value) }), {});
       let token = cookieValue.jwtToken.toString();
@@ -98,16 +83,14 @@ const Calendar = () => {
       });
     } catch (err) {
       navigate("/login");
-    }
-  
-    loadEvents();
+    }    
   }, []);
 
-  /*useEffect(() => {
+  useEffect(() => {
     initCalendar();
     listMonthEvents();
-    loadEvents();
-  }, [month, year, eventsArr]);*/
+    //loadEvents();
+  }, [month, year, eventsArr]);
 
   const months = [
     "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
@@ -119,6 +102,16 @@ const Calendar = () => {
     setEventsArr(events);
     initCalendar();
     listMonthEvents();
+  };
+
+  const fetchEvents = async () => {
+    try {
+      const response = await getEvents()
+      return response.data
+    } catch (error) {
+      console.log(error)
+      alert("Erro na requisição")
+    }
   };
 
   const weekdays = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
@@ -348,12 +341,15 @@ const Calendar = () => {
 
   };
 
-function deletaEvento(id){
-  axios.post("http://localhost:3000/eventos/delete",{
-    id: id  
-  });
-  loadEvents()
-  updateEvents();
+const deletaEvento = async (id) => {
+  try {
+    await deleteEvent({id: id})
+    loadEvents()
+    updateEvents();
+  } catch (error) {
+    console.log(error)
+    alert("Erro ao deletar o Evento")
+  }
 }
 
   return (
