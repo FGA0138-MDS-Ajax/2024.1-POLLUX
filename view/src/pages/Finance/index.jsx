@@ -66,7 +66,7 @@ function Finance() {
   const get = async () => {
     const response = await getActions();
     setItem(response.data);
-    saldoTotal(item);
+    saldoTotal(response.data);
   };
 
   const criarItem = async (titulo, valor, tipo, mes, ano) => {
@@ -128,18 +128,6 @@ function Finance() {
     setShowPopup(false);
     setAcao("");
     setValor("");
-  };
-
-  const calcularSaldo = () => {
-    let total = 0;
-    acoes.forEach((acao) => {
-      if (acao.tipo === "Entrada") {
-        total += acao.valor;
-      } else if (acao.tipo === "Saída") {
-        total -= acao.valor;
-      }
-    });
-    setSaldo(total);
   };
 
   const saldoTotal = (item) => {
