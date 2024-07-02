@@ -1,3 +1,9 @@
+/* 
+   Componente TableProx para exibição de uma tabela com próximos eventos da EDRA.
+   - Renderiza uma tabela com cabeçalho e três colunas: Evento, Local e Data.
+   - Cada linha representa um evento futuro da EDRA, com informações preenchidas.
+*/
+
 import './TableProx.css';
 import React from 'react';
 

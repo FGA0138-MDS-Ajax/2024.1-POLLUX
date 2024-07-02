@@ -25,6 +25,50 @@ O projeto EDRA têm como objetivo criar uma aplicação web que sirva para divul
 # Documentação
 Link para a documentação do projeto: [MkDocs - Pollux 2024.1](https://fga0138-mds-ajax.github.io/2024.1-POLLUX/) <br><br>
 
+# Instruções para iniciar o site localmente
+
+### Dependências
+
+- Node.js v20.13.1
+- NPM (Node Package Manager) instalado
+- [adicionar]
+- [...]
+
+### Passo a passo para iniciar o projeto
+
+1.  **Clone o repositório:**
+
+    ```
+    git clone https://github.com/FGA0138-MDS-Ajax/2024.1-POLLUX.git
+    ``` 
+    caso seja necessário, entre na pasta do projeto
+    ```
+    cd 2024-1-POLLUX
+    ```
+
+2.  **Configuração do Banco de Dados:**
+
+    -  [adicionar]
+      
+3.  **Executar  o projeto**
+
+    Para rodar o front-end da aplicação faça os seguintes comandos:
+
+    ```
+    cd view
+    ```
+    ```
+    npm install
+    ```
+    ```
+    npm run dev
+    ```
+
+    Em um novo terminal, navegue até a pasta do .... para o back
+    ```
+    adicionar
+    ```
+
 # Autores
 
  <table>

@@ -1,3 +1,10 @@
+/* 
+   Este componente representa o rodapé(footer) da aplicação, o qual exibe informações e links 
+   úteis relacionados à EDRA - Equipe de Robótica Aérea da Universidade de Brasília (UnB).
+   Ele inclui o logotipo da EDRA, informações de localização, contatos nas redes sociais 
+   (Instagram, GitHub, LinkedIn), notícias recentes e logotipos da UnB e HYDRA.
+*/
+
 import './Footer.css';
 
 function Footer() {

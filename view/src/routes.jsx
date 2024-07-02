@@ -1,3 +1,11 @@
+/*
+   Configuração das Rotas da Aplicação utilizando React Router.
+   - Define as rotas da aplicação utilizando BrowserRouter e Routes do React Router.
+   - Cada rota é mapeada para um componente específico correspondente à página desejada.
+   - Cada Route path especifica o caminho da URL e o componente React correspondente a ser renderizado.
+   - Utiliza elementos JSX para definir as rotas e associar cada caminho a um componente da aplicação.
+*/
+
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Divulgation from './pages/Divulgation'
 import Login from './pages/Login'

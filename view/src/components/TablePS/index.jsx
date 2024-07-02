@@ -1,3 +1,9 @@
+/* 
+   Componente TablePS para exibição de uma tabela com informações sobre o processo 
+   seletivo da EDRA - Equipe de Robótica Aérea.
+   - Renderiza uma tabela com duas colunas: Descrição importante da etapa do preceso e Data.
+*/
+
 import './TablePS.css';
 import React from 'react';
 

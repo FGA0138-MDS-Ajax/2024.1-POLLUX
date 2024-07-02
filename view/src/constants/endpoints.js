@@ -1,3 +1,16 @@
+/* 
+   Configuração dos endpoints da API para diferentes recursos da aplicação.
+
+   Estrutura:
+   - Cada recurso (como usuário, ação, armazenamento, documento, evento, reunião 
+   e tarefa) possui endpoints configurados.
+   - Para cada recurso, são definidos endpoints base, individuais (para operações
+   específicas como visualizar, editar, deletar), e alguns endpoints adicionais 
+   específicos (como para links de reuniões).
+*/
+
+// Exporta um objeto contendo todos os endpoints configurados, facilitando o uso e manutenção das URLs da API.
+
 export default {
     user: {
         base: '/users',

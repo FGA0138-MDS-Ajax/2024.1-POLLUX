@@ -1,5 +1,14 @@
+/*
+   Funções de Serviço para Reuniões utilizando Axios e Endpoints definidos.
+   - Cada função utiliza Axios para realizar requisições HTTP para os endpoints definidos.
+   - As URLs dos endpoints são obtidas do objeto `endpoints`.
+   - As funções tratam erros capturando exceções e registrando no console antes de lançá-los novamente.
+*/
+
 import server from "../config/axiosInstance";
 import endpoints from "../constants/endpoints";
+
+// Busca todas as reuniões através da API.
 
 export const getMeetings = async () => {
   try {
@@ -11,6 +20,8 @@ export const getMeetings = async () => {
   }
 };
 
+// Busca uma única reunião pelo ID.
+
 export const getSingleMeeting = async (meetingId) => {
   try {
     const meeting = await server.get(endpoints.meeting.single(meetingId));
@@ -20,6 +31,8 @@ export const getSingleMeeting = async (meetingId) => {
     throw error;
   }
 };
+
+// Cria uma nova reunião utilizando os dados fornecidos.
 
 export const createMeeting = async (data) => {
   try {
@@ -31,6 +44,8 @@ export const createMeeting = async (data) => {
   }
 };
 
+// Edita uma reunião existente com os dados fornecidos.
+
 export const editMeeting = async (meetingId, data) => {
   try {
     const meeting = await server.put(endpoints.meeting.edit(meetingId), data);
@@ -40,6 +55,8 @@ export const editMeeting = async (meetingId, data) => {
     throw error;
   }
 };
+
+// Deleta uma reunião existente pelo ID.
 
 export const deleteMeeting = async (meetingId) => {
   try {
@@ -51,6 +68,8 @@ export const deleteMeeting = async (meetingId) => {
   }
 };
 
+// Cria um novo link para uma reunião.
+
 export const createLink = async (meetingId, data) => {
   try {
     const meeting = await server.post(endpoints.meeting.newLink(meetingId), data)
@@ -60,6 +79,8 @@ export const createLink = async (meetingId, data) => {
     throw error;
   }
 };
+
+// Edita um link existente em uma reunião.
 
 export const editLink = async (meetingId, linkId, data) => {
   try {
@@ -71,6 +92,8 @@ export const editLink = async (meetingId, linkId, data) => {
   }
 };
 
+// Remove um link de uma reunião.
+
 export const destroyLink = async (meetingId, linkId) => {
   try {
     const meeting = await server.post(endpoints.meeting.deleteLink(meetingId, linkId))
@@ -80,6 +103,8 @@ export const destroyLink = async (meetingId, linkId) => {
     throw error;
   }
 };
+
+// Salva a presença em uma reunião.
 
 export const savePresence = async (meetingId, data) => {
   try {

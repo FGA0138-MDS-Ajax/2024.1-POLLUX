@@ -1,5 +1,14 @@
+/*
+   Funções de Serviço para Documentos utilizando Axios e Endpoints definidos.
+   - Cada função utiliza Axios para realizar requisições HTTP para os endpoints definidos.
+   - As URLs dos endpoints são obtidas do objeto `endpoints`.
+   - As funções tratam erros capturando exceções e registrando no console antes de lançá-los novamente.
+*/
+
 import server from "../config/axiosInstance";
 import endpoints from "../constants/endpoints";
+
+// Busca todos os documentos através da API.
 
 export const getDocuments = async () => {
   try {
@@ -11,6 +20,8 @@ export const getDocuments = async () => {
   }
 };
 
+// Busca um único documento pelo ID.
+
 export const getSingleDocument = async (documentId) => {
   try {
     const document = await server.get(endpoints.document.single(documentId));
@@ -20,6 +31,8 @@ export const getSingleDocument = async (documentId) => {
     throw error;
   }
 };
+
+// Cria um novo documento utilizando os dados fornecidos.
 
 export const createDocument = async (data) => {
   try {
@@ -31,6 +44,8 @@ export const createDocument = async (data) => {
   }
 };
 
+// Edita um documento existente com os dados fornecidos.
+
 export const editDocument = async (data) => {
   try {
     const document = await server.post(endpoints.document.edit, data);
@@ -40,6 +55,8 @@ export const editDocument = async (data) => {
     throw error;
   }
 };
+
+// Deleta um documento existente com os dados fornecidos.
 
 export const deleteDocument = async (data) => {
   try {

@@ -1,5 +1,14 @@
+/*
+   Funções de Serviço para Eventos utilizando Axios e Endpoints definidos.
+   - Cada função utiliza Axios para realizar requisições HTTP para os endpoints definidos.
+   - As URLs dos endpoints são obtidas do objeto `endpoints`.
+   - As funções tratam erros capturando exceções e registrando no console antes de lançá-los novamente.
+*/
+
 import server from "../config/axiosInstance";
 import endpoints from "../constants/endpoints";
+
+// Busca todos os eventos através da API.
 
 export const getEvents = async () => {
   try {
@@ -11,6 +20,8 @@ export const getEvents = async () => {
   }
 };
 
+// Busca um único evento pelo ID.
+
 export const getSingleEvent = async (eventId) => {
   try {
     const event = await server.get(endpoints.event.single(eventId));
@@ -20,6 +31,8 @@ export const getSingleEvent = async (eventId) => {
     throw error;
   }
 };
+
+// Cria um novo evento utilizando os dados fornecidos.
 
 export const createEvent = async (data) => {
   try {
@@ -31,6 +44,8 @@ export const createEvent = async (data) => {
   }
 };
 
+// Edita um evento existente com os dados fornecidos.
+
 export const editEvent = async (data) => {
   try {
     const event = await server.post(endpoints.event.edit, data);
@@ -40,6 +55,8 @@ export const editEvent = async (data) => {
     throw error;
   }
 };
+
+// Deleta um evento existente com os dados fornecidos.
 
 export const deleteEvent = async (data) => {
   try {

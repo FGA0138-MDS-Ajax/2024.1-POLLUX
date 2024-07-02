@@ -1,6 +1,15 @@
+/* 
+   Este componente representa o cabeçalho (header) da aplicação, exibindo o logotipo da EDRA, 
+   o qual redireciona para a página de Login, um menu de navegação com links âncora para seções 
+   específicas da página. Além disso, inclui um efeito de rolagem suave para as seções referenciadas 
+   pelos links âncora. e por último um icon da Unb.
+*/
+
 import { Link } from 'react-router-dom';
 import React, { useEffect } from 'react';
 import './Header.css';
+
+// Efeito de useEffect para adicionar e remover event listeners
 
 function Header() {
     useEffect(() => {
@@ -16,6 +25,8 @@ function Header() {
             });
         };
     }, []);
+
+    // Função para rolar suavemente até a seção correspondente ao link âncora clicado
 
     const scrollToSection = (event) => {
         event.preventDefault();
