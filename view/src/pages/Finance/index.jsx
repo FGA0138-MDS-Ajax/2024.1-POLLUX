@@ -19,7 +19,7 @@ function Finance() {
 
   useEffect(() => {
     document.title = "Financeiro";
-    get;
+    get()
     try {
       var cookieValue = document.cookie
         .split(";")
@@ -80,6 +80,7 @@ function Finance() {
         ano: ano,
         user_id: 1,
       });
+      get()
     } catch (error) {
       console.log(error);
       alert("Erro ao criar a ação!");
