@@ -13,7 +13,7 @@ function PasswordRecovery() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        axios.post("http://localhost:3000/password/forgot", {
+        axios.post("http://18.209.49.236:3000/password/forgot", {
             email: email
         }).then(function (response) {
             console.log(response.data); // Log a resposta do backend para debug

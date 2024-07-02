@@ -20,11 +20,11 @@ function Documents() {
       document.title = 'Documentos';
       var cookieValue = document.cookie.split(';').map(cookie => cookie.split('=')).reduce((accumulator, [key, value]) => ({ ...accumulator, [key.trim()]: decodeURIComponent(value) }), {});
       let token = cookieValue.jwtToken.toString();
-      axios.post("http://localhost:3000/users/token", {
+      axios.post("http://18.209.49.236:3000/users/token", {
           token: token
       }).then(function(response) {
         if(!(response.data < 0)){
-          axios.get("http://localhost:3000/users/"+response.data.id).then(function (resposta){
+          axios.get("http://18.209.49.236:3000/users/"+response.data.id).then(function (resposta){
             if(resposta.data.acesso.acesso_documents){
             }else{
               navigate("/detail")
