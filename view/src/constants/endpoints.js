@@ -28,6 +28,8 @@ export default {
     event: {
         base: '/eventos',
         single: (id) => `/eventos/${id}`,
+        edit: `/eventos/edit`,
+        delete: `/eventos/delete`,
     },
     meeting: {
         base: '/reuniaos',

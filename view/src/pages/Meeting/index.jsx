@@ -25,11 +25,11 @@ function Meeting() {
         setIsCollapsed(Array(meetings.length).fill(true));
     }, []);
 
-    useEffect(() => {
+    /*useEffect(() => {
         if (meetings.length > 0) {
             setIsCollapsed(Array(meetings.length).fill(true));
         }
-    }, [meetings]);
+    }, [meetings]);*/
 
     const getReunioes = async () => {
         try {
