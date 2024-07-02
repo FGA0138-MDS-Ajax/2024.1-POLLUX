@@ -31,9 +31,9 @@ export const createEvent = async (data) => {
   }
 };
 
-export const editEvent = async (eventId, data) => {
+export const editEvent = async (data) => {
   try {
-    const event = await server.put(endpoints.event.single(eventId), data);
+    const event = await server.post(endpoints.event.edit, data);
     return event;
   } catch (error) {
     console.log(error);
@@ -41,9 +41,9 @@ export const editEvent = async (eventId, data) => {
   }
 };
 
-export const deleteEvent = async (eventId) => {
+export const deleteEvent = async (data) => {
   try {
-    const event = await server.delete(endpoints.event.single(eventId));
+    const event = await server.post(endpoints.event.delete, data);
     return event;
   } catch (error) {
     console.log(error);
