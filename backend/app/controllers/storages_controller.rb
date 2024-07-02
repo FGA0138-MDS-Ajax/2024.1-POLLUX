@@ -53,7 +53,7 @@ class StoragesController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_storage
-    @storage = Storage.find(params[:id])
+    @storage = Storage.find(params[:storage_id] || params[:id])
   end
 
   # Only allow a list of trusted parameters through.

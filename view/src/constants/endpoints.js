@@ -9,6 +9,8 @@ export default {
     storage: {
         base: '/storages',
         single: (id) => `/storages/${id}`,
+        edit: (id) => `/storages/${id}/edit`,
+        delete: (id) => `/storages/${id}/delete`,
     },
     document: {
         base: '/documents',
