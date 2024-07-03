@@ -128,7 +128,7 @@ function Detail() {
   // Função para redirecionar para a página de administração se o usuário for admin
 
   const AdminTela = () => {
-    console.log(admin);
+    //console.log(admin);
     if (admin) {
       navigate("/Admin"); // Redireciona para pag Admin
     }

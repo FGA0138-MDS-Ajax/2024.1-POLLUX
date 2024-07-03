@@ -35,7 +35,7 @@ function Login() {
         try {
             var cookieValue = document.cookie.split(';').map(cookie => cookie.split('=')).reduce((accumulator, [key, value]) => ({ ...accumulator, [key.trim()]: decodeURIComponent(value) }), {});
             let token = cookieValue.jwtToken.toString();
-            console.log(token);
+            //console.log(token);
 
             axios.post("http://18.209.49.236:3000/users/token", {
                 token: token
@@ -67,8 +67,8 @@ function Login() {
     const handleSubmit = (event) => {
         event.preventDefault(); // previne que o usuário não mande o campo em branco
         // manda o que o usuário enviou nos campos, para o console
-        console.log("Matrícula:", matricula);
-        console.log("Senha:", senha);
+        //console.log("Matrícula:", matricula);
+        //console.log("Senha:", senha);
 
         axios.post("http://18.209.49.236:3000/users/login", {
             matricula: matricula,

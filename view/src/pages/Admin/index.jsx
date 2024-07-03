@@ -81,7 +81,7 @@ function Admin() {
   // Função para editar um usuário existente.
 
   const editarUsuario = async (dados) => {
-    console.log(dados)
+    //console.log(dados)
     try {
       await editUser(dados.id, {
         nome: dados.nome,
@@ -114,7 +114,7 @@ function Admin() {
               <span
                 onClick={() => {
                   setSelectedMember(member);
-                  console.log(member)
+                  //console.log(member)
                 }}
               >
                 {member.nome} - {member.matricula}
