@@ -68,19 +68,14 @@ class ReuniaosController < ApplicationController
   end
 
   # PUT /reuniaos/:id/update_link/:link_id
-  def update_link
-    puts "Params: #{params.inspect}" # Log params for debugging
-  
+  def update_link  
     if @reuniao && @reunioes_link
       if @reunioes_link.update(reuniao_links_params)
         render json: @reunioes_link, status: :ok
       else
         render json: @reunioes_link.errors, status: :unprocessable_entity
       end
-    else
-      puts "Reuniao: #{@reuniao.inspect}"
-      puts "ReunioesLink: #{@reunioes_link.inspect}"
-  
+    else  
       render json: { error: "ReunioesLink or Reuniao not found" }, status: :not_found
     end
   end

@@ -26,11 +26,9 @@ class EventosController < ApplicationController
 
     respond_to do |format|
       if @evento.save
-        format.html { redirect_to evento_url(@evento), notice: "Evento was successfully created." }
-        format.json { render :show, status: :created, location: @evento }
+        render json: @evento
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @evento.errors, status: :unprocessable_entity }
+        render json: @evento.errors
       end
     end
   end
@@ -39,11 +37,9 @@ class EventosController < ApplicationController
   def update
     respond_to do |format|
       if @evento.update(evento_params)
-        format.html { redirect_to evento_url(@evento), notice: "Evento was successfully updated." }
-        format.json { render :show, status: :ok, location: @evento }
+        render json: @evento
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @evento.errors, status: :unprocessable_entity }
+        render json: @evento.errors
       end
     end
   end
@@ -53,7 +49,6 @@ class EventosController < ApplicationController
     @evento.destroy!
 
     respond_to do |format|
-      format.html { redirect_to eventos_url, notice: "Evento was successfully destroyed." }
       format.json { head :no_content }
     end
   end

@@ -25,7 +25,7 @@ class DocumentosController < ApplicationController
     if @documento.save
       render json: @documento
     else
-      render json: "erro"
+      render json: @documento.errors
     end
   end
 
@@ -33,11 +33,9 @@ class DocumentosController < ApplicationController
   def update
     respond_to do |format|
       if @documento.update(documento_params)
-        format.html { redirect_to documento_url(@documento), notice: 'Documento was successfully updated.' }
-        format.json { render :show, status: :ok, location: @documento }
+        render json: @documento
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @documento.errors, status: :unprocessable_entity }
+        render json: @documento.errors
       end
     end
   end
