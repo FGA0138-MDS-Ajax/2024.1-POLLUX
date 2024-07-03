@@ -31,8 +31,9 @@ Link para a documentação do projeto: [MkDocs - Pollux 2024.1](https://fga0138-
 
 - Node.js v20.13.1
 - NPM (Node Package Manager) instalado
-- [adicionar]
-- [...]
+- PostgreSQL
+- Ruby
+- Rails
 
 ### Passo a passo para iniciar o projeto
 
@@ -47,8 +48,16 @@ Link para a documentação do projeto: [MkDocs - Pollux 2024.1](https://fga0138-
     ```
 
 2.  **Configuração do Banco de Dados:**
-
-    -  [adicionar]
+    ```
+    cd backend/
+    ```
+    ```
+    rails db:create
+    ```
+    ```
+    rails db:migrate
+    ```
+    
       
 3.  **Executar  o projeto**
 
