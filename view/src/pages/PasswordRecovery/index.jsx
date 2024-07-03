@@ -28,7 +28,7 @@ function PasswordRecovery() {
         axios.post("http://18.209.49.236:3000/password/forgot", {
             email: email
         }).then(function (response) {
-            console.log(response.data); // Log a resposta do backend para debug
+            //console.log(response.data); // Log a resposta do backend para debug
             alert("Email enviado com sucesso!"); // Exibe um alerta ou mensagem de sucesso
             setEmail(''); // Limpa o campo de email após o envio
         }).catch(function (error) {

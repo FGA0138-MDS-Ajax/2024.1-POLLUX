@@ -124,7 +124,7 @@ function Storage() {
 
   const editQuantidade = async (id, qtd, btn) => {
     const quantidade = qtd + btn;
-    console.log(quantidade)
+    //console.log(quantidade)
     try {
       await editStorage(id, {
         quantidade: quantidade
