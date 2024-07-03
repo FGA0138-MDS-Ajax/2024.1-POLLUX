@@ -5,13 +5,13 @@ meta {
 }
 
 post {
-  url: http://localhost:3000/storages/delete
-  body: json
+  url: {{base_url}}/storages/5/delete
+  body: none
   auth: none
 }
 
 body:json {
   {
-    "id":1
+    "id":5
   }
 }

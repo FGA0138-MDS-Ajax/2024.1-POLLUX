@@ -4,8 +4,14 @@ meta {
   seq: 3
 }
 
-delete {
-  url: {{base_url}}/eventos
-  body: none
+post {
+  url: {{base_url}}/eventos/delete
+  body: json
   auth: none
+}
+
+body:json {
+  {
+    "id": 6
+  }
 }

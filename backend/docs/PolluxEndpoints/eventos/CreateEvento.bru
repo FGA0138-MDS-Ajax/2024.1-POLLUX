@@ -6,6 +6,16 @@ meta {
 
 post {
   url: {{base_url}}/eventos
-  body: none
+  body: json
   auth: none
+}
+
+body:json {
+  {
+    "nome": "Reunião",
+    "data": "4 julho 2024",
+    "HoraInicio": "11:00",
+    "HoraTermino": "11:30",
+    "user_id": 1
+  }
 }
