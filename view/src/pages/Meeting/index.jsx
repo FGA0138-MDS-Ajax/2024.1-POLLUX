@@ -14,6 +14,8 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function Meeting() {
+  // Estados locais para gerenciar reuniões, popups, índice de reunião atual,
+  // links, descrição, título editado, e estado de colapso dos detalhes de cada reunião.
   const [meetings, setMeetings] = useState([]);
   const [showPopup, setShowPopup] = useState(false);
   const [showPopup2, setShowPopup2] = useState(false);
@@ -27,17 +29,15 @@ function Meeting() {
 
   const navigate = useNavigate();
 
+  // Configura o título da página e carrega as reuniões ao montar o componente.
+
   useEffect(() => {
     document.title = "Reuniões";
     get();
     setIsCollapsed(Array(meetings.length).fill(true));
   }, []);
 
-  /*useEffect(() => {
-        if (meetings.length > 0) {
-            setIsCollapsed(Array(meetings.length).fill(true));
-        }
-    }, [meetings]);*/
+  // Função assíncrona para obter as reuniões da API.
 
   const getReunioes = async () => {
     try {
@@ -48,10 +48,14 @@ function Meeting() {
     }
   };
 
+  // Função para obter e definir a lista de reuniões ao montar o componente.
+
   const get = async () => {
     const listaReunioes = await getReunioes();
     setMeetings(listaReunioes.data);
   };
+
+  // Função assíncrona para criar uma nova reunião.
 
   async function criarReuniao(titulo) {
     const userId = 1;
@@ -66,17 +70,25 @@ function Meeting() {
     }
   }
 
+  // Manipuladores de eventos para interação com o popup de adicionar reunião.
+
   const handleAddMeetingClick = () => {
     setShowPopup2(true);
   };
+
+  // Fechar popup.
 
   const handleClosePopup2 = () => {
     setShowPopup2(false);
   };
 
+  // Mudança de título
+
   const handleTituloChange = (e) => {
     setTitulo(e.target.value);
   };
+
+  // Submissão do formulário para adicionar ou editar título de reunião.
 
   const handleAddMeeting = (e) => {
     e.preventDefault();
@@ -92,15 +104,21 @@ function Meeting() {
     setShowPopup2(false);
   };
 
+  // Manipulador de clique na imagem para abrir o popup de adicionar link.
+
   const handleImageClick = (meetingId) => {
     setCurrentMeetingIndex(meetingId);
     setShowPopup(true);
   };
 
+  // Fechar o pop up
+
   const handleClosePopup = () => {
     setShowPopup(false);
     setCurrentMeetingIndex(null);
   };
+
+  // Funções para manipular a presença dos membros em uma reunião.
 
   const handlePresenceChange = (meetingIndex, memberIndex) => {
     const updatedMeetings = [...meetings];
@@ -109,13 +127,19 @@ function Meeting() {
     setMeetings(updatedMeetings);
   };
 
+  // Manipuladores de mudança de link para adicionar novo link.
+
   const handleLinkChange = (e) => {
     setLink(e.target.value);
   };
 
+  // Manipuladores de mudança de descrição para adicionar novo link.
+
   const handleDescricaoChange = (e) => {
     setDescricao(e.target.value);
   };
+
+  // Submissão do formulário para adicionar novo link à reunião.
 
   const handleSubmitLink = async (e) => {
     e.preventDefault();
@@ -138,6 +162,8 @@ function Meeting() {
     setDescricao("");
   };
 
+  // Função para remover um link de uma reunião.
+
   const handleRemoveLink = async (meetingIndex, linkIndex) => {
     try {
       await destroyLink(meetingIndex, linkIndex);
@@ -148,12 +174,16 @@ function Meeting() {
     }
   };
 
+  // Manipulador de duplo clique no título da reunião para editar.
+
   const handleDoubleClick = (index) => {
     const meeting = meetings[index];
     setTitulo(meeting.nome);
     setEditTitleIndex(index);
     setShowPopup2(true);
   };
+
+  // Submissão do formulário para editar o título de uma reunião.
 
   const handleUpdateMeetingTitle = async (e) => {
     e.preventDefault();
@@ -169,6 +199,8 @@ function Meeting() {
     setShowPopup2(false);
   };
 
+  // Função para remover uma reunião.
+
   const handleRemoveMeeting = async (meeting) => {
     try {
       await deleteMeeting(meeting.id);
@@ -178,6 +210,8 @@ function Meeting() {
       alert("Erro ao deletar a Reunião!");
     }
   };
+
+  // Atualizar o status da pesença
 
   const updatePresenceStatus = async (meetingIndex) => {
     const updatedMeeting = meetings[meetingIndex];
@@ -196,9 +230,13 @@ function Meeting() {
     }
   };
 
+  // Atualizar as presenças
+
   const handleSavePresence = async (meetingIndex) => {
     await updatePresenceStatus(meetingIndex);
   };
+
+  // Função para alternar o estado de colapso dos detalhes de uma reunião.
 
   const toggleCollapse = (index) => {
     const updatedCollapseState = [...isCollapsed];

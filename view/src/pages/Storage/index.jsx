@@ -1,3 +1,10 @@
+/*
+  Página de gestão de estoque, gerencia a exibição, adição, edição 
+  e exclusão de itens no estoque. Utiliza Axios para comunicação com 
+  a API RESTful para operações CRUD. Inclui funcionalidades como 
+  manipulação de quantidades, seleção de status e edição em pop-up.
+*/
+
 import { useState, useEffect } from "react";
 import SideBar from "../../components/SideBar";
 import "./Storage.css";
@@ -11,6 +18,10 @@ import {
 } from "../../queries/storages";
 
 function Storage() {
+
+  // Estados para controlar o estado do pop-up, nome, 
+  // quantidade, links, imagem selecionada e índice de edição
+
   const [showPopup, setShowPopup] = useState(false);
   const [nome, setNome] = useState("");
   const [quantidade, setQuantidade] = useState("");
@@ -19,6 +30,8 @@ function Storage() {
   const [editIndex, setEditIndex] = useState(-1); // Estado para rastrear o índice do item em edição
   const [itemEstoque, setItem] = useState([]);
   const navigate = useNavigate();
+
+  // Efeito para verificar a autenticação do usuário e obter dados do estoque ao montar o componente
 
   useEffect(() => {
     try {
@@ -40,6 +53,8 @@ function Storage() {
         })
         .then(function (response) {
           if (response.data) {
+            // Usuário autenticado, nada precisa ser feito
+
           } else {
             navigate("/login");
           }
@@ -47,16 +62,20 @@ function Storage() {
         .catch(function (error) {
           console.error(error);
         });
-      get();
+      get(); // Carregar os dados do estoque
     } catch (err) {
       navigate("/login");
     }
   }, [nome, quantidade, links, imagemSelecionada, editIndex, showPopup]);
 
+  // Função assíncrona para obter os dados do estoque da API
+
   const get = async () => {
     const listaStorage = await getStorages();
     setItem(listaStorage.data);
   };
+
+  // Função assíncrona para editar um item do estoque
 
   const editaItem = async (id, nome, quantidade, status, user_id) => {
     try {
@@ -73,6 +92,8 @@ function Storage() {
     }
   };
 
+  // Função assíncrona para deletar um item do estoque
+
   const deletaItem = async (id) => {
     try {
       await deleteStorage(id);
@@ -82,6 +103,8 @@ function Storage() {
       alert("Erro ao deletar o Item!");
     }
   };
+
+  // Função assíncrona para criar um novo item no estoque
 
   const criarEstoque = async (nome, quantidade, status, user_id) => {
     try {
@@ -97,23 +120,29 @@ function Storage() {
     }
   };
 
-  const editQuantidade =  async (id, qtd, btn) =>{
-      const quantidade = qtd + btn;
-      console.log(quantidade)
-      try {
-        await editStorage(id, {
-          quantidade: quantidade
-        })
-      } catch (error) {
-        console.error(error);
-        alert("Erro ao editar quantidade!")
-      }
-      get()
+  // Função assíncrona para editar a quantidade de um item do estoque
+
+  const editQuantidade = async (id, qtd, btn) => {
+    const quantidade = qtd + btn;
+    console.log(quantidade)
+    try {
+      await editStorage(id, {
+        quantidade: quantidade
+      })
+    } catch (error) {
+      console.error(error);
+      alert("Erro ao editar quantidade!")
+    }
+    get()
   }
+
+  // Manipulador de evento para exibir o pop-up de adicionar item
 
   const handleImageClick = () => {
     setShowPopup(true);
   };
+
+  // Manipulador de evento para fechar o pop-up de adicionar item
 
   const handleClosePopup = () => {
     setShowPopup(false);
@@ -123,13 +152,19 @@ function Storage() {
     setImagemSelecionada(null); // Resetar a imagem ao fechar o pop-up
   };
 
+  // Manipulador de evento para atualizar o estado do nome do item
+
   const handleNomeChange = (e) => {
     setNome(e.target.value);
   };
 
+  // Manipulador de evento para selecionar a imagem de status do item
+
   const handleImageSelection = (imagem) => {
     setImagemSelecionada(imagem);
   };
+
+  // Manipulador de evento para atualizar o estado da quantidade do item
 
   const handleQuantidadeChange = (event) => {
     const { value } = event.target;
@@ -137,6 +172,8 @@ function Storage() {
       setQuantidade(value);
     }
   };
+
+  // Manipulador de evento para submeter o formulário de adicionar/editar item
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -163,11 +200,15 @@ function Storage() {
     }
   };
 
+  // Manipulador de evento para remover um item da lista de links
+
   const handleRemoveLink = (index) => {
     const updatedLinks = [...links];
     updatedLinks.splice(index, 1);
     setLinks(updatedLinks);
   };
+
+  // Manipulador de evento para adicionar quantidade a um item do estoque
 
   const handleAddQuantity = (index) => {
     const updatedLinks = [...links];
@@ -176,6 +217,8 @@ function Storage() {
     );
     setLinks(updatedLinks);
   };
+
+  // Manipulador de evento para remover quantidade de um item do estoque
 
   const handleRemoveQuantity = (index) => {
     const updatedLinks = [...links];
@@ -187,6 +230,8 @@ function Storage() {
     }
     setLinks(updatedLinks);
   };
+
+  // Manipulador de evento de duplo clique para editar um item do estoque
 
   const handleDoubleClick = (item, index) => {
     setNome(item.nome);
@@ -246,29 +291,26 @@ function Storage() {
                     <img
                       src="/disponivel.svg"
                       alt="Disponível"
-                      className={`opcao-imagem ${
-                        imagemSelecionada === "/disponivel.svg"
-                          ? "selecionada"
-                          : ""
-                      }`}
+                      className={`opcao-imagem ${imagemSelecionada === "/disponivel.svg"
+                        ? "selecionada"
+                        : ""
+                        }`}
                       onClick={() => handleImageSelection("/disponivel.svg")}
                     />
                     <img
                       src="/indisponivel.svg"
                       alt="Indisponível"
-                      className={`opcao-imagem ${
-                        imagemSelecionada === "/indisponivel.svg"
-                          ? "selecionada"
-                          : ""
-                      }`}
+                      className={`opcao-imagem ${imagemSelecionada === "/indisponivel.svg"
+                        ? "selecionada"
+                        : ""
+                        }`}
                       onClick={() => handleImageSelection("/indisponivel.svg")}
                     />
                     <img
                       src="/alerta.svg"
                       alt="Alerta"
-                      className={`opcao-imagem ${
-                        imagemSelecionada === "/alerta.svg" ? "selecionada" : ""
-                      }`}
+                      className={`opcao-imagem ${imagemSelecionada === "/alerta.svg" ? "selecionada" : ""
+                        }`}
                       onClick={() => handleImageSelection("/alerta.svg")}
                     />
                   </label>

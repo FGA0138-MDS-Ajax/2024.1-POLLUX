@@ -1,8 +1,20 @@
+/*
+   Página de divulgação da Equipe de Robótica Aérea (EDRA). Inclui 
+   informações sobre a equipe(apresentação e objetivo, quem somos e a história),
+   eventos, competições e detalhes sobre o processo seletivo. Também contém seções 
+   detalhadas sobre os drones desenvolvidos pela equipe e suas áreas de atuação.
+ 
+   Componentes utilizados da pasta 'components': Header, Footer, TablePS, TableProx.
+ */
+
 import Footer from "../../components/Footer"
 import Header from "../../components/Header"
 import TablePS from "../../components/TablePS";
 import TableProx from "../../components/TableProx";
 import './Divulgation.css'
+
+// Função para lidar com o clique dos botões da aba processo seletivo,
+// se possuir link direciona, caso contrário aparece um aviso
 
 const handleButtonClick = (url) => {
     if (!url) {

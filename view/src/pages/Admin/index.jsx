@@ -1,3 +1,10 @@
+/*
+  Página Admin para gerenciamento de usuários, a qual somente o admin tem acesso.
+  - Utiliza Axios para realizar requisições HTTP.
+  - Implementa funções para buscar, criar, editar e deletar usuários.
+  - Apresenta uma interface para listar e editar membros.
+*/
+
 import { useEffect, useState } from "react";
 import "./Admin.css";
 import SideBar from "../../components/SideBar";
@@ -11,6 +18,8 @@ function Admin() {
   const [selectedMember, setSelectedMember] = useState(null);
   const navigate = useNavigate();
 
+  // Função para buscar usuários da API.
+
   const getUsuarios = async () => {
     try {
       const usuarios = await getUsers();
@@ -19,6 +28,8 @@ function Admin() {
       alert(JSON.stringify(error));
     }
   };
+
+  // Função para atualizar a lista de membros.
 
   const get = async () => {
     const listaUsuarios = await getUsuarios();
@@ -32,26 +43,28 @@ function Admin() {
       let token = cookieValue.jwtToken.toString();
       axios.post("http://18.209.49.236:3000/users/token", {
         token: token
-      }).then(function(response) {
-        if(!(response.data < 0)){
-          axios.get("http://18.209.49.236:3000/users/"+response.data.id).then(function (resposta){
-            if(resposta.data.acesso.acesso_admin){
-            }else{
+      }).then(function (response) {
+        if (!(response.data < 0)) {
+          axios.get("http://18.209.49.236:3000/users/" + response.data.id).then(function (resposta) {
+            if (resposta.data.acesso.acesso_admin) {
+            } else {
               navigate("/detail")
             }
           });
-        }else{
-            navigate("/login")
-          }
-      }).catch(function(error) {
-          console.error(error);
+        } else {
+          navigate("/login")
+        }
+      }).catch(function (error) {
+        console.error(error);
       });
-  } catch (err) {
+    } catch (err) {
       navigate("/login");
     }
     get();
-    
+
   }, []);
+
+  // Função para remover um membro da lista.
 
   const handleRemoveMember = async (memberId) => {
     try {
@@ -65,6 +78,8 @@ function Admin() {
     alert("Membro removido: " + "");
   };
 
+  // Função para editar um usuário existente.
+
   const editarUsuario = async (dados) => {
     console.log(dados)
     try {
@@ -74,11 +89,11 @@ function Admin() {
         email: dados.email,
         senha: dados.senha,
         acesso: {
-          acesso_documents: dados.acesso_documents?? false,
-          acesso_meetings: dados.acesso_meetings?? false,
-          acesso_calendar: dados.acesso_calendar?? false,
-          acesso_finance: dados.acesso_finance?? false,
-          acesso_admin: dados.acesso_admin?? false,
+          acesso_documents: dados.acesso_documents ?? false,
+          acesso_meetings: dados.acesso_meetings ?? false,
+          acesso_calendar: dados.acesso_calendar ?? false,
+          acesso_finance: dados.acesso_finance ?? false,
+          acesso_admin: dados.acesso_admin ?? false,
         }
       });
       await get();

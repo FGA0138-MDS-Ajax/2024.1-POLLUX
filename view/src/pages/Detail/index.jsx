@@ -1,3 +1,9 @@
+/*
+  Página detalhe, responsável por exibir os detalhes do usuário logado,
+  incluindo a funcionalidade de alterar a senha.
+  Apenas o admin é redirecionado para a página admin.
+*/
+
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import "./Detail.css";
@@ -17,6 +23,8 @@ function Detail() {
   const [userId, setUserId] = useState("");
   const [admin, setAdmin] = useState(false);
   const navigate = useNavigate();
+
+  // Define o título da página e recupera os dados do usuário ao montar o componente
 
   useEffect(() => {
     document.title = 'Detalhe';
@@ -43,13 +51,13 @@ function Detail() {
             setEmail(response.data.email);
             setMatricula(response.data.matricula);
             setUserId(response.data.id);
-            axios.get("http://18.209.49.236:3000/users/"+response.data.id).then(function (resposta){
-              if(resposta.data.acesso.acesso_admin){
+            axios.get("http://18.209.49.236:3000/users/" + response.data.id).then(function (resposta) {
+              if (resposta.data.acesso.acesso_admin) {
                 const estiloBotao = {
                   opacity: 1.0, // Define a opacidade desejada aqui
                 };
                 setAdmin(resposta.data.acesso.acesso_admin);
-              }else{
+              } else {
                 const estiloBotao = {
                   opacity: 0.0, // Define a opacidade desejada aqui
                 };
@@ -67,9 +75,13 @@ function Detail() {
     }
   }, []);
 
+  // Função para exibir o popup de alteração de senha
+
   const handleAlterarSenha = () => {
     setMostrarPopup(true);
   };
+
+  // Função para fechar o popup de alteração de senha
 
   const fecharPopup = () => {
     setNovaSenha("");
@@ -77,6 +89,9 @@ function Detail() {
     setMostrarPopup(false);
     setSenhaMatch(true); // Reinicia o estado para que a mensagem de erro desapareça quando o popup for fechado
   };
+
+  // Função para alterar a senha do usuário chamando a API
+
   const alterarSenha = async (userId, newData) => {
     try {
       await editPassword(userId, newData);
@@ -86,6 +101,9 @@ function Detail() {
       alert(JSON.stringify(error));
     }
   };
+
+  // Manipula o envio do formulário de alteração de senha
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     // Verifica se as senhas são iguais
@@ -107,10 +125,12 @@ function Detail() {
     }
   };
 
+  // Função para redirecionar para a página de administração se o usuário for admin
+
   const AdminTela = () => {
     console.log(admin);
-    if(admin){
-    navigate("/Admin"); // Redireciona para pag Admin
+    if (admin) {
+      navigate("/Admin"); // Redireciona para pag Admin
     }
   };
 
@@ -131,9 +151,9 @@ function Detail() {
 
         <div className="conteudo3">
           <button onClick={handleAlterarSenha}>Alterar senha</button>
-          <button className={`botaoAdmin ${!admin ? 'botaoNAOAdmin' : ''}`}onClick={AdminTela}>
-      Gerenciamento
-    </button>
+          <button className={`botaoAdmin ${!admin ? 'botaoNAOAdmin' : ''}`} onClick={AdminTela}>
+            Gerenciamento
+          </button>
           {mostrarPopup && (
             <div className="popupContainer">
               <div className="alterarSenhaPopup">

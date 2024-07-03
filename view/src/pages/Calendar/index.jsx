@@ -1,9 +1,19 @@
+/* 
+  Página calendário é responsável por exibir um calendário interativo com eventos.
+  Além do quadro Kanban, localizado na pasta 'components'
+  O usuário pode navegar entre os meses, visualizar eventos do dia e do mês, 
+  adicionar novos eventos e excluir eventos existentes. Também há uma verificação 
+  de autenticação do usuário para garantir que ele tenha acesso ao calendário.
+*/
+
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Calendar.css';
 import SideBar from '../../components/SideBar';
 import Kanban from '../../components/Kanban';
 import axios from 'axios';
+
+// Função para buscar eventos da API
 
 const fetchEvents = async () => {
   try {
@@ -30,26 +40,28 @@ const Calendar = () => {
   const [eventsArr, setEventsArr] = useState([]);
   const navigate = useNavigate();
 
+  // Função para listar eventos do mês atual
+
   const listMonthEvents = async () => {
     try {
       const response = await fetchEvents();
-  
+
       if (!Array.isArray(response)) {
         return;
       }
-  
+
       const monthEvents = response.filter(eventObj => {
         const eventDate = new Date(eventObj.data);
         return eventDate.getMonth() === month && eventDate.getFullYear() === year;
       });
-  
-   
+
+
       monthEvents.sort((a, b) => {
         const dateA = new Date(a.data + ' ' + a.HoraInicio);
         const dateB = new Date(b.data + ' ' + b.HoraInicio);
         return dateA - dateB;
       });
-  
+
       let eventsList = "";
       monthEvents.forEach(eventObj => {
         eventsList += `<div class="event">
@@ -65,16 +77,18 @@ const Calendar = () => {
           </div>
         </div>`;
       });
-  
+
       if (eventsList === "") {
         eventsList = `<div class="no-event"><h3>Sem eventos no mês</h3></div>`;
       }
-  
+
       document.querySelector('.events-month').innerHTML = eventsList;
     } catch (error) {
       console.error('Erro ao buscar eventos:', error);
     }
   };
+
+  // Hook para configurar o título da página e verificar autenticação do usuário
 
   useEffect(() => {
     document.title = 'Calendário';
@@ -86,7 +100,7 @@ const Calendar = () => {
       }).then(function (response) {
         if (!(response.data < 0)) {
           axios.get("http://18.209.49.236:3000/users/" + response.data.id).then(function (resposta) {
-            if (!resposta.data.acesso.acesso_calendar){
+            if (!resposta.data.acesso.acesso_calendar) {
               navigate("/detail");
             }
           });
@@ -99,7 +113,7 @@ const Calendar = () => {
     } catch (err) {
       navigate("/login");
     }
-  
+
     loadEvents();
   }, []);
 
@@ -113,6 +127,8 @@ const Calendar = () => {
     "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
     "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
   ];
+
+  // Função para carregar eventos do banco de dados
 
   const loadEvents = async () => {
     const events = await fetchEvents();
@@ -131,13 +147,13 @@ const Calendar = () => {
     const lastDate = lastDay.getDate();
     const day = firstDay.getDay();
     const nextDays = 7 - lastDay.getDay() - 1;
-  
+
     let days = "";
-  
+
     for (let x = day; x > 0; x--) {
       days += `<div class="day prev-date">${prevDays - x + 1}</div>`;
     }
-  
+
     for (let i = 1; i <= lastDate; i++) {
       let event = false;
       eventsArr.forEach((eventObj) => {
@@ -162,24 +178,31 @@ const Calendar = () => {
         }
       }
     }
-  
+
     for (let j = 1; j <= nextDays; j++) {
       days += `<div class="day next-date">${j}</div>`;
     }
-  
+
     document.querySelector('.days').innerHTML = days;
     addListener();
   };
+
+  // Função para navegar para o mês anterior
 
   const prevMonth = () => {
     setMonth(month - 1 < 0 ? 11 : month - 1);
     setYear(month - 1 < 0 ? year - 1 : year);
   };
 
+  // Função para navegar para o próximo mês
+
+
   const nextMonth = () => {
     setMonth(month + 1 > 11 ? 0 : month + 1);
     setYear(month + 1 > 11 ? year + 1 : year);
   };
+
+  // Função para adicionar ouvintes de eventos nos dias do calendário
 
   const addListener = () => {
     document.querySelectorAll('.day').forEach(day => {
@@ -192,6 +215,8 @@ const Calendar = () => {
     });
   };
 
+  // Função para navegar para uma data específica
+
   const gotoDate = () => {
     const dateInput = document.querySelector('.date-input').value;
     const dateArr = dateInput.split('/');
@@ -203,6 +228,8 @@ const Calendar = () => {
     }
   };
 
+  // Função para obter o dia ativo e atualizar as informações do evento
+
   const getActiveDay = (date) => {
     const day = new Date(year, month, date);
     const dayName = weekdays[day.getDay()];
@@ -210,25 +237,27 @@ const Calendar = () => {
     document.querySelector('.event-date').innerHTML = `${date} ${months[month]} ${year}`;
   };
 
+  // Função para atualizar os eventos de um dia específico
+
   const updateEvents = async (date) => {
     try {
       const allEvents = await fetchEvents();
       //console.log('Eventos obtidos do banco de dados:', allEvents);
-  
+
       if (!Array.isArray(allEvents)) {
         //console.error('Erro: allEvents não é um array');
         return;
       }
-  
+
       // Filtrar eventos para a data específica
       const dayEvents = allEvents.filter(eventObj =>
         new Date(eventObj.data).getDate() === date &&
         new Date(eventObj.data).getMonth() === month &&
         new Date(eventObj.data).getFullYear() === year
       );
-  
+
       //console.log('Eventos do dia filtrados:', dayEvents);
-  
+
       let events = "";
       if (dayEvents.length > 0) {
         // Ordenar os eventos por hora
@@ -250,7 +279,7 @@ const Calendar = () => {
       } else {
         events = `<div class="no-event"><h3>Sem eventos no dia</h3></div>`;
       }
-  
+
       document.querySelector('.events').innerHTML = events;
       document.querySelectorAll('.delete-event').forEach(btn => {
         btn.addEventListener('click', (e) => {
@@ -263,15 +292,19 @@ const Calendar = () => {
     }
   };
 
+  // Salvar eventos no local storage
+
   const saveEvents = () => { //Tem local storage?
     localStorage.setItem('events', JSON.stringify(eventsArr));
   };
+
+  // Função para adicionar um novo evento
 
   const addEvent = () => {
     const eventTitle = document.querySelector('.event-name').value;
     const eventTimeFrom = document.querySelector('.event-time-from').value;
     const eventTimeTo = document.querySelector('.event-time-to').value;
-    const eventDate = document.querySelector('.event-date').innerHTML; 
+    const eventDate = document.querySelector('.event-date').innerHTML;
     if (eventTitle === "" || eventTimeFrom === "" || eventTimeTo === "") {
       alert("Por favor, preencha todos os campos");
       return;
@@ -334,27 +367,29 @@ const Calendar = () => {
     }
 
     axios.post("http://18.209.49.236:3000/eventos", res)
-    .then(function (response) {
-      // Resposta recebida com sucesso
-      //console.log("Documento criado com sucesso:", response.data);
-      const currentDate = new Date();
-      updateEvents(currentDate.getDate(), currentDate.getMonth(), currentDate.getFullYear())
-    })
-    .catch(function (error) {
-      // Ocorreu um erro ao fazer a solicitação
-      //console.error("Erro ao criar documento:", error);
-    });
+      .then(function (response) {
+        // Resposta recebida com sucesso
+        //console.log("Documento criado com sucesso:", response.data);
+        const currentDate = new Date();
+        updateEvents(currentDate.getDate(), currentDate.getMonth(), currentDate.getFullYear())
+      })
+      .catch(function (error) {
+        // Ocorreu um erro ao fazer a solicitação
+        //console.error("Erro ao criar documento:", error);
+      });
     loadEvents()
 
   };
 
-function deletaEvento(id){
-  axios.post("http://18.209.49.236:3000/eventos/delete",{
-    id: id  
-  });
-  loadEvents()
-  updateEvents();
-}
+  // Função para deletar um evento existente
+
+  function deletaEvento(id) {
+    axios.post("http://18.209.49.236:3000/eventos/delete", {
+      id: id
+    });
+    loadEvents()
+    updateEvents();
+  }
 
   return (
     <>

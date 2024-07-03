@@ -14,6 +14,8 @@ function Documents() {
   const [documentos, setDocs] = useState([]);
   const navigate = useNavigate();
 
+  // Efeito para carregar os documentos ao montar o componente
+
   useEffect(() => {
     get()
     try {
@@ -21,25 +23,29 @@ function Documents() {
       var cookieValue = document.cookie.split(';').map(cookie => cookie.split('=')).reduce((accumulator, [key, value]) => ({ ...accumulator, [key.trim()]: decodeURIComponent(value) }), {});
       let token = cookieValue.jwtToken.toString();
       axios.post("http://18.209.49.236:3000/users/token", {
-          token: token
-      }).then(function(response) {
-        if(!(response.data < 0)){
-          axios.get("http://18.209.49.236:3000/users/"+response.data.id).then(function (resposta){
-            if(resposta.data.acesso.acesso_documents){
-            }else{
+        token: token
+      }).then(function (response) {
+        if (!(response.data < 0)) {
+          axios.get("http://18.209.49.236:3000/users/" + response.data.id).then(function (resposta) {
+            if (resposta.data.acesso.acesso_documents) {
+            } else {
               navigate("/detail")
             }
           });
-        }else{
-            navigate("/login")
+        } else {
+          navigate("/login")
         }
-      }).catch(function(error) {
-          console.error(error);
+      }).catch(function (error) {
+        console.error(error);
       });
-  } catch (err) {
+
+      // Atualizar a lista de documentos após a exclusão
+    } catch (err) {
       navigate("/login");
-  }
+    }
   }, []);
+
+  // Função assíncrona para deletar um documento
 
   const deletarDoc = async (id) => {
     try {
@@ -52,16 +58,18 @@ function Documents() {
       alert("Erro ao deletar documento!")
     }
   }
-  
+
+  // Função assíncrona para criar um novo documento
+
   const criarDocumento = async (descricao, link) => {
     // Variável para armazenar o ID do usuário
-  
+
     // Dados a serem enviados no corpo da solicitação POST
     const data = {
       nome: descricao,
       link: link
     };
-  
+
     // Fazendo a solicitação POST usando Axios
     try {
       await createDocument(data)
@@ -72,26 +80,38 @@ function Documents() {
     }
   }
 
+  // Função assíncrona para obter os documentos da API
+
   const get = async () => {
     const response = await getDocuments()
     setDocs(response.data);
   }
 
+  // Manipulador de evento para exibir o popup de adicionar link
+
   const handleImageClick = () => {
     setShowPopup(true);
   };
+
+  // Manipulador de evento para fechar o popup
 
   const handleClosePopup = () => {
     setShowPopup(false);
   };
 
+  // Manipulador de evento para atualizar o estado do link
+
   const handleLinkChange = (e) => {
     setLink(e.target.value);
   };
 
+  // Manipulador de evento para atualizar o estado da descrição
+
   const handleDescricaoChange = (e) => {
     setDescricao(e.target.value);
   };
+
+  // Manipulador de evento para submeter o formulário de adicionar documento
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -103,6 +123,7 @@ function Documents() {
     setDescricao('');
   };
 
+  // Manipulador de evento para remover um link da lista
 
   const handleRemoveLink = (index) => {
     const updatedLinks = [...links];

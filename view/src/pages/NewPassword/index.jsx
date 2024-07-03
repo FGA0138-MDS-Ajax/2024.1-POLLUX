@@ -1,8 +1,17 @@
+/**
+   Página de redefinição de senha, utiliza:
+   - useState para gerenciar estados locais para novaSenha, confirmarSenha.
+   - useNavigate para navegação programática após a redefinição da senha.
+   - useParams para capturar o token de redefinição de senha da URL.
+
+   Envia uma solicitação POST para o backend com novaSenha e o token para 
+   redefinir a senha do usuário. Exibe alertas para sucesso ou falha na redefinição da senha.
+ */
+
 import React, { useState } from 'react';
 import './NewPassword.css';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios'
-// import { useCookies } from 'react-cookie';
 
 function NewPassword() {
 
@@ -11,30 +20,7 @@ function NewPassword() {
     const navigate = useNavigate();
     const { token } = useParams();
 
-    // const [cookies, setCookie] = useCookies(['jwtToken']);
-    // const [cookie] = useCookies(['jwtToken']);
-
-    /*
-    useEffect(()=>{
-        try {
-            var cookieValue = document.cookie.split(';').map(cookie => cookie.split('=')).reduce((accumulator, [key, value]) => ({ ...accumulator, [key.trim()]: decodeURIComponent(value) }), {});
-            let token = cookieValue.jwtToken.toString();
-            console.log(token);
-        
-            axios.post("http://18.209.49.236:3000/users/token", {
-                token: token
-            }).then(function(response) {
-                if(!(response.data < 0)){
-                    navigate("/detail");
-                }
-            }).catch(function(error) {
-                console.error(error);
-            });
-        } catch (err) {
-            //console.error('Ocorreu um erro:', err);
-        }
-        
-  },[]);*/
+    // Função para lidar com o envio do formulário
 
     const handleSubmit = (event) => {
         event.preventDefault(); // previne que o usuário não mande o campo em branco
@@ -44,16 +30,16 @@ function NewPassword() {
             return; // Impede o envio do formulário se as senhas não coincidirem
         }
 
-
+        // Envia uma solicitação POST para redefinir a senha
         axios.post("http://18.209.49.236:3000/password/reset", {
             password: novaSenha,
             token: token
         }).then(function (response) {
             alert('senha alterada com sucesso.');
             navigate("/");
-      }).catch(function (error) {
+        }).catch(function (error) {
             console.log(error);
-            });
+        });
 
     };
 
