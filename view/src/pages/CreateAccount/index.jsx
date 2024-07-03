@@ -1,4 +1,11 @@
-import { useState,useEffect } from "react";
+/*
+  Página para criar conta, a qual somente o admin tem acesso.
+  Este componente é responsável pela criação de uma nova conta de usuário.
+  Inclui um formulário para entrada de dados do usuário, manipulação de estados
+  para erros de validação, e chamada de API para criação do usuário no backend.
+*/
+
+import { useState, useEffect } from "react";
 import "./CreateAccount.css";
 import { Link, useNavigate } from "react-router-dom";
 import { createUser } from "../../queries/user";
@@ -12,9 +19,14 @@ function CreateAccount() {
     senha: "",
   });
   const navigate = useNavigate()
-  useEffect(()=>{
+
+  // Define o título da página ao montar o componente
+
+  useEffect(() => {
     document.title = 'Criar Conta';
-  },[]);
+  }, []);
+
+  // Função para criar um novo usuário chamando a API
 
   const newUser = async (userData) => {
     try {
@@ -23,6 +35,9 @@ function CreateAccount() {
       alert(JSON.stringify(error));
     }
   };
+
+  // Manipula o envio do formulário, realiza validações e 
+  // chama a função de criação de usuário
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -37,11 +52,11 @@ function CreateAccount() {
       email: dados.email,
       senha: dados.password,
       acesso: {
-        acesso_documents: dados.acesso_documents?? false,
-        acesso_meetings: dados.acesso_meetings?? false,
-        acesso_calendar: dados.acesso_calendar?? false,
-        acesso_finance: dados.acesso_finance?? false,
-        acesso_admin: dados.acesso_admin?? false,
+        acesso_documents: dados.acesso_documents ?? false,
+        acesso_meetings: dados.acesso_meetings ?? false,
+        acesso_calendar: dados.acesso_calendar ?? false,
+        acesso_finance: dados.acesso_finance ?? false,
+        acesso_admin: dados.acesso_admin ?? false,
       },
     })
     navigate("/admin")

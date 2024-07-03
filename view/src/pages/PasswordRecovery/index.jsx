@@ -1,3 +1,11 @@
+/*
+  Página de recuperação de senha, permite que o usuário solicite 
+  a recuperação de senha enviando um e-mail. Utiliza Axios para 
+  enviar uma solicitação POST para a API RESTful que trata a 
+  recuperação de senha. Exibe feedback ao usuário através de alertas 
+  em caso de sucesso ou erro no envio do e-mail.
+*/
+
 import React, { useState } from 'react';
 import './PasswordRecovery.css';
 import { Link } from 'react-router-dom';
@@ -7,9 +15,13 @@ function PasswordRecovery() {
 
     const [email, setEmail] = useState('');
 
+    // Função para atualizar o estado do email conforme o usuário digita
+
     const handleEmailChange = (event) => {
         setEmail(event.target.value);
     }
+
+    // Função para lidar com o envio do formulário de recuperação de senha
 
     const handleSubmit = (event) => {
         event.preventDefault();
