@@ -73,9 +73,12 @@ Link para a documentação do projeto: [MkDocs - Pollux 2024.1](https://fga0138-
     npm run dev
     ```
 
-    Em um novo terminal, navegue até a pasta do .... para o back
+    Em um novo terminal, navegue até a pasta backend para configurar o rails
     ```
-    adicionar
+    rails db:seed
+    ```
+    ```
+    rails s
     ```
 
 # Autores
