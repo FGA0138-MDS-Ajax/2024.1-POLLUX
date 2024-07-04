@@ -9,7 +9,7 @@ class PasswordsController < ApplicationController
   
       if user.present?
         @token = user.signed_id(purpose: 'password_reset', expires_in: 15.minutes)
-        reset_url = "http://34.228.184.231/NewPassword/#{@token}"
+        reset_url = "http://localhost:5173/NewPassword/#{@token}"
         PasswordMailer.with(user: user, reset_url: reset_url).password_reset.deliver_later
         render json: { status: 'ok', token: @token }, status: :ok
       else
