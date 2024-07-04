@@ -10,6 +10,7 @@ import "./Detail.css";
 import SideBar from "../../components/SideBar";
 import { editPassword } from "../../queries/user";
 import axios from "axios";
+import { baseURL } from '../../config/baseurl';
 
 function Detail() {
   const [email, setEmail] = useState("");
@@ -41,7 +42,7 @@ function Detail() {
         );
       let token = cookieValue.jwtToken.toString();
       axios
-        .post("http://18.209.49.236:3000/users/token", {
+        .post(baseURL+"users/token", {
           token: token,
         })
         .then(function (response) {
@@ -51,7 +52,7 @@ function Detail() {
             setEmail(response.data.email);
             setMatricula(response.data.matricula);
             setUserId(response.data.id);
-            axios.get("http://18.209.49.236:3000/users/" + response.data.id).then(function (resposta) {
+            axios.get(baseURL+"users/" + response.data.id).then(function (resposta) {
               if (resposta.data.acesso.acesso_admin) {
                 const estiloBotao = {
                   opacity: 1.0, // Define a opacidade desejada aqui

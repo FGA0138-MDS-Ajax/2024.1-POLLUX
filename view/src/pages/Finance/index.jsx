@@ -15,6 +15,7 @@ import "./Finance.css";
 import SideBar from "../../components/SideBar";
 import axios from "axios";
 import { createAction, deleteAction, getActions } from "../../queries/actions";
+import { baseURL } from '../../config/baseurl';
 
 function Finance() {
   const [showPopup, setShowPopup] = useState(false);
@@ -50,13 +51,13 @@ function Finance() {
       let token = cookieValue.jwtToken.toString();
       // Verifica se o token de autenticação é válido e se o usuário tem acesso à gestão financeira
       axios
-        .post("http://18.209.49.236:3000/users/token", {
+        .post(baseURL+"users/token", {
           token: token,
         })
         .then(function (response) {
           if (!(response.data < 0)) {
             axios
-              .get("http://18.209.49.236:3000/users/" + response.data.id)
+              .get(baseURL+"users/" + response.data.id)
               .then(function (resposta) {
                 if (resposta.data.acesso.acesso_finance) {
                 } else {

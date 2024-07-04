@@ -11,6 +11,7 @@ import './Login.css';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios'
 import { useCookies } from 'react-cookie';
+import { baseURL } from '../../config/baseurl';
 
 // Dentro do seu componente ou função assíncrona onde você está fazendo a requisição
 function Login() {
@@ -37,7 +38,7 @@ function Login() {
             let token = cookieValue.jwtToken.toString();
             //console.log(token);
 
-            axios.post("http://18.209.49.236:3000/users/token", {
+            axios.post(baseURL+"users/token", {
                 token: token
             }).then(function (response) {
                 if (!(response.data < 0)) {
@@ -70,7 +71,7 @@ function Login() {
         //console.log("Matrícula:", matricula);
         //console.log("Senha:", senha);
 
-        axios.post("http://18.209.49.236:3000/users/login", {
+        axios.post(baseURL+"users/login", {
             matricula: matricula,
             senha: senha
         }).then(function (response) {

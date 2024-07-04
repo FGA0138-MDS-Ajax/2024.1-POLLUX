@@ -16,6 +16,7 @@ import {
   editStorage,
   getStorages,
 } from "../../queries/storages";
+import { baseURL } from '../../config/baseurl';
 
 function Storage() {
 
@@ -48,7 +49,7 @@ function Storage() {
         );
       let token = cookieValue.jwtToken.toString();
       axios
-        .post("http://18.209.49.236:3000/users/token", {
+        .post(baseURL+"users/token", {
           token: token,
         })
         .then(function (response) {

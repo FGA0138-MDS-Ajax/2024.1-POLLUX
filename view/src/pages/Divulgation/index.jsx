@@ -11,7 +11,7 @@ import Footer from "../../components/Footer"
 import Header from "../../components/Header"
 import TablePS from "../../components/TablePS";
 import TableProx from "../../components/TableProx";
-import './Divulgation.css'
+import './Divulgation.css';
 
 // Função para lidar com o clique dos botões da aba processo seletivo,
 // se possuir link direciona, caso contrário aparece um aviso
