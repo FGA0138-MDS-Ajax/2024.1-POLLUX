@@ -105,7 +105,7 @@ Link para a documentação do projeto: [MkDocs - Pollux 2024.1](https://fga0138-
 5. **Para fazer os testes unitarios**
     
     Primeiramente você deve rodar o banco localmente, sem a utilização do docker
-    [Crie seu usuário no postgres] (https://rpg.consudata.com.br/posts/2021-03-30-papeis-e-usurios-no-postgresql/) com o mesmo usuário e senha da sua .env
+    [Crie seu usuário no postgres](https://rpg.consudata.com.br/posts/2021-03-30-papeis-e-usurios-no-postgresql/) com o mesmo usuário e senha da sua .env
 
     ```
     cd /backend
