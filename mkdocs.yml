@@ -22,3 +22,10 @@ theme:
     scheme: default
     primary: green
     language: pt-BR
+
+
+markdown_extensions:
+  
+
+    - toc:
+        title: Conteúdo da página 
