@@ -91,7 +91,8 @@ Link para a documentação do projeto: [MkDocs - Pollux 2024.1](https://fga0138-
     ```
     rails s
     ```
-4.  **Login**
+4.  **Para entrar na plataforma de gerenciamento**
+    Deve se acessar a logo da EDRA no canto superior esquerdo da tela e logar utilizando o seguinte login
     Matricula:
     ```
     000000000
