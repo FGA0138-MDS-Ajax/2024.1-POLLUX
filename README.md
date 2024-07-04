@@ -30,7 +30,7 @@ Link para a documentação do projeto: [MkDocs - Pollux 2024.1](https://fga0138-
 ### Dependências
 
 - Node.js v20.13.1
-- NPM (Node Package Manager) instalado
+- NPM (Node Package Manager)
 - PostgreSQL
 - Ruby
 - Rails
@@ -43,7 +43,7 @@ Link para a documentação do projeto: [MkDocs - Pollux 2024.1](https://fga0138-
     ```
     git clone https://github.com/FGA0138-MDS-Ajax/2024.1-POLLUX.git
     ``` 
-    caso seja necessário, entre na pasta do projeto
+    Caso seja necessário, entre na pasta do projeto
     ```
     cd 2024-1-POLLUX
     ```
@@ -52,7 +52,7 @@ Link para a documentação do projeto: [MkDocs - Pollux 2024.1](https://fga0138-
     ```
     touch .env
     ```
-    coloque o nome do banco de dados, seu usuario e sua senha no arquivo .env
+    Coloque o nome do banco de dados, seu usuário e sua senha no arquivo .env
     ```
     cp .env /backend/
     ```
