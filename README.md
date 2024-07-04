@@ -34,6 +34,7 @@ Link para a documentação do projeto: [MkDocs - Pollux 2024.1](https://fga0138-
 - PostgreSQL
 - Ruby
 - Rails
+- Docker
 
 ### Passo a passo para iniciar o projeto
 
