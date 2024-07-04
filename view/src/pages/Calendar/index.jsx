@@ -95,8 +95,7 @@ const Calendar = () => {
       }).then(function (response) {
         if (!(response.data < 0)) {
           axios.get("http://localhost:3000/users/" + response.data.id).then(function (resposta) {
-            if (resposta.data.acesso.acesso_calendar) {
-            } else {
+            if (!resposta.data.acesso.acesso_calendar){
               navigate("/detail");
             }
           });
