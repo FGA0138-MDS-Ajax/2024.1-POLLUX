@@ -12,6 +12,7 @@ import {
 } from "../../queries/meetings";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { baseURL } from '../../config/baseurl';
 
 function Meeting() {
   // Estados locais para gerenciar reuniões, popups, índice de reunião atual,
@@ -35,6 +36,35 @@ function Meeting() {
     document.title = "Reuniões";
     get();
     setIsCollapsed(Array(meetings.length).fill(true));
+    try {
+      var cookieValue = document.cookie
+        .split(";")
+        .map((cookie) => cookie.split("="))
+        .reduce(
+          (accumulator, [key, value]) => ({
+            ...accumulator,
+            [key.trim()]: decodeURIComponent(value),
+          }),
+          {}
+        );
+      let token = cookieValue.jwtToken.toString();
+      axios
+        .post(baseURL+"users/token", {
+          token: token,
+        })
+        .then(function (response) {
+          if (!(response.data < 0)) {
+
+          } else {
+            navigate("/login");
+          }
+        })
+        .catch(function (error) {
+          console.error(error);
+        });
+    } catch (err) {
+      navigate("/login");
+    }
   }, []);
 
   // Função assíncrona para obter as reuniões da API.

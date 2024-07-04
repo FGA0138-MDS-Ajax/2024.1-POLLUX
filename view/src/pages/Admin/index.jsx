@@ -12,6 +12,7 @@ import { deleteUser, editUser, getUsers } from "../../queries/user";
 import { parseFormData } from "../../utils/parseFormData";
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { baseURL } from '../../config/baseurl';
 
 function Admin() {
   const [members, setMembers] = useState([]);
@@ -41,11 +42,11 @@ function Admin() {
     try {
       var cookieValue = document.cookie.split(';').map(cookie => cookie.split('=')).reduce((accumulator, [key, value]) => ({ ...accumulator, [key.trim()]: decodeURIComponent(value) }), {});
       let token = cookieValue.jwtToken.toString();
-      axios.post("http://18.209.49.236:3000/users/token", {
+      axios.post(baseURL + "users/token", {
         token: token
       }).then(function (response) {
         if (!(response.data < 0)) {
-          axios.get("http://18.209.49.236:3000/users/" + response.data.id).then(function (resposta) {
+          axios.get(baseURL + "users/" + response.data.id).then(function (resposta) {
             if (resposta.data.acesso.acesso_admin) {
             } else {
               navigate("/detail")

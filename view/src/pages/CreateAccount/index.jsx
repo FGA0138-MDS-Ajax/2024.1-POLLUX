@@ -10,6 +10,8 @@ import "./CreateAccount.css";
 import { Link, useNavigate } from "react-router-dom";
 import { createUser } from "../../queries/user";
 import { parseFormData } from "../../utils/parseFormData";
+import { baseURL } from "../../config/baseurl";
+import axios from 'axios';
 
 function CreateAccount() {
   const [errors, setErrors] = useState({
@@ -24,6 +26,28 @@ function CreateAccount() {
 
   useEffect(() => {
     document.title = 'Criar Conta';
+    try {
+      var cookieValue = document.cookie.split(';').map(cookie => cookie.split('=')).reduce((accumulator, [key, value]) => ({ ...accumulator, [key.trim()]: decodeURIComponent(value) }), {});
+      let token = cookieValue.jwtToken.toString();
+      axios.post(baseURL + "users/token", {
+        token: token
+      }).then(function (response) {
+        if (!(response.data < 0)) {
+          axios.get(baseURL + "users/" + response.data.id).then(function (resposta) {
+            if (resposta.data.acesso.acesso_admin) {
+            } else {
+              navigate("/detail")
+            }
+          });
+        } else {
+          navigate("/login")
+        }
+      }).catch(function (error) {
+        console.error(error);
+      });
+    } catch (err) {
+      navigate("/login");
+    }
   }, []);
 
   // Função para criar um novo usuário chamando a API

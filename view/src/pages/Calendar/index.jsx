@@ -12,12 +12,13 @@ import './Calendar.css';
 import SideBar from '../../components/SideBar';
 import Kanban from '../../components/Kanban';
 import axios from 'axios';
+import { baseURL } from '../../config/baseurl';
 
 // Função para buscar eventos da API
 
 const fetchEvents = async () => {
   try {
-    const response = await axios.get('http://18.209.49.236:3000/eventos');
+    const response = await axios.get(baseURL+'eventos');
     //console.log('Resposta da API:', response.data);
 
     if (Array.isArray(response.data)) {
@@ -95,11 +96,11 @@ const Calendar = () => {
     try {
       const cookieValue = document.cookie.split(';').map(cookie => cookie.split('=')).reduce((accumulator, [key, value]) => ({ ...accumulator, [key.trim()]: decodeURIComponent(value) }), {});
       let token = cookieValue.jwtToken.toString();
-      axios.post("http://18.209.49.236:3000/users/token", {
+      axios.post(baseURL+"users/token", {
         token: token
       }).then(function (response) {
         if (!(response.data < 0)) {
-          axios.get("http://18.209.49.236:3000/users/" + response.data.id).then(function (resposta) {
+          axios.get(baseURL+"users/" + response.data.id).then(function (resposta) {
             if (!resposta.data.acesso.acesso_calendar) {
               navigate("/detail");
             }
@@ -366,7 +367,7 @@ const Calendar = () => {
       HoraTermino: eventTimeTo
     }
 
-    axios.post("http://18.209.49.236:3000/eventos", res)
+    axios.post(baseURL+"eventos", res)
       .then(function (response) {
         // Resposta recebida com sucesso
         //console.log("Documento criado com sucesso:", response.data);
@@ -384,7 +385,7 @@ const Calendar = () => {
   // Função para deletar um evento existente
 
   function deletaEvento(id) {
-    axios.post("http://18.209.49.236:3000/eventos/delete", {
+    axios.post(baseURL+"eventos/delete", {
       id: id
     });
     loadEvents()
