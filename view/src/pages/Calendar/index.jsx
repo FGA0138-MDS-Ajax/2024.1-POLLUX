@@ -1,3 +1,10 @@
+/* 
+  Página calendário é responsável por exibir um calendário interativo com eventos.
+  Além do quadro Kanban, localizado na pasta 'components'
+  O usuário pode navegar entre os meses, visualizar eventos do dia e do mês, 
+  adicionar novos eventos e excluir eventos existentes. Também há uma verificação 
+  de autenticação do usuário para garantir que ele tenha acesso ao calendário.
+*/
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Calendar.css';
@@ -5,7 +12,7 @@ import SideBar from '../../components/SideBar';
 import Kanban from '../../components/Kanban';
 import axios from 'axios';
 
-
+// Função para buscar eventos da API
 const fetchEvents = async () => {
   try {
     const response = await axios.get('http://localhost:3000/eventos');
@@ -32,7 +39,7 @@ const Calendar = () => {
   const [year, setYear] = useState(today.getFullYear());
   const [eventsArr, setEventsArr] = useState([]);
   const navigate = useNavigate();
-
+  // Função para listar eventos do mês atual
   const listMonthEvents = async () => {
     try {
       const response = await fetchEvents();
@@ -78,7 +85,7 @@ const Calendar = () => {
       console.error('Erro ao buscar eventos:', error);
     }
   };
-
+  // Hook para configurar o título da página e verificar autenticação do usuário
   useEffect(() => {
     try {
       const cookieValue = document.cookie.split(';').map(cookie => cookie.split('=')).reduce((accumulator, [key, value]) => ({ ...accumulator, [key.trim()]: decodeURIComponent(value) }), {});
@@ -103,7 +110,7 @@ const Calendar = () => {
       navigate("/login");
     }
   
-  
+   // Função para carregar eventos do banco de dados
     const loadEvents = async () => {
       const events = await fetchEvents();
       setEventsArr(events);
@@ -173,17 +180,17 @@ const Calendar = () => {
     document.querySelector('.days').innerHTML = days;
     addListener();
   };
-
+  // Função para navegar para o mês anterior
   const prevMonth = () => {
     setMonth(month - 1 < 0 ? 11 : month - 1);
     setYear(month - 1 < 0 ? year - 1 : year);
   };
-
+  // Função para navegar para o próximo mês
   const nextMonth = () => {
     setMonth(month + 1 > 11 ? 0 : month + 1);
     setYear(month + 1 > 11 ? year + 1 : year);
   };
-
+  // Função para adicionar ouvintes de eventos nos dias do calendário
   const addListener = () => {
     document.querySelectorAll('.day').forEach(day => {
       day.addEventListener('click', (e) => {
@@ -195,6 +202,7 @@ const Calendar = () => {
     });
   };
 
+  // Função para navegar para uma data específica
   const gotoDate = () => {
     const dateInput = document.querySelector('.date-input').value;
     const dateArr = dateInput.split('/');
@@ -205,14 +213,14 @@ const Calendar = () => {
       alert('Data Inválida');
     }
   };
-
+  // Função para obter o dia ativo e atualizar as informações do evento
   const getActiveDay = (date) => {
     const day = new Date(year, month, date);
     const dayName = weekdays[day.getDay()];
     document.querySelector('.event-day').innerHTML = dayName;
     document.querySelector('.event-date').innerHTML = `${date} ${months[month]} ${year}`;
   };
-
+  // Função para atualizar os eventos de um dia específico
   const updateEvents = async (date) => {
     try {
       const allEvents = await fetchEvents();
@@ -265,11 +273,11 @@ const Calendar = () => {
       //console.error('Erro ao buscar eventos:', error);
     }
   };
-
+  // Salvar eventos no local storage
   const saveEvents = () => { //Tem local storage?
     localStorage.setItem('events', JSON.stringify(eventsArr));
   };
-
+  // Função para adicionar um novo evento
   const addEvent = () => {
     const eventTitle = document.querySelector('.event-name').value;
     const eventTimeFrom = document.querySelector('.event-time-from').value;
@@ -349,7 +357,7 @@ const Calendar = () => {
     });
 
   };
-
+  // Função para deletar um evento existente
 function deletaEvento(id){
   axios.post("http://localhost:3000/eventos/delete",{
     id: id
