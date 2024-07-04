@@ -92,14 +92,14 @@ Link para a documentação do projeto: [MkDocs - Pollux 2024.1](https://fga0138-
     rails s
     ```
 4.  **Login**
-   Matricula:
-   ```
-   000000000
-   ```
-   Senha:
-   ```
-   senha123
-   ```
+    Matricula:
+    ```
+    000000000
+    ```
+    Senha:
+    ```
+    senha123
+    ```
     
 
 # Autores
