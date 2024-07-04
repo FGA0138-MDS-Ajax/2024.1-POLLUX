@@ -106,9 +106,9 @@ Link para a documentação do projeto: [MkDocs - Pollux 2024.1](https://fga0138-
     Primeiramente você deve rodar o banco localmente (sem ser pelo docker)
     [Crie seu usuario no postgres](https://rpg.consudata.com.br/posts/2021-03-30-papeis-e-usurios-no-postgresql/)
     Mesmo usuario e senha da sua .env
-    ´´´
+    ```
     rails test
-    ´´´
+    ```
 
 # Autores
 
