@@ -49,6 +49,16 @@ Link para a documentação do projeto: [MkDocs - Pollux 2024.1](https://fga0138-
 
 2.  **Configuração do Banco de Dados:**
     ```
+    touch .env
+    ```
+    coloque o nome do banco de dados, seu usuario e sua senha no arquivo .env
+    ```
+    cp .env /backend/
+    ```
+    ```
+    sudo docker compose up -d
+    ```
+    ```
     cd backend/
     ```
     ```
