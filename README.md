@@ -131,7 +131,7 @@ Link para a documentação do projeto: [MkDocs - Pollux 2024.1](https://fga0138-
         </a>
       </td>
       <td valign="top">
-        <a href="https://github.com/Mauriciofearauj">
+        <a href="https://github.com/mauricio-araujoo">
           <img align="center" src="https://github.com/Mauriciofearauj.png" height="100" />
           <p align="center"> Maurício Ferreira </p>
         </a>
